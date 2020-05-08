@@ -1,0 +1,412 @@
+<%= form_with(model: yfcase, local: true) do |f| %>
+<% if yfcase.errors.any? %>
+<div id="error_explanation">
+    <h2>
+        <%= pluralize(yfcase.errors.count, "error") %> prohibited this yfcase from being saved:</h2>
+    <ul>
+        <% yfcase.errors.full_messages.each do |message| %>
+        <li>
+            <%= message %>
+        </li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+<div class="accordion" id="accordionExample">
+    <!-- 基本資料   -->
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    基本資料
+                </button>
+            </h2>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <%= f.label :case_number, "案號" %>
+                        <%= f.text_field :case_number, class: 'form-control'  %>
+                    </div>
+                </div>
+                <br>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <%= f.label :country_id,"縣市" %>
+                        <%= f.collection_select :country_id, Country.order(:name), :id, :name, include_blank: true, :prompt => '請輸入縣市', class: 'form-control' %>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <%= f.label :township_id,"鄉鎮區" %>
+                        <%= f.grouped_collection_select :township_id, Country.order(:name), :township, :name, :id, :name, include_blank: true, :prompt => '請輸入鄉鎮區', class: 'form-control' %>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <%= f.label :other_address, "其他後續地址欄位" %>
+                        <%= f.text_field :other_address , placeholder: '在此輸入其他地址資訊', class: 'form-control' %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 相關人員 -->
+    <div class="card">
+        <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    相關人員
+                </button>
+            </h2>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+                <div>
+                    <%= f.check_box :co_owner %>
+                    <%= f.label :co_owner,"土地 / 建物共有人是否一致", style: "color:red;" %>
+                </div>
+                <div id="relatedpersonnels">
+                    <%= f.fields_for :personnals do |personnal| %>
+                    <%= render 'personnal_fields', f: personnal %>
+                    <% end %>
+                    <div class="links">
+                        <%= link_to_add_association '新增相關人員', f, :personnals, class: "btn btn-success btn-sm" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 拍賣資訊 -->
+    <div class="card">
+        <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    拍賣資訊
+                </button>
+            </h2>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+            <div class="card-body">
+           
+                    <div class="form-row" style="background-color:PaleGoldenRod;">
+                        <div class="col-2">
+                            拍別
+                        </div>
+                        <div class="col-2">
+                            拍賣日
+                        </div>
+                        <div class="col-2">
+                            底價(NT)
+                        </div>
+                        <div class="col-2">
+                            點閱
+                        </div>
+                        <div class="col-2">
+                            監控
+                        </div>
+                        <div class="col-2">
+                            保証金
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-2">
+                            第一拍
+                        </div>
+                        <div class="form-group col-md-2">
+                            <%= f.text_field :auction_day_1, class: "datepicker form-control" %>
+                        </div>
+                        <div class="col-2">
+                            <%= f.number_field :floor_price_1, in: 0..100000000, :required => true, class: "form-control" %>
+                        </div>
+                        <div class="col-2">
+                            <%= f.number_field :click_1, class: "form-control" %>
+                        </div>
+                        <div class="col-2">
+                            <%= f.number_field :monitor_1, class: "form-control" %>
+                        </div>
+                        <div class="col-2">
+                            <%= f.number_field :margin_1, class: "form-control" %>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-2">
+                            第二拍
+                        </div>
+                        <div class="col-2">
+                            <%= f.text_field :auction_day_2, class: "datepicker form-control" %>
+                        </div>
+                        <div class="col-2">
+                            <%= f.number_field :floor_price_2, in: 0..100000000, :required => true, class: "form-control" %>
+                        </div>
+                        <div class="col-2">
+                            <%= f.number_field :click_2, class: "form-control" %>
+                        </div>
+                        <div class="col-2">
+                            <%= f.number_field :monitor_2, class: "form-control" %>
+                        </div>
+                        <div class="col-2">
+                            <%= f.number_field :margin_2, class: "form-control" %>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-2">
+                            第三拍
+                        </div>
+                        <div class="col-2">
+                            <%= f.text_field :auction_day_3, class: "datepicker form-control" %>
+                        </div>
+                        <div class="col-2">
+                            <%= f.number_field :floor_price_3, in: 0..100000000, :required => true, class: "form-control" %>
+                        </div>
+                        <div class="col-2">
+                            <%= f.number_field :click_3, class: "form-control" %>
+                        </div>
+                        <div class="col-2">
+                            <%= f.number_field :monitor_3, class: "form-control" %>
+                        </div>
+                        <div class="col-2">
+                            <%= f.number_field :margin_3, class: "form-control" %>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-2">
+                            第四拍
+                        </div>
+                        <div class="col-2">
+                            <%= f.text_field :auction_day_4, class: "datepicker form-control" %>
+                        </div>
+                        <div class="col-2">
+                            <%= f.number_field :floor_price_4, in: 0..100000000, :required => true, class: "form-control" %>
+                        </div>
+                        <div class="col-2">
+                            <%= f.number_field :click_4, class: "form-control" %>
+                        </div>
+                        <div class="col-2">
+                            <%= f.number_field :monitor_4, class: "form-control" %>
+                        </div>
+                        <div class="col-2">
+                            <%= f.number_field :margin_4, class: "form-control" %>
+                        </div>
+                    </div>
+               
+            </div>
+        </div>
+    </div>
+
+    <!-- 土地 / 建物 -->
+    <div class="card">
+        <div class="card-header" id="headingFour">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                    土地 / 建物
+                </button>
+            </h2>
+        </div>
+        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+            <div class="card-body">
+                <div class="field">
+                    <h3>地號</h3>
+                    <div id="lands">
+                        <%= f.fields_for :lands do |land| %>
+                        <%= render 'land_fields', f: land %>
+                        <% end %>
+                        <div class="links">
+                            <%= link_to_add_association '新增地號', f, :lands, class: "btn btn-success btn-sm" %>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <h3>建號</h3>
+                    <div id="builds">
+                        <%= f.fields_for :builds do |build| %>
+                        <%= render 'build_fields', f: build %>
+                        <% end %>
+                        <div class="links">
+                            <%= link_to_add_association '新增建號', f, :builds, class: "btn btn-success btn-sm" %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+     <!-- 建物查檢表 -->
+    <div class="card">
+        <div class="card-header" id="headingFive">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                    建物查檢表
+                </button>
+            </h2>
+        </div>
+        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+            <div class="card-body">
+                <%= render partial: "buildchecklist", locals: {f: f} %>
+            </div>
+        </div>
+    </div>
+
+    <!-- 勘查記錄 -->
+    <div class="card">
+        <div class="card-header" id="headingSix">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                    勘查記錄
+                </button>
+            </h2>
+        </div>
+        <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        初勘日期
+                    </div>
+                    <div class="form-group col-md-10">
+                        <%= f.text_field :first_survey_day, class: "datepicker form-control" %>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        會勘日期
+                    </div>
+                    <div class="form-group col-md-10">
+                        <%= f.text_field :other_survey_day, class: "datepicker form-control" %>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        法拍公告(證物三)
+                    </div>
+                    <div class="form-group col-md-3">
+                        <%= f.text_field :foreclosure_announcement_title,class: "form-control",placeholder: "請輸入勘查項目標題" %>
+                    </div>
+                    <div class="form-group col-md-7">
+                        <%= f.text_field :foreclosure_announcement_link,class: "form-control",placeholder: "請輸入勘查項目連結" %>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        物件照片(證物四)
+                    </div>
+                    <div class="form-group col-md-3">
+                        <%= f.text_field :object_photo_title, class: "form-control",placeholder: "請輸入物件照片標題" %>
+                    </div>
+                    <div class="form-group col-md-7">
+                        <%= f.text_field :object_photo_link, class: "form-control",placeholder: "請輸入物件照片連結" %>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        實價登錄市價
+                    </div>
+                    <div class="form-group col-md-3">
+                        <%= f.text_field :net_price_registration_market_price_title, class: "form-control",placeholder: "請輸入實價登錄市價標題" %>
+                    </div>
+                    <div class="form-group col-md-7">
+                        <%= f.text_field :net_price_registration_market_price_link, class: "form-control",placeholder: "請輸入實價登錄市價連結" %>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        法拍記錄(證物七)
+                    </div>
+                    <div class="form-group col-md-3">
+                        <%= f.text_field :auction_record_title, class: "form-control",placeholder: "請輸入法拍記錄標題" %>
+                    </div>
+                    <div class="form-group col-md-7">
+                        <%= f.text_field :auction_record_link, class: "form-control",placeholder: "請輸入法拍記錄連結" %>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>   
+    <!-- 物件資料 -->
+    <div class="card">
+        <div class="card-header" id="headingSeven">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                    物件資料
+                </button>
+            </h2>
+        </div>
+        <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
+            <div class="card-body">
+                <div class="field">
+                    <h3>物件資料</h3>
+                    <div id="objectbuilds">
+                        <%= f.fields_for :objectbuilds do |objectbuild| %>
+                        <%= render 'objectbuild_fields', f: objectbuild %>
+                        <% end %>
+                        <div class="links">
+                            <%= link_to_add_association '新增物件', f, :objectbuilds, class: "btn btn-success btn-sm" %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 最終判定 -->
+    <div class="card">
+        <div class="card-header" id="headingEight">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                    最終判定
+                </button>
+            </h2>
+        </div>
+        <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
+            <div class="card-body">
+                <table id="finaldecision">
+                    <tr>
+                        <th>
+                            <%= f.hidden_field :final_decision_date, :value => "#{Time.now.strftime('%Y-%m-%d')}" %>
+                            <%= f.label :final_decision,"結論" %>
+                        </th>
+                        <td>
+                            <%= f.select(:final_decision,Yfcase::JUDGMENT_LIST) %>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="form-group">
+        <%= f.submit "更新YF評量表", class: "btn btn-outline-dark" %>
+        <%= link_to "返回", @yfcase, class: "btn btn-outline-secondary" %>
+    </div>
+</div>
+<script>
+    $.datepicker.regional['zh-TW']={
+       dayNames:["星期日","星期一","星期二","星期三","星期四","星期五","星期六"],
+       dayNamesMin:["日","一","二","三","四","五","六"],
+       monthNames:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
+       monthNamesShort:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
+       prevText:"上月",
+       nextText:"次月",
+       weekHeader:"週"
+    };
+    //將預設語系設定為中文
+    $.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
+    //套用到表單
+    $(function() {
+    	$('.datepicker').datepicker({dateFormat: 'yy-mm-dd'});
+    });
+    // $(function() {
+    //     $('.datepicker').datepicker({
+    //         dateFormat: "yy-mm-dd",
+    //         autoclose: true,
+    //         startDate: "today",
+    //         clearBtn: true,
+    //         calendarWeeks: true,
+    //         todayHighlight: true,
+    //         language: 'zh-TW'
+    //     });
+    // });
+</script>
+<% end %>
