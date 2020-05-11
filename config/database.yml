@@ -20,6 +20,14 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+# 資料庫為sqlite3時使用
+# production:
+#   <<: *default
+#   database: db/production.sqlite3
+
+
+# 資料庫為postgresql時使用
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+
