@@ -2,8 +2,9 @@
 
 <%= form_for @plusb , :url => updateplusrateb_yfcase_objectbuild_path( @yfcase,@plusb), method: :patch do |f| %>
 <div class="form-group">
-    <%= f.label :plusb %>
-    <%= f.number_field :plusb, in: 0..10, :step => 0.01, :required => true , :class => "form-control" %>
+    <%= f.number_field :plusb, in: 0..10, :step => 0.01,:value => 1.00, :required => true , :class => "form-control" %>
+    <p style="color:red;margin:0px;">※ 請依屋況給予加成分數(0.50~1.50)</p>
+    <p style="color:red;margin:0px;">※ 預設值為1.00</p>
     <%= f.hidden_field :surveyorb, :value => "#{current_user.first_name}#{current_user.last_name}" %>
 </div>
 
@@ -11,4 +12,4 @@
     <%= f.submit :class => "btn btn-primary" %>
 </div>
 <% end %>
-<%= link_to "back", yfcase_path(@yfcase) %>
+<%= link_to "返回", yfcase_path(@yfcase) %>
