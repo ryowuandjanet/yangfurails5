@@ -83,7 +83,6 @@ class YfcasesController < ApplicationController
     @yfcase.user=current_user
     respond_to do |format|
       if @yfcase.save
-        ContactMailer.say_hello_to(@user).deliver_now
         format.html { redirect_to @yfcase, notice: 'Yfcase was successfully created.' }
         format.json { render :show, status: :created, location: @yfcase }
       else
