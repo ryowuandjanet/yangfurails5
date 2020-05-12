@@ -7,6 +7,7 @@
         <tr>
             <th>操作</th>
             <th>案號</th>
+            <th>地址</th>
             <th>項目</th>
         </tr>
     </thead>
@@ -25,6 +26,8 @@
                 <%= yfcase.case_number %>
                 <% end %>
             </td>
+            <td>
+                <%= yfcase.township.try(:zip_code) %> <%= yfcase.country.try(:name) %><%= yfcase.township.try(:name) %><%= yfcase.other_address %></td>
             <td>
                 (修改，暫不開放)
             </td>

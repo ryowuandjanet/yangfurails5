@@ -87,7 +87,13 @@
             </td>
             <td class="xb2800 font-td"></td>
             <td class="xb2900 font-td">
-                <%= @yfcase.builds.count == 0 ? ' ' : (number_to_currency(@buildtotalarea, unit: "", precision: 2)+"("+number_to_currency(@buildtotalarea * 0.3025, unit: "", precision: 2)+")") %><br>
+                <% if @yfcase.builds.count == 0 %>
+                    ' ' 
+                <% elsif @yfcase.builds.where(build_type_use: "0公設").count > 0 %>
+                    <%= number_to_currency(@withBuildTotalArea+@withoutBuildTotalArea, unit: "", precision: 2)+"("+number_to_currency((@withBuildTotalArea+@withoutBuildTotalArea) * 0.3025, unit: "", precision: 2)+")" %><br>
+                <% else %>
+                    <%= number_to_currency(@withoutBuildTotalArea, unit: "", precision: 2)+"("+number_to_currency(@withoutBuildTotalArea * 0.3025, unit: "", precision: 2)+")" %><br>
+                <% end %>
             </td>
         </tr>
     </table>
@@ -130,14 +136,31 @@
             </td>
             <td class="xc2400 font-td">
         <% @yfcase.builds.each do |build| %>
+            <% if build.build_type_use == "0公設" %> 
+                <!--找到第一筆非公設(notPU)的個人持分(holding_point_personal)-->
+                <% @notPU_holding_point_personal=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_personal %>
+                <!--找到第一筆非公設(notPU)的個人持分(build_holding_point_all)-->
+                <% @notPU_build_holding_point_all=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_all %>
+                <%= @notPU_holding_point_personal*build.build_holding_point_personal %> / <%= @notPU_build_holding_point_all*build.build_holding_point_all %><br>
+            <% else %>
                 <%= build.build_holding_point_personal %>/
                 <%= build.build_holding_point_all %><br>
+            <% end %>
         <% end %>
             </td>
             <td class="xc2500 font-td">
         <% @yfcase.builds.each do |build| %>
+            <% if build.build_type_use == "0公設" %> 
+                <!--找到第一筆非公設(notPU)的個人持分(holding_point_personal)-->
+                <% @notPU_holding_point_personal=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_personal %>
+                <!--找到第一筆非公設(notPU)的個人持分(build_holding_point_all)-->
+                <% @notPU_build_holding_point_all=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_all %>
+                <%= area(build.build_area,@notPU_holding_point_personal*build.build_holding_point_personal,@notPU_build_holding_point_all*build.build_holding_point_all,1).round(2) %> (
+                <%= area(build.build_area,@notPU_holding_point_personal*build.build_holding_point_personal,@notPU_build_holding_point_all*build.build_holding_point_all,0.3025).round(2) %>)<br>
+            <% else %>
                 <%= area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,1).round(2) %> (
                 <%= area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,0.3025).round(2) %>)<br>
+            <% end %>
         <% end %>
             </td>
             <td class="xc2600 font-td">
@@ -882,7 +905,7 @@
 <% if @yfcase.editable_by?(current_user) && @yfcase.subsigntrueas.blank? %>
     <div id="showitem">
     	<%= link_to '編輯', edit_yfcase_path(@yfcase),class: "btn btn-primary" %> |
-        <%= link_to '返回', yfcases_path,class: "btn btn-info" %>
+        <%= link_to '返回', yfcases_path,class: "btn btn-info" %> | 
     </div>
 <% else %>
     <div id="showitem">

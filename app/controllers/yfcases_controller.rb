@@ -21,14 +21,29 @@ class YfcasesController < ApplicationController
     @yfcase = Yfcase.find(params[:id])
     # 地坪總面積 (平方公尺)
     @landtotalarea = @yfcase.lands.map{ |n| [n.land_area.to_f * (n.land_holding_point_personal.to_f / n.land_holding_point_all.to_f)] }.flatten.sum
-    # 建坪總面積 (平方公尺)
-    @buildtotalarea = @yfcase.builds.map { |n| [n.build_area.to_f * (n.build_holding_point_personal.to_f / n.build_holding_point_all.to_f)] }.flatten.sum 
+    
+    # 建坪
+    
+    if @yfcase.builds.where.not(build_type_use: "0公設").blank?
+      @notPU_HP_personal=1
+      @notPU_HP_all=1      
+    else
+      # 找到第一筆非公設(notPU)的個人持分(build_holding_point_personal)
+      @notPU_HP_personal=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_personal
+      # 找到第一筆非公設(notPU)的個人持分(build_holding_point_all)
+      @notPU_HP_all=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_all
+    end
+
+    # 建坪總面積 (平方公尺)-無公設
+    @withoutBuildTotalArea = @yfcase.builds.where.not(build_type_use: "0公設").map { |n| [n.build_area.to_f * (n.build_holding_point_personal.to_f / n.build_holding_point_all.to_f)] }.flatten.sum 
+    # 建坪總面積 (平方公尺)-有公設
+    @withBuildTotalArea = @yfcase.builds.where(build_type_use: "0公設").map { |n| [n.build_area.to_f * ((n.build_holding_point_personal.to_f * @notPU_HP_personal.to_f) / (n.build_holding_point_all.to_f * @notPU_HP_all.to_f))] }.flatten.sum 
 
     # 坪價(萬)
-    @pingprice1 = @yfcase.floor_price_1.to_f / (@buildtotalarea*0.3025).to_f
-    @pingprice2 = @yfcase.floor_price_2.to_f / (@buildtotalarea*0.3025).to_f
-    @pingprice3 = @yfcase.floor_price_3.to_f / (@buildtotalarea*0.3025).to_f
-    @pingprice4 = @yfcase.floor_price_4.to_f / (@buildtotalarea*0.3025).to_f
+    @pingprice1 = @yfcase.floor_price_1.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea)*0.3025).to_f
+    @pingprice2 = @yfcase.floor_price_2.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea)*0.3025).to_f
+    @pingprice3 = @yfcase.floor_price_3.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea)*0.3025).to_f
+    @pingprice4 = @yfcase.floor_price_4.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea)*0.3025).to_f
 
     # 時價(萬)
 
@@ -68,6 +83,7 @@ class YfcasesController < ApplicationController
     @yfcase.user=current_user
     respond_to do |format|
       if @yfcase.save
+        ContactMailer.say_hello_to(@user).deliver_now
         format.html { redirect_to @yfcase, notice: 'Yfcase was successfully created.' }
         format.json { render :show, status: :created, location: @yfcase }
       else
@@ -154,6 +170,11 @@ class YfcasesController < ApplicationController
     @subsigntruec_delete.destroy
     redirect_to @yfcase
   end
+  
+  def sendmail
+    ContactMailer.say_hello_to().deliver_now
+    redirect_to @yfcase, notice: 'User was successfully created.'
+  end
 
 
   
@@ -167,14 +188,16 @@ class YfcasesController < ApplicationController
       @yfcase = Yfcase.find(params[:id])
       # 地坪總面積 (平方公尺)
       @landtotalarea = @yfcase.lands.map{ |n| [n.land_area.to_f * (n.land_holding_point_personal.to_f / n.land_holding_point_all.to_f)] }.flatten.sum
-      # 建坪總面積 (平方公尺)
-      @buildtotalarea = @yfcase.builds.map { |n| [n.build_area.to_f * (n.build_holding_point_personal.to_f / n.build_holding_point_all.to_f)] }.flatten.sum 
+      # 建坪總面積 (平方公尺)-無公設
+      @withoutBuildTotalArea = @yfcase.builds.where.not(build_type_use: "0公設").map { |n| [n.build_area.to_f * (n.build_holding_point_personal.to_f / n.build_holding_point_all.to_f)] }.flatten.sum 
+      # 建坪總面積 (平方公尺)-有公設
+      @withBuildTotalArea = @yfcase.builds.where(build_type_use: "0公設").map { |n| [n.build_area.to_f * (n.build_holding_point_personal.to_f / n.build_holding_point_all.to_f)] }.flatten.sum 
 
       # 坪價(萬)
-      @pingprice1 = @yfcase.floor_price_1.to_f / (@buildtotalarea*0.3025).to_f
-      @pingprice2 = @yfcase.floor_price_2.to_f / (@buildtotalarea*0.3025).to_f
-      @pingprice3 = @yfcase.floor_price_3.to_f / (@buildtotalarea*0.3025).to_f
-      @pingprice4 = @yfcase.floor_price_4.to_f / (@buildtotalarea*0.3025).to_f
+      @pingprice1 = @yfcase.floor_price_1.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea)*0.3025).to_f
+      @pingprice2 = @yfcase.floor_price_2.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea)*0.3025).to_f
+      @pingprice3 = @yfcase.floor_price_3.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea)*0.3025).to_f
+      @pingprice4 = @yfcase.floor_price_4.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea)*0.3025).to_f
 
       # 時價(萬)
 
