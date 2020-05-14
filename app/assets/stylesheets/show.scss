@@ -1,17 +1,29 @@
-@font-face{
-	font-family: "msjh";
-	src: url('msjh');
-}
-
-@font-face {
-  font-family:'標楷體';
-  src: asset-url('/fonts/bkai00mp.ttf') format("truetype")
-}
+// @font-face{
+// 	font-family: "msjh";
+// 	src: url('msjh');
+// }
 
 @font-face {
   font-family:'微軟正黑體';
-  src: asset-url('/fonts/msjh.ttf') format("truetype")
-}
+  //src:font-url('msjh.ttf') format('truetype')
+  src:url('fonts/msjh.ttf') format('truetype'),
+} 
+
+@font-face {
+  font-family:'標楷體';
+  //src:font-url('bkai00mp.ttf') format('truetype')
+  src:url('fonts/bkai00mp.ttf') format('truetype'),
+} 
+
+// @font-face {
+//   font-family:'標楷體';
+//   src: asset-url('/fonts/bkai00mp.ttf') format("truetype")
+// }
+
+// @font-face {
+//   font-family:'微軟正黑體';
+//   src: asset-url('/fonts/msjh.ttf') format("truetype")
+// }
 
 body{
 	font-family: 微軟正黑體;
