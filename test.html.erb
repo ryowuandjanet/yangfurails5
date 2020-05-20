@@ -35,3 +35,6 @@
         </div>
       </div>
     </div>
+    
+    ============================================================================================================
+    <%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' :  @yfcase.personnals.where(is_original_owner: true).first.right_share_person %>/<%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' :  @yfcase.personnals.where(is_original_owner: true).first.right_share_all %>
