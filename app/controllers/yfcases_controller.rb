@@ -210,7 +210,7 @@ class YfcasesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def yfcase_params
       params.require(:yfcase).permit(:case_number, \
-        :country_id, :township_id, \
+        :country_id, :township_id, :big_section, :small_section, \
         :other_address, :co_owner, \
         :auction_day_1,:auction_day_2,:auction_day_3,:auction_day_4, \
         :floor_price_1,:floor_price_2,:floor_price_3,:floor_price_4, \
@@ -224,7 +224,7 @@ class YfcasesController < ApplicationController
         :occupy,:register,:parking_space,:management_fee,:rent,:leak,:easy_parking,:railway,:vegetable_market,:supermarket,:school,:park,:post_office,:main_road,:water_and_power_failure,:good_vision, :final_decision_date, \
         personnals_attributes: [:id, :is_debtor, :is_creditor, :is_land_owner, :is_build_owner,:is_original_owner, :is_new_owner, :is_deed_tax_agent, :is_tax_agent, :name, :identity_card, :birthday,:person_country ,:person_township ,:person_village ,:person_neighbor ,:person_street ,:person_section ,:person_lane ,:person_alley ,:person_number ,:person_floor , :local_phone, :mobile_phone, :personnal_notes,:identity_code, :public_or_private, :right_share_person, :right_share_all, :_destroy], \
         lands_attributes: [:id, :land_number, :land_url, :land_area, :land_holding_point_personal, :land_holding_point_all, :_destroy], \
-        objectbuilds_attributes: [:id, :address, :total_price, :build_area, :house_age, :floor_height, :surveyora, :surveyorb, :plusa, :plusb, :objectbuild_url, :_destroy], \
+        objectbuilds_attributes: [:id, :address, :total_price, :build_area, :house_age, :floor_height, :surveyora, :surveyorb, :plusa, :plusb,:plusa_reason,:plusb_reason,:objectbuild_status, :objectbuild_url, :_destroy], \
         builds_attributes: [:id, :build_number,:build_url,:build_area, :build_holding_point_personal, :build_holding_point_all, :build_type_use,:use_partition, :_destroy] )
     end
 end

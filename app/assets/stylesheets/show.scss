@@ -1,40 +1,30 @@
-// @font-face{
-// 	font-family: "msjh";
-// 	src: url('msjh');
-// }
-
 @font-face {
-  font-family:'微軟正黑體';
-  //src:font-url('msjh.ttf') format('truetype')
-  src:url('fonts/msjh.ttf') format('truetype'),
+	font-family:'標楷體';
+	// 使用Windows內建的系統文字楷體可以通過測試
+	src: asset_url('/assets/kaiu.ttf') format('truetype');
+	font-weight: 800;
+	font-style: normal;
 } 
 
 @font-face {
-  font-family:'標楷體';
-  //src:font-url('bkai00mp.ttf') format('truetype')
-  src:url('fonts/bkai00mp.ttf') format('truetype'),
+	font-family:'微軟正黑體';
+	// 使用Windows內建的系統文字楷體可以通過測試
+	src: asset_url('/assets/msjh') format('truetype');
+	font-weight: normal;
+	font-style: normal;
 } 
-
-// @font-face {
-//   font-family:'標楷體';
-//   src: asset-url('/fonts/bkai00mp.ttf') format("truetype")
-// }
-
-// @font-face {
-//   font-family:'微軟正黑體';
-//   src: asset-url('/fonts/msjh.ttf') format("truetype")
-// }
-
 body{
-	font-family: 微軟正黑體;
+	font-family: "微軟正黑體";
 }
 
-
+.testfont{
+	font-family: "標楷體";
+}
 /*字型*/
 
 .font-th {
 	font-size: 14pt;
-	font-family: Arial,標楷體,sans-serif;
+	font-family: Arial,"微軟正黑體",sans-serif;
 	font-width:bold;
 	color:black;
 	text-align: center;	
@@ -42,14 +32,14 @@ body{
 
 .font-td {
 	font-size: 12pt;
-	font-family: Arial,微軟正黑體,sans-serif;
+	font-family: Arial,"微軟正黑體",sans-serif;
 	font-width:bold;
 	color:blue;	
 }
 
 .font-th-10 {
 	font-size: 10pt;
-	font-family: Arial,微軟正黑體,sans-serif;
+	font-family: Arial,"微軟正黑體",sans-serif;
 	font-width:bold;
 	color:black;
 }
@@ -318,7 +308,7 @@ body{
 }
 
 /*拍賣資訊*/
-.font-th-12 {font-size: 12pt;font-family: Arial,標楷體,sans-serif;font-width:bold;color:black;text-align: center;}
+.font-th-12 {font-size: 12pt;font-family: Arial,微軟正黑體,sans-serif;font-width:bold;color:black;text-align: center;}
 .font-td-10 {font-size: 10pt;font-family: Arial,微軟正黑體,sans-serif;font-width:bold;color:blue;}
 .font-td-10-bk {font-size: 10pt;font-family: Arial,微軟正黑體,sans-serif;font-width:bold;color:black;}
 
@@ -401,8 +391,8 @@ body{
 .xe3100 {border-right:double;border-bottom:1px dotted black;border-left:3px solid black;width: 200px;text-align: center;background-color: Khaki;}
 .xe3200 {border-right:3px solid black;border-bottom:1px dotted black;width: 800px;}
 .xe4100 {border-right:double;border-bottom:1px dotted black;border-left:3px solid black;width: 200px;text-align: center;background-color: Khaki;}
-.xe4200 {border-right:3px solid black;border-bottom:1px dotted black;width: 800px;}
-.xe5100 {border-right:double;border-bottom:1px dotted black;border-left:3px solid black;width: 200px;text-align: center;background-color: Khaki;}
+.xe4200 {border-right:3px solid black;border-bottom:1px dotted black;width: 920px;}
+.xe5100 {border-right:double;border-bottom:1px dotted black;border-left:3px solid black;width: 80px;text-align: center;background-color: Khaki;}
 .xe5200 {border-right:3px solid black;border-bottom:1px dotted black;width: 800px;}
 .xe6100 {border-right:double;border-bottom:3px solid black;border-left:3px solid black;width: 200px;text-align: center;background-color: Khaki;}
 .xe6200 {border-right:3px solid black;border-bottom:3px solid black;width: 800px;}
@@ -468,26 +458,33 @@ body{
 .xg2400 {border-right:1px dotted black;border-bottom:3px solid black;width: 200px;height:120px;}
 .xg2500 {border-right:3px solid black;border-bottom:3px solid black;width: 200px;height:120px;}
 
-.xe5211{border: 1px solid black;width: 30px;text-align: center;background-color: Silver;}
+
+.xe5210{border: 1px solid black;width: 50px;text-align: center;background-color: Silver;}
+.xe5211{border: 1px solid black;width: 50px;text-align: center;background-color: Silver;}
 .xe5212{border: 1px solid black;width: 190px;text-align: center;background-color: Silver;}
 .xe5213{border: 1px solid black;width: 80px;text-align: center;background-color: Silver;}
-.xe5214{border: 1px solid black;width: 50px;text-align: center;background-color: Silver;}
-.xe5215{border: 1px solid black;width: 50px;text-align: center;background-color: Silver;}
+.xe5214{border: 1px solid black;width: 70px;text-align: center;background-color: Silver;}
+.xe5215{border: 1px solid black;width: 70px;text-align: center;background-color: Silver;}
 .xe5216{border: 1px solid black;width: 50px;text-align: center;background-color: Silver;}
 .xe5217{border: 1px solid black;width: 80px;text-align: center;background-color: Silver;}
 .xe5218{border: 1px solid black;width: 50px;text-align: center;background-color: Silver;}
 .xe5219{border: 1px solid black;width: 80px;text-align: center;background-color: Silver;}
 .xe521a{border: 1px solid black;width: 50px;text-align: center;background-color: Silver;}
 .xe521b{border: 1px solid black;width: 80px;text-align: center;background-color: Silver;}
+.xe521x{border: 1px solid black;width: 150px;text-align: center;background-color: Silver;}
+.xe521y{border: 1px solid black;width: 150px;text-align: center;background-color: Silver;}
 
-.xe5221{border: 1px solid black;width: 30px;text-align: center;color: blue;}
+.xe5220{border: 1px solid black;width: 50px;text-align: center;color: blue;}
+.xe5221{border: 1px solid black;width: 50px;text-align: center;color: blue;}
 .xe5222{border: 1px solid black;width: 190px;text-align: left;color: blue;}
 .xe5223{border: 1px solid black;width: 80px;text-align: right;color: blue;}
-.xe5224{border: 1px solid black;width: 50px;text-align: right;color: blue;}
-.xe5225{border: 1px solid black;width: 50px;text-align: right;color: blue;}
+.xe5224{border: 1px solid black;width: 70px;text-align: right;color: blue;}
+.xe5225{border: 1px solid black;width: 70px;text-align: right;color: blue;}
 .xe5226{border: 1px solid black;width: 50px;text-align: center;color: blue;}
 .xe5227{border: 1px solid black;width: 80px;text-align: center;color: blue;}
 .xe5228{border: 1px solid black;width: 50px;text-align: right;color: blue;}
 .xe5229{border: 1px solid black;width: 80px;text-align: center;color: blue;}
 .xe522a{border: 1px solid black;width: 50px;text-align: right;color: blue;}
-.xe522b{border: 1px solid black;width: 80px;text-align: right;color: blue;}
+.xe522b{border: 1px solid black;width: 50px;text-align: right;color: blue;}
+.xe522x{border: 1px solid black;width: 250px;color: blue;}
+.xe522y{border: 1px solid black;width: 250px;color: blue;}

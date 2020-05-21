@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_07_145534) do
+ActiveRecord::Schema.define(version: 2020_05_20_062613) do
 
   create_table "builds", force: :cascade do |t|
     t.string "build_number"
@@ -58,6 +58,9 @@ ActiveRecord::Schema.define(version: 2020_05_07_145534) do
     t.integer "yfcase_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "objectbuild_status"
+    t.string "plusa_reason"
+    t.string "plusb_reason"
     t.index ["yfcase_id"], name: "index_objectbuilds_on_yfcase_id"
   end
 
@@ -102,6 +105,7 @@ ActiveRecord::Schema.define(version: 2020_05_07_145534) do
     t.integer "objectbuild_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "plusa_reason"
     t.index ["objectbuild_id"], name: "index_plusrateas_on_objectbuild_id"
   end
 
@@ -111,6 +115,7 @@ ActiveRecord::Schema.define(version: 2020_05_07_145534) do
     t.integer "objectbuild_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "plusb_reason"
     t.index ["objectbuild_id"], name: "index_plusratebs_on_objectbuild_id"
   end
 
@@ -241,6 +246,8 @@ ActiveRecord::Schema.define(version: 2020_05_07_145534) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "big_section"
+    t.string "small_section"
     t.index ["country_id"], name: "index_yfcases_on_country_id"
     t.index ["township_id"], name: "index_yfcases_on_township_id"
     t.index ["user_id"], name: "index_yfcases_on_user_id"

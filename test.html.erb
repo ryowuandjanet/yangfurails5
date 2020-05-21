@@ -38,3 +38,96 @@
     
     ============================================================================================================
     <%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' :  @yfcase.personnals.where(is_original_owner: true).first.right_share_person %>/<%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' :  @yfcase.personnals.where(is_original_owner: true).first.right_share_all %>
+    
+    ============================================================================================================
+                    <table>
+                    <tr class="danger">
+                        <th class="xe5211 font-th-10">附件</th>
+                        <th class="xe5212 font-th-10">地址(屋齡)</th>
+                        <th class="xe5213 font-th-10">總價(元)</th>
+                        <th class="xe5214 font-th-10">建坪(坪)</th>
+                        <th class="xe5215 font-th-10">單價(元)</th>
+                        <th class="xe5216 font-th-10">樓高</th>
+                        <% if user_signed_in? %>
+                            <th class="xe5217 font-th-10">勘查員A</th>
+                            <th class="xe5218 font-th-10">加成A</th>
+                            <th class="xe5219 font-th-10">勘查員B</th>
+                            <th class="xe521a font-th-10">加成B</th>
+                            <th class="xe521b font-th-10">計算</th>
+                        <% end %>
+                    </tr>
+                    <% @yfcase.objectbuilds.each do |objectbuild| %>
+                    <tr>
+                        <td class="xe5221 font-th-10">
+                            <% if objectbuild.objectbuild_url == "" %>
+                                <%= link_to "" %>
+                            <% else %>
+                                <%= link_to "連結", objectbuild.objectbuild_url, target: "_blank" %>
+                            <% end %>
+                        </td>
+                        <td class="xe5222 font-th-10">
+                            <%= objectbuild.address %>
+                            <% if objectbuild.house_age.present? %>
+                                <br>(<%= objectbuild.house_age %>年)
+                            <% else %>
+                                <%= ' ' %>
+                            <% end %>
+                        </td>
+                        <td class="xe5223 font-th-10">
+                            <%= number_to_currency(objectbuild.total_price, unit: "", precision: 0 ) %>
+                        </td>
+                        <td class="xe5224 font-th-10">
+                            <%= objectbuild.build_area %>
+                        </td>
+                        <td class="xe5225 font-th-10">
+                            <%= number_to_currency(holdingpoint(objectbuild.total_price,objectbuild.build_area), unit: "", precision: 0 ) %>
+                        </td>
+
+                        <td class="xe5226 font-th-10">
+                            <%= objectbuild.floor_height %>
+                        </td>
+                        <% if user_signed_in? %>
+                            <td class="xe5227 font-th-10">
+                                <% if current_user.role == 1 %>
+                                    <%= objectbuild.surveyora %>
+                                    <%= link_to deleteplusratea_yfcase_objectbuild_path(@yfcase,objectbuild),method: :delete do %>
+                                        <span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
+                                    <% end %>
+                                <% elsif objectbuild.surveyora.present? %>
+                                    <%= objectbuild.surveyora %>
+                                <% elsif objectbuild.surveyorb == (current_user.first_name + current_user.last_name) %>
+                                    已評
+                                <% else %>
+                                    <%= link_to "待評分", editplusratea_yfcase_objectbuild_path(@yfcase,objectbuild),class: "btn btn-primary btn-sm" %>
+                                <% end %>
+                            </td>
+                            <td class="xe5228 font-th-10">
+                                <% @plusa=objectbuild.plusa %>
+                                <%= @plusa %>
+                            </td>
+                            <td class="xe5229 font-th-10">
+                                <% if current_user.role == 1 %>
+                                    <%= objectbuild.surveyorb %>
+                                    <%= link_to deleteplusrateb_yfcase_objectbuild_path(@yfcase,objectbuild),method: :delete do %>
+                                        <span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
+                                    <% end %>
+                                <% elsif objectbuild.surveyorb.present? %>
+                                    <%= objectbuild.surveyorb %>
+                                <% elsif objectbuild.surveyora == (current_user.first_name + current_user.last_name) %>
+                                    已評
+                                <% else %>
+                                    <%= link_to "待評分", editplusrateb_yfcase_objectbuild_path(@yfcase,objectbuild),class: "btn btn-primary btn-sm" %>
+                                <% end %>
+                            </td>
+                            <td class="xe522a font-th-10">
+                                <% @plusb=objectbuild.plusb %>
+                                <%= @plusb %>
+                            </td>
+                            <td class="xe522b font-th-10">
+                                <% @totalmesa = testvalue(objectbuild.total_price.to_f/objectbuild.build_area.to_f,@plusa,@plusb) %>
+                                <%= number_to_currency(@totalmesa, unit: "", precision: 0 ) %>
+                            </td>
+                        <% end %>
+                    </tr>
+                    <% end %>
+                </table>

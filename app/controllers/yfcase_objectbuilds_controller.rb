@@ -15,7 +15,7 @@ class YfcaseObjectbuildsController < ApplicationController
 
 	def deleteplusratea
 		@plusa = @yfcase.objectbuilds.find(params[:id])
-		@plusa.update(surveyora: nil, plusa: nil)
+		@plusa.update(surveyora: nil, plusa: nil,plusa_reason: nil)
 		redirect_to yfcase_path( @yfcase )
 	end
 
@@ -34,7 +34,7 @@ class YfcaseObjectbuildsController < ApplicationController
 	
 	def deleteplusrateb
 		@plusb = @yfcase.objectbuilds.find(params[:id])
-		@plusb.update(surveyorb: nil, plusb: nil)
+		@plusb.update(surveyorb: nil, plusb: nil, plusb_reason: nil)
 		redirect_to yfcase_path( @yfcase )
 	end
 	
@@ -44,6 +44,6 @@ class YfcaseObjectbuildsController < ApplicationController
 	end
 
 	def plusa_params
-		params.require(:objectbuild).permit(:plusa,:plusb,:surveyora,:surveyorb)
+		params.require(:objectbuild).permit(:plusa,:plusb,:surveyora,:surveyorb,:plusa_reason,:plusb_reason)
 	end
 end

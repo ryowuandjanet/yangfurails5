@@ -5,12 +5,12 @@ class ObjectbuildPlusrateasController < ApplicationController
 	end
 
 	def new
-		@plusrateb = @objectbuild.plusratebs.new(plusb: 0)
+		@plusratea = @objectbuild.plusrateas.new(plusa: 0)
 	end
 
 	def create
-		@plusrateb = @objectbuild.plusratebs.new(plusrateb_params)
-		if @plusrateb.save
+		@plusratea = @objectbuild.plusrateas.new(plusratea_params)
+		if @plusratea.save
 			redirect_to yfcase_path(@yfcase)
 		else
 			render :action => "new"
@@ -23,7 +23,7 @@ class ObjectbuildPlusrateasController < ApplicationController
 		@objectbuild=@yfcase.objectbuilds.find(params[:objectbuild_id])
 	end
 
-	def plusrateb_params
-		params.require(:plusrateb).permit(:plusb,:personb)
+	def plusratea_params
+		params.require(:plusratea).permit(:plusa,:persona,:plusa_reason)
 	end
 end

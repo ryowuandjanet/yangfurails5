@@ -14,9 +14,12 @@
  *= require bootstrap-datepicker
  *= require_self
  */
+ 
+
 @import "bootstrap";
 @import "font-awesome";
 @import "show";
+
 
 
 .printcss {
@@ -67,4 +70,61 @@
     font-size: 36px;
     border:5px solid red;
     border-radius: 10px;  
+}
+
+.y10000{
+    border:2px solid blue;
+    color:blue;
+    width:30px;
+    height:30px;
+    text-align: center;
+    font-weight:bold;
+    font-size: 14pt;
+    font-family: Arial,標楷體,sans-serif;
+    font-width: bold;
+}
+
+.y20000{
+    border:2px solid red;
+    color:red;
+    width:30px;
+    height:30px;
+    text-align: center;
+    font-weight:bold;
+    font-size: 14pt;
+    font-family: Arial,標楷體,sans-serif;
+    font-width: bold;
+}
+.y30000{
+    border:2px solid green;
+    color:green;
+    width:30px;
+    height:30px;
+    text-align: center;
+    font-weight:bold;
+    font-size: 14pt;
+    font-family: Arial,標楷體,sans-serif;
+    font-width: bold;
+}
+.y40000{
+    border:2px solid black;
+    color:black;
+    width:30px;
+    height:30px;
+    text-align: center;
+    font-weight:bold;
+    font-size: 14pt;
+    font-family: Arial,標楷體,sans-serif;
+    font-width: bold;
+}
+.y50000{
+    border:2px solid Indigo;
+    color:Indigo;
+    width:30px;
+    height:30px;
+    text-align: center;
+    font-weight:bold;
+    font-size: 14pt;
+    font-family: Arial,標楷體,sans-serif;
+    font-width: bold;
 }

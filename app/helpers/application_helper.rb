@@ -62,7 +62,16 @@ module ApplicationHelper
 		end
 	end		
 	
-	
+	# 加偠後CP值判定
+	def suggestedincreaseJudgment(floorprice,click,monitor)
+		result=((click.to_f/100).ceil+monitor.to_f)*0.03
+		
+		if result > 0.15
+			return 1.15
+		else
+			return 1+result
+		end
+	end		
 	
 	
 	# 設定貨幣格式helper

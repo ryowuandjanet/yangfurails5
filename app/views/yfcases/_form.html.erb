@@ -30,7 +30,8 @@
                         <%= f.text_field :case_number, class: 'form-control'  %>
                     </div>
                 </div>
-                <br>
+                <hr>
+                
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <%= f.label :country_id,"縣市" %>
@@ -39,6 +40,14 @@
                     <div class="form-group col-md-3">
                         <%= f.label :township_id,"鄉鎮區" %>
                         <%= f.grouped_collection_select :township_id, Country.order(:name), :township, :name, :id, :name, include_blank: true, :prompt => '請輸入鄉鎮區', class: 'form-control' %>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <%= f.label :big_section,"段號" %>
+                        <%= f.text_field :big_section , placeholder: '在此輸入段號', class: 'form-control' %>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <%= f.label :small_section,"小段" %>
+                        <%= f.text_field :small_section , placeholder: '在此輸入小段', class: 'form-control' %>
                     </div>
                 </div>
                 <div class="form-row">
@@ -280,33 +289,25 @@
                     <div class="form-group col-md-2">
                         法拍公告(證物三)
                     </div>
-                    <div class="form-group col-md-3">
-                        <%= f.text_field :foreclosure_announcement_title,class: "form-control",placeholder: "請輸入勘查項目標題" %>
-                    </div>
-                    <div class="form-group col-md-7">
-                        <%= f.text_field :foreclosure_announcement_link,class: "form-control",placeholder: "請輸入勘查項目連結" %>
+                    <div class="form-group col-md-10">
+                        <%= f.text_field :foreclosure_announcement_link,class: "form-control",placeholder: "請輸入法拍公告網址" %>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-2">
                         物件照片(證物四)
                     </div>
-                    <div class="form-group col-md-3">
-                        <%= f.text_field :object_photo_title, class: "form-control",placeholder: "請輸入物件照片標題" %>
-                    </div>
-                    <div class="form-group col-md-7">
-                        <%= f.text_field :object_photo_link, class: "form-control",placeholder: "請輸入物件照片連結" %>
+                    <div class="form-group col-md-10">
+                        <%= f.text_field :object_photo_link, class: "form-control",placeholder: "請輸入Google街景連結" %>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-2">
                         實價登錄市價
                     </div>
-                    <div class="form-group col-md-3">
-                        <%= f.text_field :net_price_registration_market_price_title, class: "form-control",placeholder: "請輸入實價登錄市價標題" %>
-                    </div>
-                    <div class="form-group col-md-7">
-                        <%= f.text_field :net_price_registration_market_price_link, class: "form-control",placeholder: "請輸入實價登錄市價連結" %>
+
+                    <div class="form-group col-md-10">
+                        <%= f.text_field :net_price_registration_market_price_link, class: "form-control",placeholder: "請輸入參考物件補充文件" %>
                     </div>
                 </div>
 
@@ -314,10 +315,7 @@
                     <div class="form-group col-md-2">
                         法拍記錄(證物七)
                     </div>
-                    <div class="form-group col-md-3">
-                        <%= f.text_field :auction_record_title, class: "form-control",placeholder: "請輸入法拍記錄標題" %>
-                    </div>
-                    <div class="form-group col-md-7">
+                    <div class="form-group col-md-10">
                         <%= f.text_field :auction_record_link, class: "form-control",placeholder: "請輸入法拍記錄連結" %>
                     </div>
                 </div>
