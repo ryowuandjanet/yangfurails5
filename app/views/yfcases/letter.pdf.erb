@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- 	<meta charset="UTF-8"> -->
+    <title>存證信函狀</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <%= wicked_pdf_stylesheet_link_tag 'pdf' %>
+    <style type="text/css">
+    body {
+        /*楷體*/
+        font-family: 'cwTeXKai', serif; 
+        font-size: 24px;
+    }
+
+    .page-break {
+        page-break-before: always;
+    }
+    .lettertd-1{
+        border:1px solid black;
+        padding:0px;
+        margin:0px;
+        text-align: right;  
+        font-size:20pt;
+    }
+    
+    .lettertd-2{
+        /*border:1px solid black;*/
+        margin:0px;
+        text-align: left;
+        font-size: 14pt;
+        height: 25px;
+        padding: 3px;
+    }
+    .lettertd-3{
+        border:1px solid black;
+        margin:0px;
+        text-align: left;
+        font-size: 14pt;
+        height: 25px;
+        padding: 3px;
+    }
+    .lettertd{
+        border:1px solid black;
+        padding:0px;
+        margin:0px;
+        text-align: center;
+        font-size: 20pt;
+        width:40px;
+        height:50px;
+    }
+    </style>
+</head>
+
+<body>
+    <div style="text-align:center;">
+        <h1>郵 局 存 證 信 函 用 紙</h1>
+    </div>
+    
+    <table style="border-collapse: collapse;font-family: 'cwTeXKai', serif;font-size:14pt;">
+		<tr>
+			<td class="lettertd-1" colspan="6" rowspan="8">
+			    郵  局<br><br>
+			    存證信函第&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;號
+			</td>
+			<td class="lettertd-2" colspan="15" style="border-top:1px solid black;border-right:1px solid black;font-size:13pt;">
+			    &nbsp;&nbsp;&nbsp;(寄件人如為機關、團體、學校、公司、商號請加蓋單位圖章及法定代理人簽名或蓋章)
+			</td>
+		</tr>
+		
+		<tr>
+		    <td class="lettertd-2" colspan="3" rowspan="2" style="text-align:right;">
+		        一、寄件人&nbsp;&nbsp;&nbsp;
+		    </td>
+		    <td class="lettertd-2" colspan="12" style="border-right:1px solid black;">
+		        姓名：曾友和   印
+		    </td>
+		</tr>
+		<tr>
+		    <td class="lettertd-2" colspan="12" style="border-right:1px solid black;">詳細地址：臺南市東區東平路11號5樓</td>
+		</tr>
+		
+		<tr>
+		    <td class="lettertd-2" colspan="3" rowspan="2" style="text-align:right;">
+		        二、收件人&nbsp;&nbsp;&nbsp;
+		    </td>
+		    <td class="lettertd-2" colspan="12" style="border-right:1px solid black;">
+		        姓名：詳參附表
+		    </td>
+		</tr>
+		<tr>
+		    <td class="lettertd-2" colspan="12" style="border-right:1px solid black;">詳細地址：詳參附表</td>
+		</tr>
+
+		<tr>
+		    <td class="lettertd-2" colspan="3" rowspan="2" style="text-align:right;">
+		        三、副&nbsp;&nbsp;&nbsp;本&nbsp;&nbsp;&nbsp;<br>收件人&nbsp;&nbsp;&nbsp;
+		    </td>
+		    <td class="lettertd-2" colspan="12" style="border-right:1px solid black;">
+		        姓名：
+		    </td>
+		</tr>
+		<tr>
+		    <td class="lettertd-2" colspan="12" style="border-right:1px solid black;">詳細地址：</td>
+		</tr>
+		<tr>
+		    <td class="lettertd-2" colspan="15" style="border-right:1px solid black;font-size:13pt;">&nbsp;&nbsp;&nbsp;(本欄姓名、地址不敷填寫時，請另紙聯記)</td>
+		</tr>
+		
+		
+	    <!--標題-->
+	    <tr>
+			<td class="lettertd">
+			    <p style="margin:0px;padding:3px;text-align:right;">格</p>
+			    <p style="margin:0px;padding:3px;text-align:left;">行</p>
+			</td>
+			<td class="lettertd">1</td>
+			<td class="lettertd">2</td>
+			<td class="lettertd">3</td>
+			<td class="lettertd">4</td>
+			<td class="lettertd">5</td>
+			<td class="lettertd">6</td>
+			<td class="lettertd">7</td>
+			<td class="lettertd">8</td>
+			<td class="lettertd">9</td>
+			<td class="lettertd">10</td>
+			<td class="lettertd">11</td>
+			<td class="lettertd">12</td>
+			<td class="lettertd">13</td>
+			<td class="lettertd">14</td>
+			<td class="lettertd">15</td>
+			<td class="lettertd">16</td>
+			<td class="lettertd">17</td>
+			<td class="lettertd">18</td>
+			<td class="lettertd">19</td>
+			<td class="lettertd">20</td>
+		</tr>
+		
+		<!--第一行-->
+		<tr>
+		    <td class='lettertd'>一</td>
+            <td class='lettertd'>敬</td>
+            <td class='lettertd'>啟</td>
+            <td class='lettertd'>者</td>
+            <td class='lettertd'>：</td>
+            <td class='lettertd'>收</td>
+            <td class='lettertd'>信</td>
+            <td class='lettertd'>平</td>
+            <td class='lettertd'>安</td>
+            <td class='lettertd'>。</td>
+            <td class='lettertd'>關</td>
+            <td class='lettertd'>於</td>
+            <td class='lettertd'>揚</td>
+            <td class='lettertd'>富</td>
+            <td class='lettertd'>開</td>
+            <td class='lettertd'>發</td>
+            <td class='lettertd'>有</td>
+            <td class='lettertd'>限</td>
+            <td class='lettertd'>公</td>
+            <td class='lettertd'>司</td>
+            <td class='lettertd'>與</td>
+		</tr>
+		
+		<!--第二行-->
+		<tr>
+		    <td class='lettertd'>二</td>
+            <td class='lettertd'>台</td>
+            <td class='lettertd'>端</td>
+            <td class='lettertd'>間</td>
+            <td class='lettertd'>共</td>
+            <td class='lettertd'>有</td>
+            <td class='lettertd'>[</td>
+            <td class='lettertd'>附</td>
+            <td class='lettertd'>表</td>
+            <td class='lettertd'>]</td>
+            <td class='lettertd'>所</td>
+            <td class='lettertd'>示</td>
+            <td class='lettertd'>不</td>
+            <td class='lettertd'>動</td>
+            <td class='lettertd'>產</td>
+            <td class='lettertd'>，</td>
+            <td class='lettertd'>為</td>
+            <td class='lettertd'>解</td>
+            <td class='lettertd'>決</td>
+            <td class='lettertd'>共</td>
+            <td class='lettertd'>有</td>
+		</tr>
+		
+		<!--第三行-->
+		<tr>
+		    <td class='lettertd'>三</td>
+            <td class='lettertd'>權</td>
+            <td class='lettertd'>屬</td>
+            <td class='lettertd'>複</td>
+            <td class='lettertd'>雜</td>
+            <td class='lettertd'>致</td>
+            <td class='lettertd'>不</td>
+            <td class='lettertd'>利</td>
+            <td class='lettertd'>長</td>
+            <td class='lettertd'>期</td>
+            <td class='lettertd'>規</td>
+            <td class='lettertd'>劃</td>
+            <td class='lettertd'>使</td>
+            <td class='lettertd'>用</td>
+            <td class='lettertd'>問</td>
+            <td class='lettertd'>題</td>
+            <td class='lettertd'>，</td>
+            <td class='lettertd'>歡</td>
+            <td class='lettertd'>迎</td>
+            <td class='lettertd'>您</td>
+            <td class='lettertd'>於</td>
+		</tr>
+		
+		<!--第四行-->
+		<tr>
+		   <td class='lettertd'>四</td>
+            <td class='lettertd'>十</td>
+            <td class='lettertd'>日</td>
+            <td class='lettertd'>內</td>
+            <td class='lettertd'>與</td>
+            <td class='lettertd'>揚</td>
+            <td class='lettertd'>富</td>
+            <td class='lettertd'>開</td>
+            <td class='lettertd'>發</td>
+            <td class='lettertd'>有</td>
+            <td class='lettertd'>限</td>
+            <td class='lettertd'>公</td>
+            <td class='lettertd'>司</td>
+            <td class='lettertd'>曾</td>
+            <td class='lettertd'>友</td>
+            <td class='lettertd'>和</td>
+            <td class='lettertd'>先</td>
+            <td class='lettertd'>生</td>
+            <td class='lettertd'>(</td>
+            <td class='lettertd'>0</td>
+            <td class='lettertd'>9</td>
+		</tr>
+
+		<!--第五行-->
+		<tr>
+		    <td class='lettertd'>五</td>
+            <td class='lettertd'>2</td>
+            <td class='lettertd'>1</td>
+            <td class='lettertd'>-</td>
+            <td class='lettertd'>7</td>
+            <td class='lettertd'>6</td>
+            <td class='lettertd'>5</td>
+            <td class='lettertd'>0</td>
+            <td class='lettertd'>2</td>
+            <td class='lettertd'>3</td>
+            <td class='lettertd'>)</td>
+            <td class='lettertd'>聯</td>
+            <td class='lettertd'>繫</td>
+            <td class='lettertd'>並</td>
+            <td class='lettertd'>完</td>
+            <td class='lettertd'>成</td>
+            <td class='lettertd'>協</td>
+            <td class='lettertd'>議</td>
+            <td class='lettertd'>，</td>
+            <td class='lettertd'>倘</td>
+            <td class='lettertd'>協</td>
+		</tr>
+		
+		<!--第六行-->
+		<tr>
+		    <td class='lettertd'>六</td>
+            <td class='lettertd'>議</td>
+            <td class='lettertd'>不</td>
+            <td class='lettertd'>成</td>
+            <td class='lettertd'>，</td>
+            <td class='lettertd'>續</td>
+            <td class='lettertd'>依</td>
+            <td class='lettertd'>民</td>
+            <td class='lettertd'>事</td>
+            <td class='lettertd'>訴</td>
+            <td class='lettertd'>訟</td>
+            <td class='lettertd'>序</td>
+            <td class='lettertd'>訴</td>
+            <td class='lettertd'>請</td>
+            <td class='lettertd'>裁</td>
+            <td class='lettertd'>判</td>
+            <td class='lettertd'>分</td>
+            <td class='lettertd'>割</td>
+            <td class='lettertd'>共</td>
+            <td class='lettertd'>有</td>
+            <td class='lettertd'>物</td>
+		</tr>
+		
+		<!--第七行-->
+		<tr>
+		   <td class='lettertd'>七</td>
+            <td class='lettertd'>，</td>
+            <td class='lettertd'>謹</td>
+            <td class='lettertd'>請</td>
+            <td class='lettertd'>諒</td>
+            <td class='lettertd'>悉</td>
+            <td class='lettertd'>。</td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+		</tr>
+		
+		<!--第八行-->
+		<tr>
+		   <td class='lettertd'>八</td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+		</tr>
+		
+		<!--第九行-->
+		<tr>
+		    <td class='lettertd'>九</td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+		</tr>
+		
+		<!--第十行-->
+		<tr>
+		    <td class='lettertd'>十</td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+            <td class='lettertd'></td>
+		</tr>
+
+		<!--footer-->
+		<tr>
+		    <td class='lettertd-3' colspan="17" rowspan="2">
+		    	本存證信函共&emsp;&emsp;&emsp;&emsp;頁，正本&emsp;&emsp;&emsp;&emsp;份，存證費&emsp;&emsp;&emsp;&emsp;元，<br>
+		        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&thinsp;&thinsp;副本&emsp;&emsp;&emsp;&emsp;份，存證費&emsp;&emsp;&emsp;&emsp;元，<br>
+		        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&thinsp;&thinsp;附件&emsp;&emsp;&emsp;&emsp;張，存證費&emsp;&emsp;&emsp;&emsp;元，<br>
+		        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&emsp;加具正本&emsp;&emsp;&emsp;&emsp;份，存證費&emsp;&emsp;&emsp;&emsp;元，<br>
+		        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&emsp;加具附本&emsp;&emsp;&emsp;&emsp;份，存證費&emsp;&emsp;&emsp;&emsp;元，合計&emsp;&emsp;&emsp;&emsp;元<br>
+		        <br>
+		        &emsp;&emsp;經&emsp;&emsp;&emsp;&emsp;&emsp;&thinsp;&thinsp;&thinsp;&thinsp;郵局&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;經辦員<br>
+		        
+		        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&thinsp;&thinsp;&thinsp;正<br>
+		        &emsp;&emsp;年&emsp;&emsp;月&emsp;&emsp;日證明&emsp;本內容完全相同&emsp;&emsp;&emsp;&emsp;&emsp;&thinsp;&thinsp;主管<br>
+		        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&thinsp;&thinsp;&thinsp;副    
+            </td>
+		    <td class='lettertd-3' colspan="2">黏</td>
+		    <td class='lettertd-3' colspan="2">貼</td>
+
+		</tr>
+		<tr>
+		    <td class='lettertd-3' colspan="4">郵票或</td>
+		</tr>
+		<tr>
+		    <td class='lettertd-3' rowspan="3" style="font-size:20pt;text-align:center;">備<br><br>註</td>
+		    <td class='lettertd-3' colspan="16">
+		        一、存證信函需送交郵局辦理證明手續後始有效，自交寄之日起由郵局保存之副本，<br>
+		        &emsp;&thinsp;&thinsp;&thinsp;&thinsp;於三年期滿後銷燬之。
+		    </td>
+		    <td class='lettertd-3' colspan="4">郵資券</td>
+		</tr>
+		<tr>
+		    <td class='lettertd-3' colspan="10">二、在　　頁　　行第　　　格下塗改增刪　　字</td>
+		    <td class='lettertd-3' colspan="6">
+		        (如有修改應填註本欄並蓋用寄件人印章，但塗改增刪)<br>
+		        <small>每頁至多不得逾二十字。</small>
+		    </td>
+		    <td class='lettertd-3' colspan="2" rowspan="2">處</td>
+		    <td class='lettertd-3' colspan="2" rowspan="2"></td>
+		</tr>
+		<tr>
+		    <td class='lettertd-3' colspan="16">
+		        三、每件一式三份，用不脫色筆或打字機複寫，或書寫後複印、影印，每格限書一字<br>
+		        &emsp;&thinsp;&thinsp;&thinsp;&thinsp;，色澤明顯、字跡端正。
+		    </td>
+		    
+		</tr>
+	</table>
+
+</body>
+
+</html>

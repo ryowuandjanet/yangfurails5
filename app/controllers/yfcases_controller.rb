@@ -1,7 +1,7 @@
 class YfcasesController < ApplicationController
   include ApplicationHelper
-  before_action :set_yfcase, only: [:edit, :update, :destroy, :deedtax, :yfratingscale, :realestateregistration, :complaint]
-  before_action :show_helper, only: [:edit, :update, :destroy, :deedtax, :yfratingscale, :realestateregistration, :complaint]
+  before_action :set_yfcase, only: [:edit, :update, :destroy, :deedtax, :yfratingscale, :realestateregistration, :complaint, :letter]
+  before_action :show_helper, only: [:edit, :update, :destroy, :deedtax, :yfratingscale, :realestateregistration, :complaint, :letter]
   before_action :authenticate_user!
 
   # GET /yfcases
@@ -147,6 +147,14 @@ class YfcasesController < ApplicationController
       format.json
       format.pdf {render template:'yfcases/complaint', pdf: 'Complaint'}
     end
+  end
+  
+  def letter
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf {render template:'yfcases/letter', pdf: 'Letter'}
+    end    
   end
 
   def delete_subsigntruea
