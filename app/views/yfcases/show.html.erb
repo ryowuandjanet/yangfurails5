@@ -468,13 +468,21 @@
         <tr>
             <th class="xe3100 font-th">法拍公告(證物三)</th>
             <th class="xe3200 font-td">
-                <%= link_to "法拍公告", add_https(@yfcase.foreclosure_announcement_link), target: "_blank" %>
+                <% if @yfcase.foreclosure_announcement_link.blank? %>
+                    <%= " " %>
+                <% else %>
+                    <%= link_to "法拍公告", add_https(@yfcase.foreclosure_announcement_link), target: "_blank" %>
+                <% end %>
             </th>
         </tr>
         <tr>
             <th class="xe4100 font-th">物件照片(證物四)</th>
             <th class="xe4200 font-td">
-                <%= link_to "Google街景", add_https(@yfcase.object_photo_link) , target: "_blank" %>
+                <% if @yfcase.object_photo_link.blank? %>
+                    <%= " " %>
+                <% else %>
+                    <%= link_to "Google街景", add_https(@yfcase.object_photo_link) , target: "_blank" %>
+                <% end %>
             </th>
         </tr>
         <tr>
@@ -602,7 +610,11 @@
         <tr>
             <th class="xe6100 font-th">法拍記錄(證物七)</th>
             <th class="xe6200 font-td">
-                <%= link_to "法拍記錄", add_https(@yfcase.auction_record_link), target: "_blank" %>
+                <% if @yfcase.auction_record_link.blank? %>
+                    <%= " " %>
+                <% else %>
+                    <%= link_to "法拍記錄", add_https(@yfcase.auction_record_link), target: "_blank" %>
+                <% end %>
             </th>
         </tr>
 
