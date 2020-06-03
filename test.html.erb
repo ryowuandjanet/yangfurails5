@@ -131,3 +131,49 @@
                     </tr>
                     <% end %>
                 </table>
+                
+           ============================================================================================================
+            <th class="xg1300 font-th">
+                <% if yfcasefullname == currentfullname && @yfcase.subsigntrueas.first.present? %>
+                    副署人員1<%= link_to "刪除", delete_subsigntruea_yfcase_path(@yfcase),method: :delete,class: "btn btn-info btn-sm" %>
+                <% elsif @yfcase.final_decision.blank? || (@yfcase.final_decision.present? && yfcasefullname == currentfullname) %>
+                    <%= '副署人員1' %>
+                <% else %>
+                    <% if @yfcase.subsigntrueas.first.blank? %>
+                         <%= link_to "副署人員1", new_yfcase_subsigntruea_path(@yfcase),class: "btn btn-primary btn-sm" %>
+                    <% else %>
+                         <%= "副署人員1" %>
+                    <% end %>
+                <% end %>    
+            </th>
+            <th class="xg1400 font-th">
+                <% if yfcasefullname == currentfullname && @yfcase.subsigntruebs.first.present? %>
+                    副署人員2 <%= link_to "刪除", delete_subsigntrueb_yfcase_path(@yfcase),method: :delete,class: "btn btn-info btn-sm" %>
+                <% elsif @yfcase.final_decision.blank? || (@yfcase.final_decision.present? && yfcasefullname == currentfullname) %>
+                    <%= '副署人員2' %>
+                <% elsif @yfcase.final_decision.present? && yfcasefullname != currentfullname && subsigntrueafullname == currentfullname %>
+                    <%= '該員已副署' %>
+                <% else %>
+                    <% if @yfcase.subsigntruebs.first.blank? && @yfcase.subsigntrueas.first.present? %>
+                         <%= link_to "副署人員2", new_yfcase_subsigntrueb_path(@yfcase),class: "btn btn-primary btn-sm" %>
+                    <% else %>
+                         <%= "副署人員2" %>
+                    <% end %>
+                <% end %>
+            </th>
+            <th class="xg1500 font-th">
+                <% if yfcasefullname == currentfullname && @yfcase.subsigntruecs.first.present? %>
+                    副署人員3<%= link_to "刪除", delete_subsigntruec_yfcase_path(@yfcase),method: :delete,class: "btn btn-info btn-sm" %>
+                <% elsif  @yfcase.final_decision.blank? || (@yfcase.final_decision.present? && yfcasefullname == currentfullname) %>
+                    <%= '副署人員3' %>
+                <% elsif @yfcase.final_decision.present? && yfcasefullname != currentfullname && ((subsigntrueafullname == currentfullname && subsigntruebfullname != currentfullname) || (subsigntrueafullname != currentfullname && subsigntruebfullname == currentfullname)) %>
+                    <%= '該員已副署' %>
+                <% else %>
+                    <% if @yfcase.subsigntruecs.first.blank? && @yfcase.subsigntruebs.first.present? %>
+                         <%= link_to "副署人員3", new_yfcase_subsigntruec_path(@yfcase),class: "btn btn-primary btn-sm" %>
+                    <% else %>
+                         <%= "副署人員3" %>
+                    <% end %>
+                <% end %>
+            </th>
+        </tr>

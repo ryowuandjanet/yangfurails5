@@ -1,9 +1,9 @@
 <!-- 基本資料 -->
 <div class="basedata" style="width:1000px;">
     <h1 class="x110000" style="text-align: center;font-family: Arial,標楷體;font-weight: bold;">
-        <%= @yfcase.case_number %> YF評量表
+        <%= @yfcase.case_number %> YF評量表 </br>
+        <small>(所屬公司：<%= @yfcase.company %>)</small>
     </h1>
-
     <table style="border:3px solid black;">
         <tr>
             <th class="xa1100 font-th">案號</th>
@@ -35,7 +35,7 @@
             <th class="xa2100 font-th">住址</th>
             <th class="xa2200 font-td" colspan="5">
                 <%= @yfcase.township.try(:zip_code) %> <%= @yfcase.country.try(:name) %><%= \
-                @yfcase.township.try(:name) %><%= @yfcase.big_section %><%= @yfcase.small_section %><%= @yfcase.other_address %>
+                @yfcase.township.try(:name) %><%= @yfcase.other_address %>
             </th>
         </tr>
     </table>
@@ -488,6 +488,18 @@
         <tr>
             <th class="xe5100 font-th">實價登錄市價</th>
             <th class="xe5200 font-td">
+                <!-- 區域負責人 -->
+                    <% yfcasefullname = @yfcase.user.first_name + @yfcase.user.last_name %>
+                    <!-- 登入人員 -->
+                    <% currentfullname = current_user.first_name + current_user.last_name %>
+                    <!-- 副署人員1 -->
+                    <% @yfcase.subsigntrueas.first.blank? ? ' ' : subsigntrueafullname = @yfcase.subsigntrueas.first.signtruea %>
+                    <!-- 副署人員2 -->
+                    <% @yfcase.subsigntruebs.first.blank? ? ' ' : subsigntruebfullname = @yfcase.subsigntruebs.first.signtrueb %>
+                    <!-- 副署人員3 -->
+                    <% @yfcase.subsigntruecs.first.blank? ? ' ' : subsigntruecfullname = @yfcase.subsigntruecs.first.signtruec %>
+
+
                     <% @yfcase.objectbuilds.each do |objectbuild| %>
                     <table style="border:2px double black;">
                          <tr class="danger" >
@@ -496,7 +508,13 @@
                             <th class="xe5213 font-th-10">總價(元)</th>
                             <th class="xe5214 font-th-10">建坪(坪)</th>
                             <th class="xe5215 font-th-10">單價(元)</th>
-                            <th class="xe5217 font-th-10">勘查員A</th>
+                            <th class="xe5217 font-th-10">勘查員A
+                             <% if current_user.role == 1 || (yfcasefullname == currentfullname && (@yfcase.subsigntrueas.first.blank? && @yfcase.subsigntruebs.first.blank? && @yfcase.subsigntruecs.first.blank?)) %> 
+                                    <%= link_to deleteplusrateall_yfcase_objectbuild_path(@yfcase,objectbuild),method: :delete do %>
+                                            <span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
+                                    <% end %>
+                             <% end %>
+                            </th>
                             <th class="xe5218 font-th-10">加成A</th>
                             <th class="xe521x font-th-10">加成原因A</th>
                             <th class="xe521b font-th-10">計算</th>
@@ -843,7 +861,7 @@
             <th class="xg1100 font-th">結論</th>
             <th class="xg1200 font-th">區域負責人</th>
             <th class="xg1300 font-th">
-                <% if yfcasefullname == currentfullname && @yfcase.subsigntrueas.first.present? %>
+                <% if current_user.role == 1 %>
                     副署人員1<%= link_to "刪除", delete_subsigntruea_yfcase_path(@yfcase),method: :delete,class: "btn btn-info btn-sm" %>
                 <% elsif @yfcase.final_decision.blank? || (@yfcase.final_decision.present? && yfcasefullname == currentfullname) %>
                     <%= '副署人員1' %>
@@ -856,7 +874,7 @@
                 <% end %>    
             </th>
             <th class="xg1400 font-th">
-                <% if yfcasefullname == currentfullname && @yfcase.subsigntruebs.first.present? %>
+                <% if current_user.role == 1 %>
                     副署人員2 <%= link_to "刪除", delete_subsigntrueb_yfcase_path(@yfcase),method: :delete,class: "btn btn-info btn-sm" %>
                 <% elsif @yfcase.final_decision.blank? || (@yfcase.final_decision.present? && yfcasefullname == currentfullname) %>
                     <%= '副署人員2' %>
@@ -871,7 +889,7 @@
                 <% end %>
             </th>
             <th class="xg1500 font-th">
-                <% if yfcasefullname == currentfullname && @yfcase.subsigntruecs.first.present? %>
+                <% if current_user.role == 1 %>
                     副署人員3<%= link_to "刪除", delete_subsigntruec_yfcase_path(@yfcase),method: :delete,class: "btn btn-info btn-sm" %>
                 <% elsif  @yfcase.final_decision.blank? || (@yfcase.final_decision.present? && yfcasefullname == currentfullname) %>
                     <%= '副署人員3' %>
@@ -885,7 +903,6 @@
                     <% end %>
                 <% end %>
             </th>
-        </tr>
         <tr>
             <th class="xg2100 font-td">
                 <% if @yfcase.final_decision == "3拍進場" %>

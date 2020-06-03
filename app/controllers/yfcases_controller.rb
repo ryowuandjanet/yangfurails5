@@ -217,7 +217,7 @@ class YfcasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def yfcase_params
-      params.require(:yfcase).permit(:case_number, \
+      params.require(:yfcase).permit(:case_number, :company,\
         :country_id, :township_id, :big_section, :small_section, \
         :other_address, :co_owner, \
         :auction_day_1,:auction_day_2,:auction_day_3,:auction_day_4, \

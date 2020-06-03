@@ -11,7 +11,11 @@
             <th>縣市</th>
             <th>負責人</th>
             <th>最終判定</th>
-            <th colspan="5">項目</th>
+            <% if current_user.role == 1 %>
+                <th colspan="5">項目</th>
+            <% else %>
+                <th>項目</th>
+            <% end %>
         </tr>
     </thead>
     <tbody>
@@ -41,32 +45,35 @@
             <td style="padding:6px 3px;">
                 <%= yfcase.final_decision %>
             </td>
-            <td style="padding:6px 3px;">
-                <%= link_to yfratingscale_yfcase_path(yfcase,format: "pdf") do %>
-                    <div class="y10000">評</div>
-                <% end %>
-            </td>
-            <td style="padding:6px 3px;">
-                <%= link_to deedtax_yfcase_path(yfcase,format: "pdf") do %>
-                    <div class="y20000">契</div>
-                <% end %>
-            </td>
-            <td style="padding:6px 3px;">
-                <%= link_to realestateregistration_yfcase_path(yfcase,format: "pdf") do %>
-                    <div class="y30000">動</div>
-                <% end %>
-            </td>
-            <td style="padding:6px 3px;">
-                <%= link_to complaint_yfcase_path(yfcase,format: "pdf") do %>
-                    <div class="y40000">狀</div>
-                <% end %>
-            </td>
-            <td style="padding:6px 3px;">
-                <%= link_to letter_yfcase_path(yfcase,format: "pdf") do %>
-                    <div class="y50000">函</div>       
-                <% end %>
-            </td>
-           
+            <% if current_user.role == 1 %>
+                <td style="padding:6px 3px;">
+                    <%= link_to yfratingscale_yfcase_path(yfcase,format: "pdf") do %>
+                        <div class="y10000">評</div>
+                    <% end %>
+                </td>
+                <td style="padding:6px 3px;">
+                    <%= link_to deedtax_yfcase_path(yfcase,format: "pdf") do %>
+                        <div class="y20000">契</div>
+                    <% end %>
+                </td>
+                <td style="padding:6px 3px;">
+                    <%= link_to realestateregistration_yfcase_path(yfcase,format: "pdf") do %>
+                        <div class="y30000">動</div>
+                    <% end %>
+                </td>
+                <td style="padding:6px 3px;">
+                    <%= link_to complaint_yfcase_path(yfcase,format: "pdf") do %>
+                        <div class="y40000">狀</div>
+                    <% end %>
+                </td>
+                <td style="padding:6px 3px;">
+                    <%= link_to letter_yfcase_path(yfcase,format: "pdf") do %>
+                        <div class="y50000">函</div>       
+                    <% end %>
+                </td>
+            <% else %>
+                <td <style></style>="color:red;">編寫測試中，暫不開放</td>
+            <% end %>
         </tr>
         <% end %>
     </tbody>

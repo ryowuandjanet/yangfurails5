@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_20_062613) do
+ActiveRecord::Schema.define(version: 2020_05_25_134706) do
 
   create_table "builds", force: :cascade do |t|
     t.string "build_number"
@@ -248,6 +248,7 @@ ActiveRecord::Schema.define(version: 2020_05_20_062613) do
     t.datetime "updated_at", null: false
     t.string "big_section"
     t.string "small_section"
+    t.string "company"
     t.index ["country_id"], name: "index_yfcases_on_country_id"
     t.index ["township_id"], name: "index_yfcases_on_township_id"
     t.index ["user_id"], name: "index_yfcases_on_user_id"

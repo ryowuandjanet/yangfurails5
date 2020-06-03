@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 			patch :updateplusrateb , :controller => "yfcase_objectbuilds"
 			delete :deleteplusratea , :controller => "yfcase_objectbuilds" #刪除加成人員A及加成A
 			delete :deleteplusrateb , :controller => "yfcase_objectbuilds" #刪除加成人員B及加成B
+			delete :deleteplusrateall , :controller => "yfcase_objectbuilds" #刪除所有加成人員及加成
 		end
 	end
 	member do

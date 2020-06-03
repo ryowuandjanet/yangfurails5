@@ -38,6 +38,13 @@ class YfcaseObjectbuildsController < ApplicationController
 		redirect_to yfcase_path( @yfcase )
 	end
 	
+	def deleteplusrateall
+		@plusall = @yfcase.objectbuilds.find(params[:id])
+		@plusall.update(surveyora: nil, plusa: nil, plusa_reason: nil)
+		@plusall.update(surveyorb: nil, plusb: nil, plusb_reason: nil)
+		redirect_to yfcase_path( @yfcase )		
+	end
+	
 	protected
 	def set_plus
 		@yfcase=Yfcase.find(params[:yfcase_id])

@@ -19,7 +19,7 @@
         <div class="card-header" id="headingOne">
             <h2 class="mb-0">
                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    基本資料
+                    基本資料  ( <%= f.label :company, "所屬公司" %><%= f.select(:company,Yfcase::COMPANY_LIST) %> )
                 </button>
             </h2>
         </div>
