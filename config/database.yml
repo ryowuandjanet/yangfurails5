@@ -26,6 +26,6 @@ test:
 #   database: db/production.sqlite3
 
 
-資料庫為postgresql時使用
+# 資料庫為postgresql時使用
 production:
   database: <%= ENV['DATABASE_URL'] %>
