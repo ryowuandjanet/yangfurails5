@@ -68,7 +68,7 @@
             </th>
             <th class="xb2200 font-td">
                 <% @yfcase.lands.each do |land| %>
-                    <%= land.land_url == "" ? ' ' : (link_to "連結", land.land_url, target: "_blank") %><br>
+                    <%= land.land_url.blank? ? ' ' : (link_to "連結", land.land_url, target: "_blank") %><br>
                 <% end %>
             </th>
             <th class="xb2300 font-td">
@@ -130,7 +130,7 @@
             </th>
             <th class="xc2200 font-td">
         <% @yfcase.builds.each do |build| %>
-                <% if build.build_url == "" %>
+                <% if build.build_url.blank? %>
                 <%= link_to " " %> <br>
                 <% else%>
                 <%= link_to "連結", build.build_url, target: "_blank" %><br>
@@ -587,7 +587,7 @@
                         <tr>
                             <!--輸入附件-->
                             <th class="xe5221 font-th-10">
-                                <% if objectbuild.objectbuild_url == "" %>
+                                <% if objectbuild.objectbuild_url.blank? %>
                                     <%= link_to "" %>
                                 <% else %>
                                     <%= link_to "連結", objectbuild.objectbuild_url, target: "_blank" %>

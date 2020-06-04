@@ -1,4 +1,4 @@
 class Country < ApplicationRecord
-	has_many :yfcases
-	has_many :township
+	has_many :yfcases, :dependent => :destroy
+	has_many :township, :dependent => :destroy
 end

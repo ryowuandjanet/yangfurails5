@@ -12,6 +12,19 @@ default: &default
 development:
   <<: *default
   database: db/development.sqlite3
+  # adapter: postgresql
+  # pool: 5
+  # encoding: UTF-8
+  # database: my_application_development
+  # # adapter: postgresql
+  # # encoding: unicode
+  # # database: yangfurails5
+  # # pool: 5
+  # # username: leowu
+  
+  # # password: postgres
+  # # database: db/yangfurails5.psql
+
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -32,9 +45,5 @@ test:
   # database: <%= ENV['DATABASE_URL'] %>
   
 production:
-  adapter: postgresql
-  encoding: unicode
-  database: dc0hi9460o0nt5
-  pool: 5432
-  username: fjolnudhlesfdg
-  password: 6f918f4db86dd4f5209f3dcfab205454d33711d42db23688a0002695a7758a92
+  <<: *default
+  database: db/development.sqlite3

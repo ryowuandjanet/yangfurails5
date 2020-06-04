@@ -1,4 +1,4 @@
 class Township < ApplicationRecord
-    belongs_to :country
-    has_many :yfcases
+    belongs_to :country, :optional => true
+    has_many :yfcases, :dependent => :destroy
 end

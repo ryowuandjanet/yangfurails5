@@ -5,7 +5,9 @@
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th>操作</th>
+            <% if current_user.role == 1 %>
+                <th>操作</th>
+            <% end %>
             <th>案號</th>
             <th>地址</th>
             <th>縣市</th>
@@ -21,13 +23,13 @@
     <tbody>
         <% @yfcases.each do |yfcase| %>
         <tr>
-            <td style="padding:6px 3px;">
-                <% if yfcase.editable_by?(current_user) %>
+            <% if current_user.role == 1 %>
+                <td style="padding:6px 3px;">
                     <%= link_to yfcase, method: :delete, data: { confirm: '你(妳)確定要刪除嗎?' } do %>
                         <%= fa_icon "window-close",class: "fa-2x" %>
                     <% end %>
-                <% end %>
-            </td>
+                </td>
+            <% end %>
             <td style="padding:6px 3px;">
                 <%= link_to yfcase_path(yfcase) do %>
                 <%= yfcase.case_number %>
