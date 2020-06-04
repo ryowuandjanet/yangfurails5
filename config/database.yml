@@ -27,5 +27,14 @@ test:
 
 
 # 資料庫為postgresql時使用
+# production:
+#   database: yangfurails5
+  # database: <%= ENV['DATABASE_URL'] %>
+  
 production:
-  database: <%= ENV['DATABASE_URL'] %>
+  adapter: postgresql
+  encoding: unicode
+  database: dc0hi9460o0nt5
+  pool: 5432
+  username: fjolnudhlesfdg
+  password: 6f918f4db86dd4f5209f3dcfab205454d33711d42db23688a0002695a7758a92
