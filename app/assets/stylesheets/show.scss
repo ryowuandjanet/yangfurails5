@@ -1,18 +1,18 @@
-@font-face {
-	font-family:'標楷體';
-	// 使用Windows內建的系統文字楷體可以通過測試
-	src: asset_url('/assets/kaiu.ttf') format('truetype');
-	font-weight: 800;
-	font-style: normal;
-} 
+// @font-face {
+// 	font-family:'標楷體';
+// 	// 使用Windows內建的系統文字楷體可以通過測試
+// 	src: asset_url('/assets/kaiu.ttf') format('truetype');
+// 	font-weight: 800;
+// 	font-style: normal;
+// } 
 
-@font-face {
-	font-family:'微軟正黑體';
-	// 使用Windows內建的系統文字楷體可以通過測試
-	src: asset_url('/assets/msjh') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-} 
+// @font-face {
+// 	font-family:'微軟正黑體';
+// 	// 使用Windows內建的系統文字楷體可以通過測試
+// 	src: asset_url('/assets/msjh') format('truetype');
+// 	font-weight: normal;
+// 	font-style: normal;
+// } 
 body{
 	font-family: "微軟正黑體";
 }
