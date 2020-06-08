@@ -7,7 +7,8 @@ class YfcasesController < ApplicationController
   # GET /yfcases
   # GET /yfcases.json
   def index
-    @yfcases = Yfcase.all
+    # @yfcases = Yfcase.all
+    prepare_variable_for_index_template
     respond_to do |format|
       format.html
       format.json
@@ -213,6 +214,29 @@ class YfcasesController < ApplicationController
       @marketprice = marketpricesum.map!{|e| e.to_f}.sum.fdiv(marketpricesum.size) / 10000
     end
 
+    def prepare_variable_for_index_template
+        @yfcases = Yfcase.all
+        kk=true
+        # keyword=案號篩選
+        # keyword2=判定篩選
+        # city=縣市篩選
+        if params[:keyword] and params[:keyword2] and params[:city]
+          if params[:city].blank?
+            @yfcases = Yfcase.where( [ "case_number like ? AND final_decision like ?", "%#{params[:keyword]}%" ,"%#{params[:keyword2]}%"] )
+          else
+            @yfcases = Yfcase.where( [ "case_number like ? AND final_decision like ? AND country_id = ?", "%#{params[:keyword]}%" ,"%#{params[:keyword2]}%" ,params[:city] ] )
+          end
+        else
+            @yfcases = Yfcase.all
+        end
+     
+        if params[:sqrtcasename] == 'up'
+          @yfcases = @yfcases.order(:case_number => "ASC")
+        else  params[:sqrtcasename] == 'down'
+          @yfcases = @yfcases.order(:case_number => "DESC")
+        end
+        
+    end
 
 
     # Only allow a list of trusted parameters through.

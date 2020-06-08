@@ -1,18 +1,38 @@
 <p id="notice">
     <%= notice %>
 </p>
-<h1>YF評量表</h1>
+<h1 style="text-align:center;">YF評量表</h1>
+<div style="margin-bottom:3px;">
+    <h3>篩選條件</h3>
+    <%= form_tag yfcases_path, :method => :get do %>
+        <%= text_field_tag "keyword", nil , placeholder: "輸入要篩選的案號" %>&emsp;|&emsp;
+        <%= text_field_tag "keyword2", nil , placeholder: "輸入要篩選的最終判定"%>&emsp;|&emsp;
+        縣市：<%= select_tag "city", options_from_collection_for_select(Country.order(:name), "id", "name"), prompt: " "  %>
+        <%= submit_tag "搜尋" %>
+    <% end %>
+</div>
+
+
 <table class="table">
     <thead class="thead-dark">
         <tr>
             <% if current_user.role == 1 %>
                 <th>操作</th>
             <% end %>
-            <th>案號</th>
-            <th>地址</th>
-            <th>縣市</th>
-            <th>負責人</th>
-            <th>最終判定</th>
+            <th style="background-color:#000;">案號</th>
+            <th style="background-color:#000;text-align:right;">
+                <%= link_to yfcases_path( :sqrtcasename => "up") do %>
+                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                <% end %>
+                <%= link_to yfcases_path( :sqrtcasename => "down") do %>
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <% end %>
+            </th>
+            <th style="background-color:#555;">地址</th>
+            <th style="background-color:#000;">縣市</th>
+            <th style="background-color:#555;">鄉鎮</th>
+            <th style="background-color:#000;">負責人</th>
+            <th style="background-color:#555;">最終判定</th>
             <% if current_user.role == 1 %>
                 <th colspan="5">項目</th>
             <% else %>
@@ -30,7 +50,7 @@
                     <% end %>
                 </td>
             <% end %>
-            <td style="padding:6px 3px;">
+            <td style="padding:6px 3px;" colspan="2">
                 <%= link_to yfcase_path(yfcase) do %>
                 <%= yfcase.case_number %>
                 <% end %>
@@ -40,6 +60,9 @@
             </td>
             <td style="padding:6px 3px;">
                 <%= yfcase.country.try(:name) %>
+            </td>
+            <td style="padding:6px 3px;">
+                <%= yfcase.township.try(:name) %>
             </td>
             <td style="padding:6px 3px;">
                 <%= yfcase.user.first_name + yfcase.user.last_name %>
