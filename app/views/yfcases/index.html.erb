@@ -33,11 +33,13 @@
             <th style="background-color:#555;">鄉鎮</th>
             <th style="background-color:#000;">負責人</th>
             <th style="background-color:#555;">最終判定</th>
+
             <% if current_user.role == 1 %>
                 <th colspan="5">項目</th>
             <% else %>
                 <th>項目</th>
             <% end %>
+
         </tr>
     </thead>
     <tbody>
@@ -70,7 +72,8 @@
             <td style="padding:6px 3px;">
                 <%= yfcase.final_decision %>
             </td>
-            <% if current_user.role == 1 %>
+
+              <% if current_user.role == 1 %>  
                 <td style="padding:6px 3px;">
                     <%= link_to yfratingscale_yfcase_path(yfcase,format: "pdf") do %>
                         <div class="y10000">評</div>
@@ -96,9 +99,12 @@
                         <div class="y50000">函</div>       
                     <% end %>
                 </td>
+              
             <% else %>
                 <td style="color:red;">編寫測試中，暫不開放</td>
             <% end %>
+              
+            
         </tr>
         <% end %>
     </tbody>

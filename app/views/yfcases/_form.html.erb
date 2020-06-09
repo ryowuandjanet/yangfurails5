@@ -228,7 +228,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <h3>建號</h3><small style="color:red;">最少要有一筆建號，才可設定公設資料</small>
+                    <h3>建號</h3><small style="color:red;">第一筆需為目標建號 >> 儲存 >> 後續才可設定"公設"及"增建"資料</small>
                     <div id="builds">
                         <%= f.fields_for :builds do |build| %>
                         <%= render 'build_fields', f: build %>

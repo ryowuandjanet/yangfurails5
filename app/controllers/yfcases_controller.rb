@@ -25,26 +25,36 @@ class YfcasesController < ApplicationController
     
     # 建坪
     
-    if @yfcase.builds.where.not(build_type_use: "0公設").blank?
-      @notPU_HP_personal=1
-      @notPU_HP_all=1      
-    else
+    if @yfcase.builds.where("build_type_use = ?","0公設").present?
       # 找到第一筆非公設(notPU)的個人持分(build_holding_point_personal)
-      @notPU_HP_personal=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_personal
+      @notPU_HP_personal=@yfcase.builds.where.not("build_type_use = ?","0公設").first.build_holding_point_personal
       # 找到第一筆非公設(notPU)的個人持分(build_holding_point_all)
-      @notPU_HP_all=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_all
+      @notPU_HP_all=@yfcase.builds.where.not("build_type_use = ?","0公設").first.build_holding_point_all
+      # 建坪總面積 (平方公尺)-有公設 (計算"0公設"的總面積)
+      @withBuildTotalArea = @yfcase.builds.where("build_type_use = ?","0公設").map { |n| [n.build_area.to_f * ((n.build_holding_point_personal.to_f * @notPU_HP_personal.to_f) / (n.build_holding_point_all.to_f * @notPU_HP_all.to_f))] }.flatten.sum 
+    else
+      @withBuildTotalArea = 0
     end
-
-    # 建坪總面積 (平方公尺)-無公設
-    @withoutBuildTotalArea = @yfcase.builds.where.not(build_type_use: "0公設").map { |n| [n.build_area.to_f * (n.build_holding_point_personal.to_f / n.build_holding_point_all.to_f)] }.flatten.sum 
-    # 建坪總面積 (平方公尺)-有公設
-    @withBuildTotalArea = @yfcase.builds.where(build_type_use: "0公設").map { |n| [n.build_area.to_f * ((n.build_holding_point_personal.to_f * @notPU_HP_personal.to_f) / (n.build_holding_point_all.to_f * @notPU_HP_all.to_f))] }.flatten.sum 
-
+    
+    if @yfcase.builds.where("build_type_use = ?","12增建(持分後坪數打對折)").count >0
+      # 建坪總面積 (平方公尺)-有增建 (計算"12增建(持分後坪數打對折)"的總面積)
+      @addBuildTotalArea = @yfcase.builds.where("build_type_use = ?","12增建(持分後坪數打對折)").map { |n| [n.build_area.to_f * ((n.build_holding_point_personal.to_f) / (n.build_holding_point_all.to_f))] }.flatten.sum * 0.5
+    else
+      @addBuildTotalArea = 0
+    end
+    
+    if @yfcase.builds.where.not("build_type_use = ? OR build_type_use = ?", "0公設","12增建(持分後坪數打對折)").count > 0
+      # 建坪總面積 (平方公尺)-無公設 (計算不含"0公設"及"12增建(持分後坪數打對折)"的總面積)
+      @withoutBuildTotalArea = @yfcase.builds.where.not("build_type_use = ? OR build_type_use = ?", "0公設","12增建(持分後坪數打對折)").map { |n| [n.build_area.to_f * (n.build_holding_point_personal.to_f / n.build_holding_point_all.to_f)] }.flatten.sum 
+    else
+      @withoutBuildTotalArea = 0
+    end 
+    
     # 坪價(萬)
-    @pingprice1 = @yfcase.floor_price_1.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea)*0.3025).to_f
-    @pingprice2 = @yfcase.floor_price_2.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea)*0.3025).to_f
-    @pingprice3 = @yfcase.floor_price_3.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea)*0.3025).to_f
-    @pingprice4 = @yfcase.floor_price_4.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea)*0.3025).to_f
+    @pingprice1 = @yfcase.floor_price_1.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea+@addBuildTotalArea)*0.3025).to_f
+    @pingprice2 = @yfcase.floor_price_2.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea+@addBuildTotalArea)*0.3025).to_f
+    @pingprice3 = @yfcase.floor_price_3.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea+@addBuildTotalArea)*0.3025).to_f
+    @pingprice4 = @yfcase.floor_price_4.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea+@addBuildTotalArea)*0.3025).to_f
 
     # 時價(萬)
 
@@ -193,19 +203,36 @@ class YfcasesController < ApplicationController
     end
 
     def show_helper
-      @yfcase = Yfcase.find(params[:id])
-      # 地坪總面積 (平方公尺)
-      @landtotalarea = @yfcase.lands.map{ |n| [n.land_area.to_f * (n.land_holding_point_personal.to_f / n.land_holding_point_all.to_f)] }.flatten.sum
-      # 建坪總面積 (平方公尺)-無公設
-      @withoutBuildTotalArea = @yfcase.builds.where.not(build_type_use: "0公設").map { |n| [n.build_area.to_f * (n.build_holding_point_personal.to_f / n.build_holding_point_all.to_f)] }.flatten.sum 
-      # 建坪總面積 (平方公尺)-有公設
-      @withBuildTotalArea = @yfcase.builds.where(build_type_use: "0公設").map { |n| [n.build_area.to_f * (n.build_holding_point_personal.to_f / n.build_holding_point_all.to_f)] }.flatten.sum 
-
-      # 坪價(萬)
-      @pingprice1 = @yfcase.floor_price_1.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea)*0.3025).to_f
-      @pingprice2 = @yfcase.floor_price_2.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea)*0.3025).to_f
-      @pingprice3 = @yfcase.floor_price_3.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea)*0.3025).to_f
-      @pingprice4 = @yfcase.floor_price_4.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea)*0.3025).to_f
+    if @yfcase.builds.where("build_type_use = ?","0公設").present?
+      # 找到第一筆非公設(notPU)的個人持分(build_holding_point_personal)
+      @notPU_HP_personal=@yfcase.builds.where.not("build_type_use = ?","0公設").first.build_holding_point_personal
+      # 找到第一筆非公設(notPU)的個人持分(build_holding_point_all)
+      @notPU_HP_all=@yfcase.builds.where.not("build_type_use = ?","0公設").first.build_holding_point_all
+      # 建坪總面積 (平方公尺)-有公設 (計算"0公設"的總面積)
+      @withBuildTotalArea = @yfcase.builds.where("build_type_use = ?","0公設").map { |n| [n.build_area.to_f * ((n.build_holding_point_personal.to_f * @notPU_HP_personal.to_f) / (n.build_holding_point_all.to_f * @notPU_HP_all.to_f))] }.flatten.sum 
+    else
+      @withBuildTotalArea = 0
+    end
+    
+    if @yfcase.builds.where("build_type_use = ?","12增建(持分後坪數打對折)").count >0
+      # 建坪總面積 (平方公尺)-有增建 (計算"12增建(持分後坪數打對折)"的總面積)
+      @addBuildTotalArea = @yfcase.builds.where("build_type_use = ?","12增建(持分後坪數打對折)").map { |n| [n.build_area.to_f * ((n.build_holding_point_personal.to_f) / (n.build_holding_point_all.to_f))] }.flatten.sum * 0.5
+    else
+      @addBuildTotalArea = 0
+    end
+    
+    if @yfcase.builds.where.not("build_type_use = ? OR build_type_use = ?", "0公設","12增建(持分後坪數打對折)").count > 0
+      # 建坪總面積 (平方公尺)-無公設 (計算不含"0公設"及"12增建(持分後坪數打對折)"的總面積)
+      @withoutBuildTotalArea = @yfcase.builds.where.not("build_type_use = ? OR build_type_use = ?", "0公設","12增建(持分後坪數打對折)").map { |n| [n.build_area.to_f * (n.build_holding_point_personal.to_f / n.build_holding_point_all.to_f)] }.flatten.sum 
+    else
+      @withoutBuildTotalArea = 0
+    end 
+    
+    # 坪價(萬)
+    @pingprice1 = @yfcase.floor_price_1.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea+@addBuildTotalArea)*0.3025).to_f
+    @pingprice2 = @yfcase.floor_price_2.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea+@addBuildTotalArea)*0.3025).to_f
+    @pingprice3 = @yfcase.floor_price_3.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea+@addBuildTotalArea)*0.3025).to_f
+    @pingprice4 = @yfcase.floor_price_4.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea+@addBuildTotalArea)*0.3025).to_f
 
       # 時價(萬)
 

@@ -243,24 +243,36 @@ body{
 .xc1500{
 	border-top:3px solid black;
 	border-right:1px dotted black;
-	border-bottom:double;
+	border-bottom:1px dotted black;
 	background-color: DeepSkyBlue;
-	width: 150px;
+	width: 250px;
 }
-.xc1600{
-	border-top:3px solid black;
+.xc1511{
 	border-right:1px dotted black;
 	border-bottom:double;
 	background-color: DeepSkyBlue;
-	width: 190px;
+	width: 125px;
 }
-.xc1700{
+.xc1512{
+	border-right:1px dotted black;
+	border-bottom:double;
+	background-color: DeepSkyBlue;
+	width: 125px;
+}
+.xc1600{
 	border-top:3px solid black;
 	border-right:3px solid black;
 	border-bottom:double;
 	background-color: DeepSkyBlue;
-	width: 110px;
+	width: 200px;
 }
+// .xc1700{
+// 	border-top:3px solid black;
+// 	border-right:3px solid black;
+// 	border-bottom:double;
+// 	background-color: DeepSkyBlue;
+// 	width: 110px;
+// }
 
 .xc2100{
 	border-right:1px dotted black;
@@ -278,34 +290,39 @@ body{
 	border-right:1px dotted black;
 	border-bottom:3px solid black;	
 	width: 150px;
-	text-align: center;
+	text-align: right;
 }
 .xc2400{
 	border-right:1px dotted black;
 	border-bottom:3px solid black;	
 	width: 100px;
-	text-align: center;
+	text-align: right;
 }
 .xc2500{
 	border-right:1px dotted black;
 	border-bottom:3px solid black;	
-	width: 150px;
-	text-align: center;
+	width: 125px;
+	text-align: right;
+}
+.xc2501{
+	border-right:1px dotted black;
+	border-bottom:3px solid black;	
+	width: 125px;
+	text-align: right;
 }
 .xc2600{
-	border-right:1px dotted black;
-	border-bottom:3px solid black;
-	width: 190px;
-	font-size:14px;
-	text-align: center;
-}
-.xc2700{
 	border-right:3px solid black;
 	border-bottom:3px solid black;
-	width: 110px;
-	font-size:14px;
-	text-align: center;
+	width: 200px;
+	text-align: left;
 }
+// .xc2700{
+// 	border-right:3px solid black;
+// 	border-bottom:3px solid black;
+// 	width: 110px;
+// 	font-size:14px;
+// 	text-align: center;
+// }
 
 /*拍賣資訊*/
 .font-th-12 {font-size: 12pt;font-family: Arial,微軟正黑體,sans-serif;font-width:bold;color:black;text-align: center;}

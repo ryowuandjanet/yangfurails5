@@ -59,7 +59,7 @@
 			<td style="border:1px solid black;width:54px;" rowspan="2">(2)建號</td>
 			<td style="border:1px solid black;width:140px;color:blue;" rowspan="2">        
 				<% @yfcase.builds.each do |build| %>
-                	<%= build.build_number %><br>
+                	<%= @yfcase.big_section %><%= build.build_number %><br>
         		<% end %>
         	</td>
 			<td style="border:1px solid black;width:70px;" rowspan="2">(3)移　　轉<br>&nbsp;&nbsp;&nbsp;房屋坐落</td>
@@ -191,7 +191,7 @@
 			<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.person_number %></td>
 			<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.person_floor %></td>
 			<td style="border:1px solid black;color:blue;" rowspan="2">
-				<%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' :  @yfcase.personnals.where(is_original_owner: true).first.right_share_person & "/" & @yfcase.personnals.where(is_original_owner: true).first.right_share_all %>
+				<%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' :  @yfcase.personnals.where(is_original_owner: true).first.right_share_person.to_s + "/" + @yfcase.personnals.where(is_original_owner: true).first.right_share_all.to_s %>
 			</td>
 			<td style="border:1px solid black;" rowspan="12">一般案件</td>
 
@@ -243,13 +243,13 @@
 				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.person_number %></td>
 				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.person_floor %></td>
 				<td style="border:1px solid black;color:blue;" rowspan="2">
-					<%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.right_share_person & "/" & @yfcase.personnals.where(is_new_owner: true).first.right_share_all %>
+					<%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.right_share_person.to_s + "/" + @yfcase.personnals.where(is_new_owner: true).first.right_share_all.to_s %>
 				</td>
 
 		</tr>
 		<tr style="height:20px;">
 			<td style="border:1px solid black;">電話</td>
-			<td style="border:1px solid black;font-size:7pt;"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.mobile_phone %></td>
+			<td style="border:1px solid black;font-size:7pt;color:blue;"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.mobile_phone %></td>
 		</tr>
 		<tr style="height:20px;">
 			<td style="border:1px solid black;" rowspan="2"></td>
@@ -278,52 +278,56 @@
 		<!-- (10)契稅代理人 -->
 		<tr style="height:20px;">
 			<td style="border:1px solid black;text-align:left;" rowspan="2">(10)契稅代理人</td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" colspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.name %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"></td>
+				<td style="border:1px solid black;color:blue;" colspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.identity_card %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.identity_code %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.public_or_private %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_country %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_township %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_village %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_neighbor %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_street %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_section %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_lane %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_alley %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_number %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_floor %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2">
+					<%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.right_share_person.to_s + "/" + @yfcase.personnals.where(is_deed_tax_agent: true).first.right_share_all.to_s %>
+				</td>
 
 		</tr>
 		<tr style="height:25px;">
 			<td style="border:1px solid black;">電話</td>
-			<td style="border:1px solid black;font-size:7pt;"></td>
+			<td style="border:1px solid black;font-size:7pt;color:blue;"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.mobile_phone %></td>
 		</tr>
 
 		<!-- (11)在國內房屋稅納稅代理人 -->
 		<tr style="height:20px;">
 			<td style="border:1px solid black;text-align:left;" rowspan="2">(11)在國內房屋<br>&nbsp;&nbsp;&nbsp;稅納稅代理人</td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" colspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.name %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"></td>
+				<td style="border:1px solid black;color:blue;" colspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.identity_card %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.identity_code %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.public_or_private %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_country %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_township %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_village %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_neighbor %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_street %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_section %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_lane %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_alley %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_number %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_floor %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2">
+					<%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.right_share_person.to_s + "/" + @yfcase.personnals.where(is_tax_agent: true).first.right_share_all.to_s %>
+				</td>
 		</tr>
 		<tr style="height:20px;">
 			<td style="border:1px solid black;">電話</td>
-			<td style="border:1px solid black;font-size:7pt;"></td>
+			<td style="border:1px solid black;font-size:7pt;color:blue;"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.mobile_phone %></td>
 		</tr>
 	</table>
 

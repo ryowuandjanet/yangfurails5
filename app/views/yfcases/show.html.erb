@@ -93,9 +93,13 @@
             <th class="xb2800 font-td"></th>
             <th class="xb2900 font-td">
                 <% if @yfcase.builds.count == 0 %>
-                    ' ' 
-                <% elsif @yfcase.builds.where(build_type_use: "0公設").count > 0 %>
+                    <%= ' ' %> 
+                <% elsif @yfcase.builds.where(build_type_use: "0公設").count > 0 && @yfcase.builds.where(build_type_use: "12增建(持分後坪數打對折)").count > 0 %>
+                    <%= number_to_currency(@withBuildTotalArea+@withoutBuildTotalArea+@addBuildTotalArea, unit: "", precision: 2)+"("+number_to_currency((@withBuildTotalArea+@withoutBuildTotalArea+@addBuildTotalArea) * 0.3025, unit: "", precision: 2)+")" %><br>
+                <% elsif @yfcase.builds.where(build_type_use: "0公設").count > 0 && @yfcase.builds.where(build_type_use: "12增建(持分後坪數打對折)").count == 0 %>
                     <%= number_to_currency(@withBuildTotalArea+@withoutBuildTotalArea, unit: "", precision: 2)+"("+number_to_currency((@withBuildTotalArea+@withoutBuildTotalArea) * 0.3025, unit: "", precision: 2)+")" %><br>
+                <% elsif @yfcase.builds.where(build_type_use: "0公設").count == 0 && @yfcase.builds.where(build_type_use: "12增建(持分後坪數打對折)").count > 0 %>
+                    <%= number_to_currency(@withoutBuildTotalArea+@addBuildTotalArea, unit: "", precision: 2)+"("+number_to_currency((@withoutBuildTotalArea+@addBuildTotalArea) * 0.3025, unit: "", precision: 2)+")" %><br>
                 <% else %>
                     <%= number_to_currency(@withoutBuildTotalArea, unit: "", precision: 2)+"("+number_to_currency(@withoutBuildTotalArea * 0.3025, unit: "", precision: 2)+")" %><br>
                 <% end %>
@@ -105,18 +109,28 @@
 </div>
 <div style="padding:3px;"></div> 
 
-
 <!-- 建物 -->
 <div class="build" style="width:1000px;">
     <table>
         <tr>
-            <th class="xc1100 font-th">建號</th>
-            <th class="xc1200 font-th">建號謄本</th>
-            <th class="xc1300 font-th">建坪(面積)<br>平方公尺(坪)</th>
-            <th class="xc1400 font-th">持分</th>  
-            <th class="xc1500 font-th">建坪(持分)<br>平方公尺(坪)</th>
-            <th class="xc1600 font-th">建物型/使用</th>
-            <th class="xc1700 font-th">使用分區</th>
+            <th class="xc1100 font-th" rowspan="2">建號</th>
+            <th class="xc1200 font-th" rowspan="2">建號謄本</th>
+            <th class="xc1300 font-th" rowspan="2">建坪(面積)<br>平方公尺(坪)</th>
+            <th class="xc1400 font-th" rowspan="2">持分</th>  
+            <th class="xc1500 font-th" colspan="2">建坪持分 - 平方公尺(坪)</th>
+            <th class="xc1600 font-th" rowspan="2">
+                <div style="font-size:12pt;color;red;background-color:Cornsilk;text-align:left;">
+                   使用分區：
+                    <% if @yfcase.builds.first.present? %>
+                        <%= @yfcase.builds.first.use_partition %>
+                    <% end %>
+                </div>
+                建物型/使用
+            </th>
+        </tr>
+        <tr>
+            <th class="xc1511 font-th">(原)</th>
+            <th class="xc1512 font-th">(計算後)</th>
         </tr>
         <tr>
             <th class="xc2100 font-td">
@@ -158,30 +172,47 @@
         <% end %>
             </th>
             <th class="xc2500 font-td">
-        <% @yfcase.builds.each do |build| %>
-            <% if build.build_type_use == "0公設" %> 
-                <!--找到第一筆非公設(notPU)的個人持分(holding_point_personal)-->
-                <% @notPU_holding_point_personal=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_personal %>
-                <!--找到第一筆非公設(notPU)的個人持分(build_holding_point_all)-->
-                <% @notPU_build_holding_point_all=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_all %>
-                <%= area(build.build_area,@notPU_holding_point_personal*build.build_holding_point_personal,@notPU_build_holding_point_all*build.build_holding_point_all,1).round(2) %> (
-                <%= area(build.build_area,@notPU_holding_point_personal*build.build_holding_point_personal,@notPU_build_holding_point_all*build.build_holding_point_all,0.3025).round(2) %>)<br>
-            <% else %>
-                <%= area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,1).round(2) %> (
-                <%= area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,0.3025).round(2) %>)<br>
-            <% end %>
-        <% end %>
+                <% @yfcase.builds.each do |build| %>
+                    <% if build.build_type_use == "0公設" %> 
+                        <!--找到第一筆非公設(notPU)的個人持分(holding_point_personal)-->
+                        <% @notPU_holding_point_personal=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_personal %>
+                        <!--找到第一筆非公設(notPU)的個人持分(build_holding_point_all)-->
+                        <% @notPU_build_holding_point_all=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_all %>
+                        <%= area(build.build_area,@notPU_holding_point_personal*build.build_holding_point_personal,@notPU_build_holding_point_all*build.build_holding_point_all,1).round(2) %> (
+                        <%= '%.2f' % area(build.build_area,@notPU_holding_point_personal*build.build_holding_point_personal,@notPU_build_holding_point_all*build.build_holding_point_all,0.3025).round(2) %> )<br>
+                    <% elsif build.build_type_use == "12增建(持分後坪數打對折)" %>
+                        <%= area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,1).round(2) %> (
+                        <%= '%.2f' % area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,0.3025).round(2) %> )<br>
+                    <% else %>
+                        <%= area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,1).round(2) %> (
+                        <%= '%.2f' % area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,0.3025).round(2) %> )<br>
+                    <% end %>
+                <% end %>   
+            </th>
+            <th class="xc2501 font-td">
+                <% @yfcase.builds.each do |build| %>
+                    <% if build.build_type_use == "0公設" %> 
+                        <!--找到第一筆非公設(notPU)的個人持分(holding_point_personal)-->
+                        <% @notPU_holding_point_personal=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_personal %>
+                        <!--找到第一筆非公設(notPU)的個人持分(build_holding_point_all)-->
+                        <% @notPU_build_holding_point_all=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_all %>
+                        <%= area(build.build_area,@notPU_holding_point_personal*build.build_holding_point_personal,@notPU_build_holding_point_all*build.build_holding_point_all,1).round(2) %> (
+                        <%= '%.2f' % area(build.build_area,@notPU_holding_point_personal*build.build_holding_point_personal,@notPU_build_holding_point_all*build.build_holding_point_all,0.3025).round(2) %> )<br>
+                    <% elsif build.build_type_use == "12增建(持分後坪數打對折)" %>
+                        <%= area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,0.5).round(2) %> (
+                        <%= '%.2f' % area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,0.15125).round(2) %> )<br>
+                    <% else %>
+                        <%= area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,1).round(2) %> (
+                        <%= '%.2f' % area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,0.3025).round(2) %> )<br>
+                    <% end %>
+                <% end %>                
             </th>
             <th class="xc2600 font-td">
-        <% @yfcase.builds.each do |build| %>
-                <%= build.build_type_use %><br>
-        <% end %>
+                <% @yfcase.builds.each do |build| %>
+                        <%= build.build_type_use %><br>
+                <% end %>
             </th>
-            <th class="xc2700 font-td">
-        <% @yfcase.builds.each do |build| %>
-                <%= build.use_partition %><br>
-        <% end %>
-            </th>
+
         </tr>
     </table>
 </div>
