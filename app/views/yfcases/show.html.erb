@@ -486,13 +486,13 @@
     <table>
         <tr>
             <th class="xe1100 font-th">初勘日</th>
-            <th class="xe1200 font-td">
+            <th class="xe1200 font-td" colspan="3">
                 <%= @yfcase.first_survey_day %>
             </th>
         </tr>
         <tr>
             <th class="xe2100 font-th">會勘日</th>
-            <th class="xe2200 font-td">
+            <th class="xe2200 font-td" colspan="3">
                 <%= @yfcase.other_survey_day %>
             </th>
         </tr>
@@ -505,10 +505,18 @@
                     <%= link_to "法拍公告", add_https(@yfcase.foreclosure_announcement_link), target: "_blank" %>
                 <% end %>
             </th>
+            <th class="xe3300 font-th">998連結</th>
+            <th class="xe3400 font-td">
+                <% if @yfcase.foreclosure_announcement_988_link.blank? %>
+                    <%= " " %>
+                <% else %>
+                    <%= link_to "988連結路徑", add_https(@yfcase.foreclosure_announcement_988_link), target: "_blank" %>
+                <% end %>
+            </th>
         </tr>
         <tr>
             <th class="xe4100 font-th">物件照片(證物四)</th>
-            <th class="xe4200 font-td">
+            <th class="xe4200 font-td" colspan="3">
                 <% if @yfcase.object_photo_link.blank? %>
                     <%= " " %>
                 <% else %>
@@ -518,7 +526,7 @@
         </tr>
         <tr>
             <th class="xe5100 font-th">實價登錄市價</th>
-            <th class="xe5200 font-td">
+            <th class="xe5200 font-td" colspan="3">
                 <!-- 區域負責人 -->
                     <% yfcasefullname = @yfcase.user.first_name + @yfcase.user.last_name %>
                     <!-- 登入人員 -->
@@ -658,7 +666,7 @@
 
         <tr>
             <th class="xe6100 font-th">法拍記錄(證物七)</th>
-            <th class="xe6200 font-td">
+            <th class="xe6200 font-td" colspan="3">
                 <% if @yfcase.auction_record_link.blank? %>
                     <%= " " %>
                 <% else %>

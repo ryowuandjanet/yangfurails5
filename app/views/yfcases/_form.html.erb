@@ -296,6 +296,14 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-2">
+                        988連結
+                    </div>
+                    <div class="form-group col-md-10">
+                        <%= f.text_field :foreclosure_announcement_988_link,class: "form-control",placeholder: "請輸入988連結網址" %>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
                         物件照片(證物四)
                     </div>
                     <div class="form-group col-md-10">
@@ -379,6 +387,7 @@
         <%= f.submit "更新YF評量表", class: "btn btn-outline-dark" %>
         <%= link_to "返回", @yfcase, class: "btn btn-outline-secondary" %>
     </div>
+    <%= f.hidden_field :adv_find_condition, :value => "#{@yfcase.case_number}/#{@yfcase.final_decision}/#{@yfcase.user_id}/#{@yfcase.country_id}" %>
 </div>
 <script>
     $.datepicker.regional['zh-TW']={

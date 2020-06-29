@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_25_134706) do
+ActiveRecord::Schema.define(version: 2020_06_29_063415) do
 
   create_table "builds", force: :cascade do |t|
     t.string "build_number"
@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(version: 2020_05_25_134706) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "full_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -249,6 +250,8 @@ ActiveRecord::Schema.define(version: 2020_05_25_134706) do
     t.string "big_section"
     t.string "small_section"
     t.string "company"
+    t.string "foreclosure_announcement_988_link"
+    t.string "adv_find_condition"
     t.index ["country_id"], name: "index_yfcases_on_country_id"
     t.index ["township_id"], name: "index_yfcases_on_township_id"
     t.index ["user_id"], name: "index_yfcases_on_user_id"

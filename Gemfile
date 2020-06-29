@@ -27,7 +27,7 @@ gem 'jbuilder', '~> 2.5'
 
 
 gem 'devise'
-
+gem 'wdm'
 gem 'bootstrap'
 gem 'rails_12factor'
 gem "font-awesome-rails"

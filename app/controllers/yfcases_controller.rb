@@ -1,8 +1,8 @@
 class YfcasesController < ApplicationController
   include ApplicationHelper
-  before_action :set_yfcase, only: [:edit, :update, :destroy, :deedtax, :yfratingscale, :realestateregistration, :complaint, :letter]
+  before_action :set_yfcase, only: [:edit, :update, :destroy]
   before_action :show_helper, only: [:edit, :update, :destroy, :deedtax, :yfratingscale, :realestateregistration, :complaint, :letter]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
 
   # GET /yfcases
   # GET /yfcases.json
@@ -203,59 +203,97 @@ class YfcasesController < ApplicationController
     end
 
     def show_helper
-    if @yfcase.builds.where("build_type_use = ?","0公設").present?
-      # 找到第一筆非公設(notPU)的個人持分(build_holding_point_personal)
-      @notPU_HP_personal=@yfcase.builds.where.not("build_type_use = ?","0公設").first.build_holding_point_personal
-      # 找到第一筆非公設(notPU)的個人持分(build_holding_point_all)
-      @notPU_HP_all=@yfcase.builds.where.not("build_type_use = ?","0公設").first.build_holding_point_all
-      # 建坪總面積 (平方公尺)-有公設 (計算"0公設"的總面積)
-      @withBuildTotalArea = @yfcase.builds.where("build_type_use = ?","0公設").map { |n| [n.build_area.to_f * ((n.build_holding_point_personal.to_f * @notPU_HP_personal.to_f) / (n.build_holding_point_all.to_f * @notPU_HP_all.to_f))] }.flatten.sum 
-    else
-      @withBuildTotalArea = 0
-    end
-    
-    if @yfcase.builds.where("build_type_use = ?","12增建(持分後坪數打對折)").count >0
-      # 建坪總面積 (平方公尺)-有增建 (計算"12增建(持分後坪數打對折)"的總面積)
-      @addBuildTotalArea = @yfcase.builds.where("build_type_use = ?","12增建(持分後坪數打對折)").map { |n| [n.build_area.to_f * ((n.build_holding_point_personal.to_f) / (n.build_holding_point_all.to_f))] }.flatten.sum * 0.5
-    else
-      @addBuildTotalArea = 0
-    end
-    
-    if @yfcase.builds.where.not("build_type_use = ? OR build_type_use = ?", "0公設","12增建(持分後坪數打對折)").count > 0
-      # 建坪總面積 (平方公尺)-無公設 (計算不含"0公設"及"12增建(持分後坪數打對折)"的總面積)
-      @withoutBuildTotalArea = @yfcase.builds.where.not("build_type_use = ? OR build_type_use = ?", "0公設","12增建(持分後坪數打對折)").map { |n| [n.build_area.to_f * (n.build_holding_point_personal.to_f / n.build_holding_point_all.to_f)] }.flatten.sum 
-    else
-      @withoutBuildTotalArea = 0
-    end 
-    
-    # 坪價(萬)
-    @pingprice1 = @yfcase.floor_price_1.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea+@addBuildTotalArea)*0.3025).to_f
-    @pingprice2 = @yfcase.floor_price_2.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea+@addBuildTotalArea)*0.3025).to_f
-    @pingprice3 = @yfcase.floor_price_3.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea+@addBuildTotalArea)*0.3025).to_f
-    @pingprice4 = @yfcase.floor_price_4.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea+@addBuildTotalArea)*0.3025).to_f
+      @yfcase = Yfcase.find(params[:id])
+      # 地坪總面積 (平方公尺)
+      @landtotalarea = @yfcase.lands.map{ |n| [n.land_area.to_f * (n.land_holding_point_personal.to_f / n.land_holding_point_all.to_f)] }.flatten.sum
+      
+      # 建坪
+      
+      if @yfcase.builds.where("build_type_use = ?","0公設").present?
+        # 找到第一筆非公設(notPU)的個人持分(build_holding_point_personal)
+        @notPU_HP_personal=@yfcase.builds.where.not("build_type_use = ?","0公設").first.build_holding_point_personal
+        # 找到第一筆非公設(notPU)的個人持分(build_holding_point_all)
+        @notPU_HP_all=@yfcase.builds.where.not("build_type_use = ?","0公設").first.build_holding_point_all
+        # 建坪總面積 (平方公尺)-有公設 (計算"0公設"的總面積)
+        @withBuildTotalArea = @yfcase.builds.where("build_type_use = ?","0公設").map { |n| [n.build_area.to_f * ((n.build_holding_point_personal.to_f * @notPU_HP_personal.to_f) / (n.build_holding_point_all.to_f * @notPU_HP_all.to_f))] }.flatten.sum 
+      else
+        @withBuildTotalArea = 0
+      end
+      
+      if @yfcase.builds.where("build_type_use = ?","12增建(持分後坪數打對折)").count >0
+        # 建坪總面積 (平方公尺)-有增建 (計算"12增建(持分後坪數打對折)"的總面積)
+        @addBuildTotalArea = @yfcase.builds.where("build_type_use = ?","12增建(持分後坪數打對折)").map { |n| [n.build_area.to_f * ((n.build_holding_point_personal.to_f) / (n.build_holding_point_all.to_f))] }.flatten.sum * 0.5
+      else
+        @addBuildTotalArea = 0
+      end
+      
+      if @yfcase.builds.where.not("build_type_use = ? OR build_type_use = ?", "0公設","12增建(持分後坪數打對折)").count > 0
+        # 建坪總面積 (平方公尺)-無公設 (計算不含"0公設"及"12增建(持分後坪數打對折)"的總面積)
+        @withoutBuildTotalArea = @yfcase.builds.where.not("build_type_use = ? OR build_type_use = ?", "0公設","12增建(持分後坪數打對折)").map { |n| [n.build_area.to_f * (n.build_holding_point_personal.to_f / n.build_holding_point_all.to_f)] }.flatten.sum 
+      else
+        @withoutBuildTotalArea = 0
+      end 
+      
+      # 坪價(萬)
+      @pingprice1 = @yfcase.floor_price_1.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea+@addBuildTotalArea)*0.3025).to_f
+      @pingprice2 = @yfcase.floor_price_2.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea+@addBuildTotalArea)*0.3025).to_f
+      @pingprice3 = @yfcase.floor_price_3.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea+@addBuildTotalArea)*0.3025).to_f
+      @pingprice4 = @yfcase.floor_price_4.to_f / ((@withoutBuildTotalArea+@withBuildTotalArea+@addBuildTotalArea)*0.3025).to_f
 
       # 時價(萬)
 
       marketpricecount = @yfcase.objectbuilds.count
       marketpricesum=@yfcase.objectbuilds.map { |n| [(testvalue(n.total_price.to_f / n.build_area.to_f ,n.plusa,n.plusb))] }.flatten
-      @marketprice = marketpricesum.map!{|e| e.to_f}.sum.fdiv(marketpricesum.size) / 10000
+      @marketprice = marketpricesum.map!{|e| e.to_f}.sum.fdiv(marketpricesum.size)
+      respond_to do |format|
+      format.html
+      format.json
+      format.pdf {render template:'yfcases/deedtax', pdf: 'Deedtax'}
+      end
     end
 
     def prepare_variable_for_index_template
         @yfcases = Yfcase.all
         kk=true
-        # keyword=案號篩選
-        # keyword2=判定篩選
-        # city=縣市篩選
-        if params[:keyword] and params[:keyword2] and params[:city]
-          if params[:city].blank?
-            @yfcases = Yfcase.where( [ "case_number like ? AND final_decision like ?", "%#{params[:keyword]}%" ,"%#{params[:keyword2]}%"] )
-          else
-            @yfcases = Yfcase.where( [ "case_number like ? AND final_decision like ? AND country_id = ?", "%#{params[:keyword]}%" ,"%#{params[:keyword2]}%" ,params[:city] ] )
-          end
-        else
-            @yfcases = Yfcase.all
+        # keyword=案號篩選(case_number)
+        # keyword2=判定篩選(final_decision)
+        # person=人員篩選(user_id)
+        # city=縣市篩選(country_id)
+      
+        if params[:keyword].present? && params[:keyword2].present? && params[:person].present? && params[:city].present?
+          @yfcases = Yfcase.where( [ "case_number like ?", "%#{params[:keyword]}%"]).where( [ "final_decision like ?", "%#{params[:keyword2]}%"]).where( [ "user_id like ?", params[:person]]).where( [ "country_id like ?", params[:city]])
+        elsif params[:keyword].present? && params[:keyword2].present? && params[:person].present? && params[:city].blank?
+          @yfcases = Yfcase.where( [ "case_number like ?", "%#{params[:keyword]}%"]).where( [ "final_decision like ?", "%#{params[:keyword2]}%"]).where( [ "user_id like ?", params[:person]])
+        elsif params[:keyword].present? && params[:keyword2].present? && params[:person].blank? && params[:city].present?
+          @yfcases = Yfcase.where( [ "case_number like ?", "%#{params[:keyword]}%"]).where( [ "final_decision like ?", "%#{params[:keyword2]}%"]).where( [ "country_id like ?", params[:city]])
+        elsif params[:keyword].present? && params[:keyword2].present? && params[:person].blank? && params[:city].blank?
+          @yfcases = Yfcase.where( [ "case_number like ?", "%#{params[:keyword]}%"]).where( [ "final_decision like ?", "%#{params[:keyword2]}%"])
+        elsif params[:keyword].present? && params[:keyword2].blank? && params[:person].present? && params[:city].present?
+          @yfcases = Yfcase.where( [ "case_number like ?", "%#{params[:keyword]}%"]).where( [ "user_id like ?", params[:person]]).where( [ "country_id like ?", params[:city]])
+        elsif params[:keyword].present? && params[:keyword2].blank? && params[:person].present? && params[:city].blank?
+          @yfcases = Yfcase.where( [ "case_number like ?", "%#{params[:keyword]}%"]).where( [ "user_id like ?", params[:person]])
+        elsif params[:keyword].present? && params[:keyword2].blank? && params[:person].blank? && params[:city].present?
+          @yfcases = Yfcase.where( [ "case_number like ?", "%#{params[:keyword]}%"]).where( [ "country_id like ?", params[:city]])
+        elsif params[:keyword].present? && params[:keyword2].blank? && params[:person].blank? && params[:city].blank?
+          @yfcases = Yfcase.where( [ "case_number like ?", "%#{params[:keyword]}%"])
+        elsif params[:keyword].blank? && params[:keyword2].present? && params[:person].present? && params[:city].present?
+          @yfcases = Yfcase.where( [ "final_decision like ?", "%#{params[:keyword2]}%"]).where( [ "user_id like ?", params[:person]]).where( [ "country_id like ?", params[:city]])
+        elsif params[:keyword].blank? && params[:keyword2].present? && params[:person].present? && params[:city].blank?
+          @yfcases = Yfcase.where( [ "final_decision like ?", "%#{params[:keyword2]}%"]).where( [ "user_id like ?", params[:person]])
+        elsif params[:keyword].blank? && params[:keyword2].present? && params[:person].blank? && params[:city].present?
+          @yfcases = Yfcase.where( [ "final_decision like ?", "%#{params[:keyword2]}%"]).where( [ "country_id like ?", params[:city]])
+        elsif params[:keyword].blank? && params[:keyword2].present? && params[:person].blank? && params[:city].blank?
+          @yfcases = Yfcase.where( [ "final_decision like ?", "%#{params[:keyword2]}%"])
+        elsif params[:keyword].blank? && params[:keyword2].blank? && params[:person].present? && params[:city].present?
+          @yfcases = Yfcase.where( [ "user_id like ?", params[:person]]).where( [ "country_id like ?", params[:city]])
+        elsif params[:keyword].blank? && params[:keyword2].blank? && params[:person].present? && params[:city].blank?
+          @yfcases = Yfcase.where( [ "user_id like ?", params[:person]])
+        elsif params[:keyword].blank? && params[:keyword2].blank? && params[:person].blank? && params[:city].present?
+          @yfcases = Yfcase.where( [ "country_id like ?", params[:city]])
+        else 
+          @yfcases = Yfcase.all
         end
+        
      
         if params[:sqrtcasename] == 'up'
           @yfcases = @yfcases.order(:case_number => "ASC")
@@ -268,7 +306,7 @@ class YfcasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def yfcase_params
-      params.require(:yfcase).permit(:case_number, :company,\
+      params.require(:yfcase).permit(:case_number, :company, :adv_find_condition,\
         :country_id, :township_id, :big_section, :small_section, \
         :other_address, :co_owner, \
         :auction_day_1,:auction_day_2,:auction_day_3,:auction_day_4, \
@@ -277,7 +315,7 @@ class YfcasesController < ApplicationController
         :monitor_1,:monitor_2,:monitor_3,:monitor_4, \
         :margin_1,:margin_2,:margin_3,:margin_4,:auction_notes, \
         :first_survey_day,:other_survey_day, \
-        :foreclosure_announcement_title,:foreclosure_announcement_link,:object_photo_title,:object_photo_link, \
+        :foreclosure_announcement_title,:foreclosure_announcement_link,:foreclosure_announcement_988_link,:object_photo_title,:object_photo_link, \
         :net_price_registration_market_price_title,:net_price_registration_market_price_link,:net_price_registration_map_title,:net_price_registration_map_link,:net_price_registration_photo_title,:net_price_registration_photo_link, \
         :auction_record_title,:auction_record_link,:other_notes,:survey_resolution,:final_decision, \
         :occupy,:register,:parking_space,:management_fee,:rent,:leak,:easy_parking,:railway,:vegetable_market,:supermarket,:school,:park,:post_office,:main_road,:water_and_power_failure,:good_vision, :final_decision_date, \

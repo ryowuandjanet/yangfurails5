@@ -1,114 +1,106 @@
 <p id="notice">
     <%= notice %>
 </p>
-<h1 style="text-align:center;">YF評量表</h1>
+<h1 style="text-align:center;">案號清單</h1>
 <div style="margin-bottom:3px;">
     <h3>篩選條件</h3>
     <%= form_tag yfcases_path, :method => :get do %>
-        <%= text_field_tag "keyword", nil , placeholder: "輸入要篩選的案號" %>&emsp;|&emsp;
-        <%= text_field_tag "keyword2", nil , placeholder: "輸入要篩選的最終判定"%>&emsp;|&emsp;
+        案號：<%= text_field_tag "keyword", nil , placeholder: "輸入關鍵字" %>&emsp;|&emsp;
+        最終判定：<%= select_tag "keyword2", raw("<option>3拍進場</option><option>4拍進場</option><option>放棄</option>"), include_blank: true %>&emsp;|&emsp;
         縣市：<%= select_tag "city", options_from_collection_for_select(Country.order(:name), "id", "name"), prompt: " "  %>
+        人員：<%= select_tag "person", options_from_collection_for_select(User.order(:full_name), "id", "full_name") , prompt: " " %>
         <%= submit_tag "搜尋" %>
     <% end %>
+    <%= params[:user_id] %>
 </div>
 
 
-<table class="table">
-    <thead class="thead-dark">
+<table class="content-table">
+    <thead>
         <tr>
             <% if current_user.role == 1 %>
                 <th>操作</th>
             <% end %>
-            <th style="background-color:#000;">案號</th>
-            <th style="background-color:#000;text-align:right;">
+            <th>案號
                 <%= link_to yfcases_path( :sqrtcasename => "up") do %>
-                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                    <%=  fa_stacked_icon "arrow-down inverse", base: "circle",class: "pull-right" %>
                 <% end %>
                 <%= link_to yfcases_path( :sqrtcasename => "down") do %>
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    <%=  fa_stacked_icon "arrow-up inverse", base: "circle",class: "pull-right" %>
                 <% end %>
             </th>
-            <th style="background-color:#555;">地址</th>
-            <th style="background-color:#000;">縣市</th>
-            <th style="background-color:#555;">鄉鎮</th>
-            <th style="background-color:#000;">負責人</th>
-            <th style="background-color:#555;">最終判定</th>
-
-            <% if current_user.role == 1 %>
-                <th colspan="5">項目</th>
-            <% else %>
-                <th>項目</th>
-            <% end %>
-
+            <th>地址</th>
+            <th>縣市</th>
+            <th>鄉鎮</th>
+            <th>負責人</th>
+            <th>最終判定</th>
+            <th>項目</th>
         </tr>
     </thead>
     <tbody>
         <% @yfcases.each do |yfcase| %>
         <tr>
             <% if current_user.role == 1 %>
-                <td style="padding:6px 3px;">
+                <td>
                     <%= link_to yfcase, method: :delete, data: { confirm: '你(妳)確定要刪除嗎?' } do %>
                         <%= fa_icon "window-close",class: "fa-2x" %>
                     <% end %>
                 </td>
             <% end %>
-            <td style="padding:6px 3px;" colspan="2">
+            <td data-label="案號">
                 <%= link_to yfcase_path(yfcase) do %>
-                <%= yfcase.case_number %>
+                    <%= yfcase.case_number %>
                 <% end %>
             </td>
-            <td style="padding:6px 3px;">
+            <td data-label="地址">
                 <%= yfcase.township.try(:zip_code) %> <%= yfcase.country.try(:name) %><%= yfcase.township.try(:name) %><%= yfcase.other_address %>
             </td>
-            <td style="padding:6px 3px;">
+            <td data-label="縣市">
                 <%= yfcase.country.try(:name) %>
             </td>
-            <td style="padding:6px 3px;">
+            <td data-label="鄉鎮">
                 <%= yfcase.township.try(:name) %>
             </td>
-            <td style="padding:6px 3px;">
+            <td data-label="區域負責人">
                 <%= yfcase.user.first_name + yfcase.user.last_name %>
             </td>
-            <td style="padding:6px 3px;">
-                <%= yfcase.final_decision %>
+            <td data-label="最終判定">
+                
+                <%= yfcase.final_decision.blank? ? '未判定' : yfcase.final_decision %>
             </td>
 
-              <% if current_user.role == 1 %>  
-                <td style="padding:6px 3px;">
-                    <%= link_to yfratingscale_yfcase_path(yfcase,format: "pdf") do %>
-                        <div class="y10000">評</div>
-                    <% end %>
-                </td>
-                <td style="padding:6px 3px;">
-                    <%= link_to deedtax_yfcase_path(yfcase,format: "pdf") do %>
-                        <div class="y20000">契</div>
-                    <% end %>
-                </td>
-                <td style="padding:6px 3px;">
-                    <%= link_to realestateregistration_yfcase_path(yfcase,format: "pdf") do %>
-                        <div class="y30000">動</div>
-                    <% end %>
-                </td>
-                <td style="padding:6px 3px;">
-                    <%= link_to complaint_yfcase_path(yfcase,format: "pdf") do %>
-                        <div class="y40000">狀</div>
-                    <% end %>
-                </td>
-                <td style="padding:6px 3px;">
-                    <%= link_to letter_yfcase_path(yfcase,format: "pdf") do %>
-                        <div class="y50000">函</div>       
-                    <% end %>
-                </td>
+         
+            <td data-label="項目">
+                <div class="row">
+                    <div style="margin:0 2px;">
+                        <%= link_to yfratingscale_yfcase_path(yfcase,format: "pdf") do %>
+                            <div class="y10000">評</div>
+                        <% end %> 
+                    </div>
+                    <div style="margin:0 2px;">
+                        <%= link_to deedtax_yfcase_path(yfcase,format: "pdf") do %>
+                            <div class="y20000">契</div>
+                        <% end %>                          
+                    </div>
+                    <div style="margin:0 2px;">
+                        <%= link_to realestateregistration_yfcase_path(yfcase,format: "pdf") do %>
+                            <div class="y30000">動</div>
+                        <% end %>                          
+                    </div>
+                    <div style="margin:0 2px;">
+                        <%= link_to complaint_yfcase_path(yfcase,format: "pdf") do %>
+                            <div class="y40000">狀</div>
+                        <% end %>                          
+                    </div>
+                    <div style="margin:0 2px;">
+                        <%= link_to letter_yfcase_path(yfcase,format: "pdf") do %>
+                            <div class="y50000">函</div>       
+                        <% end %>                          
+                    </div>
+                </div>
+            </td>
               
-            <% else %>
-                <td style="color:red;">編寫測試中，暫不開放</td>
-            <% end %>
-              
-            
         </tr>
         <% end %>
     </tbody>
-
-   
 </table>
-<br>
