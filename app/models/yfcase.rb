@@ -23,6 +23,17 @@ class Yfcase < ApplicationRecord
 	
 	AREA_LIST=["第一種住宅區","第二種住宅區","第三種住宅區","第四種住宅區","第一種商業區","第二種商業區","第三種商業區","第四種商業區","第二種工業區","第三種工業區","行政區","文教區","倉庫區","風景區","農業區","保護區","行水區","保存區","特定專用區"]
 	JUDGMENT_LIST=[" ","3拍進場","4拍進場","放棄"]
+	ACTIVE_RESULT_LIST=[" ","撤回","遭搶標","得標"]
+	PRIORITY_PURCHASE_RESULT_LIST=[" ","等待優購","遭搶標","無人優購"]
+	APPLICATION_FOR_REGISTRATION_LIST=[" ","所有權第一次登記","所有權移轉登記","抵押權登記","抵押權塗銷登記","抵押權內容變更登記","標示變更登記"]
+	REASON_FOR_REGISTRATION_LIST=[" ","買賣","贈與","繼承","分割繼承","拍賣","共有物分割"]
+	MARKING_AND_APPLICATION_RIGHTS_LIST=[" ","契約書","登記清冊","複丈結果通知書","建物測量成果圖"]
+	
+	DEEDTAX_DEBTTAX_PAYMENT_RECEIPT_METHOD=[" ","親領","郵寄"]
+	DEEDTAX_CLOSE_NEWSLETTER=[" ","需要","不需要"]
+	
+
+
 	PUBLIC_LIST=[" ","公","私"]
 	accepts_nested_attributes_for :lands,reject_if: proc { |attributes| attributes['land_number'].blank? },allow_destroy: true
 	accepts_nested_attributes_for :builds,reject_if: proc { |attributes| attributes['build_number'].blank? },allow_destroy: true

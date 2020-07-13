@@ -3,7 +3,7 @@
         <div class="row mb-2" style="padding:10px;">
             <div class="col-md-2 mb-2">
                 <%= f.label :objectbuild_status,"狀態" %>
-                <%= f.select(:objectbuild_status,Objectbuild::OBJECTBUILD_STATUS_LIST) %>
+                <%= f.select(:objectbuild_status,Objectbuild::OBJECTBUILD_STATUS_LIST, {}, {  :prompt => '請輸入狀態', class: 'form-control'}) %>
             </div>            
             
             <div class="col-md-10 mb-2">

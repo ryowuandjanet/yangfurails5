@@ -44,6 +44,24 @@ body{
 	color:black;
 }
 
+/*頁面大小*/
+@media only screen and (max-width: 1200px) {
+	.container{
+		max-width:1154;
+	}
+}
+@media only screen and (max-width: 600px) {
+	.container{
+		max-width:560px;
+	}
+}
+
+
+.x110000 { 
+	text-align: center;
+	font-family: Arial,標楷體;
+	font-weight: bold;
+}
 /*基本資料*/
 .xa1100{
 	background-color: pink;
@@ -507,3 +525,82 @@ body{
 .xe522b{border: 1px solid black;width: 50px;text-align: right;color: blue;}
 .xe522x{border: 1px solid black;width: 250px;color: blue;}
 .xe522y{border: 1px solid black;width: 250px;color: blue;}
+
+// ===========================自行設定=========================================================
+
+.yfcaseDatabase, .yfcaseLand, .yfcaseLandTotall, .yfcaseBuildTotall,.yfcaseBuild,.yfcaseAttachment {
+	border-collapse: collapse; 
+	border:3px solid black;
+}
+
+.yfcaseDatabase tr{
+	border-bottom:1px dashed grey;
+}
+
+.yfcaseDatabase tr th,td{
+	border-right:1px dotted grey;
+	border-left:1px dotted grey;
+	padding:3px;
+}
+
+.yfcaseDatabase tr th{
+	background-color: AntiqueWhite;
+	border-right:1px dotted grey;
+	text-align:center;
+}
+
+.yfcaseDatabase tr td{
+	color:blue;
+}
+.yfcaseLand {
+	margin-right: 5px;
+}
+
+.yfcaseLand tr th{
+	border-right: 1px dotted grey;
+	border-left: 1px dotted grey;
+	background-color: Aquamarine;
+	text-align: center;
+}
+
+.yfcaseLand tr td,.yfcaseLandTotall tr td,.yfcaseBuildTotall tr td,.yfcaseBuild tr td{
+	border-top: 3px double grey;
+	color: blue;
+	text-align: center;
+}
+
+.yfcaseLandTotall {
+	margin: 0px 5px;
+}
+
+.yfcaseLandTotall tr th{
+	text-align:center;
+	background-color: Aquamarine;
+}
+
+.yfcaseBuildTotall {
+	margin-left: 5px;
+}
+
+.yfcaseBuildTotall tr th,.yfcaseBuild tr th{
+	border-right: 1px dotted grey;
+	border-left: 1px dotted grey;
+	border-bottom: 1px dotted grey;
+	text-align:center;
+	background-color: DeepSkyBlue;
+}
+
+.yfcaseAttachment tr th {
+	text-align:center;
+	background-color: Khaki;
+	border-bottom: 1px dashed grey;
+	border-right:3px double grey;
+}
+
+.yfcaseAttachment tr td {
+	text-align:left;
+	color:blue;
+	border-bottom: 1px dashed grey;
+}
+
+

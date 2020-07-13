@@ -19,5 +19,5 @@
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.zh-TW.js
 //= require activestorage
 //= require cocoon
+//= require bootstrap-select
 //= require_tree .
-

@@ -1,6 +1,6 @@
 class YfcasesController < ApplicationController
   include ApplicationHelper
-  before_action :set_yfcase, only: [:edit, :update, :destroy]
+  before_action :set_yfcase, only: [:edit, :update, :destroy, :deedtax, :yfratingscale, :realestateregistration, :complaint, :letter]
   before_action :show_helper, only: [:edit, :update, :destroy, :deedtax, :yfratingscale, :realestateregistration, :complaint, :letter]
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
 
@@ -80,7 +80,9 @@ class YfcasesController < ApplicationController
 
   # GET /yfcases/new
   def new
-    @yfcase = current_user.yfcases.build(floor_price_1:0,floor_price_2:0,floor_price_3:0,floor_price_4:0)
+    @yfcase = current_user.yfcases.build( \
+    floor_price_1:0,floor_price_2:0,floor_price_3:0,floor_price_4:0,number_of_attached_quantity_1:0,\
+    number_of_attached_quantity_2:0,number_of_attached_quantity_3:0,deedtaxTransferPrice:0,deedtaxUnderreportedDays:0)
   end
 
   # GET /yfcases/1/edit
@@ -245,11 +247,11 @@ class YfcasesController < ApplicationController
       marketpricecount = @yfcase.objectbuilds.count
       marketpricesum=@yfcase.objectbuilds.map { |n| [(testvalue(n.total_price.to_f / n.build_area.to_f ,n.plusa,n.plusb))] }.flatten
       @marketprice = marketpricesum.map!{|e| e.to_f}.sum.fdiv(marketpricesum.size)
-      respond_to do |format|
-      format.html
-      format.json
-      format.pdf {render template:'yfcases/deedtax', pdf: 'Deedtax'}
-      end
+      # respond_to do |format|
+      # format.html
+      # format.json
+      # # format.pdf {render template:'yfcases/deedtax', pdf: 'Deedtax'}
+      # end
     end
 
     def prepare_variable_for_index_template
@@ -319,9 +321,20 @@ class YfcasesController < ApplicationController
         :net_price_registration_market_price_title,:net_price_registration_market_price_link,:net_price_registration_map_title,:net_price_registration_map_link,:net_price_registration_photo_title,:net_price_registration_photo_link, \
         :auction_record_title,:auction_record_link,:other_notes,:survey_resolution,:final_decision, \
         :occupy,:register,:parking_space,:management_fee,:rent,:leak,:easy_parking,:railway,:vegetable_market,:supermarket,:school,:park,:post_office,:main_road,:water_and_power_failure,:good_vision, :final_decision_date, \
-        personnals_attributes: [:id, :is_debtor, :is_creditor, :is_land_owner, :is_build_owner,:is_original_owner, :is_new_owner, :is_deed_tax_agent, :is_tax_agent, :name, :identity_card, :birthday,:person_country ,:person_township ,:person_village ,:person_neighbor ,:person_street ,:person_section ,:person_lane ,:person_alley ,:person_number ,:person_floor , :local_phone, :mobile_phone, :personnal_notes,:identity_code, :public_or_private, :right_share_person, :right_share_all, :_destroy], \
-        lands_attributes: [:id, :land_number, :land_url, :land_area, :land_holding_point_personal, :land_holding_point_all, :_destroy], \
+        :active_result,:active_result_date,:priority_purchase_result,:target_number, \
+        :deedtaxDateOfDeed, :deedtaxDeclarationDate, :deedtaxTransferPrice, :deedtaxChargeDaffairesTaxDeclarant, :deedtaxDebtTaxPaymentReceiptMethod, :deedtaxClosedNewsletter, :deedtaxUnderreportedDays, :deedtaxRemark, \
+        :cause_data,:application_for_registration,:reason_for_registration,:marking_and_application_rights,:attached_Document_Content_1,:number_of_attached_quantity_1,:attached_Document_Content_2,:number_of_attached_quantity_2,:attached_Document_Content_3,:number_of_attached_quantity_3,:registration_notes, \
+        :deedtaxBuildingTransferLevel1, :deedtaxBuildingTransferLevel2, :deedtaxBuildingTransferLevel3, :deedtaxBuildingTransferLevel4, :deedtaxBuildingTransferLevel5, :deedtaxBuildingTransferLevel6, :deedtaxBuildingTransferLevel7, \
+        :deedtaxBuildingTransferStructure1, :deedtaxBuildingTransferStructure2, :deedtaxBuildingTransferStructure3, :deedtaxBuildingTransferStructure4, :deedtaxBuildingTransferStructure5, :deedtaxBuildingTransferStructure6, :deedtaxBuildingTransferStructure7, \
+        :deedtaxBuildingTransferArea1, :deedtaxBuildingTransferArea2, :deedtaxBuildingTransferArea3, :deedtaxBuildingTransferArea4, :deedtaxBuildingTransferArea5, :deedtaxBuildingTransferArea6, :deedtaxBuildingTransferArea7, \
+        :deedtaxBuildingTransferPublicBuildingNumber1, :deedtaxBuildingTransferPublicBuildingNumber2, :deedtaxBuildingTransferPublicBuildingNumber3, :deedtaxBuildingTransferPublicBuildingNumber4, :deedtaxBuildingTransferPublicBuildingNumber5, \
+        :deedtaxBuildingTransferPublicArea1, :deedtaxBuildingTransferPublicArea2, :deedtaxBuildingTransferPublicArea3, :deedtaxBuildingTransferPublicArea4, :deedtaxBuildingTransferPublicArea5, \
+        :deedtaxBuildingTransferPublicHoldings1, :deedtaxBuildingTransferPublicHoldings2, :deedtaxBuildingTransferPublicHoldings3, :deedtaxBuildingTransferPublicHoldings4, :deedtaxBuildingTransferPublicHoldings5, \
+        personnals_attributes: [:id, :is_debtor, :is_creditor, :is_land_owner, :is_build_owner,:is_original_owner, :is_new_owner, :is_deed_tax_agent, :is_tax_agent, :name, :identity_card, :birthday,:person_country , \
+        :person_township ,:person_village ,:person_neighbor ,:person_street ,:person_section ,:person_lane ,:person_alley ,:person_number ,:person_floor , :local_phone, :mobile_phone, :personnal_notes,:identity_code, :public_or_private, :right_share_person, :right_share_all,:personnalBuildHoldingPointPerson,:personnalBuildHoldingPointAll, :_destroy], \
+        lands_attributes: [:id, :land_number, :land_url, :land_area, :land_holding_point_personal, :land_holding_point_all ,:landRemarks , :_destroy], \
         objectbuilds_attributes: [:id, :address, :total_price, :build_area, :house_age, :floor_height, :surveyora, :surveyorb, :plusa, :plusb,:plusa_reason,:plusb_reason,:objectbuild_status, :objectbuild_url, :_destroy], \
-        builds_attributes: [:id, :build_number,:build_url,:build_area, :build_holding_point_personal, :build_holding_point_all, :build_type_use,:use_partition, :_destroy] )
+        builds_attributes: [:id, :build_number,:build_url,:build_area, :build_holding_point_personal, :build_holding_point_all, :build_type_use,:use_partition, :_destroy, \
+        :buildCity, :buildTownship, :buildArea, :buildStreet, :buildRoad, :buildSegment, :buildLane, :buildDo, :buildNumber, :buildFloor, :buildBigSegment, :buildSmallSegment, :buildLot, :buildLevel1, :buildLevel2, :buildLevel3, :buildLevel4, :buildOther1, :buildOther2, :buildUse, :buildScopeOfArea, :buildScopeOfRights, :buildRemarks] )
     end
 end

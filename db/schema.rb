@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_29_063415) do
+ActiveRecord::Schema.define(version: 2020_07_13_091540) do
 
   create_table "builds", force: :cascade do |t|
     t.string "build_number"
@@ -23,6 +23,29 @@ ActiveRecord::Schema.define(version: 2020_06_29_063415) do
     t.integer "yfcase_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "buildCity"
+    t.string "buildTownship"
+    t.string "buildArea"
+    t.string "buildStreet"
+    t.string "buildRoad"
+    t.string "buildSegment"
+    t.string "buildLane"
+    t.string "buildDo"
+    t.string "buildNumber"
+    t.string "buildFloor"
+    t.string "buildBigSegment"
+    t.string "buildSmallSegment"
+    t.string "buildLot"
+    t.string "buildLevel1"
+    t.string "buildLevel2"
+    t.string "buildLevel3"
+    t.string "buildLevel4"
+    t.string "buildOther1"
+    t.string "buildOther2"
+    t.string "buildUse"
+    t.string "buildScopeOfArea"
+    t.string "buildScopeOfRights"
+    t.string "buildRemarks"
     t.index ["yfcase_id"], name: "index_builds_on_yfcase_id"
   end
 
@@ -41,6 +64,7 @@ ActiveRecord::Schema.define(version: 2020_06_29_063415) do
     t.integer "yfcase_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "landRemarks"
     t.index ["yfcase_id"], name: "index_lands_on_yfcase_id"
   end
 
@@ -96,6 +120,8 @@ ActiveRecord::Schema.define(version: 2020_06_29_063415) do
     t.integer "yfcase_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "personnalBuildHoldingPointPerson"
+    t.string "personnalBuildHoldingPointAll"
     t.index ["yfcase_id"], name: "index_personnals_on_yfcase_id"
   end
 
@@ -252,6 +278,65 @@ ActiveRecord::Schema.define(version: 2020_06_29_063415) do
     t.string "company"
     t.string "foreclosure_announcement_988_link"
     t.string "adv_find_condition"
+    t.string "active_result"
+    t.date "active_result_date"
+    t.string "priority_purchase_result"
+    t.string "target_number"
+    t.date "cause_data"
+    t.string "application_for_registration"
+    t.string "reason_for_registration"
+    t.string "marking_and_application_rights"
+    t.string "attached_Document_Content_1"
+    t.integer "number_of_attached_quantity_1"
+    t.string "attached_Document_Content_2"
+    t.integer "number_of_attached_quantity_2"
+    t.string "attached_Document_Content_3"
+    t.integer "number_of_attached_quantity_3"
+    t.string "registration_notes"
+    t.date "deedtaxDateOfDeed"
+    t.date "deedtaxDeclarationDate"
+    t.integer "deedtaxTransferPrice"
+    t.string "deedtaxChargeDaffairesTaxDeclarant"
+    t.string "deedtaxDebtTaxPaymentReceiptMethod"
+    t.string "deedtaxClosedNewsletter"
+    t.integer "deedtaxUnderreportedDays"
+    t.string "deedtaxRemark"
+    t.string "deedtaxBuildingTransferLevel1"
+    t.string "deedtaxBuildingTransferLevel2"
+    t.string "deedtaxBuildingTransferLevel3"
+    t.string "deedtaxBuildingTransferLevel4"
+    t.string "deedtaxBuildingTransferLevel5"
+    t.string "deedtaxBuildingTransferLevel6"
+    t.string "deedtaxBuildingTransferLevel7"
+    t.string "deedtaxBuildingTransferStructure1"
+    t.string "deedtaxBuildingTransferStructure2"
+    t.string "deedtaxBuildingTransferStructure3"
+    t.string "deedtaxBuildingTransferStructure4"
+    t.string "deedtaxBuildingTransferStructure5"
+    t.string "deedtaxBuildingTransferStructure6"
+    t.string "deedtaxBuildingTransferStructure7"
+    t.string "deedtaxBuildingTransferArea1"
+    t.string "deedtaxBuildingTransferArea2"
+    t.string "deedtaxBuildingTransferArea3"
+    t.string "deedtaxBuildingTransferArea4"
+    t.string "deedtaxBuildingTransferArea5"
+    t.string "deedtaxBuildingTransferArea6"
+    t.string "deedtaxBuildingTransferArea7"
+    t.string "deedtaxBuildingTransferPublicBuildingNumber1"
+    t.string "deedtaxBuildingTransferPublicBuildingNumber2"
+    t.string "deedtaxBuildingTransferPublicBuildingNumber3"
+    t.string "deedtaxBuildingTransferPublicBuildingNumber4"
+    t.string "deedtaxBuildingTransferPublicBuildingNumber5"
+    t.string "deedtaxBuildingTransferPublicArea1"
+    t.string "deedtaxBuildingTransferPublicArea2"
+    t.string "deedtaxBuildingTransferPublicArea3"
+    t.string "deedtaxBuildingTransferPublicArea4"
+    t.string "deedtaxBuildingTransferPublicArea5"
+    t.string "deedtaxBuildingTransferPublicHoldings1"
+    t.string "deedtaxBuildingTransferPublicHoldings2"
+    t.string "deedtaxBuildingTransferPublicHoldings3"
+    t.string "deedtaxBuildingTransferPublicHoldings4"
+    t.string "deedtaxBuildingTransferPublicHoldings5"
     t.index ["country_id"], name: "index_yfcases_on_country_id"
     t.index ["township_id"], name: "index_yfcases_on_township_id"
     t.index ["user_id"], name: "index_yfcases_on_user_id"

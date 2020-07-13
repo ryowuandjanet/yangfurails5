@@ -9,7 +9,8 @@
     <style type="text/css">
     body {
         /*楷體*/
-        font-family: 'cwTeXKai', serif; 
+        /*font-family: Arial,'cwTeXKai', serif; */
+        font-family: Arial,標楷體,sans-serif;
         font-size: 24px;
     }
 
@@ -53,6 +54,8 @@
 </head>
 
 <body>
+  <div style="font-family:msjh;font-size:12pt;">ryowu 123</div>
+    
     <div style="text-align:center;">
         <h1>郵 局 存 證 信 函 用 紙</h1>
     </div>
@@ -73,11 +76,11 @@
 		        一、寄件人&nbsp;&nbsp;&nbsp;
 		    </td>
 		    <td class="lettertd-2" colspan="12" style="border-right:1px solid black;">
-		        姓名：曾友和   印
+		        姓名： 揚富開發有限公司   印
 		    </td>
 		</tr>
 		<tr>
-		    <td class="lettertd-2" colspan="12" style="border-right:1px solid black;">詳細地址：臺南市東區東平路11號5樓</td>
+		    <td class="lettertd-2" colspan="12" style="border-right:1px solid black;">詳細地址：臺中市大里區新仁路三段49號</td>
 		</tr>
 		
 		<tr>
@@ -110,30 +113,30 @@
 		
 	    <!--標題-->
 	    <tr>
-			<td class="lettertd">
-			    <p style="margin:0px;padding:3px;text-align:right;">格</p>
-			    <p style="margin:0px;padding:3px;text-align:left;">行</p>
-			</td>
-			<td class="lettertd">1</td>
-			<td class="lettertd">2</td>
-			<td class="lettertd">3</td>
-			<td class="lettertd">4</td>
-			<td class="lettertd">5</td>
-			<td class="lettertd">6</td>
-			<td class="lettertd">7</td>
-			<td class="lettertd">8</td>
-			<td class="lettertd">9</td>
-			<td class="lettertd">10</td>
-			<td class="lettertd">11</td>
-			<td class="lettertd">12</td>
-			<td class="lettertd">13</td>
-			<td class="lettertd">14</td>
-			<td class="lettertd">15</td>
-			<td class="lettertd">16</td>
-			<td class="lettertd">17</td>
-			<td class="lettertd">18</td>
-			<td class="lettertd">19</td>
-			<td class="lettertd">20</td>
+  			<td class="lettertd">
+  		    <p style="margin:0px;padding:3px;text-align:right;">格</p>
+  		    <p style="margin:0px;padding:3px;text-align:left;">行</p>
+  			</td>
+  			<td class="lettertd" style="font-family: 標楷體;">1</td>
+  			<td class="lettertd">2</td>
+  			<td class="lettertd">3</td>
+  			<td class="lettertd">4</td>
+  			<td class="lettertd">5</td>
+  			<td class="lettertd">6</td>
+  			<td class="lettertd">7</td>
+  			<td class="lettertd">8</td>
+  			<td class="lettertd">9</td>
+  			<td class="lettertd">10</td>
+  			<td class="lettertd">11</td>
+  			<td class="lettertd">12</td>
+  			<td class="lettertd">13</td>
+  			<td class="lettertd">14</td>
+  			<td class="lettertd">15</td>
+  			<td class="lettertd">16</td>
+  			<td class="lettertd">17</td>
+  			<td class="lettertd">18</td>
+  			<td class="lettertd">19</td>
+  			<td class="lettertd">20</td>
 		</tr>
 		
 		<!--第一行-->
@@ -226,9 +229,9 @@
             <td class='lettertd'>限</td>
             <td class='lettertd'>公</td>
             <td class='lettertd'>司</td>
-            <td class='lettertd'>曾</td>
-            <td class='lettertd'>友</td>
-            <td class='lettertd'>和</td>
+            <td class='lettertd'><%= current_user.full_name.at(0) %></td>
+            <td class='lettertd'><%= current_user.full_name.at(1) %></td>
+            <td class='lettertd'><%= current_user.full_name.at(2) %></td>
             <td class='lettertd'>先</td>
             <td class='lettertd'>生</td>
             <td class='lettertd'>(</td>
@@ -434,6 +437,56 @@
 		</tr>
 	</table>
 
+
+    <!-- 附表 -->
+    <div class="page-break">
+        <table style="border-collapse: collapse;width:100%;font-size:30px;">
+            <tr>
+                <td colspan="2" style="font-size:48px;">附表：</td>
+                <td></td>
+            </tr>
+            <tr style="background-color: #ccc;">
+                <th style="border:1px solid black;" rowspan="2">共有人設籍</th>
+                <th style="border:1px solid black;" colspan="2">系爭房地應有部分比例</th>
+            </tr>
+            <tr>
+                <th style="border:1px solid black;background-color: LightGoldenRodYellow;">
+                    <% @yfcase.lands.each do |land|%>
+                    <%= @yfcase.big_section %><%= land.land_number %><br>
+                    <% end %>
+                </th>
+                <th style="border:1px solid black;background-color: PaleGreen;">
+                    <% @yfcase.builds.each do |build|%>
+                    <%= @yfcase.big_section %><%= build.build_number %><br>
+                    <% end %>
+                </th>
+            </tr>
+            <% @yfcase.personnals.where(["is_land_owner = :is_land_owner or is_build_owner = :is_build_owner", { is_land_owner: true, is_build_owner: true }]).each do |debtor| %>
+              <tr style="font-size:16pt;">
+                <td style="border:1px solid black;text-align:center;">
+                  <%= debtor.name %><br>
+                  <%= address(debtor.person_country,debtor.person_township,debtor.person_village,debtor.person_neighbor,debtor.person_street,debtor.person_section,debtor.person_lane,debtor.person_alley,debtor.person_number,debtor.person_floor) %>
+                </td>
+                <td style="border:1px solid black;text-align:center;">
+                  <%= debtor.right_share_person %>/<%= debtor.right_share_all %><br>
+                  <%= numberToChinese(debtor.right_share_all) %>分之<%= numberToChinese(debtor.right_share_person) %>
+                </td>
+                <td style="border:1px solid black;text-align:center;">
+                  <%= debtor.personnalBuildHoldingPointPerson %>/<%= debtor.personnalBuildHoldingPointAll %><br>
+                  <%= numberToChinese(debtor.personnalBuildHoldingPointAll) %>分之<%= numberToChinese(debtor.personnalBuildHoldingPointPerson) %>
+                </td>
+              </tr>
+            <% end %>
+    
+            <tr>
+                <th style="border:1px solid black;">合計</th>
+                <th style="border:1px solid black;">全部</th>
+                <th style="border:1px solid black;">全部</th>
+            </tr>
+        </table>
+        
+    </div>
+    
 </body>
 
 </html>

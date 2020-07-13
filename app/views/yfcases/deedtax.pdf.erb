@@ -84,52 +84,60 @@
 
 
 	<!-- (4)立契日期或使用執照核發日期（限房屋建造完成前取得所有權案件）/(5)申報日期 -->
+	<% @deedtaxDateOfDeedYear = (@yfcase.deedtaxDateOfDeed.year-1911).to_s %>
+	<% @deedtaxDateOfDeedMonth = @yfcase.deedtaxDateOfDeed.month.to_s %>
+	<% @deedtaxDateOfDeedDay = @yfcase.deedtaxDateOfDeed.day.to_s %>
+	<% @deedtaxDeclarationDateYear = (@yfcase.deedtaxDeclarationDate.year-1911).to_s %>
+	<% @deedtaxDeclarationDateMonth = @yfcase.deedtaxDeclarationDate.month.to_s %>
+	<% @deedtaxDeclarationDateDay = @yfcase.deedtaxDeclarationDate.day.to_s %>
+	
 	<table style="border-collapse: collapse;font-size:12px;text-align: center;">
 		<tr style="height:25px;">
 			<td style="border:1px solid black;width:258px;text-align: left;" rowspan="2">(4)立契日期或使用執照核發日期（限房<br>&nbsp;&nbsp;&nbsp;屋建造完成前取得所有權案件）</td>
 			<td style="border:1px solid black;" colspan="3">年</td>
 			<td style="border:1px solid black;" colspan="2">月</td>
 			<td style="border:1px solid black;" colspan="2">日</td>
-			<td style="border:1px solid black;width:310px;text-align: left;" rowspan="2">▉1.一般申報案件<br> □ 2.房屋建造完成前取得所有權案件</td>
+			<td style="border:1px solid black;width:310px;text-align: left;" rowspan="2">&#9745 1.一般申報案件<br> &#9744 2.房屋建造完成前取得所有權案件</td>
 			<td style="border:1px solid black;width:80px;" rowspan="2">(5)申報日期</td>
 			<td style="border:1px solid black;" colspan="3">年</td>
 			<td style="border:1px solid black;" colspan="2">月</td>
 			<td style="border:1px solid black;" colspan="2">日</td>
 		</tr>
 		<tr style="height:25px;">
-			<td style="border:1px solid black;width:12px;">1</td>
-			<td style="border:1px solid black;width:13px;">0</td>
-			<td style="border:1px solid black;width:13px;">9</td>
-			<td style="border:1px solid black;width:13px;">0</td>
-			<td style="border:1px solid black;width:13px;">4</td>
-			<td style="border:1px solid black;width:13px;">1</td>
-			<td style="border:1px solid black;width:13px;">7</td>
-			<td style="border:1px solid black;width:12px;">1</td>
-			<td style="border:1px solid black;width:13px;">0</td>
-			<td style="border:1px solid black;width:13px;">9</td>
-			<td style="border:1px solid black;width:13px;">0</td>
-			<td style="border:1px solid black;width:13px;">4</td>
-			<td style="border:1px solid black;width:13px;">1</td>
-			<td style="border:1px solid black;width:13px;">7</td>
+			<td style="border:1px solid black;width:12px;color:blue;"><%= @deedtaxDateOfDeedYear[0] %></td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDateOfDeedYear[1] %></td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDateOfDeedYear[2] %></td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDateOfDeedMonth[-2].blank? ? "0" : @deedtaxDateOfDeedMonth[-2] %></td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDateOfDeedMonth[-1] %></td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDateOfDeedDay[-2].blank? ? "0" : @deedtaxDateOfDeedDay[-2] %></td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDateOfDeedDay[-1] %></td>
+			<td style="border:1px solid black;width:12px;color:blue;"><%= @deedtaxDeclarationDateYear[0] %></td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDeclarationDateYear[1] %></td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDeclarationDateYear[2] %></td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDeclarationDateMonth[-2].blank? ? "0" : @deedtaxDeclarationDateMonth[-2] %></td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDeclarationDateMonth[-1] %></td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDeclarationDateDay[-2].blank? ? "0" : @deedtaxDeclarationDateDay[-2] %></td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDeclarationDateDay[-1] %></td>
 		</tr>
 	</table>
 
 	<!-- (6)移轉價格(新臺幣) -->
+	<% @deedtaxTransferPrice = @yfcase.deedtaxTransferPrice.to_s %>
 	<table style="border-collapse: collapse;font-size:12px;text-align: center;">
 		<tr style="height:70px;">
 			<td style="border:1px solid black;width:102px;text-align: left;">(6)移轉價格<br>(新臺幣)</td>
-			<td style="border:1px solid black;width:13px;">*</td>
-			<td style="border:1px solid black;width:13px;">*</td>
-			<td style="border:1px solid black;width:13px;">*</td>
-			<td style="border:1px solid black;width:13px;">*</td>
-			<td style="border:1px solid black;width:13px;">1</td>
-			<td style="border:1px solid black;width:13px;">2</td>
-			<td style="border:1px solid black;width:12px;">2</td>
-			<td style="border:1px solid black;width:12px;">0</td>
-			<td style="border:1px solid black;width:12px;">0</td>
-			<td style="border:1px solid black;width:12px;">0</td>
-			<td style="border:1px solid black;width:12px;">元</td>
-			<td style="border:1px solid black;width:600px;text-align: left;">1.□請按照評定標準價格核課契稅。<br>2.▉本件係領買標購公產或法院拍賣案件請按照評定標準價格或申報移轉價格從低核課契稅。</td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxTransferPrice[-10].blank? ? "*" : @deedtaxTransferPrice[-10] %></td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxTransferPrice[-9].blank? ? "*" : @deedtaxTransferPrice[-9] %></td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxTransferPrice[-8].blank? ? "*" : @deedtaxTransferPrice[-8] %></td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxTransferPrice[-7].blank? ? "*" : @deedtaxTransferPrice[-7] %></td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxTransferPrice[-6].blank? ? "*" : @deedtaxTransferPrice[-6] %></td>
+			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxTransferPrice[-5].blank? ? "*" : @deedtaxTransferPrice[-5] %></td>
+			<td style="border:1px solid black;width:12px;color:blue;"><%= @deedtaxTransferPrice[-4].blank? ? "*" : @deedtaxTransferPrice[-4] %></td>
+			<td style="border:1px solid black;width:12px;color:blue;"><%= @deedtaxTransferPrice[-3].blank? ? "*" : @deedtaxTransferPrice[-3] %></td>
+			<td style="border:1px solid black;width:12px;color:blue;"><%= @deedtaxTransferPrice[-2].blank? ? "*" : @deedtaxTransferPrice[-2] %></td>
+			<td style="border:1px solid black;width:12px;color:blue;"><%= @deedtaxTransferPrice[-1].blank? ? "*" : @deedtaxTransferPrice[-1] %></td>
+			<td style="border:1px solid black;width:12px;color:blue;">元</td>
+			<td style="border:1px solid black;width:600px;text-align: left;">1.&#9744請按照評定標準價格核課契稅。<br>2.&#9745本件係領買標購公產或法院拍賣案件請按照評定標準價格或申報移轉價格從低核課契稅。</td>
 		</tr>
 	</table>
 
@@ -137,7 +145,7 @@
 	<table style="border-collapse: collapse;font-size:12px;text-align: center;">
 		<tr style="height:25px;">
 			<td style="border-width:1px;border-style:none none none solid;width:70px;text-align: left;" rowspan="2">(7)茲委託</td>
-			<td style="width:102px;color:blue;" rowspan="2"><%= @yfcase.user.first_name + @yfcase.user.last_name %></td>
+			<td style="width:102px;color:blue;" rowspan="2"><%= @yfcase.deedtaxChargeDaffairesTaxDeclarant %></td>
 			<td style="width:25px;">先生</td>
 			<td style="border-width:1px;border-style:none solid none none;width:675px;" rowspan="2">代辦契稅申報、領取契稅繳款書或免稅證明書、前業主應繳未繳之房屋稅繳款書及領回證件等事項。</td>
 		</tr>
@@ -193,7 +201,20 @@
 			<td style="border:1px solid black;color:blue;" rowspan="2">
 				<%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' :  @yfcase.personnals.where(is_original_owner: true).first.right_share_person.to_s + "/" + @yfcase.personnals.where(is_original_owner: true).first.right_share_all.to_s %>
 			</td>
-			<td style="border:1px solid black;" rowspan="12">一般案件</td>
+			<td style="border:1px solid black;text-align:left;" rowspan="12">
+				&#9744一般案件<br/>
+				&emsp;&#9744截至&emsp;年&emsp;月<br/>
+				&emsp;&emsp;無欠繳房屋稅<br/>
+				<br/>
+				&emsp;&#9744尚有欠繳房屋稅<br/>
+				<br/>
+				&emsp;&#9744即予開徵&emsp;&emsp;元<br/>
+				<br/>
+				&emsp;&#9744未即予開徵<br/>
+				<br/>
+				<br/>
+				&#9745法院拍賣案件<br/>
+			</td>
 
 		</tr>
 		<tr style="height:20px;">
@@ -335,11 +356,11 @@
 	<table style="border-collapse: collapse;font-size:12px;">
 		<tr>
 			<td style="border-width:1px;border-style:none solid;width:102px;">(12)案件類型</td>
-			<td style="border-style:none;width:150px;" colspan="17">□1.買賣□2.典權□3.交換</td>
-			<td style="border-style:none;width:90px;" colspan="17">□4.0贈與<br>□4.1夫妻贈與</td>
-			<td style="border-style:none;width:200px;" colspan="17">□5.分割□6.占有□7.二親等間買賣</td>
-			<td style="border-style:none;width:70px;" colspan="17">□8.1標購<br>▉8.2拍賣<br>□8.3領買</td>
-			<td style="border-style:none;width:150px;" colspan="17">□9.1判決<br>□9.2調解<br>□9.3和解</td>
+			<td style="border-style:none;width:150px;" colspan="17">&#9744 1.買賣 &#9744 2.典權 &#9744 3.交換</td>
+			<td style="border-style:none;width:90px;" colspan="17">&#9744 4.0贈與<br>&#9744 4.1夫妻贈與</td>
+			<td style="border-style:none;width:200px;" colspan="17">&#9744 5.分割 &#9744 6.占有 &#9744 7.二親等間買賣</td>
+			<td style="border-style:none;width:70px;" colspan="17">&#9744 8.1標購<br>&#9745 8.2拍賣<br>&#9744 8.3領買</td>
+			<td style="border-style:none;width:150px;" colspan="17">&#9744 9.1判決<br>&#9744 9.2調解<br>&#9744 9.3和解</td>
 			<td style="border-width:1px;border-style:none solid;width:104px;text-align:center;">※查欠人員<br>&nbsp;&nbsp;蓋　　章</td>
 		</tr>
 	</table>
@@ -349,50 +370,50 @@
 		<tr style="height:25px;">
 			<td style="border:1px solid black;width:102px;" rowspan="3">(13)移轉情形</td>
 			<td style="border:1px solid black;width:70px;">層次</td>
-			<td style="border:1px solid black;width:38px;"></td>
-			<td style="border:1px solid black;width:38px;"></td>
-			<td style="border:1px solid black;width:38px;"></td>
-			<td style="border:1px solid black;width:38px;"></td>
-			<td style="border:1px solid black;width:38px;"></td>
-			<td style="border:1px solid black;width:38px;"></td>
-			<td style="border:1px solid black;width:38px;"></td>
+			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferLevel1 %></td>
+			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferLevel2 %></td>
+			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferLevel3 %></td>
+			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferLevel4 %></td>
+			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferLevel5 %></td>
+			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferLevel6 %></td>
+			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferLevel7 %></td>
 			<td style="border:1px solid black;width:68px;">公設建號</td>
-			<td style="border:1px solid black;width:38px;"></td>
-			<td style="border:1px solid black;width:38px;"></td>
-			<td style="border:1px solid black;width:38px;"></td>
-			<td style="border:1px solid black;width:38px;"></td>
-			<td style="border:1px solid black;width:69px;" rowspan="3">▉未辦保<br>存登記部<br>分一併移<br>轉</td>
+			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicBuildingNumber1 %></td>
+			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicBuildingNumber2 %></td>
+			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicBuildingNumber3 %></td>
+			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicBuildingNumber4 %></td>
+			<td style="border:1px solid black;width:69px;" rowspan="3">&#9745未辦保<br>存登記部<br>分一併移<br>轉</td>
 			<td style="border:1px solid black;width:104px;" rowspan="3"></td>
 		</tr>
 		<tr style="height:25px;">
 			<td style="border:1px solid black;">構造</td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferStructure1 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferStructure2 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferStructure3 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferStructure4 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferStructure5 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferStructure6 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferStructure7 %></td>
 			<td style="border:1px solid black;">面積（m2）</td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicArea1 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicArea2 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicArea3 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicArea4 %></td>
 		</tr>
 		<tr style="height:25px;">
 			<td style="border:1px solid black;font-size:9px;">面積(平方公尺)</td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferArea1 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferArea2 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferArea3 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferArea4 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferArea5 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferArea6 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferArea7 %></td>
 			<td style="border:1px solid black;">持分比例</td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
-			<td style="border:1px solid black;"></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicHoldings1 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicHoldings2 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicHoldings3 %></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicHoldings4 %></td>
 		</tr>
 	</table>
 	
@@ -400,9 +421,9 @@
 	<table style="border-collapse: collapse;font-size:12px;">
 		<tr style="height:50px;">
 			<td style="border:1px solid black;width:102px;">(14)申請減免<br>項目</td>
-			<td style="border:1px solid black;width:70px;">□ 1.全免<br>□ 2.減徵</td>
+			<td style="border:1px solid black;width:70px;">&#9744 1.全免<br>&#9744 2.減徵</td>
 			<td style="border:1px solid black;width:570px;" colspan="12">合於契稅條例第(　　   )條規定。<br>合於(　　              )條例第(　　  )條(　　  )款規定。</td>
-			<td style="border:1px solid black;width:69px;">*□准<br>*□不准</td>
+			<td style="border:1px solid black;width:69px;">*&#9744 准<br>*&#9744 不准</td>
 			<td style="border:1px solid black;width:104px;text-align:center;">※房屋稅承辦<br>人員蓋章</td>
 		</tr>
 	</table>
@@ -411,39 +432,43 @@
 	<table style="margin:0px;border-collapse: collapse;font-size:12px;">
 		<tr style="height:80px;">
 			<td style="border:1px solid black;width:102px;">(15)檢　　附</td>
-			<td style="border:1px solid black;width:708px;"" colspan="5">
-				□契約書正本(查驗後退還)、影本（貼印花部分）1份，　□所有權狀影本共(　　)份。<br>
-				□不動產權利移轉證明書影本1份，□法院判決書及判決確定證明書影本( 　 )份。<br>
-				□身分證明文件影本(   　)份，□該移轉房屋已納房屋稅繳款書影本1份　□其他文件(　　　) 份。<br>
+			<td style="border:1px solid black;width:708px;" colspan="5">
+				&#9744契約書正本(查驗後退還)、影本（貼印花部分）1份，　□所有權狀影本共(　　)份。<br>
+				&#9745不動產權利移轉證明書影本1份，□法院判決書及判決確定證明書影本( 　 )份。<br>
+				&#9745身分證明文件影本(   　)份，□該移轉房屋已納房屋稅繳款書影本1份　□其他文件(　　　) 份。<br>
 				<b>
-					□納稅者如有依納稅者權利保護法第7條第8項但書規定，為重要事項陳述者，請另填報「聲明事項表」並檢附相關證明文件。
+					&#9744納稅者如有依納稅者權利保護法第7條第8項但書規定，為重要事項陳述者，請另填報「聲明事項表」並檢附相關證明文件。
 				</b>
 			</td>
-			<td style="border:1px solid black;width:104px;"" rowspan="4"></td>
+			<td style="border:1px solid black;width:104px;" rowspan="4"></td>
 		</tr>
 
 		<!-- (16)持分共有房屋繳款書填發方式		 -->
 		<tr style="height:70px;">
 			<td style="border:1px solid black;">(16)持分共有房屋繳款書填發方式</td>
 			<td style="border:1px solid black;" colspan="5">
-				□本房屋為持分共有，已推定共有人           為管理人繳納房屋稅。<br>
-				▉本房屋為持分共有，請依稅捐稽徵法第12條規定，按持分比例分別發單課徵房屋稅。
+				&#9744本房屋為持分共有，已推定共有人           為管理人繳納房屋稅。<br>
+				&#9745本房屋為持分共有，請依稅捐稽徵法第12條規定，按持分比例分別發單課徵房屋稅。
 			</td style="border:1px solid black;">
 		</tr>
 
 		<!-- (17)契稅繳款書領回方式 -->
 		<tr style="height:25px;">
-			<td style="border:1px solid black;" colspan="6">(17)契稅繳款書領回方式  ▉親領　□郵寄　   請寄：</td>
+			<td style="border:1px solid black;color:blue;" colspan="6">(17)契稅繳款書領回方式&emsp;  
+			<%= @yfcase.deedtaxDebtTaxPaymentReceiptMethod == "親領" ? "\u2611" : "\u2610" %>親領&emsp;
+			<%= @yfcase.deedtaxDebtTaxPaymentReceiptMethod == "郵寄" ? "\u2611" : "\u2610" %>郵寄　   請寄：</td>
 		</tr>
 		
 		<!-- (18)結案簡訊通知 -->
 		<tr style="height:40px;">
 			<td style="border:1px solid black;">(18)結案簡訊<br>&nbsp;&nbsp;&nbsp;&nbsp;通&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;知</td>
-			<td style="border:1px solid black;width:120px;">▉需要 □不需要</td>
+			<td style="border:1px solid black;width:120px;color:blue;">
+				<%= @yfcase.deedtaxClosedNewsletter == "需要" ? "\u2611" : "\u2610" %>需要&emsp; 
+				<%= @yfcase.deedtaxClosedNewsletter == "不需要" ? "\u2611" : "\u2610" %>不需要</td>
 			<td style="border:1px solid black;width:100px;">(19)※怠報日數</td>
-			<td style="border:1px solid black;width:70px;"></td>
+			<td style="border:1px solid black;width:70px;text-align:center;color:blue;"><%= @yfcase.deedtaxUnderreportedDays %></td>
 			<td style="border:1px solid black;width:70px;">(20)備註：</td>
-			<td style="border:1px solid black;"></td>
+			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxRemark %></td>
 		</tr>
 
 	</table>

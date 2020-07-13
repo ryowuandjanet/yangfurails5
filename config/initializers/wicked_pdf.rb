@@ -16,7 +16,10 @@ WickedPdf.config = {
   # exe_path: '/usr/local/bin/wkhtmltopdf',
 
   # for windows(company)  
-  exe_path: 'D://OQC/Program_Area/wkhtmltox/bin/wkhtmltopdf.exe'
+  # exe_path: 'D://OQC/Program_Area/wkhtmltox/bin/wkhtmltopdf.exe'
+
+  # for AWS
+  exe_path: '/home/ubuntu/.rvm/gems/ruby-2.6.5/bin/wkhtmltopdf'
 
 
   # exe_path: '/home/ubuntu/.rvm/gems/ruby-2.6.5/bin/wkhtmltopdf',

@@ -17,10 +17,41 @@
 		  display: table;
 		  clear: both;
 		}
+		.realestateregistrationLand {
+		    border-collapse: collapse;
+		    width:100%;
+		    /*border: 1px solid black;*/
+		}
+		.realestateregistrationLand tr th {
+		    border: 1px solid black;
+		}
+		.realestateregistrationLand tr td {
+		    color:blue;
+		    text-align:center;
+		    width:11.7%;
+		    border: 1px solid black;
+		}
+		.realestateregistrationBuild {
+		    border-collapse: collapse;
+		    width:100%;
+		    /*border: 1px solid black;*/
+		}
+		.realestateregistrationBuild tr th {
+		    border: 1px solid black;
+		}
+		.realestateregistrationBuild tr td {
+		  text-align: center;
+		  color:blue;
+		  width:18%;
+	    border: 1px solid black;
+	    height: 38px;
+		}
+		
     </style>
 </head>
 
 <body>
+    
     <!-- 前導資料 -->
     <div class="firstdata">
     	<div style="float: left;width: 33.33%;">
@@ -84,15 +115,30 @@
     <table style="border-collapse: collapse;font-size:20px;text-align:center;width:100%">
         <tr>
             <td style="border:1px solid black;width:9%;height:90px;" rowspan="2">(1)<br>受理<br>機關</td>
-            <td style="border-top:1px solid black;width:10%;text-align:right;height:45px;">縣</td>
-            <td style="border-top:1px solid black;width:17%;text-align:right;">地政事務所</td>
+            <td style="border-top:1px solid black;width:10%;text-align:right;height:45px;">
+                <%= @yfcase.country.try(:name).at(-1) == '縣' ? @yfcase.country.try(:name) : '縣' %>
+            </td>
+            <td style="border-top:1px solid black;width:17%;text-align:right;"><%= @yfcase.township.try(:land_office).blank? ? '' : @yfcase.township.try(:land_office) %>地政事務所</td>
             <td style="border:1px solid black;width:6%;" rowspan="2">資料管<br>轄機關</td>
-            <td style="border:1px solid black;width:21%;text-align:right;" rowspan="2">縣<br>市<br>地政事務所</td>
+            <td style="border:1px solid black;width:21%;text-align:right;" rowspan="2">
+                <%= @yfcase.country.try(:name).at(-1) == '縣' ? @yfcase.country.try(:name) : '縣' %><br>
+                <%= @yfcase.country.try(:name).at(-1) == '市' ? @yfcase.country.try(:name) : '市' %><br>
+                <%= @yfcase.township.try(:land_office).blank? ? '' : @yfcase.township.try(:land_office) %>地政事務所
+            </td>
             <td style="border:1px solid black;width:10%;" rowspan="2">(2)原因發生<br>日    期</td>
-            <td style="border:1px solid black;width:26%;" rowspan="2">中華民國    年    月    日</td>
+            <td style="border:1px solid black;width:26%;" rowspan="2">
+                
+                <% if @yfcase.cause_data.blank? %>
+                    中華民國    年    月    日
+                <% else %>
+                    中華民國 <%= @yfcase.cause_data.year-1911 %> 年 <%= @yfcase.cause_data.month %> 月 <%= @yfcase.cause_data.day %> 日
+                <% end %>
+            </td>
         </tr>
         <tr style="height:28px;">
-            <td style="border-style:none;text-align:right;height:45px;">市</td>
+            <td style="border-style:none;text-align:right;height:45px;">
+                <%= @yfcase.country.try(:name).at(-1) == '市' ? @yfcase.country.try(:name) : '市' %>
+            </td>
             <td style="border-style:none;text-align:right;">□跨所申請</td>
         </tr>
     </table>
@@ -104,32 +150,60 @@
         </tr>
 
         <tr style="height:28px;">
-            <td style="border:1px solid black;height:28px;">□ 所有權第一次登記</td>
+            <td style="border:1px solid black;height:28px;">
+                <%= @yfcase.application_for_registration == "所有權第一次登記" ? "V 所有權第一次登記" : "□ 所有權第一次登記" %>
+            </td>
             <td style="border:1px solid black;height:28px;">□ 第一次登記</td>
         </tr>
 
         <tr style="height:28px;">
-            <td style="border:1px solid black;height:28px;">□ 所有權移轉登記</td>
-            <td style="border:1px solid black;height:28px;">□ 買賣  □ 贈與  □ 繼承  □ 分割繼承  □ 拍賣  □ 共有物分割  □ </td>
+            <td style="border:1px solid black;height:28px;">
+                <%= @yfcase.application_for_registration == "所有權移轉登記" ? "V 所有權移轉登記" : "□ 所有權移轉登記" %>
+            </td>
+            <td style="border:1px solid black;height:28px;">
+                <% if @yfcase.reason_for_registration == "買賣" %>
+                    &#9745 買賣  &#9744 贈與  &#9744 繼承  &#9744 分割繼承  &#9744 拍賣  &#9744 共有物分割  &#9744 
+                <% elsif @yfcase.reason_for_registration == "贈與" %>
+                    &#9744 買賣  &#9745 贈與  &#9744 繼承  &#9744 分割繼承  &#9744 拍賣  &#9744 共有物分割  &#9744 
+                <% elsif @yfcase.reason_for_registration == "繼承" %>
+                    &#9744 買賣  &#9744 贈與  &#9745 繼承  &#9744 分割繼承  &#9744 拍賣  &#9744 共有物分割  &#9744
+                <% elsif @yfcase.reason_for_registration == "分割繼承" %>
+                    &#9744 買賣  &#9744 贈與  &#9744 繼承  &#9745 分割繼承  &#9744 拍賣  &#9744 共有物分割  &#9744
+                <% elsif @yfcase.reason_for_registration == "拍賣" %>
+                    &#9744 買賣  &#9744 贈與  &#9744 繼承  &#9744 分割繼承  &#9745 拍賣  &#9744 共有物分割  &#9744
+                <% elsif @yfcase.reason_for_registration == "共有物分割" %>
+                    &#9744 買賣  &#9744 贈與  &#9744 繼承  &#9744 分割繼承  &#9744 拍賣  &#9745 共有物分割  &#9744
+                <% else %>
+                    &#9744 買賣  &#9744 贈與  &#9744 繼承  &#9744 分割繼承  &#9744 拍賣  &#9744 共有物分割  &#9744
+                <% end %>
+            </td>
         </tr>
 
         <tr style="height:28px;">
-            <td style="border:1px solid black;height:28px;">□ 抵押權登記</td>
+            <td style="border:1px solid black;height:28px;">
+                <%= @yfcase.application_for_registration == "抵押權登記" ? "V 抵押權登記" : "□ 抵押權登記" %>
+            </td>
             <td style="border:1px solid black;height:28px;">□ 設定  □ 法定  □ </td>
         </tr>
 
         <tr style="height:28px;">
-            <td style="border:1px solid black;height:28px;">□ 抵押權塗銷登記</td>
+            <td style="border:1px solid black;height:28px;">
+                <%= @yfcase.application_for_registration == "抵押權塗銷登記" ? "V 抵押權塗銷登記" : "□ 抵押權塗銷登記" %>
+            </td>
             <td style="border:1px solid black;height:28px;">□ 清償  □ 拋棄  □ 混同  □ 判決塗銷  □ </td>
         </tr>
 
         <tr style="height:28px;">
-            <td style="border:1px solid black;height:28px;">□ 抵押權內容變更登記</td>
+            <td style="border:1px solid black;height:28px;">
+                <%= @yfcase.application_for_registration == "抵押權內容變更登記" ? "V 抵押權內容變更登記" : "□ 抵押權內容變更登記" %>
+            </td>
             <td style="border:1px solid black;height:28px;">□ 權利價值變更   □ 權利內容等變更  □ </td>
         </tr>
 
         <tr style="height:28px;">
-            <td style="border:1px solid black;height:28px;">□ 標示變更登記</td>
+            <td style="border:1px solid black;height:28px;">
+                <%= @yfcase.application_for_registration == "標示變更登記" ? "V 標示變更登記" : "□ 標示變更登記" %>
+            </td>
             <td style="border:1px solid black;height:28px;">□ 分割  □ 合併  □ 地目變更  □ </td>
         </tr>
 
@@ -143,25 +217,55 @@
     <table style="border-collapse: collapse;font-size:20px;text-align:left;width:100%">
         <tr style="height:28px;">
             <td style="border:1px solid black;width:21%;height:28px;">(5)標示及申請權利內容</td>
-            <td style="border:1px solid black;">詳如  □ 契約書  □ 登記清冊  □ 複丈結果通知書  □ 建物測量成果圖  □</td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.marking_and_application_rights == "契約書" %>
+                    詳如  V 契約書  □ 登記清冊  □ 複丈結果通知書  □ 建物測量成果圖  □
+                <% elsif @yfcase.marking_and_application_rights == "登記清冊" %>
+                    詳如  □ 契約書  V 登記清冊  □ 複丈結果通知書  □ 建物測量成果圖  □
+                <% elsif @yfcase.marking_and_application_rights == "複丈結果通知書" %>
+                    詳如  □ 契約書  □ 登記清冊  V 複丈結果通知書  □ 建物測量成果圖  □
+                <% elsif @yfcase.marking_and_application_rights == "建物測量成果圖" %>
+                    詳如  □ 契約書  □ 登記清冊  □ 複丈結果通知書  V 建物測量成果圖  □
+                <% else %>
+                    詳如  □ 契約書  □ 登記清冊  □ 複丈結果通知書  □ 建物測量成果圖  □
+                <% end %>
+            </td>
         </tr>
     </table>
     <!-- (6)附繳證件 -->
     <table style="border-collapse: collapse;font-size:20px;text-align:left;width:100%">
         <tr style="height:28px;">
             <td style="border:1px solid black;width:5%;text-align:center;" rowspan="3">(6)<br>附繳<br>證件</td>
-            <td style="border:1px solid black;width:31%;height:28px;">1.                           份</td>
+            <td style="border:1px solid black;width:31%;height:28px;color:blue;">
+                <% if @yfcase.attached_Document_Content_1.blank? %>
+                    1.                           份
+                <% else %>
+                    1. <%= @yfcase.attached_Document_Content_1 %>   共 <%= @yfcase.number_of_attached_quantity_1 %> 份
+                <% end %>
+                </td>
             <td style="border:1px solid black;width:32%;height:28px;">4.                           份</td>
             <td style="border:1px solid black;width:32%;height:28px;">7.                           份</td>
 
         </tr>
         <tr style="height:28px;">
-            <td style="border:1px solid black;height:28px;">2.                           份</td>
+            <td style="border:1px solid black;height:28px;color:blue;">
+                <% if @yfcase.attached_Document_Content_2.blank? %>
+                    2.                           份                           
+                <% else %>
+                    2. <%= @yfcase.attached_Document_Content_2 %>   共 <%= @yfcase.number_of_attached_quantity_2 %> 份
+                <% end %>
+            </td>
             <td style="border:1px solid black;height:28px;">5.                           份</td>
             <td style="border:1px solid black;height:28px;">8.                           份</td>
         </tr>
         <tr style="height:28px;">
-            <td style="border:1px solid black;height:28px;">3.                           份</td>
+            <td style="border:1px solid black;height:28px;color:blue;">
+                <% if @yfcase.attached_Document_Content_3.blank? %>
+                    3.                           份                           
+                <% else %>
+                    3. <%= @yfcase.attached_Document_Content_3 %>   共 <%= @yfcase.number_of_attached_quantity_3 %> 份
+                <% end %>
+            </td>
             <td style="border:1px solid black;height:28px;">6.                           份</td>
             <td style="border:1px solid black;height:28px;">9.                           份</td>
         </tr>
@@ -175,33 +279,41 @@
 			</td>
             <td style="border:1px solid black;width:3%;" rowspan="8">(8)<br>聯<br>絡<br>方<br>式</td>
             <td style="border:1px solid black;width:14%;height:28px;">權利人電話</td>
-            <td style="border:1px solid black;width:15%;"></td>
+            <td style="border:1px solid black;width:15%;color:blue;">
+                <% if @yfcase.personnals.where(is_creditor: true).first.mobile_phone.present? %>
+                    <%= @yfcase.personnals.where(is_creditor: true).first.mobile_phone %>
+                <% end %>
+            </td>
         </tr>
         <tr>
             <td style="border:1px solid black;height:28px;">義務人電話</td>
-            <td style="border:1px solid black;"></td>        	
+            <td style="border:1px solid black;color:blue;">
+                <% if @yfcase.personnals.where(is_debtor: true).first.mobile_phone.present? %>
+                    <%= @yfcase.personnals.where(is_debtor: true).first.mobile_phone %>
+                <% end %>
+            </td>        	
         </tr>
         <tr>
             <td style="border:1px solid black;height:28px;">代理人聯絡電話</td>
-            <td style="border:1px solid black;"></td>        	
+            <td style="border:1px solid black;color:blue;"></td>        	
         </tr>
         <tr>
             <td style="border:1px solid black;width:5%;" rowspan="4">(9)<br>備<br><br>註</td>
-            <td style="border:1px solid black;width:63%;" rowspan="4"></td>
+            <td style="border:1px solid black;width:63%;color:blue;" rowspan="4"><%= @yfcase.registration_notes %></td>
             <td style="border:1px solid black;height:28px;">傳真電話</td>
-            <td style="border:1px solid black;"></td>
+            <td style="border:1px solid black;color:blue;"></td>
         </tr>
         <tr style="height:20px;">
             <td style="border:1px solid black;height:28px;">電子郵件信箱</td>
-            <td style="border:1px solid black;"></td>
+            <td style="border:1px solid black;color:blue;"></td>
         </tr>
         <tr style="height:20px;">
             <td style="border:1px solid black;height:28px;">不動產經紀人姓名</td>
-            <td style="border:1px solid black;"></td>
+            <td style="border:1px solid black;color:blue;"></td>
         </tr>
         <tr style="height:20px;">
             <td style="border:1px solid black;height:28px;">不動產經紀人電話</td>
-            <td style="border:1px solid black;"></td>
+            <td style="border:1px solid black;color:blue;"></td>
         </tr>
        
     </table>
@@ -231,58 +343,233 @@
             <td style="border:1px solid black;width:3%;">樓</td>
             <td style="border:1px solid black;width:2%;"></td>
         </tr>
-        <tr style="height:28px;">
-            <td style="border:1px solid black;height:50px;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
+        <tr style="height:28px;color:blue;">
+            <td style="border:1px solid black;height:50px;">
+                <% if @yfcase.personnals.where(is_debtor: true).first.name.present? %>
+                    義務人
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_debtor: true).first.name.present? %>
+                    <%= @yfcase.personnals.where(is_debtor: true).first.name %>
+                <% end %>                
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_debtor: true).first.birthday.present? %>
+                    <%= @yfcase.personnals.where(is_debtor: true).first.birthday.year %>年
+                    <%= @yfcase.personnals.where(is_debtor: true).first.birthday.month %>月
+                    <%= @yfcase.personnals.where(is_debtor: true).first.birthday.day %>日
+                <% end %>  
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_debtor: true).first.identity_card.present? %>
+                    <%= @yfcase.personnals.where(is_debtor: true).first.identity_card %>
+                <% end %>  
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_debtor: true).first.person_country.present? %>
+                    <%= @yfcase.personnals.where(is_debtor: true).first.person_country %>
+                <% end %> 
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_debtor: true).first.person_township.present? %>
+                    <%= @yfcase.personnals.where(is_debtor: true).first.person_township %>
+                <% end %> 
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_debtor: true).first.person_village.present? %>
+                    <%= @yfcase.personnals.where(is_debtor: true).first.person_village %>
+                <% end %> 
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_debtor: true).first.person_neighbor.present? %>
+                    <%= @yfcase.personnals.where(is_debtor: true).first.person_neighbor %>
+                <% end %> 
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_debtor: true).first.person_street.present? %>
+                    <%= @yfcase.personnals.where(is_debtor: true).first.person_street %>
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_debtor: true).first.person_section.present? %>
+                    <%= @yfcase.personnals.where(is_debtor: true).first.person_section %>
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_debtor: true).first.person_lane.present? %>
+                    <%= @yfcase.personnals.where(is_debtor: true).first.person_lane %>
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_debtor: true).first.person_alley.present? %>
+                    <%= @yfcase.personnals.where(is_debtor: true).first.person_alley %>
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_debtor: true).first.person_number.present? %>
+                    <%= @yfcase.personnals.where(is_debtor: true).first.person_number %>
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_debtor: true).first.person_floor.present? %>
+                    <%= @yfcase.personnals.where(is_debtor: true).first.person_floor %>
+                <% end %>
+            </td>
             <td style="border:1px solid black;"></td>
             <td style="border:1px solid black;" rowspan="6"></td>
         </tr>
-        <tr style="height:28px;">
-            <td style="border:1px solid black;height:50px;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
+        <tr style="height:28px;color:blue;">
+            <td style="border:1px solid black;height:50px;">
+                <% if @yfcase.personnals.where(is_creditor: true).first.name.present? %>
+                    權利人
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_creditor: true).first.name.present? %>
+                    <%= @yfcase.personnals.where(is_creditor: true).first.name %>
+                <% end %>                
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_creditor: true).first.birthday.present? %>
+                    <%= @yfcase.personnals.where(is_creditor: true).first.birthday.year %>年
+                    <%= @yfcase.personnals.where(is_creditor: true).first.birthday.month %>月
+                    <%= @yfcase.personnals.where(is_creditor: true).first.birthday.day %>日
+                <% end %>  
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_creditor: true).first.identity_card.present? %>
+                    <%= @yfcase.personnals.where(is_creditor: true).first.identity_card %>
+                <% end %>  
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_creditor: true).first.person_country.present? %>
+                    <%= @yfcase.personnals.where(is_creditor: true).first.person_country %>
+                <% end %> 
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_creditor: true).first.person_township.present? %>
+                    <%= @yfcase.personnals.where(is_creditor: true).first.person_township %>
+                <% end %> 
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_creditor: true).first.person_village.present? %>
+                    <%= @yfcase.personnals.where(is_creditor: true).first.person_village %>
+                <% end %> 
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_creditor: true).first.person_neighbor.present? %>
+                    <%= @yfcase.personnals.where(is_creditor: true).first.person_neighbor %>
+                <% end %> 
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_creditor: true).first.person_street.present? %>
+                    <%= @yfcase.personnals.where(is_creditor: true).first.person_street %>
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_creditor: true).first.person_section.present? %>
+                    <%= @yfcase.personnals.where(is_creditor: true).first.person_section %>
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_creditor: true).first.person_lane.present? %>
+                    <%= @yfcase.personnals.where(is_creditor: true).first.person_lane %>
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_creditor: true).first.person_alley.present? %>
+                    <%= @yfcase.personnals.where(is_creditor: true).first.person_alley %>
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_creditor: true).first.person_number.present? %>
+                    <%= @yfcase.personnals.where(is_creditor: true).first.person_number %>
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_creditor: true).first.person_floor.present? %>
+                    <%= @yfcase.personnals.where(is_creditor: true).first.person_floor %>
+                <% end %>
+            </td>
             <td style="border:1px solid black;"></td>
         </tr>
-        <tr style="height:28px;">
-            <td style="border:1px solid black;height:50px;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
+        <tr style="height:28px;color:blue;">
+            <td style="border:1px solid black;height:50px;">
+                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.name.present? %>
+                    契稅代理人
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.name.present? %>
+                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.name %>
+                <% end %>                
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.birthday.present? %>
+                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.birthday.year %>年
+                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.birthday.month %>月
+                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.birthday.day %>日
+                <% end %>  
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.identity_card.present? %>
+                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.identity_card %>
+                <% end %>  
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_country.present? %>
+                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_country %>
+                <% end %> 
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_township.present? %>
+                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_township %>
+                <% end %> 
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_village.present? %>
+                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_village %>
+                <% end %> 
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_neighbor.present? %>
+                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_neighbor %>
+                <% end %> 
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_street.present? %>
+                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_street %>
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_section.present? %>
+                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_section %>
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_lane.present? %>
+                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_lane %>
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_alley.present? %>
+                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_alley %>
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_number.present? %>
+                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_number %>
+                <% end %>
+            </td>
+            <td style="border:1px solid black;">
+                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_floor.present? %>
+                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_floor %>
+                <% end %>
+            </td>
             <td style="border:1px solid black;"></td>
         </tr>
+
         <tr style="height:28px;">
             <td style="border:1px solid black;height:50px;"></td>
             <td style="border:1px solid black;"></td>
@@ -340,6 +627,249 @@
             <td style="border:1px solid black;"></td>
         </tr>
     </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!--登記清冊-土地清冊-->
+    <table class="realestateregistrationLand">
+        <!--第一行-->
+        <tr>
+            <th colspan="10">
+             登 記 清 冊 申請人 揚富開發有限公司<br>
+             法定代理人 陳美純 簽章
+            </th>
+        </tr>
+        
+        <!--第二行-->
+        <tr>
+            <th rowspan="7" style="width:3%;">土地標示</th>
+            <th rowspan="3" style="width:3%">(1)坐落</th>
+            <th style="width:12%;height:100px;">鄉 鎮<br>市 區</th>
+            <td><%= @yfcase.lands.first.blank? ? "" : @yfcase.country.try(:name) %><br><%= @yfcase.lands.first.blank? ? "" : @yfcase.township.try(:name) %></td>
+            <td><%= @yfcase.lands.second.blank? ? "" : @yfcase.country.try(:name) %><br><%= @yfcase.lands.second.blank? ? "" : @yfcase.township.try(:name) %></td>
+            <td><%= @yfcase.lands.third.blank? ? "" : @yfcase.country.try(:name) %><br><%= @yfcase.lands.third.blank? ? "" : @yfcase.township.try(:name) %></td>
+            <td><%= @yfcase.lands.fourth.blank? ? "" : @yfcase.country.try(:name) %><br><%= @yfcase.lands.fourth.blank? ? "" : @yfcase.township.try(:name) %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        
+        <!--第三行-->
+        <tr>
+            <th style="height:100px;">段</th>
+            <td><%= @yfcase.lands.first.blank? ? "" : @yfcase.big_section %></td>
+            <td><%= @yfcase.lands.second.blank? ? "" : @yfcase.big_section %></td>
+            <td><%= @yfcase.lands.third.blank? ? "" : @yfcase.big_section %></td>
+            <td><%= @yfcase.lands.fourth.blank? ? "" : @yfcase.big_section %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        
+        <!--第四行-->
+        <tr>
+            <th style="height:100px;">小段</th>
+            <td><%= @yfcase.lands.first.blank? ? "" : @yfcase.small_section %></td>
+            <td><%= @yfcase.lands.second.blank? ? "" : @yfcase.small_section %></td>
+            <td><%= @yfcase.lands.third.blank? ? "" : @yfcase.small_section %></td>
+            <td><%= @yfcase.lands.fourth.blank? ? "" : @yfcase.small_section %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        
+        <!--第五行-->
+        <tr>
+            <th colspan="2" style="height:100px;">(2)地 號</th>
+            <td><%= @yfcase.lands.first.blank? ? "" : @yfcase.big_section+@yfcase.lands.first.land_number %></td>
+            <td><%= @yfcase.lands.second.blank? ? "" : @yfcase.big_section+@yfcase.lands.second.land_number %></td>
+            <td><%= @yfcase.lands.third.blank? ? "" : @yfcase.big_section+@yfcase.lands.third.land_number %></td>
+            <td><%= @yfcase.lands.fourth.blank? ? "" : @yfcase.big_section+@yfcase.lands.fourth.land_number %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        
+        <!--第六行-->
+        <tr>
+            <th colspan="2" style="height:100px;">(3)面 積<br>(平方公尺)</th>
+            <td><%= @yfcase.lands.first.blank? ? "" : number_to_currency(@yfcase.lands.first.land_area, unit: "", precision: 2) %></td>
+            <td><%= @yfcase.lands.second.blank? ? "" : number_to_currency(@yfcase.lands.second.land_area, unit: "", precision: 2) %></td>
+            <td><%= @yfcase.lands.third.blank? ? "" : number_to_currency(@yfcase.lands.third.land_area, unit: "", precision: 2) %></td>
+            <td><%= @yfcase.lands.fourth.blank? ? "" : number_to_currency(@yfcase.lands.fourth.land_area, unit: "", precision: 2) %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        
+        <!--第七行-->
+        <tr>
+            <th colspan="2" style="height:100px;">(4)權利範圍</th>
+            <td><%= @yfcase.lands.first.blank? ? "" : (@yfcase.lands.first.land_holding_point_personal).to_s+"/"+(@yfcase.lands.first.land_holding_point_all).to_s %></td>
+            <td><%= @yfcase.lands.second.blank? ? "" : (@yfcase.lands.second.land_holding_point_personal).to_s+"/"+(@yfcase.lands.second.land_holding_point_all).to_s %></td>
+            <td><%= @yfcase.lands.third.blank? ? "" : (@yfcase.lands.third.land_holding_point_personal).to_s+"/"+(@yfcase.lands.third.land_holding_point_all).to_s %></td>
+            <td><%= @yfcase.lands.fourth.blank? ? "" : (@yfcase.lands.fourth.land_holding_point_personal).to_s+"/"+(@yfcase.lands.fourth.land_holding_point_all).to_s %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        
+        <!--第八行-->
+        <tr>
+            <th colspan="2" style="height:100px;">(5)備 註</th>
+            <td><%= @yfcase.lands.first.blank? ? "" : @yfcase.lands.first.landRemarks %></td>
+            <td><%= @yfcase.lands.second.blank? ? "" : @yfcase.lands.second.landRemarks %></td>
+            <td><%= @yfcase.lands.third.blank? ? "" : @yfcase.lands.third.landRemarks %></td>
+            <td><%= @yfcase.lands.fourth.blank? ? "" : @yfcase.lands.fourth.landRemarks %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!--登記清冊-建物清冊-->
+    <table class="realestateregistrationBuild">
+        <tr>
+            <th rowspan="18" style="width:3%">建 物 標 示</th>
+            <th colspan="2">(6)建 號</th>
+            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.big_section+@yfcase.builds.first.build_number %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.big_section+@yfcase.builds.second.build_number %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.big_section+@yfcase.builds.third.build_number %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.big_section+@yfcase.builds.fourth.build_number %></td>
+        </tr>
+        <tr>
+            <th rowspan="4" style="width:10%">(7)<br>門 牌</th>
+            <th style="width:15%">鄉鎮市區</th>
+            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.country.try(:name)+@yfcase.township.try(:name) %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.country.try(:name)+@yfcase.township.try(:name) %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.country.try(:name)+@yfcase.township.try(:name) %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.country.try(:name)+@yfcase.township.try(:name) %></td>
+        </tr>
+        <tr>
+            <th>街 路</th>
+            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildRoad %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildRoad %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildRoad %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildRoad %></td>
+        </tr>
+        <tr>
+            <th>段 巷 弄</th>
+            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildLane+"巷" %><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildDo+"弄" %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildLane+"巷" %><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildDo+"弄" %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildLane+"巷" %><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildDo+"弄" %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildLane+"巷" %><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildDo+"弄" %></td>
+        </tr>
+        <tr>
+            <th>號 樓</th>
+            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildNumber+"號" %><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildFloor+"樓" %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildNumber+"號" %><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildFloor+"樓" %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildNumber+"號" %><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildFloor+"樓" %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildNumber+"號" %><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildFloor+"樓" %></td>
+        </tr>
+        <tr>
+            <th rowspan="3">(8)<br>建 物<br>坐 落</th>
+            <th>段</th>
+            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.big_section %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.big_section %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.big_section %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.big_section %></td>
+        </tr>
+        <tr>
+            <th>小段</th>
+            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.small_section %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.small_section %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.small_section %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.small_section %></td>
+        </tr>
+        <tr>
+            <th>地段</th>
+            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildLot %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildLot %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildLot %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildLot %></td>
+        </tr>
+        <tr>
+            <th rowspan="6">(9)<br>面 積<br>︵<br>平方<br>公尺<br>︶</th>
+            <th>1 層</th>
+            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildLevel1 %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildLevel1 %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : +@yfcase.builds.third.buildLevel1 %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildLevel1 %></td>
+        </tr>
+        <tr>
+            <th>2 層</th>
+            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildLevel2 %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildLevel2 %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildLevel2 %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildLevel2 %></td>
+        </tr>
+        <tr>
+            <th>  層</th>
+            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildLevel3 %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildLevel3 %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildLevel3 %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildLevel3 %></td>
+        </tr>
+        <tr>
+            <th>  層</th>
+            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildLevel4 %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildLevel4 %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildLevel4 %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildLevel4 %></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildOther1 %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildOther1 %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildOther1 %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildOther1 %></td>
+        </tr>
+        <tr>
+            <th>共 計</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th rowspan="2">(10)<br>附 屬<br>建 物</th>
+            <th>用途</th>
+            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildUse %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildUse %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildUse %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildUse %></td>
+        </tr>
+        <tr>
+            <th>面 積<br>(平方公尺)</th>
+            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildScopeOfArea %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildScopeOfArea %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildScopeOfArea %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildScopeOfArea %></td>
+        </tr>
+        <tr>
+            <th colspan="2">(11)權 利 範 圍</th>
+            <td><%= @yfcase.builds.first.blank? ? "" : (@yfcase.builds.first.build_holding_point_personal).to_s+"/"+(@yfcase.builds.first.build_holding_point_all).to_s %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : (@yfcase.builds.second.build_holding_point_personal).to_s+"/"+(@yfcase.builds.second.build_holding_point_all).to_s %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : (@yfcase.builds.third.build_holding_point_personal).to_s+"/"+(@yfcase.builds.third.build_holding_point_all).to_s %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : (@yfcase.builds.fourth.build_holding_point_personal).to_s+"/"+(@yfcase.builds.fourth.build_holding_point_all).to_s %></td>
+        </tr>
+        <tr>
+            <th colspan="2">(12)備 註</th>
+            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildRemarks %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildRemarks %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildRemarks %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildRemarks %></td>
+        </tr>
+    </table>
+    
 </body>
 
 </html>

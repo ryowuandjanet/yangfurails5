@@ -158,4 +158,24 @@ module ApplicationHelper
 	def address(country,township,village,neighbor,street,section,lane,alley,number,floor)
 		return "#{country}#{township}#{village}#{neighbor}#{street}#{section}#{lane}#{alley}#{number}#{floor}"
 	end
+	
+	def isBlank(object)
+		return object.blank? ? "" : object
+	end
+	
+	def numberToChinese(number)
+		numberString = number.to_s
+		chinese = "零一二三四五六七八九"
+		arabic = "0123456789"
+		if numberString[-4].present? 
+		 value =numberString[-4].tr(arabic,chinese)+"千"+ numberString[-3].tr(arabic,chinese)+"百"+ (numberString[-2] == "1" ? "十" : numberString[-2].tr(arabic,chinese)+"十")+ numberString[-1].tr(arabic,chinese)
+		elsif numberString[-3].present? 
+		 value = numberString[-3].tr(arabic,chinese)+"百"+ (numberString[-2] == "1" ? "十" : numberString[-2].tr(arabic,chinese)+"十")+ numberString[-1].tr(arabic,chinese)
+		elsif numberString[-2].present? 
+		 value = (numberString[-2] == "1" ? "十" : numberString[-2].tr(arabic,chinese)+"十")+ numberString[-1].tr(arabic,chinese)
+		else
+		 value = numberString[-1].tr(arabic,chinese)
+		end
+		return value
+	end
 end
