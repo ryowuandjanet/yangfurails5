@@ -25,7 +25,7 @@
               </button>
             </h2>
           </div>
-          <div id="collapseRealestaterregistration" class="collapse show" aria-labelledby="headingRealestaterregistration" data-parent="#accordionExample">
+          <div id="collapseRealestaterregistration" class="collapse" aria-labelledby="headingRealestaterregistration" data-parent="#accordionExample">
             <div class="card-body">
               
               <div class="form-row">
@@ -464,6 +464,97 @@
           </div>
         </div>
       </div>
+      
+      <!--無人優購後顯示：民事起訴狀-->
+      <div class="card">
+        <div class="card-header" id="headingComplaint">
+          <h2 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseComplaint" aria-expanded="true" aria-controls="collapseComplaint">
+              無人優購後顯示：民事起訴狀
+            </button>
+          </h2>
+        </div>
+        <div id="collapseComplaint" class="collapse" aria-labelledby="headingComplaint" data-parent="#accordionExample">
+          <div class="card-body">
+            
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <%= f.label :housingTax, "房屋課稅" %>
+              </div>
+              <div class="form-group col">
+                <%= f.text_field :housingTax,  class: "form-control" %>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <%= f.label :refereeFee, "裁判費" %>
+              </div>
+              <div class="form-group col">
+                <%= f.text_field :refereeFee,  class: "form-control" %>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <%= f.label :agreementSplitUnsuccessfulDate, "協議分割未果日期" %>
+              </div>
+              <div class="form-group col">
+                <%= f.text_field :agreementSplitUnsuccessfulDate,  class: "datepicker form-control" %>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <%= f.label :exhibit1, "證物1" %>
+              </div>
+              <div class="form-group col">
+                <%= f.text_field :exhibit1,  class: "form-control" %>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <%= f.label :exhibit2, "證物2" %>
+              </div>
+              <div class="form-group col">
+                <%= f.text_field :exhibit2,  class: "form-control" %>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <%= f.label :exhibit3, "證物3" %>
+              </div>
+              <div class="form-group col">
+                <%= f.text_field :exhibit3,  class: "form-control" %>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <%= f.label :exhibit4, "證物4" %>
+              </div>
+              <div class="form-group col">
+                <%= f.text_field :exhibit4,  class: "form-control" %>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <%= f.label :tabulationDate, "製表日期" %>
+              </div>
+              <div class="form-group col">
+                <%= f.text_field :tabulationDate,  class: "datepicker form-control" %>
+              </div>
+            </div>
+            
+            
+     
+          </div>
+        </div>
+      </div>      
+      
     <% end %>
     
     <!-- 基本資料   -->

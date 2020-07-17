@@ -10,163 +10,218 @@
     body {
         /*楷體*/
         /*font-family: Arial,'cwTeXKai', serif; */
-        font-family: Arial,標楷體,sans-serif;
+        font-family: 'bkai00mp','Roboto',sans-serif;
         font-size: 24px;
     }
 
     .page-break {
         page-break-before: always;
     }
-    .lettertd-1{
-        border:1px solid black;
-        padding:0px;
-        margin:0px;
-        text-align: right;  
-        font-size:20pt;
+    
+    /*以下為新格式運用*/
+    .letterPDF {
+      border-collapse:collapse;
+    }
+    .letterPDF td {
+      border:1px solid black;
+    }
+    .letterPDF .letterPDFPaper {
+      border:none;
+    }
+    .letterPDFPostOffice {
+      border-collapse:collapse;
+      width:100%;
+    }
+    .letterPDFPostOffice td {
+      border:none;
+      height:70px;
+      text-align:right;
+      padding-right:10px;
+      vertical-align:top;
+    }
+
+    .letterPDFInfo {
+      border-collapse:collapse;
+      width:100%;1
+    }
+    .letterPDFInfo td {
+      border:none;
+      font-size:12pt;
+      padding:5px 0px 5px 5px;
+    }
+
+    .letterPDFRemark {
+      border-collapse:collapse;
+      width:100%;
+    }
+    .letterPDFRemark td {
+      border:none;
+      font-size:13pt;
+      padding:3px 0px 3px 15px;
     }
     
-    .lettertd-2{
-        /*border:1px solid black;*/
-        margin:0px;
-        text-align: left;
-        font-size: 14pt;
-        height: 25px;
-        padding: 3px;
+    .letterPDFContent {
+      border-collapse:collapse;
+      width:100%;
     }
-    .lettertd-3{
-        border:1px solid black;
-        margin:0px;
-        text-align: left;
-        font-size: 14pt;
-        height: 25px;
-        padding: 3px;
+    .letterPDFContent td {
+      border:none;
+      vertical-align:top;
+      font-size:12pt;
     }
-    .lettertd{
-        border:1px solid black;
+    
+    .letterPDFPaper {
+      width:7%;
+      font-size:14pt;
+      text-align:center;
+      vertical-align:top;
+      padding-top:20px;
+
+    }
+    .lettertdTitle{
         padding:0px;
         margin:0px;
         text-align: center;
-        font-size: 20pt;
+        font-size: 14pt;
         width:40px;
         height:50px;
+    }  
+    .lettertd{
+        padding:0px;
+        margin:0px;
+        text-align: center;
+        font-size: 24pt;
+        width:40px;
+        height:50px;
+    }  
+    
+    .letterPDFAttachment{
+      border-collapse: collapse;
+      width:100%;
+      font-size:30px;
+    }
+    .letterPDFAttachment td{
+      padding:5px;
     }
     </style>
 </head>
 
 <body>
-  <div style="font-family:msjh;font-size:12pt;">ryowu 123</div>
-    
-    <div style="text-align:center;">
-        <h1>郵 局 存 證 信 函 用 紙</h1>
-    </div>
-    
-    <table style="border-collapse: collapse;font-family: 'cwTeXKai', serif;font-size:14pt;">
-		<tr>
-			<td class="lettertd-1" colspan="6" rowspan="8">
-			    郵  局<br><br>
-			    存證信函第&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;號
-			</td>
-			<td class="lettertd-2" colspan="15" style="border-top:1px solid black;border-right:1px solid black;font-size:13pt;">
-			    &nbsp;&nbsp;&nbsp;(寄件人如為機關、團體、學校、公司、商號請加蓋單位圖章及法定代理人簽名或蓋章)
-			</td>
-		</tr>
-		
-		<tr>
-		    <td class="lettertd-2" colspan="3" rowspan="2" style="text-align:right;">
-		        一、寄件人&nbsp;&nbsp;&nbsp;
-		    </td>
-		    <td class="lettertd-2" colspan="12" style="border-right:1px solid black;">
-		        姓名： 揚富開發有限公司   印
-		    </td>
-		</tr>
-		<tr>
-		    <td class="lettertd-2" colspan="12" style="border-right:1px solid black;">詳細地址：臺中市大里區新仁路三段49號</td>
-		</tr>
-		
-		<tr>
-		    <td class="lettertd-2" colspan="3" rowspan="2" style="text-align:right;">
-		        二、收件人&nbsp;&nbsp;&nbsp;
-		    </td>
-		    <td class="lettertd-2" colspan="12" style="border-right:1px solid black;">
-		        姓名：詳參附表
-		    </td>
-		</tr>
-		<tr>
-		    <td class="lettertd-2" colspan="12" style="border-right:1px solid black;">詳細地址：詳參附表</td>
-		</tr>
-
-		<tr>
-		    <td class="lettertd-2" colspan="3" rowspan="2" style="text-align:right;">
-		        三、副&nbsp;&nbsp;&nbsp;本&nbsp;&nbsp;&nbsp;<br>收件人&nbsp;&nbsp;&nbsp;
-		    </td>
-		    <td class="lettertd-2" colspan="12" style="border-right:1px solid black;">
-		        姓名：
-		    </td>
-		</tr>
-		<tr>
-		    <td class="lettertd-2" colspan="12" style="border-right:1px solid black;">詳細地址：</td>
-		</tr>
-		<tr>
-		    <td class="lettertd-2" colspan="15" style="border-right:1px solid black;font-size:13pt;">&nbsp;&nbsp;&nbsp;(本欄姓名、地址不敷填寫時，請另紙聯記)</td>
-		</tr>
-		
-		
-	    <!--標題-->
+  <div style="text-align:center;padding-bottom:10px;font-size:22pt;">
+    <b>郵  局  存  證  信  函  用  紙</b>
+  </div>
+  
+  <table class="letterPDF">
+    <tr>
+      <td rowspan="16" class="letterPDFPaper">副&thinsp;正<br>本</td>
+      <td colspan="7">
+        <table class="letterPDFPostOffice">
+          <tr>
+            <td colspan="2">郵 局</td>
+          </tr>
+          <tr>
+            <td style="width:55%">存證信函第</td>
+            <td>號</td>
+          </tr>
+        </table>
+      </td>
+      <td colspan="14">
+        <table class="letterPDFInfo">
+          <tr>
+            <td colspan="2" style="padding-left:10px;font-size:10pt;">
+              〈寄件人如為機關、團體、學校、公司、商號請加蓋單位圖章及法定代理人簽名或蓋章〉
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="2" style="width:20%;">一、寄件人</td>
+            <td style="padding:0px;">
+              <table >
+                <tr>
+                  <td>姓名： 揚富開發有限公司&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td>
+                  <td style="margin:0px;padding:0px 5px;border:1px solid black;">印</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>詳細地址：臺中市大里區新仁路三段49號</td>
+          </tr>
+          <tr>
+            <td rowspan="2">二、收件人</td>
+            <td>姓名：詳參附表</td>
+          </tr>
+          <tr>
+            <td>詳細地址：詳參附表</td>
+          </tr>
+          <tr>
+            <td rowspan="2">三、副&emsp;本<br>&emsp;&emsp;收件人</td>
+            <td>姓名：</td>
+          </tr>
+          <tr>
+            <td>詳細地址</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding-left:10px;">(本欄姓名、地址不敷填寫時，請另紙聯記)</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+        <!--標題-->
 	    <tr>
-  			<td class="lettertd">
+  			<td class="lettertdTitle">
   		    <p style="margin:0px;padding:3px;text-align:right;">格</p>
   		    <p style="margin:0px;padding:3px;text-align:left;">行</p>
   			</td>
-  			<td class="lettertd" style="font-family: 標楷體;">1</td>
-  			<td class="lettertd">2</td>
-  			<td class="lettertd">3</td>
-  			<td class="lettertd">4</td>
-  			<td class="lettertd">5</td>
-  			<td class="lettertd">6</td>
-  			<td class="lettertd">7</td>
-  			<td class="lettertd">8</td>
-  			<td class="lettertd">9</td>
-  			<td class="lettertd">10</td>
-  			<td class="lettertd">11</td>
-  			<td class="lettertd">12</td>
-  			<td class="lettertd">13</td>
-  			<td class="lettertd">14</td>
-  			<td class="lettertd">15</td>
-  			<td class="lettertd">16</td>
-  			<td class="lettertd">17</td>
-  			<td class="lettertd">18</td>
-  			<td class="lettertd">19</td>
-  			<td class="lettertd">20</td>
+  			<td class="lettertdTitle">1</td>
+  			<td class="lettertdTitle">2</td>
+  			<td class="lettertdTitle">3</td>
+  			<td class="lettertdTitle">4</td>
+  			<td class="lettertdTitle">5</td>
+  			<td class="lettertdTitle">6</td>
+  			<td class="lettertdTitle">7</td>
+  			<td class="lettertdTitle">8</td>
+  			<td class="lettertdTitle">9</td>
+  			<td class="lettertdTitle">10</td>
+  			<td class="lettertdTitle">11</td>
+  			<td class="lettertdTitle">12</td>
+  			<td class="lettertdTitle">13</td>
+  			<td class="lettertdTitle">14</td>
+  			<td class="lettertdTitle">15</td>
+  			<td class="lettertdTitle">16</td>
+  			<td class="lettertdTitle">17</td>
+  			<td class="lettertdTitle">18</td>
+  			<td class="lettertdTitle">19</td>
+  			<td class="lettertdTitle">20</td>
 		</tr>
 		
 		<!--第一行-->
 		<tr>
-		    <td class='lettertd'>一</td>
-            <td class='lettertd'>敬</td>
-            <td class='lettertd'>啟</td>
-            <td class='lettertd'>者</td>
-            <td class='lettertd'>：</td>
-            <td class='lettertd'>收</td>
-            <td class='lettertd'>信</td>
-            <td class='lettertd'>平</td>
-            <td class='lettertd'>安</td>
-            <td class='lettertd'>。</td>
-            <td class='lettertd'>關</td>
-            <td class='lettertd'>於</td>
-            <td class='lettertd'>揚</td>
-            <td class='lettertd'>富</td>
-            <td class='lettertd'>開</td>
-            <td class='lettertd'>發</td>
-            <td class='lettertd'>有</td>
-            <td class='lettertd'>限</td>
-            <td class='lettertd'>公</td>
-            <td class='lettertd'>司</td>
-            <td class='lettertd'>與</td>
+		    <td class='lettertdTitle'>一</td>
+        <td class='lettertd'>敬</td>
+        <td class='lettertd'>啟</td>
+        <td class='lettertd'>者</td>
+        <td class='lettertd'>：</td>
+        <td class='lettertd'>收</td>
+        <td class='lettertd'>信</td>
+        <td class='lettertd'>平</td>
+        <td class='lettertd'>安</td>
+        <td class='lettertd'>。</td>
+        <td class='lettertd'>關</td>
+        <td class='lettertd'>於</td>
+        <td class='lettertd'>揚</td>
+        <td class='lettertd'>富</td>
+        <td class='lettertd'>開</td>
+        <td class='lettertd'>發</td>
+        <td class='lettertd'>有</td>
+        <td class='lettertd'>限</td>
+        <td class='lettertd'>公</td>
+        <td class='lettertd'>司</td>
+        <td class='lettertd'>與</td>
 		</tr>
 		
 		<!--第二行-->
 		<tr>
-		    <td class='lettertd'>二</td>
+		    <td class='lettertdTitle'>二</td>
             <td class='lettertd'>台</td>
             <td class='lettertd'>端</td>
             <td class='lettertd'>間</td>
@@ -191,7 +246,7 @@
 		
 		<!--第三行-->
 		<tr>
-		    <td class='lettertd'>三</td>
+		    <td class='lettertdTitle'>三</td>
             <td class='lettertd'>權</td>
             <td class='lettertd'>屬</td>
             <td class='lettertd'>複</td>
@@ -216,7 +271,7 @@
 		
 		<!--第四行-->
 		<tr>
-		   <td class='lettertd'>四</td>
+		   <td class='lettertdTitle'>四</td>
             <td class='lettertd'>十</td>
             <td class='lettertd'>日</td>
             <td class='lettertd'>內</td>
@@ -241,7 +296,7 @@
 
 		<!--第五行-->
 		<tr>
-		    <td class='lettertd'>五</td>
+		    <td class='lettertdTitle'>五</td>
             <td class='lettertd'>2</td>
             <td class='lettertd'>1</td>
             <td class='lettertd'>-</td>
@@ -266,7 +321,7 @@
 		
 		<!--第六行-->
 		<tr>
-		    <td class='lettertd'>六</td>
+		    <td class='lettertdTitle'>六</td>
             <td class='lettertd'>議</td>
             <td class='lettertd'>不</td>
             <td class='lettertd'>成</td>
@@ -291,7 +346,7 @@
 		
 		<!--第七行-->
 		<tr>
-		   <td class='lettertd'>七</td>
+		   <td class='lettertdTitle'>七</td>
             <td class='lettertd'>，</td>
             <td class='lettertd'>謹</td>
             <td class='lettertd'>請</td>
@@ -316,7 +371,7 @@
 		
 		<!--第八行-->
 		<tr>
-		   <td class='lettertd'>八</td>
+		   <td class='lettertdTitle'>八</td>
             <td class='lettertd'></td>
             <td class='lettertd'></td>
             <td class='lettertd'></td>
@@ -341,7 +396,7 @@
 		
 		<!--第九行-->
 		<tr>
-		    <td class='lettertd'>九</td>
+		    <td class='lettertdTitle'>九</td>
             <td class='lettertd'></td>
             <td class='lettertd'></td>
             <td class='lettertd'></td>
@@ -366,7 +421,7 @@
 		
 		<!--第十行-->
 		<tr>
-		    <td class='lettertd'>十</td>
+		    <td class='lettertdTitle'>十</td>
             <td class='lettertd'></td>
             <td class='lettertd'></td>
             <td class='lettertd'></td>
@@ -389,60 +444,142 @@
             <td class='lettertd'></td>
 		</tr>
 
-		<!--footer-->
-		<tr>
-		    <td class='lettertd-3' colspan="17" rowspan="2">
-		    	本存證信函共&emsp;&emsp;&emsp;&emsp;頁，正本&emsp;&emsp;&emsp;&emsp;份，存證費&emsp;&emsp;&emsp;&emsp;元，<br>
-		        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&thinsp;&thinsp;副本&emsp;&emsp;&emsp;&emsp;份，存證費&emsp;&emsp;&emsp;&emsp;元，<br>
-		        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&thinsp;&thinsp;附件&emsp;&emsp;&emsp;&emsp;張，存證費&emsp;&emsp;&emsp;&emsp;元，<br>
-		        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&emsp;加具正本&emsp;&emsp;&emsp;&emsp;份，存證費&emsp;&emsp;&emsp;&emsp;元，<br>
-		        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&emsp;加具附本&emsp;&emsp;&emsp;&emsp;份，存證費&emsp;&emsp;&emsp;&emsp;元，合計&emsp;&emsp;&emsp;&emsp;元<br>
-		        <br>
-		        &emsp;&emsp;經&emsp;&emsp;&emsp;&emsp;&emsp;&thinsp;&thinsp;&thinsp;&thinsp;郵局&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;經辦員<br>
-		        
-		        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&thinsp;&thinsp;&thinsp;正<br>
-		        &emsp;&emsp;年&emsp;&emsp;月&emsp;&emsp;日證明&emsp;本內容完全相同&emsp;&emsp;&emsp;&emsp;&emsp;&thinsp;&thinsp;主管<br>
-		        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&thinsp;&thinsp;&thinsp;副    
+    <tr>
+      <td colspan="17" rowspan="2">
+        <table class="letterPDFContent">
+          <tr>
+            <td rowspan="5" style="width:16%;">本存證信函共</td>
+            <td style="width:10%;"></td>
+            <td style="width:11%;">頁,正本</td>
+            <td style="width:8%;"></td>
+            <td style="width:12%;">份,存證費</td>
+            <td style="width:12%;"></td>
+            <td>元,</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>副本</td>
+            <td></td>
+            <td>份,存證費</td>
+            <td></td>
+            <td>元,</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>附件</td>
+            <td></td>
+            <td>份,存證費</td>
+            <td></td>
+            <td>元,</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>加具正本</td>
+            <td></td>
+            <td>份,存證費</td>
+            <td></td>
+            <td>元,</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>加具副本</td>
+            <td></td>
+            <td>份,存證費</td>
+            <td></td>
+            <td>元,</td>
+          </tr>
+          <tr>
+            <td colspan="7" style="height:10px;"></td>
+          </tr>
+          <tr>
+            <td colspan="2" style="text-align:right;">經&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;郵局</td>
+            <td colspan="3"></td>
+            <td colspan="2">經辦員</td>
+
+          </tr>
+          <tr>
+            <td colspan="2" style="text-align:right;vertical-align:middle;">年&emsp;&emsp;月&emsp;&emsp;日證明</td>
+            <td colspan="3">
+              <table style="border-collapse:collapse;">
+                <tr>
+                  <td>正</td>
+                  <td rowspan="2" style="vertical-align:middle;">本內容完全相同</td>
+                </tr>
+                <tr>
+                  <td style="padding:0px;">副</td>
+                </tr>
+              </table>
             </td>
-		    <td class='lettertd-3' colspan="2">黏</td>
-		    <td class='lettertd-3' colspan="2">貼</td>
+            <td colspan="2" style="vertical-align:middle;">主管</td>
 
-		</tr>
-		<tr>
-		    <td class='lettertd-3' colspan="4">郵票或</td>
-		</tr>
-		<tr>
-		    <td class='lettertd-3' rowspan="3" style="font-size:20pt;text-align:center;">備<br><br>註</td>
-		    <td class='lettertd-3' colspan="16">
-		        一、存證信函需送交郵局辦理證明手續後始有效，自交寄之日起由郵局保存之副本，<br>
-		        &emsp;&thinsp;&thinsp;&thinsp;&thinsp;於三年期滿後銷燬之。
-		    </td>
-		    <td class='lettertd-3' colspan="4">郵資券</td>
-		</tr>
-		<tr>
-		    <td class='lettertd-3' colspan="10">二、在　　頁　　行第　　　格下塗改增刪　　字</td>
-		    <td class='lettertd-3' colspan="6">
-		        (如有修改應填註本欄並蓋用寄件人印章，但塗改增刪)<br>
-		        <small>每頁至多不得逾二十字。</small>
-		    </td>
-		    <td class='lettertd-3' colspan="2" rowspan="2">處</td>
-		    <td class='lettertd-3' colspan="2" rowspan="2"></td>
-		</tr>
-		<tr>
-		    <td class='lettertd-3' colspan="16">
-		        三、每件一式三份，用不脫色筆或打字機複寫，或書寫後複印、影印，每格限書一字<br>
-		        &emsp;&thinsp;&thinsp;&thinsp;&thinsp;，色澤明顯、字跡端正。
-		    </td>
-		    
-		</tr>
-	</table>
+          </tr>
+        </table>
+      </td>
+      <td colspan="2" style="height:80px;text-align:center;">黏</td>
+      <td colspan="2" style="text-align:center;">貼</td>
+    </tr>
+    <tr>
+      <td colspan="4" style="border-bottom:none;text-align:center;">郵&emsp;票&emsp;或</td>
+    </tr>
+    <tr>
+      <td rowspan="2" style="text-align:center;">備<br><br>註</td>
+      <td colspan="16" rowspan="2">
+        <table class="letterPDFRemark">
+          <tr>
+            <td colspan="2">
+              一、存證信函需送交郵局辦理證明手續後始有效，自交寄之日起由郵局保存之副<br>
+              &emsp;&emsp;本，於三年期滿後銷燬之。
+            </td>
+          </tr>
+          <tr>
+            <td style="width:60%;font-size:12pt;padding-left:0px;">
+              <table style="border-collapse:collapse;">
+                <tr>
+                  <td rowspan="2" style="padding-left:15px;">二、在&emsp;&emsp;頁&emsp;&emsp;行第&emsp;&emsp;&emsp;格下</td>
+                  <td style="padding:0px;">塗改</td>
+                  <td rowspan="2">&emsp;字</td>
+                </tr>
+                <tr>
+                  <td style="padding:0px;">增刪</td>
+                </tr>
+              </table>
+            </td>
+            <td style="padding:0px;">
+              <table style="border-collapse:collapse;width:100%">
+                <tr>
+                  <td rowspan="2" style="width:20%;"></td>
+                  <td style="font-size:10pt;padding-left:5px;">( 如有修改應填註本欄並蓋用<br>寄件人印章，但塗改增刪 )</td>
+                </tr>
+                <tr>
+                  <td style="font-size:10pt;padding-left:5px;">每頁至多不得逾二十字。</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              三、每件一式三份，用不脫色筆或打字機複寫，或書寫後複印、影印，每格限書<br>
+              &emsp;&emsp;一字，色澤明顯、字跡端正。
+            </td>
+          </tr>
+        </table>
+      </td>
+    <td colspan="4" style="border-top:none;height:60px;text-align:center;">郵&emsp;資&emsp;券</td>
+    </tr>
+    <tr>
+      <td colspan="2" style="text-align:center;">處</td>
+      <td colspan="2"></td>
+    </tr>
+  </table>
+  
+ 
 
 
     <!-- 附表 -->
     <div class="page-break">
-        <table style="border-collapse: collapse;width:100%;font-size:30px;">
+        <table class="letterPDFAttachment" style="border-collapse: collapse;width:100%;font-size:30px;">
             <tr>
-                <td colspan="2" style="font-size:48px;">附表：</td>
+                <td colspan="2" style="font-size:30px;padding-bottom:10px;">附表：</td>
                 <td></td>
             </tr>
             <tr style="background-color: #ccc;">
@@ -463,7 +600,7 @@
             </tr>
             <% @yfcase.personnals.where(["is_land_owner = :is_land_owner or is_build_owner = :is_build_owner", { is_land_owner: true, is_build_owner: true }]).each do |debtor| %>
               <tr style="font-size:16pt;">
-                <td style="border:1px solid black;text-align:center;">
+                <td style="border:1px solid black;text-align:left;">
                   <%= debtor.name %><br>
                   <%= address(debtor.person_country,debtor.person_township,debtor.person_village,debtor.person_neighbor,debtor.person_street,debtor.person_section,debtor.person_lane,debtor.person_alley,debtor.person_number,debtor.person_floor) %>
                 </td>

@@ -7,46 +7,48 @@
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <%= wicked_pdf_stylesheet_link_tag 'pdf' %>
     <style type="text/css">
-        body {
-            /*楷體*/
-            font-family: 'cwTeXKai', serif; 
-            font-size: 24px;
-        }
+	    body {
+        /*楷體*/
+        /*font-family: Arial,'cwTeXKai', serif; */
+        font-family: 'bkai00mp','Roboto',sans-serif;
+        font-size: 26px;
+        font-width : border;
+	    }
     	.firstdata:after {
-		  content: "";
-		  display: table;
-		  clear: both;
-		}
-		.realestateregistrationLand {
-		    border-collapse: collapse;
-		    width:100%;
-		    /*border: 1px solid black;*/
-		}
-		.realestateregistrationLand tr th {
-		    border: 1px solid black;
-		}
-		.realestateregistrationLand tr td {
-		    color:blue;
-		    text-align:center;
-		    width:11.7%;
-		    border: 1px solid black;
-		}
-		.realestateregistrationBuild {
-		    border-collapse: collapse;
-		    width:100%;
-		    /*border: 1px solid black;*/
-		}
-		.realestateregistrationBuild tr th {
-		    border: 1px solid black;
-		}
-		.realestateregistrationBuild tr td {
-		  text-align: center;
-		  color:blue;
-		  width:18%;
-	    border: 1px solid black;
-	    height: 38px;
-		}
-		
+  		  content: "";
+  		  display: table;
+  		  clear: both;
+  		}
+  		.realestateregistrationLand {
+  		    border-collapse: collapse;
+  		    width:100%;
+  		    /*border: 1px solid black;*/
+  		}
+  		.realestateregistrationLand tr th {
+  		    border: 1px solid black;
+  		}
+  		.realestateregistrationLand tr td {
+  		    color:blue;
+  		    text-align:center;
+  		    width:11.7%;
+  		    border: 1px solid black;
+  		}
+  		.realestateregistrationBuild {
+  		    border-collapse: collapse;
+  		    width:100%;
+  		    /*border: 1px solid black;*/
+  		}
+  		.realestateregistrationBuild tr th {
+  		    border: 1px solid black;
+  		}
+  		.realestateregistrationBuild tr td {
+  		  text-align: center;
+  		  vertical-align: middle;
+  		  color:blue;
+  		  width:18%;
+  	    border: 1px solid black;
+  	    height: 38px;
+  		}
     </style>
 </head>
 
@@ -56,51 +58,51 @@
     <div class="firstdata">
     	<div style="float: left;width: 33.33%;">
     		<table style="border-collapse: collapse;font-size:20px;text-align: center;">
-                    <tr>
-                        <td style="border:1px solid black;width:4%;text-align:center;height:102px;" rowspan="2">收<br><br><br>件</td>
-                        <td style="border:1px solid black;width:3%;height:51px;">日期</td>
-                        <td style="border:1px solid black;width:19%;height:51px;text-align: right;">年&nbsp;月&nbsp;日&nbsp;時&nbsp;分</td>
-                        <td style="border:1px solid black;width:5%;" rowspan="2">收件<br><br><br>者章</td>
-                        <td style="border:1px solid black;width:7%;" rowspan="2"></td>
-                        <td style="border-style:none;width:1%;" rowspan="2"></td>
-                    </tr>
-                    <tr style="height:28px;">
-                        <td style="border:1px solid black;">字號</td>
-                        <td style="border:1px solid black;"> 字第		號</td>
-                    </tr>
-                </table>
+          <tr>
+            <td style="border:1px solid black;width:4%;text-align:center;height:102px;" rowspan="2">收<br><br><br>件</td>
+            <td style="border:1px solid black;width:3%;height:51px;">日期</td>
+            <td style="border:1px solid black;width:19%;height:51px;text-align: right;">年&nbsp;月&nbsp;日&nbsp;時&nbsp;分</td>
+            <td style="border:1px solid black;width:5%;" rowspan="2">收件<br><br><br>者章</td>
+            <td style="border:1px solid black;width:7%;" rowspan="2"></td>
+            <td style="border-style:none;width:1%;" rowspan="2"></td>
+          </tr>
+          <tr style="height:28px;">
+            <td style="border:1px solid black;">字號</td>
+            <td style="border:1px solid black;"> 字第		號</td>
+          </tr>
+        </table>
     	</div>
     	<div style="float: left;width: 33.33%;">
-                <table style="border-collapse: collapse;font-size:20px;text-align: center;">
-                    <tr>
-                        <td style="border:1px solid black;width:9%;height:102px;">連件序別<br>（非連件<br>者免填）</td>
-                        <td style="border:1px solid black;width:7%;">共 件</td>
-                        <td style="border:1px solid black;width:7%;">第 件</td>
-                        <td style="border-style:none;width:1%;"></td>
-                    </tr>
-                </table>
+        <table style="border-collapse: collapse;font-size:20px;text-align: center;">
+          <tr>
+            <td style="border:1px solid black;width:9%;height:102px;">連件序別<br>（非連件<br>者免填）</td>
+            <td style="border:1px solid black;width:7%;">共 件</td>
+            <td style="border:1px solid black;width:7%;">第 件</td>
+            <td style="border-style:none;width:1%;"></td>
+          </tr>
+        </table>
     	</div>
     	<div style="float: left;width: 33.33%;">
-                <table style="border-collapse: collapse;font-size:20px;text-align: center;">
-                    <tr>
-                        <td style="border:1px solid black;width:8%;height:32px;">登記費</td>
-                        <td style="border:1px solid black;width:10%;">元</td>
-                        <td style="border:1px solid black;width:7%;">合 計</td>
-                        <td style="border:1px solid black;width:12%;">元</td>
-                    </tr>
-                    <tr>
-                        <td style="border:1px solid black;height:32px;">書狀費</td>
-                        <td style="border:1px solid black;">元</td>
-                        <td style="border:1px solid black;">收 據</td>
-                        <td style="border:1px solid black;"> 字 號</td>
-                    </tr>
-                    <tr>
-                        <td style="border:1px solid black;height:32px;">罰 鍰</td>
-                        <td style="border:1px solid black;">元</td>
-                        <td style="border:1px solid black;">核算者</td>
-                        <td style="border:1px solid black;"></td>
-                    </tr>
-                </table>
+        <table style="border-collapse: collapse;font-size:20px;text-align: center;">
+          <tr>
+            <td style="border:1px solid black;width:8%;height:32px;">登記費</td>
+            <td style="border:1px solid black;width:10%;">元</td>
+            <td style="border:1px solid black;width:7%;">合 計</td>
+            <td style="border:1px solid black;width:12%;">元</td>
+          </tr>
+          <tr>
+            <td style="border:1px solid black;height:32px;">書狀費</td>
+            <td style="border:1px solid black;">元</td>
+            <td style="border:1px solid black;">收 據</td>
+            <td style="border:1px solid black;"> 字 號</td>
+          </tr>
+          <tr>
+            <td style="border:1px solid black;height:32px;">罰 鍰</td>
+            <td style="border:1px solid black;">元</td>
+            <td style="border:1px solid black;">核算者</td>
+            <td style="border:1px solid black;"></td>
+          </tr>
+        </table>
     	</div>
 
     </div>
@@ -139,7 +141,7 @@
             <td style="border-style:none;text-align:right;height:45px;">
                 <%= @yfcase.country.try(:name).at(-1) == '市' ? @yfcase.country.try(:name) : '市' %>
             </td>
-            <td style="border-style:none;text-align:right;">□跨所申請</td>
+            <td style="border-style:none;text-align:right;">&#9744 跨所申請</td>
         </tr>
     </table>
     <!-- (3)申請登記事由 /(4)登記原因 -->
@@ -151,14 +153,14 @@
 
         <tr style="height:28px;">
             <td style="border:1px solid black;height:28px;">
-                <%= @yfcase.application_for_registration == "所有權第一次登記" ? "V 所有權第一次登記" : "□ 所有權第一次登記" %>
+                <%= @yfcase.application_for_registration == "所有權第一次登記" ? "\u2611" : "\u2610" %> 所有權第一次登記
             </td>
-            <td style="border:1px solid black;height:28px;">□ 第一次登記</td>
+            <td style="border:1px solid black;height:28px;">□&#9744 第一次登記</td>
         </tr>
 
         <tr style="height:28px;">
             <td style="border:1px solid black;height:28px;">
-                <%= @yfcase.application_for_registration == "所有權移轉登記" ? "V 所有權移轉登記" : "□ 所有權移轉登記" %>
+                <%= @yfcase.application_for_registration == "所有權移轉登記" ? "\u2611" : "\u2610" %> 所有權移轉登記
             </td>
             <td style="border:1px solid black;height:28px;">
                 <% if @yfcase.reason_for_registration == "買賣" %>
@@ -181,35 +183,35 @@
 
         <tr style="height:28px;">
             <td style="border:1px solid black;height:28px;">
-                <%= @yfcase.application_for_registration == "抵押權登記" ? "V 抵押權登記" : "□ 抵押權登記" %>
+                <%= @yfcase.application_for_registration == "抵押權登記" ? "\u2611" : "\u2610" %> 抵押權登記
             </td>
-            <td style="border:1px solid black;height:28px;">□ 設定  □ 法定  □ </td>
+            <td style="border:1px solid black;height:28px;">&#9744 設定  &#9744 法定  &#9744 </td>
         </tr>
 
         <tr style="height:28px;">
             <td style="border:1px solid black;height:28px;">
-                <%= @yfcase.application_for_registration == "抵押權塗銷登記" ? "V 抵押權塗銷登記" : "□ 抵押權塗銷登記" %>
+                <%= @yfcase.application_for_registration == "抵押權塗銷登記" ? "\u2611" : "\u2610" %> 抵押權塗銷登記
             </td>
-            <td style="border:1px solid black;height:28px;">□ 清償  □ 拋棄  □ 混同  □ 判決塗銷  □ </td>
+            <td style="border:1px solid black;height:28px;">&#9744 清償  &#9744 拋棄  &#9744 混同  &#9744 判決塗銷  &#9744 </td>
         </tr>
 
         <tr style="height:28px;">
             <td style="border:1px solid black;height:28px;">
-                <%= @yfcase.application_for_registration == "抵押權內容變更登記" ? "V 抵押權內容變更登記" : "□ 抵押權內容變更登記" %>
+                <%= @yfcase.application_for_registration == "抵押權內容變更登記" ? "\u2611" : "\u2610" %> 抵押權內容變更登記
             </td>
-            <td style="border:1px solid black;height:28px;">□ 權利價值變更   □ 權利內容等變更  □ </td>
+            <td style="border:1px solid black;height:28px;">&#9744 權利價值變更   &#9744 權利內容等變更  &#9744 </td>
         </tr>
 
         <tr style="height:28px;">
             <td style="border:1px solid black;height:28px;">
-                <%= @yfcase.application_for_registration == "標示變更登記" ? "V 標示變更登記" : "□ 標示變更登記" %>
+                <%= @yfcase.application_for_registration == "標示變更登記" ? "\u2611" : "\u2610" %> 標示變更登記
             </td>
-            <td style="border:1px solid black;height:28px;">□ 分割  □ 合併  □ 地目變更  □ </td>
+            <td style="border:1px solid black;height:28px;">&#9744 分割  &#9744 合併  &#9744 地目變更  &#9744 </td>
         </tr>
 
         <tr style="height:28px;">
-            <td style="border:1px solid black;height:28px;">□ </td>
-            <td style="border:1px solid black;height:28px;">□ </td>
+            <td style="border:1px solid black;height:28px;">&#9744 </td>
+            <td style="border:1px solid black;height:28px;">&#9744 </td>
         </tr>
         
     </table>
@@ -219,15 +221,15 @@
             <td style="border:1px solid black;width:21%;height:28px;">(5)標示及申請權利內容</td>
             <td style="border:1px solid black;">
                 <% if @yfcase.marking_and_application_rights == "契約書" %>
-                    詳如  V 契約書  □ 登記清冊  □ 複丈結果通知書  □ 建物測量成果圖  □
+                    詳如  &#9745 契約書  &#9744 登記清冊  &#9744 複丈結果通知書  &#9744 建物測量成果圖  &#9744
                 <% elsif @yfcase.marking_and_application_rights == "登記清冊" %>
-                    詳如  □ 契約書  V 登記清冊  □ 複丈結果通知書  □ 建物測量成果圖  □
+                    詳如  &#9744 契約書  &#9745 登記清冊  &#9744 複丈結果通知書  &#9744 建物測量成果圖  &#9744
                 <% elsif @yfcase.marking_and_application_rights == "複丈結果通知書" %>
-                    詳如  □ 契約書  □ 登記清冊  V 複丈結果通知書  □ 建物測量成果圖  □
+                    詳如  &#9744 契約書  &#9744 登記清冊  &#9745 複丈結果通知書  &#9744 建物測量成果圖  &#9744
                 <% elsif @yfcase.marking_and_application_rights == "建物測量成果圖" %>
-                    詳如  □ 契約書  □ 登記清冊  □ 複丈結果通知書  V 建物測量成果圖  □
+                    詳如  &#9744 契約書  &#9744 登記清冊  &#9744 複丈結果通知書  &#9745 建物測量成果圖  &#9744
                 <% else %>
-                    詳如  □ 契約書  □ 登記清冊  □ 複丈結果通知書  □ 建物測量成果圖  □
+                    詳如  &#9744 契約書  &#9744 登記清冊  &#9744 複丈結果通知書  &#9744 建物測量成果圖  &#9744
                 <% end %>
             </td>
         </tr>
@@ -695,15 +697,14 @@
         <!--第六行-->
         <tr>
             <th colspan="2" style="height:100px;">(3)面 積<br>(平方公尺)</th>
-            <td><%= @yfcase.lands.first.blank? ? "" : number_to_currency(@yfcase.lands.first.land_area, unit: "", precision: 2) %></td>
-            <td><%= @yfcase.lands.second.blank? ? "" : number_to_currency(@yfcase.lands.second.land_area, unit: "", precision: 2) %></td>
-            <td><%= @yfcase.lands.third.blank? ? "" : number_to_currency(@yfcase.lands.third.land_area, unit: "", precision: 2) %></td>
-            <td><%= @yfcase.lands.fourth.blank? ? "" : number_to_currency(@yfcase.lands.fourth.land_area, unit: "", precision: 2) %></td>
+            <td><%= @yfcase.lands.first.blank? ? "" : number_to_currency((@yfcase.lands.first.land_area.to_f * @yfcase.lands.first.land_holding_point_personal.to_f / @yfcase.lands.first.land_holding_point_all.to_f), unit: "", precision: 2) %></td>
+            <td><%= @yfcase.lands.second.blank? ? "" : number_to_currency((@yfcase.lands.second.land_area.to_f * @yfcase.lands.second.land_holding_point_personal.to_f / @yfcase.lands.second.land_holding_point_all.to_f), unit: "", precision: 2) %></td>
+            <td><%= @yfcase.lands.third.blank? ? "" : number_to_currency((@yfcase.lands.third.land_area.to_f * @yfcase.lands.third.land_holding_point_personal.to_f / @yfcase.lands.third.land_holding_point_all.to_f), unit: "", precision: 2) %></td>
+            <td><%= @yfcase.lands.fourth.blank? ? "" : number_to_currency((@yfcase.lands.fourth.land_area.to_f * @yfcase.lands.fourth.land_holding_point_personal.to_f / @yfcase.lands.fourth.land_holding_point_all.to_f), unit: "", precision: 2) %></td>
             <td></td>
             <td></td>
             <td></td>
         </tr>
-        
         <!--第七行-->
         <tr>
             <th colspan="2" style="height:100px;">(4)權利範圍</th>
@@ -834,10 +835,18 @@
         </tr>
         <tr>
             <th>共 計</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>
+              <%= @yfcase.builds.first.blank? ? "" :@yfcase.builds.first.buildLevel1.to_i + @yfcase.builds.first.buildLevel2.to_i+ @yfcase.builds.first.buildLevel3.to_i + @yfcase.builds.first.buildLevel4.to_i + @yfcase.builds.first.buildOther1.to_i %>
+            </td>
+            <td>
+              <%= @yfcase.builds.second.blank? ? "" :@yfcase.builds.second.buildLevel1.to_i + @yfcase.builds.second.buildLevel2.to_i+ @yfcase.builds.second.buildLevel3.to_i + @yfcase.builds.second.buildLevel4.to_i + @yfcase.builds.second.buildOther1.to_i %>
+            </td>
+            <td>
+              <%= @yfcase.builds.third.blank? ? "" :@yfcase.builds.third.buildLevel1.to_i + @yfcase.builds.third.buildLevel2.to_i+ @yfcase.builds.third.buildLevel3.to_i + @yfcase.builds.third.buildLevel4.to_i + @yfcase.builds.third.buildOther1.to_i %>
+            </td>
+            <td>
+              <%= @yfcase.builds.fourth.blank? ? "" :@yfcase.builds.fourth.buildLevel1.to_i + @yfcase.builds.fourth.buildLevel2.to_i+ @yfcase.builds.fourth.buildLevel3.to_i + @yfcase.builds.fourth.buildLevel4.to_i + @yfcase.builds.fourth.buildOther1.to_i %>
+            </td>
         </tr>
         <tr>
             <th rowspan="2">(10)<br>附 屬<br>建 物</th>
@@ -849,10 +858,10 @@
         </tr>
         <tr>
             <th>面 積<br>(平方公尺)</th>
-            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildScopeOfArea %></td>
-            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildScopeOfArea %></td>
-            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildScopeOfArea %></td>
-            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildScopeOfArea %></td>
+            <td><%= @yfcase.builds.first.blank? ? "" : number_to_currency((@yfcase.builds.first.build_area.to_f * @yfcase.builds.first.build_holding_point_personal.to_f / @yfcase.builds.first.build_holding_point_all.to_f), unit: "", precision: 2) %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : number_to_currency((@yfcase.builds.second.build_area.to_f * @yfcase.builds.second.build_holding_point_personal.to_f / @yfcase.builds.second.build_holding_point_all.to_f), unit: "", precision: 2) %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : number_to_currency((@yfcase.builds.third.build_area.to_f * @yfcase.builds.third.build_holding_point_personal.to_f / @yfcase.builds.third.build_holding_point_all.to_f), unit: "", precision: 2) %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : number_to_currency((@yfcase.builds.fourth.build_area.to_f * @yfcase.builds.fourth.build_holding_point_personal.to_f / @yfcase.builds.fourth.build_holding_point_all.to_f), unit: "", precision: 2) %></td>
         </tr>
         <tr>
             <th colspan="2">(11)權 利 範 圍</th>

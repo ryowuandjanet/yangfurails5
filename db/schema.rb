@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_13_091540) do
+ActiveRecord::Schema.define(version: 2020_07_16_031100) do
 
   create_table "builds", force: :cascade do |t|
     t.string "build_number"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2020_07_13_091540) do
     t.string "buildScopeOfArea"
     t.string "buildScopeOfRights"
     t.string "buildRemarks"
+    t.string "buildTotalArea"
     t.index ["yfcase_id"], name: "index_builds_on_yfcase_id"
   end
 
@@ -65,6 +66,10 @@ ActiveRecord::Schema.define(version: 2020_07_13_091540) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "landRemarks"
+    t.string "landPresentValue"
+    t.string "landTotalArea"
+    t.string "landAreaWidth"
+    t.string "landAreaDepth"
     t.index ["yfcase_id"], name: "index_lands_on_yfcase_id"
   end
 
@@ -337,6 +342,14 @@ ActiveRecord::Schema.define(version: 2020_07_13_091540) do
     t.string "deedtaxBuildingTransferPublicHoldings3"
     t.string "deedtaxBuildingTransferPublicHoldings4"
     t.string "deedtaxBuildingTransferPublicHoldings5"
+    t.string "housingTax"
+    t.string "refereeFee"
+    t.string "agreementSplitUnsuccessfulDate"
+    t.string "exhibit1"
+    t.string "exhibit2"
+    t.string "exhibit3"
+    t.string "exhibit4"
+    t.date "tabulationDate"
     t.index ["country_id"], name: "index_yfcases_on_country_id"
     t.index ["township_id"], name: "index_yfcases_on_township_id"
     t.index ["user_id"], name: "index_yfcases_on_user_id"

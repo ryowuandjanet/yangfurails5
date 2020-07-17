@@ -36,6 +36,25 @@
       <div class="col-sm-1" style="padding:1px;margin:auto;text-align:center;">
         <%= link_to_remove_association "刪除地號", f, class: "btn btn-danger btn-sm" %>
       </div>
+    <div class="form-group row" style="margin-bottom:3px;">
+      <div class="col-sm-6">
+        <label style="margin:0px;">土地公告現值</label>
+        <%= f.text_field :landPresentValue, class: "form-control form-control-sm" %>
+      </div>
+      <div class="col-sm-5">
+        <label style="margin:0px;">土地總面積</label>
+        <%= f.text_field :landTotalArea, class: "form-control form-control-sm" %>
+      </div>
+      <div class="col-sm-6">
+        <label style="margin:0px;">土地面積寬度</label>
+        <%= f.text_field :landAreaWidth , class: "form-control form-control-sm" %>
+      </div>
+      <div class="col-sm-5">
+        <label style="margin:0px;">土地面積深度</label>
+        <%= f.text_field :landAreaDepth , class: "form-control form-control-sm" %>
+      </div>
+      
+    </div>
     </div>
   </div>
 

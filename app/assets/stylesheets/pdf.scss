@@ -13,12 +13,37 @@
 //   src: asset-url('fonts/msjh.ttf') format("truetype")
 // }
 
+
+// @font-face {
+//     font-family: 'bkai00mp';
+//     src: asset-url('bkai00mp.eot');
+//     src: asset-url('bkai00mp.eot?#iefix') format('embedded-opentype'),
+//           asset-url('bkai00mp.woff') format('woff'),
+//           asset-url('bkai00mp.ttf') format('truetype'),
+//           asset-url('bkai00mp.svg#action_manregular') format('svg');
+//     font-weight: normal;
+//     font-style: normal;
+// }
+@font-face {
+   font-family: 'bkai00mp';
+   src: url('../public/fonts/bkai00mp.ttf');
+}
+
+@font-face {
+   font-family: 'Helvetica';
+   src: url('../public/fonts/Helvetica.ttf');
+}
+
+@font-face {
+   font-family: '標楷體';
+   src: url('../public/fonts/kaiu.ttf');
+}
 // body {
 // 	font-family: '標楷體';
 // 	font-size: 13px;
 // }
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
-@import url('https://fonts.googleapis.com/earlyaccess/cwtexkai.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Roboto&display=swap');
+// @import url('https://fonts.googleapis.com/earlyaccess/cwtexkai.css');
 
 /*字型*/
 

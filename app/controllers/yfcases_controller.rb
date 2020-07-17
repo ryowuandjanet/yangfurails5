@@ -317,6 +317,8 @@ class YfcasesController < ApplicationController
         :monitor_1,:monitor_2,:monitor_3,:monitor_4, \
         :margin_1,:margin_2,:margin_3,:margin_4,:auction_notes, \
         :first_survey_day,:other_survey_day, \
+        :housingTax, :refereeFee, :agreementSplitUnsuccessfulDate, \
+        :exhibit1, :exhibit2, :exhibit3, :exhibit4, :tabulationDate, \
         :foreclosure_announcement_title,:foreclosure_announcement_link,:foreclosure_announcement_988_link,:object_photo_title,:object_photo_link, \
         :net_price_registration_market_price_title,:net_price_registration_market_price_link,:net_price_registration_map_title,:net_price_registration_map_link,:net_price_registration_photo_title,:net_price_registration_photo_link, \
         :auction_record_title,:auction_record_link,:other_notes,:survey_resolution,:final_decision, \
@@ -332,9 +334,9 @@ class YfcasesController < ApplicationController
         :deedtaxBuildingTransferPublicHoldings1, :deedtaxBuildingTransferPublicHoldings2, :deedtaxBuildingTransferPublicHoldings3, :deedtaxBuildingTransferPublicHoldings4, :deedtaxBuildingTransferPublicHoldings5, \
         personnals_attributes: [:id, :is_debtor, :is_creditor, :is_land_owner, :is_build_owner,:is_original_owner, :is_new_owner, :is_deed_tax_agent, :is_tax_agent, :name, :identity_card, :birthday,:person_country , \
         :person_township ,:person_village ,:person_neighbor ,:person_street ,:person_section ,:person_lane ,:person_alley ,:person_number ,:person_floor , :local_phone, :mobile_phone, :personnal_notes,:identity_code, :public_or_private, :right_share_person, :right_share_all,:personnalBuildHoldingPointPerson,:personnalBuildHoldingPointAll, :_destroy], \
-        lands_attributes: [:id, :land_number, :land_url, :land_area, :land_holding_point_personal, :land_holding_point_all ,:landRemarks , :_destroy], \
+        lands_attributes: [:id, :land_number, :land_url, :land_area, :land_holding_point_personal, :land_holding_point_all ,:landRemarks , :landPresentValue, :landTotalArea, :landAreaWidth, :landAreaDepth, :_destroy], \
         objectbuilds_attributes: [:id, :address, :total_price, :build_area, :house_age, :floor_height, :surveyora, :surveyorb, :plusa, :plusb,:plusa_reason,:plusb_reason,:objectbuild_status, :objectbuild_url, :_destroy], \
         builds_attributes: [:id, :build_number,:build_url,:build_area, :build_holding_point_personal, :build_holding_point_all, :build_type_use,:use_partition, :_destroy, \
-        :buildCity, :buildTownship, :buildArea, :buildStreet, :buildRoad, :buildSegment, :buildLane, :buildDo, :buildNumber, :buildFloor, :buildBigSegment, :buildSmallSegment, :buildLot, :buildLevel1, :buildLevel2, :buildLevel3, :buildLevel4, :buildOther1, :buildOther2, :buildUse, :buildScopeOfArea, :buildScopeOfRights, :buildRemarks] )
+        :buildCity, :buildTownship, :buildArea, :buildStreet, :buildRoad, :buildSegment, :buildLane, :buildDo, :buildNumber, :buildFloor, :buildBigSegment, :buildSmallSegment, :buildLot, :buildLevel1, :buildLevel2, :buildLevel3, :buildLevel4, :buildOther1, :buildOther2, :buildUse, :buildScopeOfArea, :buildScopeOfRights, :buildTotalArea, :buildRemarks] )
     end
 end
