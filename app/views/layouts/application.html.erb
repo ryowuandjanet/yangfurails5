@@ -33,7 +33,7 @@
             <% end %>
         </nav>
     </div>
-    <div class="container center" style="width:1200px;padding:0px;">
+    <div class="container center" style="padding:0px;">
         <% flash.each do |name, msg| %>
           <% content_tag(:div, msg, class: "alert alert-#{name}") %>
         <% end %>

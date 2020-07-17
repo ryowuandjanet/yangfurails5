@@ -39,37 +39,24 @@
     <tbody>
         <% @yfcases.each do |yfcase| %>
         <tr>
+          <td>
+            <%= link_to yfcase, method: :delete, data: { confirm: '你(妳)確定要刪除嗎?' } do %>
+              <%= fa_icon "trash",class: "fa-2x" %>
+            <% end %>
+          </td>
            
-                <td>
-                    <%= link_to yfcase, method: :delete, data: { confirm: '你(妳)確定要刪除嗎?' } do %>
-                        <%= fa_icon "trash",class: "fa-2x" %>
-                    <% end %>
-                </td>
-           
-            <td data-label="案號">
-              <%= link_to yfcase_path(yfcase) do %>
-                  <%= yfcase.case_number %>
-              <% end %>
-              
-               
-            </td>
-            <td data-label="地址" style="	text-align: left;">
-                <%= yfcase.township.try(:zip_code) %> <%= yfcase.country.try(:name) %><%= yfcase.township.try(:name) %><%= yfcase.other_address %>
-                
-                
-                <hr style="margin:2px 2px;" />
-                
-                <div class="col align-self-end">
-                  
-                
-                <table>
-                  <tr>
-                    
-                    
-                  </tr>
-                </table>
-                </div>
-            </td>
+          <td data-label="案號" style="text-align:left;">
+            <%= link_to yfcase_path(yfcase) do %>
+              <%= yfcase.case_number %>
+            <% end %>
+          </td>
+          <td data-label="地址" style="	text-align: left;">
+            <%= yfcase.township.try(:zip_code) %> <%= yfcase.country.try(:name) %><%= yfcase.township.try(:name) %><%= yfcase.other_address %>
+      
+            <hr style="margin:2px 2px;" />
+            
+            <div class="col align-self-end"></div>
+          </td>
 
             <td data-label="區域負責人">
                 <%= yfcase.user.first_name + yfcase.user.last_name %>

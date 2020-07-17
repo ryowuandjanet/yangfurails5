@@ -1,119 +1,265 @@
-<h1 class="x110000">
-  <%= @yfcase.case_number %> YF評量表 </br>
-  <small>(所屬公司：<%= @yfcase.company %>)</small>
-</h1>
-<!-- 基本資料 -->
-<div class="basedata">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--    <meta charset="UTF-8"> -->
+    <title>YF評量表</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <%= wicked_pdf_stylesheet_link_tag 'pdf' %>
+    <style type="text/css">
+    body {
+      /*楷體*/
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 12pt;
+      padding: 0px;
+    }
+    .yfratingscalePDFTitle {
+      font-size: 26pt;
+      font-weight: bolder;
+      text-align: center;
+    }
+    .yfratingscalePDFBaseData, .yfratingscalePDFLand , .yfratingscalePDFBuild, .yfratingscalePDFAction, .yfratingscalePDFAttachment, .yfratingscalePDFBuildCheckList, .yfratingscalePDFFinaldecision, .yfratingscalePDFObjectBuild {
+      border-collapse:collapse;
+      border:3px solid black;
+      margin-bottom:5px;
+      width:100%;
+    }
+    .yfratingscalePDFBaseData th {
+      background-color: AntiqueWhite;
+      border: 1px solid black;
+      text-align:center;
+      padding:0px;
+    }
+    .yfratingscalePDFBaseData td {
+      padding:0px 5px;
+      text-align:left;
+      border: 1px solid black;
+      font-size: 12pt;
+    }
+    
+    .yfratingscalePDFLand th {
+      background-color: Aquamarine;
+      border: 1px solid black;
+      text-align:center;
+      padding:0px;
+    }
+    .yfratingscalePDFBuild th {
+      background-color: DeepSkyBlue;
+      border: 1px solid black;
+      text-align: center;
+      padding:0px;
+    }
+    .yfratingscalePDFAction th {
+      background-color: Gainsboro;
+      border: 1px solid black;
+      text-align: center;
+      padding: 0px;
+    }
+    .yfratingscalePDFAttachment th {
+      background-color: Khaki;
+      border: 1px solid black;
+      text-align: center;
+      padding:0px;
+    }
+    .yfratingscalePDFBuildCheckList th {
+      background-color: LightSteelBlue;
+      border: 1px solid black;
+      text-align: center;
+      padding: 0px;
+    }
+    .yfratingscalePDFObjectBuild th{
+      background-color: Thistle;
+      border: 1px solid black;
+      text-align: center;
+      font-size: 10pt;
+      padding: 0px;
+    }
+    .yfratingscalePDFFinaldecision th {
+      background-color: YellowGreen;
+      border: 1px solid black;
+      text-align: center;
+      padding: 0px;
+    }
+    .yfratingscalePDFLand td, .yfratingscalePDFBuild td, .yfratingscalePDFBuildCheckList td {
+      padding:0px 5px;
+      text-align:center;
+      border: 1px solid black;
+      font-size: 12pt;
+    }
+    .yfratingscalePDFAction td {
+      padding:0px 5px;
+      text-align:center;
+      border: 1px solid black;
+      font-size: 12pt;
+    }
+    .yfratingscalePDFObjectBuild td {
+      padding:0px 5px;
+      text-align:center;
+      border: 1px solid black;
+      font-size: 10pt;
+    }
+    .yfratingscalePDFFinaldecision td {
+      padding:0px 5px;
+      text-align:center;
+      border: 1px solid black;
+      font-size: 10pt;
+      height:35px;
+    }
+    td.landEmpty {
+      border-top:hidden;
+      border-bottom:hidden;
+      border-left:3px solid black;
+      border-right:3px solid black;
+    }
+    .yfratingscalePDFBuildCheckList .yfratingscalePDFBuildCheckListItem {
+      background-color:LightCyan;
+      padding: 2px 5px;
+      text-align:left;
+      font-size:12pt;
+    }
+    
+    .yfratingscalePDFFinaldecision .yfratingscalePDFPerson {
+      padding:14px 20px;
+    }
+    .yfratingscalePDFPersonCircle {
+      border:5px solid red;
+      border-radius:50%;
+    }
+    .yfratingscalePDFPersonTable {
+      border-collapse:collapse;
+      width:100%;
+    }
+    .yfratingscalePDFPersonTable .yfratingscalePDFPersonName {
+      text-align:center;
+      border:none;
+      vertical-align: middle;
+      font-size:20pt;
+      color:red;
+    }
+    .yfratingscalePDFPersonTable .yfratingscalePDFPersonDate {
+      border:none;
+      text-align:center;
+      font-weight: bolder ;
+      vertical-align: middle;
+      color:red;
+      font-size:14pt;
+    }
+    .yfratingscalePDFAttachmentContent {
+      padding:0px 5px;
+      border: 1px solid black;
+      font-size: 12pt;
+      text-align:left;
+    }
+    .yfratingscalePDFFinaldecisionJudgment {
+      text-align: center;
+      font-size: 36px;
+      border:5px solid black;
+      border-radius: 10px;
+      padding:30px;
+    }
+    </style>
+</head>
+
+<body>
+  <div class="yfratingscalePDFTitle">
+    <%= @yfcase.case_number %> YF評量表
+  </div>
+  
+  <!--基本資料-->
   <div class="row">
-    <table class="yfcaseDatabase col">
-        <tr>
-            <th style="width:10%">案號</th>
-            <td style="width:30%"><%= @yfcase.case_number %></td>
-            <th style="width:10%">債務人</th>
-            <td style="width:20%">
-                <% if @yfcase.personnals.where(is_debtor: true).count > 1 %>
-                    <%= @yfcase.personnals.where(is_debtor: true).first.name %> ...共<%= @yfcase.personnals.where(is_debtor: true).count %>名<br>
-                    <%= (@yfcase.co_owner == true ) ? '土地/建物共有人一致' : ' ' %>
-                <% elsif @yfcase.personnals.where(is_debtor: true).count == 1 %>
-                    <%= @yfcase.personnals.where(is_debtor: true).first.name %><br>
-                    <%= (@yfcase.co_owner == true ) ? '土地/建物共有人一致' : ' ' %>
-                <% else %>
-                    <%= ' ' %>
-                <% end %>
-            </td>
-            <th style="width:10%">債權人</th>
-            <td style="width:20%">
-                <% if @yfcase.personnals.where(is_creditor: true).count > 1 %>
-                    <%= @yfcase.personnals.where(is_creditor: true).first.name %> ...共<%= @yfcase.personnals.where(is_creditor: true).count %>名
-                <% elsif @yfcase.personnals.where(is_creditor: true).count == 1 %>
-                    <%= @yfcase.personnals.where(is_creditor: true).first.name %>
-                <% else %>
-                    <%= ' ' %>
-                <% end %>
-            </td>
-        </tr>
-        <tr>
-            <th style="width:10%">住址</th>
-            <td colspan="5">
-                <%= @yfcase.township.try(:zip_code) %> <%= @yfcase.country.try(:name) %><%= \
-                @yfcase.township.try(:name) %><%= @yfcase.other_address %>
-            </td>
-        </tr>
+    <table class="yfratingscalePDFBaseData">
+      <tr>
+        <th style="width:10%;">案號</th>
+        <td style="width:30%;">
+          <%= @yfcase.case_number %>
+        </td>
+        <th style="width:10%;">債務人</th>
+        <td style="width:25%;">
+          <% if @yfcase.personnals.where(is_debtor: true).count > 1 %>
+            <%= @yfcase.personnals.where(is_debtor: true).first.name %> ...共
+            <%= @yfcase.personnals.where(is_debtor: true).count %>名<br>
+            <small style="color:red;"><%= (@yfcase.co_owner == true ) ? '土地/建物共有人一致' : ' ' %></small>
+          <% elsif @yfcase.personnals.where(is_debtor: true).count == 1 %>
+            <%= @yfcase.personnals.where(is_debtor: true).first.name %><br>
+            <small style="color:red;"><%= (@yfcase.co_owner == true ) ? '土地/建物共有人一致' : ' ' %></small>
+          <% else %>
+            <%= ' ' %>
+          <% end %>
+        </td>
+        <th style="width:10%;">債務人</th>
+        <td>
+          <% if @yfcase.personnals.where(is_creditor: true).count > 1 %>
+          <%= @yfcase.personnals.where(is_creditor: true).first.name %> ...共
+          <%= @yfcase.personnals.where(is_creditor: true).count %>名
+          <% elsif @yfcase.personnals.where(is_creditor: true).count == 1 %>
+          <%= @yfcase.personnals.where(is_creditor: true).first.name %>
+          <% else %>
+          <%= ' ' %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <th>住址</th>
+        <td colspan="5">
+          <%= @yfcase.township.try(:zip_code) %> <%= @yfcase.country.try(:name) %><%= @yfcase.township.try(:name) %><%= @yfcase.other_address %>
+        </td>
+      </tr>
     </table>
   </div>
-</div>
-
-
-<!-- 基本資料 & 土地 分隔空間 -->
-<div style="padding:3px;"></div>
-
-<!-- 土地 -->
-<div class="land">
+  
+  <!-- 土地 -->
   <div class="row">
-    <table class="yfcaseLand col" style="width:70%">
+    <table class="yfratingscalePDFLand col">
       <tr>
-        <th style="width:30%">地號</th>
-        <th style="width:10%">地號謄本</th>
-        <th style="width:20%">地坪(面積)<br>平方公尺(坪)</th>
-        <th style="width:10%">持分</th>
-        <th style="width:20%">地坪(持分)<br>平方公尺(坪)</th>
+        <th style="width:20%;">地號</th>
+        <th style="width:7%;">地號<br>謄本</th>
+        <th style="width:15%;">地坪(面積)<br>平方公尺(坪)</th>
+        <th style="width:9%;">持分</th>
+        <th style="width:15%;">地坪(持分)<br>平方公尺(坪)</th>
+        <td class="landEmpty" style="width:2%;"></td>
+        <th style="width:15%;">地坪(面積)<br>平方公尺(坪)</th>
+        <td class="landEmpty" style="width:2%;"></td>
+        <th style="background-color:DeepSkyBlue;">建坪(面積)<br>平方公尺(坪)</th>
       </tr>
       <tr>
         <td style="text-align:left;">
           <% @yfcase.lands.each do |land| %>
-            <% if @yfcase.big_section.blank? %>
-              <%= land.land_number %><br>
-            <% else %>
-              <%= @yfcase.big_section %><%= land.land_number %><br>
-            <% end %>
+            <%= land.land_number %><br>
           <% end %>
         </td>
         <td>
           <% @yfcase.lands.each do |land| %>
-            <%= land.land_url.blank? ? ' ' : (link_to "連結", land.land_url, target: "_blank") %><br>
+            <%= land.land_url == "" ? ' ' : (link_to "連結", land.land_url, target: "_blank") %><br>
           <% end %>
         </td>
         <td>
           <% @yfcase.lands.each do |land| %>
-            <%= area(land.land_area,1,1,1).round(2) %>(<%= area(land.land_area,1,1,0.3025).round(2) %>)<br>
+            <%= area(land.land_area,1,1,1).round(2) %>(
+            <%= area(land.land_area,1,1,0.3025).round(2) %>)<br>
           <% end %>
         </td>
         <td>
           <% @yfcase.lands.each do |land| %>
-            <%= land.land_holding_point_personal %>/<%= land.land_holding_point_all %><br>
+            <%= land.land_holding_point_personal %>/
+            <%= land.land_holding_point_all %><br>
           <% end %>
         </td>
         <td>
           <% @yfcase.lands.each do |land| %>
-            <%= area(land.land_area,land.land_holding_point_personal,land.land_holding_point_all,1).round(2) %>(<%= area(land.land_area,land.land_holding_point_personal,land.land_holding_point_all,0.3025).round(2) %>)<br>
+            <%= area(land.land_area,land.land_holding_point_personal,land.land_holding_point_all,1).round(2) %>(
+            <%= area(land.land_area,land.land_holding_point_personal,land.land_holding_point_all,0.3025).round(2) %>)<br>
           <% end %>
         </td>
-      </tr>
-    </table>
-    <table class="yfcaseLandTotall" style="width:15%">
-      <tr>
-        <th>地坪(面積)<br>平方公尺(坪)</th>
-      </tr>
-      <tr>
+        <td class="landEmpty"></td>
         <td>
           <%= @yfcase.lands.count == 0 ? ' ' : (number_to_currency(@landtotalarea, unit: "", precision: 2)+"("+number_to_currency(@landtotalarea * 0.3025, unit: "", precision: 2)+")") %><br>
         </td>
-      </tr>
-    </table>
-    <table class="yfcaseBuildTotall" style="width:15%">  
-      <tr>
-        <th>建坪(面積)<br>平方公尺(坪)</th>
-      </tr>
-      <tr>
+        <td class="landEmpty"></td>
         <td>
           <% if @yfcase.builds.count == 0 %>
-            <%= ' ' %> 
-          <% elsif @yfcase.builds.where(build_type_use: "0公設").count > 0 && @yfcase.builds.where(build_type_use: "12增建(持分後坪數打對折)").count > 0 %>
-            <%= number_to_currency(@withBuildTotalArea+@withoutBuildTotalArea+@addBuildTotalArea, unit: "", precision: 2)+"("+number_to_currency((@withBuildTotalArea+@withoutBuildTotalArea+@addBuildTotalArea) * 0.3025, unit: "", precision: 2)+")" %><br>
-          <% elsif @yfcase.builds.where(build_type_use: "0公設").count > 0 && @yfcase.builds.where(build_type_use: "12增建(持分後坪數打對折)").count == 0 %>
+            <%= "" %> 
+          <% elsif @yfcase.builds.where(build_type_use: "0公設").count > 0 %>
             <%= number_to_currency(@withBuildTotalArea+@withoutBuildTotalArea, unit: "", precision: 2)+"("+number_to_currency((@withBuildTotalArea+@withoutBuildTotalArea) * 0.3025, unit: "", precision: 2)+")" %><br>
-          <% elsif @yfcase.builds.where(build_type_use: "0公設").count == 0 && @yfcase.builds.where(build_type_use: "12增建(持分後坪數打對折)").count > 0 %>
-            <%= number_to_currency(@withoutBuildTotalArea+@addBuildTotalArea, unit: "", precision: 2)+"("+number_to_currency((@withoutBuildTotalArea+@addBuildTotalArea) * 0.3025, unit: "", precision: 2)+")" %><br>
           <% else %>
             <%= number_to_currency(@withoutBuildTotalArea, unit: "", precision: 2)+"("+number_to_currency(@withoutBuildTotalArea * 0.3025, unit: "", precision: 2)+")" %><br>
           <% end %>
@@ -121,39 +267,18 @@
       </tr>
     </table>
   </div>
-  <div class="row"> 
-    <table>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </table>
-  </div>
   
-</div>
-
-<!-- 土地 & 建物 分隔空間 -->
-<div style="padding:3px;"></div> 
-
-<!-- 建物 -->
-<div class="build">
+  <!-- 建物 -->
   <div class="row">
-    <table class="yfcaseBuild col">
+    <table class="yfratingscalePDFBuild col">
       <tr>
-        <th rowspan="2" style="width:22.75%">建號</th>
-        <th rowspan="2" style="width:7.5%">建號謄本</th>
-        <th rowspan="2" style="width:15.2%">建坪(面積)<br>平方公尺(坪)</th>
-        <th rowspan="2" style="width:7.5%">持分</th>  
+        <th rowspan="2" style="width:20%">建號</th>
+        <th rowspan="2" style="width:7%">建號<br>謄本</th>
+        <th rowspan="2" style="width:15%">建坪(面積)<br>平方公尺(坪)</th>
+        <th rowspan="2" style="width:9%">持分</th>  
         <th colspan="2">建坪持分 - 平方公尺(坪)</th>
-        <th rowspan="2">
-          <div style="font-size:12pt;color;red;background-color:Cornsilk;text-align:center;">
+        <th rowspan="2" style="width:23%">
+          <div style="font-size:10.5pt;color;red;background-color:Cornsilk;text-align:center;">
            使用分區：
             <% if @yfcase.builds.first.present? %>
               <%= @yfcase.builds.first.use_partition %>
@@ -187,8 +312,7 @@
         </td>
         <td>
           <% @yfcase.builds.each do |build| %>
-            <%= area(build.build_area,1,1,1).round(2) %> (
-            <%= area(build.build_area,1,1,0.3025).round(2) %>)<br>
+            <%= area(build.build_area,1,1,1).round(2) %>(<%= area(build.build_area,1,1,0.3025).round(2) %>)<br>
           <% end %>
         </td>
         <td>
@@ -198,10 +322,9 @@
               <% @notPU_holding_point_personal=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_personal %>
               <!--找到第一筆非公設(notPU)的個人持分(build_holding_point_all)-->
               <% @notPU_build_holding_point_all=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_all %>
-              <%= @notPU_holding_point_personal*build.build_holding_point_personal %> / <%= @notPU_build_holding_point_all*build.build_holding_point_all %><br>
+              <%= @notPU_holding_point_personal*build.build_holding_point_personal %>/<%= @notPU_build_holding_point_all*build.build_holding_point_all %><br>
             <% else %>
-              <%= build.build_holding_point_personal %>/
-              <%= build.build_holding_point_all %><br>
+              <%= build.build_holding_point_personal %>/<%= build.build_holding_point_all %><br>
             <% end %>
           <% end %>
         </td>
@@ -249,843 +372,753 @@
       </tr>
     </table>
   </div>
-</div>
-<div style="padding:3px;"></div>
-
-<!-- 拍賣結果 -->
-<div class="auction">
-    <table>
-        <tr>
-            <th class="xd1100 font-th-12">拍賣日</th>
-            <th class="xd1200 font-th-12" colspan="4">拍別-進場判定<br><div style="padding:0px;font-size:10pt;color:red;">(可進場CP值)</div></th>
-            <th class="xd1600 font-th-12">底價(NT)<br><div style="padding:0px;font-size:10pt;color:red;">各拍建議底價</div></th>
-            <th class="xd1700 font-th-12">坪價(NT)</th>
-            <th class="xd1800 font-th-12">時價(NT)</th>
-            <th class="xd1900 font-th-12">CP</th>
-            <th class="xd1a00 font-th-12">點閱</th>
-            <th class="xd1b00 font-th-12">監控</th>
-            <th class="xd1c00 font-th-12">建議加價</th>
-            <th class="xd1d00 font-th-12">保証金</th>
-
-        </tr>
-        <!-- 第一拍 -->
-        <tr>
-            <!-- 拍別：第一拍 -->
-            <th class="xd2100 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_1 == 0 ? ' ' : @yfcase.auction_day_1 %>
-            </th>
-            <th class="xd2200 font-td-12">第一拍<br><div style="padding:0px;font-size:10pt;color:red;">(CP>0.92)</div></th>
-            <th class="xd2300 font-td-10-bk" colspan="3">
-                <% @floorPricePlus1=suggestedincreaseJudgment(@yfcase.floor_price_1,@yfcase.click_1,@yfcase.monitor_1) %>
-                <% @cp1=@marketprice / @pingprice1 %>
-                <% @cpPlusJudgment1=@cp1 / @floorPricePlus1 %>
-                <% if @yfcase.floor_price_1 == 0 %>
-                    <div>底價未輸入</div>
-                <% elsif @cpPlusJudgment1 > 0.92 %>
-                    <div style="padding:0px;font-size:10pt;color:green;">加價CP(<%= (@cpPlusJudgment1).round(2) %>)<br>建議進場</div>
-                <% else %>
-                    <div style="padding:0px;font-size:10pt;color:red;">加價CP(<%= (@cpPlusJudgment1).round(2) %>)<br>不可進場</div>
-                <% end %>
-            </th>
-            <!-- 第一拍：底價 -->
-            <th class="xd2600 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_1 == 0 ? ' ' : currency_helper(@yfcase.floor_price_1,0) %>
-            </th>
-            <!-- 第一拍：坪價 -->
-            <th class="xd2700 font-td-12" style="color:blue;">
-                <%= (@yfcase.floor_price_1 == 0 || @yfcase.builds.count == 0) ? ' ' : currency_helper(@pingprice1,0) %>
-            </th>
-            <!-- 第一拍：時價 -->
-            <th class="xd2800 font-td-12" style="color:blue;">
-                <%= (@yfcase.floor_price_1 == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : currency_helper(@marketprice,0) %> 
-            </th>
-            <!-- 第一拍：CP值 -->
-            <th class="xd2900 font-td-12" style="color:blue;">
-                <%= (@yfcase.floor_price_1 == 0 || @yfcase.builds.count == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : (@marketprice / @pingprice1).round(2) %>
-            </th>
-            <!-- 第一拍：點閱 -->
-            <th class="xd2a00 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_1 == 0 ? ' ' : @yfcase.click_1 %>
-            </th>
-            <!-- 第一拍：監控 -->
-            <th class="xd2b00 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_1 == 0 ? ' ' : @yfcase.monitor_1 %>
-            </th>
-            <!-- 第一拍：建議加價 -->
-            <th class="xd2c00 font-td-10">
-                <%= @yfcase.floor_price_1 == 0 ? ' ' : suggestedincrease(@yfcase.floor_price_1,@yfcase.click_1,@yfcase.monitor_1) %>
-            </th>
-            <!-- 第一拍：保証金 -->
-            <th class="xd2d00 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_1 == 0 ? ' ' : currency_helper(@yfcase.margin_1,0) %>
-            </th>
-
-        </tr>
-        <!-- 第二拍 -->
-        <tr>
-            <!-- 拍別：第二拍 -->
-            <th class="xd3100 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_2 == 0 ? ' ' : @yfcase.auction_day_2 %>
-            </th>
-            <th class="xd3200 font-td-12">第二拍<br><div style="padding:0px;font-size:10pt;color:red;">(CP>1.15)</div></th>
-            <th class="xd3300 font-td-10-bk" colspan="3">
-                <% @floorPricePlus2=suggestedincreaseJudgment(@yfcase.floor_price_2,@yfcase.click_2,@yfcase.monitor_2) %>
-                <% @cp2=@marketprice / @pingprice2 %>
-                <% @cpPlusJudgment2=@cp2 / @floorPricePlus2 %>
-                <% if @yfcase.floor_price_2 == 0 %>
-                    <div>底價未輸入</div>
-                <% elsif @cpPlusJudgment2 > 1.15 %>
-                    <div style="padding:0px;font-size:10pt;color:green;">加價CP(<%= (@cpPlusJudgment2).round(2) %>)<br>建議進場</div>
-                <% else %>
-                    <div style="padding:0px;font-size:10pt;color:red;">加價CP(<%= (@cpPlusJudgment2).round(2) %>)<br>不可進場</div>
-                <% end %>
-            </th>
-            <!-- 第二拍：底價 -->
-            <th class="xd3600 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_2 == 0 ? ' ' : currency_helper(@yfcase.floor_price_2,0) %>
-                <!-- 第二拍建議底價 -->
-                <% if @yfcase.floor_price_1 != 0 %>
-                    <br><div style="padding:0px;font-size:10pt;color:red;"><%= currency_helper(@yfcase.floor_price_1 * 0.8 ,0) %></div>
-                <% else %>
-                    <%= " " %>
-                <% end %>
-            </th>
-            <!-- 第二拍：坪價 -->
-            <th class="xd3700 font-td-12" style="color:blue;">
-                <%= (@yfcase.floor_price_2 == 0 || @yfcase.builds.count == 0) ? ' ' : currency_helper(@pingprice2,0) %>
-            </th>
-            <!-- 第二拍：時價 -->
-            <th class="xd3800 font-td-12" style="color:blue;">
-                <%= (@yfcase.floor_price_2 == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : currency_helper(@marketprice,0) %>
-            </th>
-            <!-- 第二拍：CP值 -->
-            <th class="xd3900 font-td-12" style="color:blue;">
-                <%= (@yfcase.floor_price_2 == 0 || @yfcase.builds.count == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : (@marketprice / @pingprice2).round(2) %>
-            </th>
-            <!-- 第二拍：點閱 -->
-            <th class="xd3a00 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_2 == 0 ? ' ' : @yfcase.click_2 %>
-            </th>
-            <!-- 第二拍：監控 -->
-            <th class="xd3b00 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_2 == 0 ? ' ' : @yfcase.monitor_2 %>
-            </th>
-            <!-- 第二拍：建議加價 -->
-            <th class="xd3c00 font-td-10">
-                <%= @yfcase.floor_price_2 == 0 ? ' ' : suggestedincrease(@yfcase.floor_price_2,@yfcase.click_2,@yfcase.monitor_2) %>
-            </th>
-            <!-- 第二拍：保証金 -->
-            <th class="xd3d00 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_2 == 0 ? ' ' : currency_helper(@yfcase.margin_2,0) %>
-            </th>
-            <!-- 第二拍：備註 -->
-            <th>
-
-            </th>
-        </tr>
-        <!-- 第三拍 -->
-        <tr>
-            <!-- 拍別：第三拍 -->
-            <th class="xd4100 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_3 == 0 ? ' ' : @yfcase.auction_day_3 %>
-            </th>
-            <th class="xd4200 font-td-12">第三拍<br><div style="padding:0px;font-size:10pt;color:red;">(CP>1.44)</div></th>
-            <th class="xd4300 font-td-10-bk" colspan="3">
-                <% @floorPricePlus3=suggestedincreaseJudgment(@yfcase.floor_price_3,@yfcase.click_3,@yfcase.monitor_3) %>
-                <% @cp3=@marketprice / @pingprice3 %>
-                <% @cpPlusJudgment3=@cp3 / @floorPricePlus3 %>
-                <% if @yfcase.floor_price_3 == 0 %>
-                    <div>底價未輸入</div>
-                <% elsif @cpPlusJudgment3 > 1.44 %>
-                    <div style="padding:0px;font-size:10pt;color:green;">加價CP(<%= (@cpPlusJudgment3).round(2) %>)<br>建議進場</div>
-                <% else %>
-                    <div style="padding:0px;font-size:10pt;color:red;">加價CP(<%= (@cpPlusJudgment3).round(2) %>)<br>不可進場</div>
-                <% end %>
-            </th>
-            <!-- 第三拍：底價 -->
-            <th class="xd4600 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_3 == 0 ? ' ' : currency_helper(@yfcase.floor_price_3,0) %>
-                <!-- 第三拍建議底價 -->
-                <% if @yfcase.floor_price_1 != 0 %>
-                    <br><div style="padding:0px;font-size:10pt;color:red;"><%= currency_helper(@yfcase.floor_price_1 * 0.8 * 0.8 ,0) %></div>
-                <% elsif @yfcase.floor_price_2 != 0 %>
-                    <br><div style="padding:0px;font-size:10pt;color:red;"><%= currency_helper(@yfcase.floor_price_2 * 0.8 ,0) %></div>
-                <% else %>
-                    <%= " " %>
-                <% end %> 
-            </th>
-            <!-- 第三拍：坪價 -->
-            <th class="xd4700 font-td-12" style="color:blue;">
-                <%= (@yfcase.floor_price_3 == 0 || @yfcase.builds.count == 0) ? ' ' : currency_helper(@pingprice3,0) %>
-            </th>
-            <!-- 第三拍：時價 -->
-            <th class="xd4800 font-td-12" style="color:blue;">
-                <%= (@yfcase.floor_price_3 == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : currency_helper(@marketprice,0) %>
-            </th>
-            <!-- 第三拍：CP值 -->
-            <th class="xd4900 font-td-12" style="color:blue;">
-                <%= (@yfcase.floor_price_3 == 0 || @yfcase.builds.count == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : (@marketprice / @pingprice3).round(2) %>
-            </th>
-            <!-- 第三拍：點閱 -->
-            <th class="xd4a00 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_3 == 0 ? ' ' : @yfcase.click_3 %>
-            </th>
-            <!-- 第三拍：監控 -->
-            <th class="xd4b00 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_3 == 0 ? ' ' : @yfcase.monitor_3 %>
-            </th>
-            <!-- 第三拍：建議加價 -->
-            <th class="xd4c00 font-td-10">
-                <%= @yfcase.floor_price_3 == 0 ? ' ' : suggestedincrease(@yfcase.floor_price_3,@yfcase.click_3,@yfcase.monitor_3) %>
-            </th>
-            <!-- 第三拍：保証金 -->
-            <th class="xd4d00 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_3 == 0 ? ' ' : currency_helper(@yfcase.margin_3,0) %>
-            </th>
-            <!-- 第三拍：備註 -->
-            <th>
-            </th>
-        </tr>
-        <!-- 第四拍 -->
-        <tr>
-            <!-- 拍別：第四拍 -->
-            <th class="xd5100 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_4 == 0 ? ' ' : @yfcase.auction_day_4 %>
-            </th>
-            <th class="xd5200 font-td-12">第四拍<br><div style="padding:0px;font-size:10pt;color:red;">(CP>1.80)</div></th>
-            <th class="xd5300 font-td-10-bk" colspan="3">
-                <% @floorPricePlus4=suggestedincreaseJudgment(@yfcase.floor_price_4,@yfcase.click_4,@yfcase.monitor_4) %>
-                <% @cp4=@marketprice / @pingprice4 %>
-                <% @cpPlusJudgment4=@cp4 / @floorPricePlus4 %>
-                <% if @yfcase.floor_price_4 == 0 %>
-                    <div>底價未輸入</div>
-                <% elsif @cpPlusJudgment4 > 1.80 %>
-                    <div style="padding:0px;font-size:10pt;color:green;">加價CP(<%= (@cpPlusJudgment4).round(2) %>)<br>建議進場</div>
-                <% else %>
-                    <div style="padding:0px;font-size:10pt;color:red;">加價CP(<%= (@cpPlusJudgment4).round(2) %>)<br>不可進場</div>
-                <% end %>
-            </th>
-            <!-- 第四拍：底價 -->
-            <th class="xd5600 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_4 == 0 ? ' ' : currency_helper(@yfcase.floor_price_4,0) %>
-                <!-- 第四拍建議底價 -->
-                <% if @yfcase.floor_price_1 != 0 %>
-                    <br><div style="padding:0px;font-size:10pt;color:red;"><%= currency_helper(@yfcase.floor_price_1 * 0.8 * 0.8 * 0.8 ,0) %></div>
-                <% elsif @yfcase.floor_price_2 != 0 %>
-                    <br><div style="padding:0px;font-size:10pt;color:red;"><%= currency_helper(@yfcase.floor_price_2 * 0.8 * 0.8 ,0) %></div>
-                <% elsif @yfcase.floor_price_3 != 0 %>
-                    <br><div style="padding:0px;font-size:10pt;color:red;"><%= currency_helper(@yfcase.floor_price_3 * 0.8 ,0) %></div>
-                <% else %>
-                    <%= " " %>
-                <% end %>
-            </th>
-            <!-- 第四拍：坪價 -->
-            <th class="xd5700 font-td-12" style="color:blue;">
-                <%= (@yfcase.floor_price_4 == 0 || @yfcase.builds.count == 0) ? ' ' : currency_helper(@pingprice4,0) %>
-            </th>
-            <!-- 第四拍：時價 -->
-            <th class="xd5800 font-td-12" style="color:blue;">
-                <%= (@yfcase.floor_price_4 == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : currency_helper(@marketprice,0) %>
-            </th>
-            <!-- 第四拍：CP值 -->
-            <th class="xd5900 font-td-12" style="color:blue;">
-                <%= (@yfcase.floor_price_4 == 0 || @yfcase.builds.count == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : (@marketprice / @pingprice4).round(2) %>
-            </th>
-            <!-- 第四拍：點閱 -->
-            <th class="xd5a00 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_4 == 0 ? ' ' : @yfcase.click_4 %>
-            </th>
-            <!-- 第四拍：監控 -->
-            <th class="xd5b00 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_4 == 0 ? ' ' : @yfcase.monitor_4 %>
-            </th>
-            <!-- 第四拍：建議加價 -->
-            <th class="xd5c00 font-td-10">
-                <%= @yfcase.floor_price_4 == 0 ? ' ' : suggestedincrease(@yfcase.floor_price_4,@yfcase.click_4,@yfcase.monitor_4) %>
-            </th>
-            <!-- 第四拍：保証金 -->
-            <th class="xd5d00 font-td-12" style="color:blue;">
-                <%= @yfcase.floor_price_4 == 0 ? ' ' : currency_helper(@yfcase.margin_4,0) %>
-            </th>
-            <!-- 第四拍：備註 -->
-            <th>
-            </th>
-        </tr>
-    </table>
-</div>
-<div style="padding:3px;"></div>
-
-<!-- 勘查結果 -->
-<div class="attachment">
+  
+  <!-- 拍賣結果 -->
   <div class="row">
-    <table class="yfcaseAttachment col">
+    <table class="yfratingscalePDFAction col">
       <tr>
-        <th style="width:15%">初勘日</th>
-        <td colspan="3">
-          <%= @yfcase.first_survey_day %>
-        </td>
+          <th style="width:11%;">拍賣日</th>
+          <th colspan="4">拍別-進場判定<br>
+              <div style="padding:0px;font-size:10pt;color:red;">(可進場CP值)</div>
+          </th>
+          <th>底價<small>(NT)</small><br>
+              <div style="padding:0px;font-size:10pt;color:red;">各拍建議底價</div>
+          </th>
+          <th>坪價<small>(NT)</small></th>
+          <th>時價<small>(NT)</small></th>
+          <th style="width:6%;">CP</th>
+          <th style="width:5%;">點閱</th>
+          <th style="width:5%;">監控</th>
+          <th style="width:15%;">建議加價</th>
+          <th style="width:9%;">保証金</th>
       </tr>
+      <!-- 第一拍 -->
       <tr>
-        <th>會勘日</th>
-        <td colspan="3">
-          <%= @yfcase.other_survey_day %>
-        </td>
-      </tr>
-      <tr>
-        <th>法拍公告(證物三)</th>
-        <td style="width:30%">
-          <% if @yfcase.foreclosure_announcement_link.blank? %>
-            <%= " " %>
-          <% else %>
-            <%= link_to "法拍公告", add_https(@yfcase.foreclosure_announcement_link), target: "_blank" %>
-          <% end %>
-        </td>
-        <th style="width:15%">998連結</th>
-        <td>
-          <% if @yfcase.foreclosure_announcement_988_link.blank? %>
-            <%= " " %>
-          <% else %>
-            <%= link_to "988連結路徑", add_https(@yfcase.foreclosure_announcement_988_link), target: "_blank" %>
-          <% end %>
-        </td>
-      </tr>
-        <tr>
-          <th>物件照片(證物四)</th>
-          <td colspan="3">
-            <% if @yfcase.object_photo_link.blank? %>
-              <%= " " %>
-            <% else %>
-              <%= link_to "Google街景", add_https(@yfcase.object_photo_link) , target: "_blank" %>
-            <% end %>
+          <!-- 拍別：第一拍 -->
+          <td>
+              <%= @yfcase.floor_price_1 == 0 ? ' ' : @yfcase.auction_day_1 %>
           </td>
-        </tr>
-        <tr>
-            <th>實價登錄市價</th>
-            
-            <td colspan="3">
-                <!-- 區域負責人 -->
-                    <% yfcasefullname = @yfcase.user.first_name + @yfcase.user.last_name %>
-                    <!-- 登入人員 -->
-                    <% currentfullname = current_user.first_name + current_user.last_name %>
-                    <!-- 副署人員1 -->
-                    <% @yfcase.subsigntrueas.first.blank? ? ' ' : subsigntrueafullname = @yfcase.subsigntrueas.first.signtruea %>
-                    <!-- 副署人員2 -->
-                    <% @yfcase.subsigntruebs.first.blank? ? ' ' : subsigntruebfullname = @yfcase.subsigntruebs.first.signtrueb %>
-                    <!-- 副署人員3 -->
-                    <% @yfcase.subsigntruecs.first.blank? ? ' ' : subsigntruecfullname = @yfcase.subsigntruecs.first.signtruec %>
-
-
-                    <% @yfcase.objectbuilds.each do |objectbuild| %>
-                    <table style="border:2px double black;">
-                         <tr class="danger" >
-                            <th class="xe5210 font-th-10">狀態</th>
-                            <th class="xe5212 font-th-10">地址(屋齡)(樓高)</th>
-                            <th class="xe5213 font-th-10">總價(元)</th>
-                            <th class="xe5214 font-th-10">建坪(坪)</th>
-                            <th class="xe5215 font-th-10">單價(元)</th>
-                            <th class="xe5217 font-th-10">勘查員A
-                             <% if current_user.role == 1 || (yfcasefullname == currentfullname && (@yfcase.subsigntrueas.first.blank? && @yfcase.subsigntruebs.first.blank? && @yfcase.subsigntruecs.first.blank?)) %> 
-                                    <%= link_to deleteplusrateall_yfcase_objectbuild_path(@yfcase,objectbuild),method: :delete do %>
-                                            <span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                                    <% end %>
-                             <% end %>
-                            </th>
-                            <th class="xe5218 font-th-10">加成A</th>
-                            <th class="xe521x font-th-10">加成原因A</th>
-                            <th class="xe521b font-th-10">計算</th>
-                        </tr>
-                        <tr>
-                            <!--輸入狀態-->
-                            <th class="xe5220 font-th-10">
-                                <%= objectbuild.objectbuild_status %>
-                            </th>
-                            <!--輸入地址(屋齡)(樓高)-->
-                            <th class="xe5222 font-th-10" rowspan="3">
-                                <%= objectbuild.address %>
-                                <% if objectbuild.house_age.present? %>
-                                    <br>(<%= objectbuild.house_age %>年)
-                                    <br>(樓高：<%= objectbuild.floor_height %>)
-                                <% else %>
-                                    <%= ' ' %>
-                                <% end %>
-                            </th>
-                            <!--輸入總價(元)-->
-                            <th class="xe5223 font-th-10" rowspan="3">
-                                <%= number_to_currency(objectbuild.total_price, unit: "", precision: 0 ) %>
-                            </th>
-                            <!--輸入建坪(坪)-->
-                            <th class="xe5224 font-th-10" rowspan="3">
-                                <%= objectbuild.build_area %>
-                            </th>
-                            <!--輸入單價(元)-->
-                            <th class="xe5225 font-th-10" rowspan="3">
-                                <%= number_to_currency(holdingpoint(objectbuild.total_price,objectbuild.build_area), unit: "", precision: 0 ) %>
-                            </th>
-                            <!--輸入勘查員A-->
-                            <th class="xe5227 font-th-10">
-                                <% if current_user.role == 1 %>
-                                    <%= objectbuild.surveyora %>
-                                    <%= link_to deleteplusratea_yfcase_objectbuild_path(@yfcase,objectbuild),method: :delete do %>
-                                        <span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                                    <% end %>
-                                <% elsif objectbuild.surveyora.present? %>
-                                    <%= objectbuild.surveyora %>
-                                <% elsif objectbuild.surveyorb == (current_user.first_name + current_user.last_name) %>
-                                    已評
-                                <% else %>
-                                    <%= link_to "待評分", editplusratea_yfcase_objectbuild_path(@yfcase,objectbuild),class: "btn btn-primary btn-sm" %>
-                                <% end %>
-                            </th>
-                            <!--要先在計算前定義plusa及plusb的變數，要不然輸入計算的部份只會計算plusa-->
-                            <% @plusa=objectbuild.plusa %>
-                            <% @plusb=objectbuild.plusb %>
-                            <!--輸入加成A-->
-                            <th class="xe5228 font-th-10">
-                                <%= @plusa %>
-                            </th>
-                            <!--輸入加成原因A-->
-                            <th class="xe522x font-th-10">
-                                <%= objectbuild.plusa_reason %>
-                            </th>
-                            <!--輸入計算-->
-                            <th class="xe522b font-th-10" rowspan="3">
-                                <% @totalmesa = testvalue(objectbuild.total_price.to_f/objectbuild.build_area.to_f,@plusa,@plusb) %>
-                                <%= number_to_currency(@totalmesa, unit: "", precision: 0 ) %>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th class="xe5211 font-th-10">附件</th>
-                            <th class="xe5219 font-th-10">勘查員B</th>
-                            <th class="xe521a font-th-10">加成B</th>
-                            <th class="xe521y font-th-10">加成原因B</th>
-                        </tr>
-                        <tr>
-                            <!--輸入附件-->
-                            <th class="xe5221 font-th-10">
-                                <% if objectbuild.objectbuild_url.blank? %>
-                                    <%= link_to "" %>
-                                <% else %>
-                                    <%= link_to "連結", objectbuild.objectbuild_url, target: "_blank" %>
-                                <% end %>
-                            </th>
-                            <!--輸入勘查員B-->
-                            <th class="xe5229 font-th-10">
-                                <% if current_user.role == 1 %>
-                                    <%= objectbuild.surveyorb %>
-                                    <%= link_to deleteplusrateb_yfcase_objectbuild_path(@yfcase,objectbuild),method: :delete do %>
-                                        <span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                                    <% end %>
-                                <% elsif objectbuild.surveyorb.present? %>
-                                    <%= objectbuild.surveyorb %>
-                                <% elsif objectbuild.surveyora == (current_user.first_name + current_user.last_name) %>
-                                    已評
-                                <% else %>
-                                    <%= link_to "待評分", editplusrateb_yfcase_objectbuild_path(@yfcase,objectbuild),class: "btn btn-primary btn-sm" %>
-                                <% end %>
-                            </th>
-                            <!--輸入加成B-->
-                            <th class="xe522a font-th-10">
-                                
-                                <%= @plusb %>
-                            </th>
-                            <!--輸入加成原因B-->
-                            <th class="xe522y font-th-10">
-                                <%= objectbuild.plusb_reason %>
-                            </th>
-                        </tr>
-                    </table>
-                    <p style="margin:2px;padding:2px;">
-                    <% end %>
-                        <% if @yfcase.net_price_registration_market_price_link.blank? %>
-                    <%= " " %>
-                <% else %>
-                    <%= link_to "實價登錄連結", add_https(@yfcase.net_price_registration_market_price_link), target: "_blank" %>
-                <% end %>
-                   
-            </td>
-        </tr>
-
-        <tr>
-          <th>法拍記錄(證物七)</th>
-          <td colspan="3">
-            <% if @yfcase.auction_record_link.blank? %>
-              <%= " " %>
-            <% else %>
-              <%= link_to "法拍記錄", add_https(@yfcase.auction_record_link), target: "_blank" %>
-            <% end %>
+          <td style="width:7%;">第一拍<br>
+              <div style="padding:0px;font-size:10pt;color:red;">(CP>0.92)</div>
           </td>
-        </tr>
-
-    </table>
+          <td colspan="3" style="width:12%;">
+              <% @floorPricePlus1=suggestedincreaseJudgment(@yfcase.floor_price_1,@yfcase.click_1,@yfcase.monitor_1) %>
+              <% @cp1=@marketprice / @pingprice1 %>
+              <% @cpPlusJudgment1=@cp1 / @floorPricePlus1 %>
+              <% if @yfcase.floor_price_1 == 0 %>
+              <div>底價未輸入</div>
+              <% elsif @cpPlusJudgment1 > 0.92 %>
+              <div style="padding:0px;font-size:10pt;color:green;">加價CP(
+                  <%= (@cpPlusJudgment1).round(2) %>)<br>建議進場</div>
+              <% else %>
+              <div style="padding:0px;font-size:10pt;color:red;">加價CP(
+                  <%= (@cpPlusJudgment1).round(2) %>)<br>不可進場</div>
+              <% end %>
+              </td>
+              <!-- 第一拍：底價 -->
+          <td>
+              <%= @yfcase.floor_price_1 == 0 ? ' ' : currency_helper(@yfcase.floor_price_1,0) %>
+          </td>
+          <!-- 第一拍：坪價 -->
+          <td>
+              <%= (@yfcase.floor_price_1 == 0 || @yfcase.builds.count == 0) ? ' ' : currency_helper(@pingprice1,0) %>
+          </td>
+          <!-- 第一拍：時價 -->
+          <td>
+              <%= (@yfcase.floor_price_1 == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : currency_helper(@marketprice,0) %>
+          </td>
+          <!-- 第一拍：CP值 -->
+          <td>
+              <%= (@yfcase.floor_price_1 == 0 || @yfcase.builds.count == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : (@marketprice / @pingprice1).round(2) %>
+          </td>
+          <!-- 第一拍：點閱 -->
+          <td>
+              <%= @yfcase.floor_price_1 == 0 ? ' ' : @yfcase.click_1 %>
+          </td>
+          <!-- 第一拍：監控 -->
+          <td>
+              <%= @yfcase.floor_price_1 == 0 ? ' ' : @yfcase.monitor_1 %>
+          </td>
+          <!-- 第一拍：建議加價 -->
+          <td>
+              <%= @yfcase.floor_price_1 == 0 ? ' ' : suggestedincrease(@yfcase.floor_price_1,@yfcase.click_1,@yfcase.monitor_1) %>
+          </td>
+          <!-- 第一拍：保証金 -->
+          <td>
+              <%= @yfcase.floor_price_1 == 0 ? ' ' : currency_helper(@yfcase.margin_1,0) %>
+          </td>
+      </tr>
+      <!-- 第二拍 -->
+      <tr>
+          <!-- 拍別：第二拍 -->
+          <td>
+              <%= @yfcase.floor_price_2 == 0 ? ' ' : @yfcase.auction_day_2 %>
+          </td>
+          <td>第二拍<br>
+              <div style="padding:0px;font-size:10pt;color:red;">(CP>1.15)</div>
+          </td>
+          <td colspan="3">
+              <% @floorPricePlus2=suggestedincreaseJudgment(@yfcase.floor_price_2,@yfcase.click_2,@yfcase.monitor_2) %>
+              <% @cp2=@marketprice / @pingprice2 %>
+              <% @cpPlusJudgment2=@cp2 / @floorPricePlus2 %>
+              <% if @yfcase.floor_price_2 == 0 %>
+              <div>底價未輸入</div>
+              <% elsif @cpPlusJudgment2 > 1.15 %>
+              <div style="padding:0px;font-size:10pt;color:green;">加價CP(
+                  <%= (@cpPlusJudgment2).round(2) %>)<br>建議進場</div>
+              <% else %>
+              <div style="padding:0px;font-size:10pt;color:red;">加價CP(
+                  <%= (@cpPlusJudgment2).round(2) %>)<br>不可進場</div>
+              <% end %>
+              </td>
+              <!-- 第二拍：底價 -->
+          <td>
+              <%= @yfcase.floor_price_2 == 0 ? ' ' : currency_helper(@yfcase.floor_price_2,0) %>
+              <!-- 第二拍建議底價 -->
+              <% if @yfcase.floor_price_1 != 0 %>
+              <br>
+              <div style="padding:0px;font-size:10pt;color:red;">
+                  <%= currency_helper(@yfcase.floor_price_1 * 0.8 ,0) %>
+              </div>
+              <% else %>
+              <%= " " %>
+              <% end %>
+          </td>
+          <!-- 第二拍：坪價 -->
+          <td>
+              <%= (@yfcase.floor_price_2 == 0 || @yfcase.builds.count == 0) ? ' ' : currency_helper(@pingprice2,0) %>
+          </td>
+          <!-- 第二拍：時價 -->
+          <td>
+              <%= (@yfcase.floor_price_2 == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : currency_helper(@marketprice,0) %>
+          </td>
+          <!-- 第二拍：CP值 -->
+          <td>
+              <%= (@yfcase.floor_price_2 == 0 || @yfcase.builds.count == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : (@marketprice / @pingprice2).round(2) %>
+          </td>
+          <!-- 第二拍：點閱 -->
+          <td>
+              <%= @yfcase.floor_price_2 == 0 ? ' ' : @yfcase.click_2 %>
+          </td>
+          <!-- 第二拍：監控 -->
+          <td>
+              <%= @yfcase.floor_price_2 == 0 ? ' ' : @yfcase.monitor_2 %>
+          </td>
+          <!-- 第二拍：建議加價 -->
+          <td>
+              <%= @yfcase.floor_price_2 == 0 ? ' ' : suggestedincrease(@yfcase.floor_price_2,@yfcase.click_2,@yfcase.monitor_2) %>
+          </td>
+          <!-- 第二拍：保証金 -->
+          <td>
+              <%= @yfcase.floor_price_2 == 0 ? ' ' : currency_helper(@yfcase.margin_2,0) %>
+          </td>
+      </tr>
+      <!-- 第三拍 -->
+      <tr>
+          <!-- 拍別：第三拍 -->
+          <td>
+              <%= @yfcase.floor_price_3 == 0 ? ' ' : @yfcase.auction_day_3 %>
+          </td>
+          <td>第三拍<br>
+              <div style="padding:0px;font-size:10pt;color:red;">(CP>1.44)</div>
+          </td>
+          <td colspan="3">
+              <% @floorPricePlus3=suggestedincreaseJudgment(@yfcase.floor_price_3,@yfcase.click_3,@yfcase.monitor_3) %>
+              <% @cp3=@marketprice / @pingprice3 %>
+              <% @cpPlusJudgment3=@cp3 / @floorPricePlus3 %>
+              <% if @yfcase.floor_price_3 == 0 %>
+              <div>底價未輸入</div>
+              <% elsif @cpPlusJudgment3 > 1.44 %>
+              <div style="padding:0px;font-size:10pt;color:green;">加價CP(
+                  <%= (@cpPlusJudgment3).round(2) %>)<br>建議進場</div>
+              <% else %>
+              <div style="padding:0px;font-size:10pt;color:red;">加價CP(
+                  <%= (@cpPlusJudgment3).round(2) %>)<br>不可進場</div>
+              <% end %>
+              </td>
+              <!-- 第三拍：底價 -->
+          <td>
+              <%= @yfcase.floor_price_3 == 0 ? ' ' : currency_helper(@yfcase.floor_price_3,0) %>
+              <!-- 第三拍建議底價 -->
+              <% if @yfcase.floor_price_1 != 0 %>
+              <br>
+              <div style="padding:0px;font-size:10pt;color:red;">
+                  <%= currency_helper(@yfcase.floor_price_1 * 0.8 * 0.8 ,0) %>
+              </div>
+              <% elsif @yfcase.floor_price_2 != 0 %>
+              <br>
+              <div style="padding:0px;font-size:10pt;color:red;">
+                  <%= currency_helper(@yfcase.floor_price_2 * 0.8 ,0) %>
+              </div>
+              <% else %>
+              <%= " " %>
+              <% end %>
+          </td>
+          <!-- 第三拍：坪價 -->
+          <td>
+              <%= (@yfcase.floor_price_3 == 0 || @yfcase.builds.count == 0) ? ' ' : currency_helper(@pingprice3,0) %>
+          </td>
+          <!-- 第三拍：時價 -->
+          <td>
+              <%= (@yfcase.floor_price_3 == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : currency_helper(@marketprice,0) %>
+          </td>
+          <!-- 第三拍：CP值 -->
+          <td>
+              <%= (@yfcase.floor_price_3 == 0 || @yfcase.builds.count == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : (@marketprice / @pingprice3).round(2) %>
+          </td>
+          <!-- 第三拍：點閱 -->
+          <td>
+              <%= @yfcase.floor_price_3 == 0 ? ' ' : @yfcase.click_3 %>
+          </td>
+          <!-- 第三拍：監控 -->
+          <td>
+              <%= @yfcase.floor_price_3 == 0 ? ' ' : @yfcase.monitor_3 %>
+          </td>
+          <!-- 第三拍：建議加價 -->
+          <td>
+              <%= @yfcase.floor_price_3 == 0 ? ' ' : suggestedincrease(@yfcase.floor_price_3,@yfcase.click_3,@yfcase.monitor_3) %>
+          </td>
+          <!-- 第三拍：保証金 -->
+          <td>
+              <%= @yfcase.floor_price_3 == 0 ? ' ' : currency_helper(@yfcase.margin_3,0) %>
+          </td>
+      </tr>
+      <!-- 第四拍 -->
+      <tr>
+          <!-- 拍別：第四拍 -->
+          <td>
+              <%= @yfcase.floor_price_4 == 0 ? ' ' : @yfcase.auction_day_4 %>
+          </td>
+          <td>第四拍<br>
+              <div style="padding:0px;font-size:10pt;color:red;">(CP>1.80)</div>
+          </td>
+          <td colspan="3">
+              <% @floorPricePlus4=suggestedincreaseJudgment(@yfcase.floor_price_4,@yfcase.click_4,@yfcase.monitor_4) %>
+              <% @cp4=@marketprice / @pingprice4 %>
+              <% @cpPlusJudgment4=@cp4 / @floorPricePlus4 %>
+              <% if @yfcase.floor_price_4 == 0 %>
+              <div>底價未輸入</div>
+              <% elsif @cpPlusJudgment4 > 1.80 %>
+              <div style="padding:0px;font-size:10pt;color:green;">加價CP(
+                  <%= (@cpPlusJudgment4).round(2) %>)<br>建議進場</div>
+              <% else %>
+              <div style="padding:0px;font-size:10pt;color:red;">加價CP(
+                  <%= (@cpPlusJudgment4).round(2) %>)<br>不可進場</div>
+              <% end %>
+              </td>
+              <!-- 第四拍：底價 -->
+          <td>
+              <%= @yfcase.floor_price_4 == 0 ? ' ' : currency_helper(@yfcase.floor_price_4,0) %>
+              <!-- 第四拍建議底價 -->
+              <% if @yfcase.floor_price_1 != 0 %>
+              <br>
+              <div style="padding:0px;font-size:10pt;color:red;">
+                  <%= currency_helper(@yfcase.floor_price_1 * 0.8 * 0.8 * 0.8 ,0) %>
+              </div>
+              <% elsif @yfcase.floor_price_2 != 0 %>
+              <br>
+              <div style="padding:0px;font-size:10pt;color:red;">
+                  <%= currency_helper(@yfcase.floor_price_2 * 0.8 * 0.8 ,0) %>
+              </div>
+              <% elsif @yfcase.floor_price_3 != 0 %>
+              <br>
+              <div style="padding:0px;font-size:10pt;color:red;">
+                  <%= currency_helper(@yfcase.floor_price_3 * 0.8 ,0) %>
+              </div>
+              <% else %>
+              <%= " " %>
+              <% end %>
+          </td>
+          <!-- 第四拍：坪價 -->
+          <td>
+              <%= (@yfcase.floor_price_4 == 0 || @yfcase.builds.count == 0) ? ' ' : currency_helper(@pingprice4,0) %>
+          </td>
+          <!-- 第四拍：時價 -->
+          <td>
+              <%= (@yfcase.floor_price_4 == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : currency_helper(@marketprice,0) %>
+          </td>
+          <!-- 第四拍：CP值 -->
+          <td>
+              <%= (@yfcase.floor_price_4 == 0 || @yfcase.builds.count == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : (@marketprice / @pingprice4).round(2) %>
+          </td>
+          <!-- 第四拍：點閱 -->
+          <td>
+              <%= @yfcase.floor_price_4 == 0 ? ' ' : @yfcase.click_4 %>
+          </td>
+          <!-- 第四拍：監控 -->
+          <td>
+              <%= @yfcase.floor_price_4 == 0 ? ' ' : @yfcase.monitor_4 %>
+          </td>
+          <!-- 第四拍：建議加價 -->
+          <td>
+              <%= @yfcase.floor_price_4 == 0 ? ' ' : suggestedincrease(@yfcase.floor_price_4,@yfcase.click_4,@yfcase.monitor_4) %>
+          </td>
+          <!-- 第四拍：保証金 -->
+          <td>
+              <%= @yfcase.floor_price_4 == 0 ? ' ' : currency_helper(@yfcase.margin_4,0) %>
+          </td>
+      </tr>
+  </table>
   </div>
-</div>
-<div style="padding:3px;"></div>
+  
+  <!-- 勘查結果 -->
+  <div class="row">
+      <table class="yfratingscalePDFAttachment col">
+        <tr>
+          <th style="width:18%">初勘日</th>
+          <td class="yfratingscalePDFAttachmentContent" style="width:32%">
+            <%= @yfcase.first_survey_day %>
+          </td>
+          <th>會勘日</th>
+          <td class="yfratingscalePDFAttachmentContent">
+            <%= @yfcase.other_survey_day %>
+          </td>
+        </tr>
+        <tr>
+          <th>法拍公告<small>(證物三)</small></th>
+          <td class="yfratingscalePDFAttachmentContent">
+            <% if @yfcase.foreclosure_announcement_link.blank? %>
+              <%= " " %>
+            <% else %>
+              <%= link_to "法拍公告", add_https(@yfcase.foreclosure_announcement_link), target: "_blank" %>
+            <% end %>
+          </td>
+          <th style="width:18%">998連結</th>
+          <td class="yfratingscalePDFAttachmentContent">
+            <% if @yfcase.foreclosure_announcement_988_link.blank? %>
+              <%= " " %>
+            <% else %>
+              <%= link_to "988連結路徑", add_https(@yfcase.foreclosure_announcement_988_link), target: "_blank" %>
+            <% end %>
+          </td>
+        </tr>
+          <tr>
+            <th>物件照片<small>(證物四)</small></th>
+            <td colspan="3" class="yfratingscalePDFAttachmentContent">
+              <% if @yfcase.object_photo_link.blank? %>
+                <%= " " %>
+              <% else %>
+                <%= link_to "Google街景", add_https(@yfcase.object_photo_link) , target: "_blank" %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+              <th>實價登錄市價</th>
+              
+              <td colspan="3" class="yfratingscalePDFAttachmentContent">
+                  <!-- 區域負責人 -->
+                      <% yfcasefullname = @yfcase.user.first_name + @yfcase.user.last_name %>
+                      <!-- 登入人員 -->
+                      <% currentfullname = current_user.first_name + current_user.last_name %>
+                      <!-- 副署人員1 -->
+                      <% @yfcase.subsigntrueas.first.blank? ? ' ' : subsigntrueafullname = @yfcase.subsigntrueas.first.signtruea %>
+                      <!-- 副署人員2 -->
+                      <% @yfcase.subsigntruebs.first.blank? ? ' ' : subsigntruebfullname = @yfcase.subsigntruebs.first.signtrueb %>
+                      <!-- 副署人員3 -->
+                      <% @yfcase.subsigntruecs.first.blank? ? ' ' : subsigntruecfullname = @yfcase.subsigntruecs.first.signtruec %>
+  
+  
+                      <% @yfcase.objectbuilds.each do |objectbuild| %>
+                      <table class="yfratingscalePDFObjectBuild">
+                           <tr>
+                              <th>狀態</th>
+                              <th>地址(屋齡)(樓高)</th>
+                              <th>總價(元)</th>
+                              <th>建坪(坪)</th>
+                              <th>單價(元)</th>
+                              <th>勘查員A
+                               <% if current_user.role == 1 || (yfcasefullname == currentfullname && (@yfcase.subsigntrueas.first.blank? && @yfcase.subsigntruebs.first.blank? && @yfcase.subsigntruecs.first.blank?)) %> 
+                                      <%= link_to deleteplusrateall_yfcase_objectbuild_path(@yfcase,objectbuild),method: :delete do %>
+                                              <span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
+                                      <% end %>
+                               <% end %>
+                              </th>
+                              <th>加成A</th>
+                              <th>加成原因A</th>
+                              <th>計算</th>
+                          </tr>
+                          <tr>
+                              <!--輸入狀態-->
+                              <td>
+                                  <%= objectbuild.objectbuild_status %>
+                              </td>
+                              <!--輸入地址(屋齡)(樓高)-->
+                              <td rowspan="3">
+                                  <%= objectbuild.address %>
+                                  <% if objectbuild.house_age.present? %>
+                                      <br>(<%= objectbuild.house_age %>年)
+                                      <br>(樓高：<%= objectbuild.floor_height %>)
+                                  <% else %>
+                                      <%= ' ' %>
+                                  <% end %>
+                              </td>
+                              <!--輸入總價(元)-->
+                              <td rowspan="3">
+                                  <%= number_to_currency(objectbuild.total_price, unit: "", precision: 0 ) %>
+                              </td>
+                              <!--輸入建坪(坪)-->
+                              <td rowspan="3">
+                                  <%= objectbuild.build_area %>
+                              </td>
+                              <!--輸入單價(元)-->
+                              <td rowspan="3">
+                                  <%= number_to_currency(holdingpoint(objectbuild.total_price,objectbuild.build_area), unit: "", precision: 0 ) %>
+                              </td>
+                              <!--輸入勘查員A-->
+                              <td>
+                                  <% if current_user.role == 1 %>
+                                      <%= objectbuild.surveyora %>
+                                      <%= link_to deleteplusratea_yfcase_objectbuild_path(@yfcase,objectbuild),method: :delete do %>
+                                          <span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
+                                      <% end %>
+                                  <% elsif objectbuild.surveyora.present? %>
+                                      <%= objectbuild.surveyora %>
+                                  <% elsif objectbuild.surveyorb == (current_user.first_name + current_user.last_name) %>
+                                      已評
+                                  <% else %>
+                                      <%= link_to "待評分", editplusratea_yfcase_objectbuild_path(@yfcase,objectbuild),class: "btn btn-primary btn-sm" %>
+                                  <% end %>
+                              </td>
+                              <!--要先在計算前定義plusa及plusb的變數，要不然輸入計算的部份只會計算plusa-->
+                              <% @plusa=objectbuild.plusa %>
+                              <% @plusb=objectbuild.plusb %>
+                              <!--輸入加成A-->
+                              <td>
+                                  <%= @plusa %>
+                              </td>
+                              <!--輸入加成原因A-->
+                              <td>
+                                  <%= objectbuild.plusa_reason %>
+                              </td>
+                              <!--輸入計算-->
+                              <td rowspan="3">
+                                  <% @totalmesa = testvalue(objectbuild.total_price.to_f/objectbuild.build_area.to_f,@plusa,@plusb) %>
+                                  <%= number_to_currency(@totalmesa, unit: "", precision: 0 ) %>
+                              </td>
+                          </tr>
+                          <tr>
+                              <th>附件</th>
+                              <th>勘查員B</th>
+                              <th>加成B</th>
+                              <th>加成原因B</th>
+                          </tr>
+                          <tr>
+                              <!--輸入附件-->
+                              <td>
+                                  <% if objectbuild.objectbuild_url.blank? %>
+                                      <%= link_to "" %>
+                                  <% else %>
+                                      <%= link_to "連結", objectbuild.objectbuild_url, target: "_blank" %>
+                                  <% end %>
+                              </td>
+                              <!--輸入勘查員B-->
+                              <td>
+                                  <% if current_user.role == 1 %>
+                                      <%= objectbuild.surveyorb %>
+                                      <%= link_to deleteplusrateb_yfcase_objectbuild_path(@yfcase,objectbuild),method: :delete do %>
+                                          <span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
+                                      <% end %>
+                                  <% elsif objectbuild.surveyorb.present? %>
+                                      <%= objectbuild.surveyorb %>
+                                  <% elsif objectbuild.surveyora == (current_user.first_name + current_user.last_name) %>
+                                      已評
+                                  <% else %>
+                                      <%= link_to "待評分", editplusrateb_yfcase_objectbuild_path(@yfcase,objectbuild),class: "btn btn-primary btn-sm" %>
+                                  <% end %>
+                              </td>
+                              <!--輸入加成B-->
+                              <td>
+                                  
+                                  <%= @plusb %>
+                              </td>
+                              <!--輸入加成原因B-->
+                              <td>
+                                  <%= objectbuild.plusb_reason %>
+                              </td>
+                          </tr>
+                      </table>
+                      <p style="margin:2px;padding:2px;">
+                      <% end %>
+                          <% if @yfcase.net_price_registration_market_price_link.blank? %>
+                      <%= " " %>
+                  <% else %>
+                      <%= link_to "實價登錄連結", add_https(@yfcase.net_price_registration_market_price_link), target: "_blank" %>
+                  <% end %>
+                     
+              </td>
+          </tr>
+  
+          <tr>
+            <th>法拍記錄<small>(證物七)</small></th>
+            <td colspan="3" class="yfratingscalePDFAttachmentContent">
+              <% if @yfcase.auction_record_link.blank? %>
+                <%= " " %>
+              <% else %>
+                <%= link_to "法拍記錄", add_https(@yfcase.auction_record_link), target: "_blank" %>
+              <% end %>
+            </td>
+          </tr>
+  
+      </table>
+  </div>
+  
+  <!-- 建物查檢表 -->
+  <div class="row">
+      <table class="yfratingscalePDFBuildCheckList col">
+          <tr>
+              <th style="width:6%;">結果</th>
+              <th style="width:21%;">查檢內容</th>
+              <th style="width:6%;">結果</th>
+              <th>查檢內容</th>
+              <th style="width:6%;">結果</th>
+              <th style="width:15%;">查檢內容</th>
+              <th style="width:6%;">結果</th>
+              <th style="width:19%;">查檢內容</th>
+          </tr>
+          <!-- 第一行 -->
+          <tr>
+              <td><%= @yfcase.occupy ? "V" : "" %></td>
+              <th class="yfratingscalePDFBuildCheckListItem">01.占用鄰地？</th>
+              <td><%= @yfcase.rent ? "V" : "" %></td>
+              <th class="yfratingscalePDFBuildCheckListItem">05.出租/出借/佔用？</th>
+              <td><%= @yfcase.vegetable_market ? "V" : "" %></td>
+              <th class="yfratingscalePDFBuildCheckListItem">09.鄰近菜市場？</th>
+              <td><%= @yfcase.post_office ? "V" : "" %></td>
+              <th class="yfratingscalePDFBuildCheckListItem">13.鄰近郵局/機關？</th>
+          </tr>
+          
+          <!-- 第二行 -->
+          <tr>
+              <td><%= @yfcase.register ? "V" : "" %></td>
+              <th class="yfratingscalePDFBuildCheckListItem">02.無未保存登記建物？</th>
+              <td><%= @yfcase.leak ? "V" : "" %></td>
+              <th class="yfratingscalePDFBuildCheckListItem">06.無嚴重漏水現象？</th>
+              <td><%= @yfcase.supermarket ? "V" : "" %></td>
+              <th class="yfratingscalePDFBuildCheckListItem">10.鄰近大賣場？</th>
+              <td><%= @yfcase.main_road ? "V" : "" %></td>
+              <th class="yfratingscalePDFBuildCheckListItem">14.鄰近幹道？</th>
+          </tr>
+          <!-- 第三行 -->
+          <tr>
+              <td><%= @yfcase.parking_space ? "V" : "" %></td>
+              <th class="yfratingscalePDFBuildCheckListItem">03.停車位(機車/汽車)？</th>
+              <td><%= @yfcase.easy_parking ? "V" : "" %></td>
+              <th class="yfratingscalePDFBuildCheckListItem">07.停車方便？</th>
+              <td><%= @yfcase.school ? "V" : "" %></td>
+              <th class="yfratingscalePDFBuildCheckListItem">11.鄰近學校？</th>
+              <td><%= @yfcase.water_and_power_failure ? "V" : "" %></td>
+              <th class="yfratingscalePDFBuildCheckListItem">15.斷水斷電？</th>
+          </tr>
+          <!-- 第四行 -->
+          <tr>
+              <td><%= @yfcase.management_fee ? "V" : "" %></td>
+              <th class="yfratingscalePDFBuildCheckListItem">04.積欠管理費？</th>
+              <td><%= @yfcase.railway ? "V" : "" %></td>
+              <th class="yfratingscalePDFBuildCheckListItem">08.鄰近捷運站/台鐵站？</th>
+              <td><%= @yfcase.park ? "V" : "" %></td>
+              <th class="yfratingscalePDFBuildCheckListItem">12.鄰近公園？</th>
+              <td><%= @yfcase.good_vision ? "V" : "" %></td>
+              <th class="yfratingscalePDFBuildCheckListItem">16.採光視野良好？</th>
+          </tr>
+          <!-- 備註 -->
+          <tr>
+              <th>備註</th>
+              <td colspan="7"></td>
+          </tr>
+      </table>
+  </div>
 
-<!-- 建物查檢表 -->
-<div class="buildchecklist">
-    <table>
-        <tr>
-            <th class="xf1100 font-th">有(是) / 無(否)</th>
-            <th class="xf1200 font-th">查檢內容</th>
-            <th class="xf1300 font-th">有(是) / 無(否)</th>
-            <th class="xf1400 font-th">查檢內容</th>
-        </tr>
-        <!-- 第一行 -->
-        <tr>
-            <td class="xf2100 font-td">
-                <% if @yfcase.occupy %>
-                  	<span style='color: Blue;'><i class='fa fa-check-circle fa-2x'></i></span>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                <% else %>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                  	<span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                <% end %>
-            </td>
-            <th class="xf2200 font-th">01.建物坐落是否無占用鄰地</th>
-            <td class="xf2300 font-td">
-                <% if @yfcase.vegetable_market %>
-                  	<span style='color: Blue;'><i class='fa fa-check-circle fa-2x'></i></span>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                <% else %>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                  	<span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                <% end %>
-            </td>
-            <th class="xf2400 font-th">09.是否鄰近菜市場</th>
-        </tr>
-        <!-- 第二行 -->
-        <tr>
-            <td class="xf3100 font-td">
-                <% if @yfcase.register %>
-                  	<span style='color: Blue;'><i class='fa fa-check-circle fa-2x'></i></span>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                <% else %>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                  	<span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                <% end %>
-            </td>
-            <th class="xf3200 font-th">02.建物是否無未保存登記建物</th>
-            <td class="xf3300 font-td">
-                <% if @yfcase.supermarket %>
-                  	<span style='color: Blue;'><i class='fa fa-check-circle fa-2x'></i></span>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                <% else %>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                  	<span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                <% end %>
-            </td>
-            <th class="xf3400 font-th">10.是否鄰近大賣場</th>
-        </tr>
-        <!-- 第三行 -->
-        <tr>
-            <td class="xf4100 font-td">
-                <% if @yfcase.parking_space %>
-                  	<span style='color: Blue;'><i class='fa fa-check-circle fa-2x'></i></span>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                <% else %>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                  	<span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                <% end %>
-            </td>
-            <th class="xf4200 font-th">03.大樓是否有停車位(機車/汽車)</th>
-            <td class="xf4300 font-td">
-                <% if @yfcase.school %>
-                  	<span style='color: Blue;'><i class='fa fa-check-circle fa-2x'></i></span>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                <% else %>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                  	<span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                <% end %>
-            </td>
-            <th class="xf4400 font-th">11.是否鄰近學校</th>
-        </tr>
-        <!-- 第四行 -->
-        <tr>
-            <td class="xf5100 font-td">
-                <% if @yfcase.management_fee %>
-                  	<span style='color: Blue;'><i class='fa fa-check-circle fa-2x'></i></span>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                <% else %>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                  	<span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                <% end %>
-            </td>
-            <th class="xf5200 font-th">04.大樓公寓是否有無積欠管理費</th>
-            <td class="xf5300 font-td">
-                <% if @yfcase.park %>
-                  	<span style='color: Blue;'><i class='fa fa-check-circle fa-2x'></i></span>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                <% else %>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                  	<span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                <% end %>
-            </td>
-            <th class="xf5400 font-th">12.是否鄰近公園</th>
-        </tr>
-        <!-- 第五行 -->
-        <tr>
-            <td class="xf6100 font-td">
-                <% if @yfcase.rent %>
-                  	<span style='color: Blue;'><i class='fa fa-check-circle fa-2x'></i></span>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                <% else %>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                  	<span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                <% end %>
-            </td>
-            <th class="xf6200 font-th">05.有無出租或出借或佔用</th>
-            <td class="xf6300 font-td">
-                <% if @yfcase.post_office %>
-                  	<span style='color: Blue;'><i class='fa fa-check-circle fa-2x'></i></span>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                <% else %>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                  	<span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                <% end %>
-            </td>
-            <th class="xf6400 font-th">13.是否鄰近郵局或常用機關</th>
-        </tr>
-        <!-- 第六行 -->
-        <tr>
-            <td class="xf7100 font-td">
-                <% if @yfcase.leak %>
-                  	<span style='color: Blue;'><i class='fa fa-check-circle fa-2x'></i></span>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                <% else %>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                  	<span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                <% end %>
-            </td>
-            <th class="xf7200 font-th">06.建物是否無嚴重漏水現象</th>
-            <td class="xf7300 font-td">
-                <% if @yfcase.main_road %>
-                  	<span style='color: Blue;'><i class='fa fa-check-circle fa-2x'></i></span>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                <% else %>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                  	<span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                <% end %>
-            </td>
-            <th class="xf7400 font-th">14.是否鄰近幹道</th>
-        </tr>
-        <!-- 第七行 -->
-        <tr>
-            <td class="xf8100 font-td">
-                <% if @yfcase.easy_parking %>
-                  	<span style='color: Blue;'><i class='fa fa-check-circle fa-2x'></i></span>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                <% else %>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                  	<span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                <% end %>
-            </td>
-            <th class="xf8200 font-th">07.建物前或附近是否停車方便</th>
-            <td class="xf8300 font-td">
-                <% if @yfcase.water_and_power_failure %>
-                  	<span style='color: Blue;'><i class='fa fa-check-circle fa-2x'></i></span>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                <% else %>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                  	<span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                <% end %>
-            </td>
-            <th class="xf8400 font-th">15.是否斷水斷電</th>
-        </tr>
-        <!-- 第八行 -->
-        <tr>
-            <td class="xf9100 font-td">
-                <% if @yfcase.railway %>
-                  	<span style='color: Blue;'><i class='fa fa-check-circle fa-2x'></i></span>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                <% else %>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                  	<span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                <% end %>
-            </td>
-            <th class="xf9200 font-th">08.是否鄰近捷運站或台鐵站</th>
-            <td class="xf9300 font-td">
-                <% if @yfcase.good_vision %>
-                  	<span style='color: Blue;'><i class='fa fa-check-circle fa-2x'></i></span>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                <% else %>
-                  	<span style='color: gray;'><i class='fa fa-circle fa-2x'></i></span>
-                  	<span style='color: Red;'><i class='fa fa-times-circle fa-2x'></i></span>
-                <% end %>
-            </td>
-            <th class="xf9400 font-th">16.建物採光視野是否良好</th>
-        </tr>
-        <!-- 備註 -->
-        <tr>
-            <th class="xfa100 font-th">備註</th>
-            <td class="xfa200 font-td" colspan="3"></td>
-        </tr>
-    </table>
-</div>
-<div style="padding:3px;"></div>
-
-<!-- 最終判定 -->
-<p style="color:red;margin-bottom: 0px;font-family:微軟正黑體;">※區域負責人不可為副署人員</p>
-<div class="finaldecision">
-    <table>
-        <tr>
-            <!-- 區域負責人 -->
-            <% yfcasefullname = @yfcase.user.first_name + @yfcase.user.last_name %>
-            <!-- 登入人員 -->
-            <% currentfullname = current_user.first_name + current_user.last_name %>
-            <!-- 副署人員1 -->
-            <% @yfcase.subsigntrueas.first.blank? ? ' ' : subsigntrueafullname = @yfcase.subsigntrueas.first.signtruea %>
-            <!-- 副署人員2 -->
-            <% @yfcase.subsigntruebs.first.blank? ? ' ' : subsigntruebfullname = @yfcase.subsigntruebs.first.signtrueb %>
-            <!-- 副署人員3 -->
-            <% @yfcase.subsigntruecs.first.blank? ? ' ' : subsigntruecfullname = @yfcase.subsigntruecs.first.signtruec %>
-
-            <th class="xg1100 font-th">結論</th>
-            <th class="xg1200 font-th">區域負責人</th>
-            <th class="xg1300 font-th">
-                <% if current_user.role == 1 %>
-                    副署人員1<%= link_to "刪除", delete_subsigntruea_yfcase_path(@yfcase),method: :delete,class: "btn btn-info btn-sm" %>
-                <% elsif @yfcase.final_decision.blank? || (@yfcase.final_decision.present? && yfcasefullname == currentfullname) %>
+  <!-- 最終判定 -->
+  <div class="row" >
+        <table class="yfratingscalePDFFinaldecision col">
+            <tr>
+                <!-- 區域負責人 -->
+                <% yfcasefullname = @yfcase.user.first_name + @yfcase.user.last_name %>
+                <!-- 登入人員 -->
+                <% currentfullname = current_user.first_name + current_user.last_name %>
+                <!-- 副署人員1 -->
+                <% @yfcase.subsigntrueas.first.blank? ? ' ' : subsigntrueafullname = @yfcase.subsigntrueas.first.signtruea %>
+                <!-- 副署人員2 -->
+                <% @yfcase.subsigntruebs.first.blank? ? ' ' : subsigntruebfullname = @yfcase.subsigntruebs.first.signtrueb %>
+                <!-- 副署人員3 -->
+                <% @yfcase.subsigntruecs.first.blank? ? ' ' : subsigntruecfullname = @yfcase.subsigntruecs.first.signtruec %>
+                <th style="width:28%;">結論</th>
+                <th style="width:18%;">區域負責人</th>
+                <th style="width:18%;">
+                    <% if current_user.role == 1 %>
+                    副署人員1
+                    <%= link_to "刪除", delete_subsigntruea_yfcase_path(@yfcase),method: :delete,class: "btn btn-info btn-sm" %>
+                    <% elsif @yfcase.final_decision.blank? || (@yfcase.final_decision.present? && yfcasefullname == currentfullname) %>
                     <%= '副署人員1' %>
-                <% else %>
+                    <% else %>
                     <% if @yfcase.subsigntrueas.first.blank? %>
-                         <%= link_to "副署人員1", new_yfcase_subsigntruea_path(@yfcase),class: "btn btn-primary btn-sm" %>
+                    <%= link_to "副署人員1", new_yfcase_subsigntruea_path(@yfcase),class: "btn btn-primary btn-sm" %>
                     <% else %>
-                         <%= "副署人員1" %>
+                    <%= "副署人員1" %>
                     <% end %>
-                <% end %>    
-            </th>
-            <th class="xg1400 font-th">
-                <% if current_user.role == 1 %>
-                    副署人員2 <%= link_to "刪除", delete_subsigntrueb_yfcase_path(@yfcase),method: :delete,class: "btn btn-info btn-sm" %>
-                <% elsif @yfcase.final_decision.blank? || (@yfcase.final_decision.present? && yfcasefullname == currentfullname) %>
+                    <% end %>
+                </th>
+                <th style="width:18%;">
+                    <% if current_user.role == 1 %>
+                    副署人員2
+                    <%= link_to "刪除", delete_subsigntrueb_yfcase_path(@yfcase),method: :delete,class: "btn btn-info btn-sm" %>
+                    <% elsif @yfcase.final_decision.blank? || (@yfcase.final_decision.present? && yfcasefullname == currentfullname) %>
                     <%= '副署人員2' %>
-                <% elsif @yfcase.final_decision.present? && yfcasefullname != currentfullname && subsigntrueafullname == currentfullname %>
+                    <% elsif @yfcase.final_decision.present? && yfcasefullname != currentfullname && subsigntrueafullname == currentfullname %>
                     <%= '該員已副署' %>
-                <% else %>
+                    <% else %>
                     <% if @yfcase.subsigntruebs.first.blank? && @yfcase.subsigntrueas.first.present? %>
-                         <%= link_to "副署人員2", new_yfcase_subsigntrueb_path(@yfcase),class: "btn btn-primary btn-sm" %>
+                    <%= link_to "副署人員2", new_yfcase_subsigntrueb_path(@yfcase),class: "btn btn-primary btn-sm" %>
                     <% else %>
-                         <%= "副署人員2" %>
+                    <%= "副署人員2" %>
                     <% end %>
-                <% end %>
-            </th>
-            <th class="xg1500 font-th">
-                <% if current_user.role == 1 %>
-                    副署人員3<%= link_to "刪除", delete_subsigntruec_yfcase_path(@yfcase),method: :delete,class: "btn btn-info btn-sm" %>
-                <% elsif  @yfcase.final_decision.blank? || (@yfcase.final_decision.present? && yfcasefullname == currentfullname) %>
+                    <% end %>
+                </th>
+                <th>
+                    <% if current_user.role == 1 %>
+                    副署人員3
+                    <%= link_to "刪除", delete_subsigntruec_yfcase_path(@yfcase),method: :delete,class: "btn btn-info btn-sm" %>
+                    <% elsif  @yfcase.final_decision.blank? || (@yfcase.final_decision.present? && yfcasefullname == currentfullname) %>
                     <%= '副署人員3' %>
-                <% elsif @yfcase.final_decision.present? && yfcasefullname != currentfullname && ((subsigntrueafullname == currentfullname && subsigntruebfullname != currentfullname) || (subsigntrueafullname != currentfullname && subsigntruebfullname == currentfullname)) %>
+                    <% elsif @yfcase.final_decision.present? && yfcasefullname != currentfullname && ((subsigntrueafullname == currentfullname && subsigntruebfullname != currentfullname) || (subsigntrueafullname != currentfullname && subsigntruebfullname == currentfullname)) %>
                     <%= '該員已副署' %>
-                <% else %>
-                    <% if @yfcase.subsigntruecs.first.blank? && @yfcase.subsigntruebs.first.present? %>
-                         <%= link_to "副署人員3", new_yfcase_subsigntruec_path(@yfcase),class: "btn btn-primary btn-sm" %>
                     <% else %>
-                         <%= "副署人員3" %>
+                    <% if @yfcase.subsigntruecs.first.blank? && @yfcase.subsigntruebs.first.present? %>
+                    <%= link_to "副署人員3", new_yfcase_subsigntruec_path(@yfcase),class: "btn btn-primary btn-sm" %>
+                    <% else %>
+                    <%= "副署人員3" %>
                     <% end %>
-                <% end %>
-            </th>
-        <tr>
-            <th class="xg2100 font-td">
-                <% if @yfcase.final_decision == "3拍進場" %>
-                    <div class="final_decision_style_3">
+                    <% end %>
+                </th>
+            </tr>
+            <tr>
+              <td>
+                    <% if @yfcase.final_decision == "3拍進場" %>
+                    <div class="yfratingscalePDFFinaldecisionJudgment" style="color:blue;border:5px solid blue;">
                         <%= @yfcase.final_decision %>
                     </div>
-                <% elsif @yfcase.final_decision == "4拍進場" %>
-                    <div class="final_decision_style_4">
+                    <% elsif @yfcase.final_decision == "4拍進場" %>
+                    <div class="yfratingscalePDFFinaldecisionJudgment" style="color:green;border:5px solid green;">
                         <%= @yfcase.final_decision %>
                     </div>
-                <% elsif @yfcase.final_decision == "放棄" %>
-                    <div class="final_decision_style_giveup">
+                    <% elsif @yfcase.final_decision == "放棄" %>
+                    <div class="yfratingscalePDFFinaldecisionJudgment" style="color:red;border:5px solid red;">
                         <%= @yfcase.final_decision %>
                     </div>
-                <% else %>
+                    <% else %>
                     <%= "" %>
-                <% end %>
-            </th>
-            <th  class="xg2200 font-td">
-                  <div class="printcss" style="margin-left:35px;margin-top:0px;">
-                    <div class="printcss-head">
-                      <%= @yfcase.user.first_name %>
-                    </div>
-                    <div class="printcss-body">
+                    <% end %>
+                </td>
+                
+              <td class="yfratingscalePDFPerson">
+                <div class="yfratingscalePDFPersonCircle">
+                  <table class="yfratingscalePDFPersonTable">
+                    <tr>
+                      <td class="yfratingscalePDFPersonName" style="border-bottom:5px solid red;">
+                        <%= @yfcase.user.first_name %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="yfratingscalePDFPersonDate">
                         <%= @yfcase.final_decision_date.blank? ? '待結論判定' : @yfcase.final_decision_date %>
-                    </div>
-                    <div class="printcss-footer">
-                      <%= @yfcase.user.last_name %>
-                    </div>    
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="yfratingscalePDFPersonName"style="border-top:5px solid red;">
+                        <%= @yfcase.user.last_name %>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+                
+                
+              <td class="yfratingscalePDFPerson">
+                <% if @yfcase.subsigntrueas.first.present? %>
+                  <div class="yfratingscalePDFPersonCircle">
+                    <table class="yfratingscalePDFPersonTable">
+                      <tr>
+                        <td class="yfratingscalePDFPersonName" style="border-bottom:5px solid red;">
+                          <%= @yfcase.subsigntrueas.first.signtruea_first_name %>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="yfratingscalePDFPersonDate">
+                          <%= @yfcase.subsigntrueas.first.signtruea_date %>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="yfratingscalePDFPersonName"style="border-top:5px solid red;">
+                          <%= @yfcase.subsigntrueas.first.signtruea_last_name %>
+                        </td>
+                      </tr>
+                    </table>
                   </div>
-
-                <!--
-                <%= @yfcase.user.first_name %>
-                <%= @yfcase.user.last_name %>
-                -->
-            </th>
-            <th class="xg2300 font-td">
-                <% if @yfcase.subsigntrueas.first.blank? %>
-                    <%= ' ' %>
-                <% else %>
-                    <div class="printcss" style="margin-left:35px;margin-top:0px;">
-                        <div class="printcss-head">
-                            <%= @yfcase.subsigntrueas.first.signtruea_first_name %>
-                        </div>
-                        <div class="printcss-body">
-                            <%= @yfcase.subsigntrueas.first.signtruea_date %>
-                        </div>
-                        <div class="printcss-footer">
-                            <%= @yfcase.subsigntrueas.first.signtruea_last_name %>
-                        </div>    
-                    </div>
-                <% end %>
-            </th>
-            <th class="xg2400 font-td">
-                <% if @yfcase.subsigntruebs.first.blank? %>
-                    <%= ' ' %>
-                <% else %>
-                    <div class="printcss" style="margin-left:35px;margin-top:0px;">
-                        <div class="printcss-head">
-                            <%= @yfcase.subsigntruebs.first.signtrueb_first_name %>
-                        </div>
-                        <div class="printcss-body">
-                            <%= @yfcase.subsigntruebs.first.signtrueb_date %>
-                        </div>
-                        <div class="printcss-footer">
-                            <%= @yfcase.subsigntruebs.first.signtrueb_last_name %>
-                        </div>    
-                    </div>
-                <% end %>
-            </th>
-            <th class="xg2500 font-td">
-                <% if @yfcase.subsigntruecs.first.blank? %>
-                    <%= ' ' %>
-                <% else %>
-                    <!--
-                    <%= @yfcase.subsigntruecs.first.signtruec %>
-                    -->
-                    <div class="printcss" style="margin-left:35px;margin-top:0px;">
-                        <div class="printcss-head">
-                            <%= @yfcase.subsigntruecs.first.signtruec_first_name %>
-                        </div>
-                        <div class="printcss-body">
-                            <%= @yfcase.subsigntruecs.first.signtruec_date %>
-                        </div>
-                        <div class="printcss-footer">
-                            <%= @yfcase.subsigntruecs.first.signtruec_last_name %>
-                        </div>    
-                    </div>
-                <% end %>
-            </th>
-        </tr>
-    </table>
-</div>
-<br>
-
-<% if @yfcase.editable_by?(current_user) && @yfcase.subsigntrueas.blank? %>
-    <div id="showitem">
-    	<%= link_to '編輯', edit_yfcase_path(@yfcase),class: "btn btn-primary" %> |
+                 <% end %> 
+                </td>
+                
+                
+                <td class="yfratingscalePDFPerson">
+                <% if @yfcase.subsigntruebs.first.present? %>
+                  <div class="yfratingscalePDFPersonCircle">
+                    <table class="yfratingscalePDFPersonTable">
+                      <tr>
+                        <td class="yfratingscalePDFPersonName" style="border-bottom:5px solid red;">
+                          <%= @yfcase.subsigntruebs.first.signtrueb_first_name %>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="yfratingscalePDFPersonDate">
+                          <%= @yfcase.subsigntruebs.first.signtrueb_date %>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="yfratingscalePDFPersonName"style="border-top:5px solid red;">
+                          <%= @yfcase.subsigntruebs.first.signtrueb_last_name %>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                 <% end %> 
+                </td>
+                
+                <td class="yfratingscalePDFPerson">
+                <% if @yfcase.subsigntruecs.first.present? %>
+                  <div class="yfratingscalePDFPersonCircle">
+                    <table class="yfratingscalePDFPersonTable">
+                      <tr>
+                        <td class="yfratingscalePDFPersonName" style="border-bottom:5px solid red;">
+                          <%= @yfcase.subsigntruecs.first.signtruec_first_name %>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="yfratingscalePDFPersonDate">
+                          <%= @yfcase.subsigntruecs.first.signtruec_date %>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="yfratingscalePDFPersonName"style="border-top:5px solid red;">
+                          <%= @yfcase.subsigntruecs.first.signtruec_last_name %>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                 <% end %> 
+                </td>
+                
+            </tr>
+        </table>
+    </div>
+    <% if @yfcase.editable_by?(current_user) && @yfcase.subsigntrueas.blank? %>
+      <div id="showitem">
+    	  <%= link_to '編輯', edit_yfcase_path(@yfcase),class: "btn btn-primary" %> |
         <%= link_to '返回', yfcases_path,class: "btn btn-info" %> | 
-    </div>
-<% else %>
-    <div id="showitem">
+      </div>
+    <% else %>
+      <div id="showitem">
         <%= link_to '返回', yfcases_path,class: "btn btn-info" %>
-    </div>
-<% end %>
+      </div>
+    <% end %>
+</body>
+
+</html>

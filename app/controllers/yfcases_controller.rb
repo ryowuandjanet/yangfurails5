@@ -2,7 +2,7 @@ class YfcasesController < ApplicationController
   include ApplicationHelper
   before_action :set_yfcase, only: [:edit, :update, :destroy, :deedtax, :yfratingscale, :realestateregistration, :complaint, :letter]
   before_action :show_helper, only: [:edit, :update, :destroy, :deedtax, :yfratingscale, :realestateregistration, :complaint, :letter]
-  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /yfcases
   # GET /yfcases.json

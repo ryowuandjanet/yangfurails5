@@ -1,3 +1,11 @@
+<style>
+  #collapseRealestaterregistration div.form-group.col-md-2 {
+    margin:0px;
+  }
+  .card-header {
+    padding:2px;
+  }
+</style>
 <%= form_with(model: yfcase, local: true) do |f| %>
 <% if yfcase.errors.any? %>
 <div id="error_explanation">
@@ -32,8 +40,8 @@
                 <div class="form-group col-md-2">
                   縣市
                 </div>
-                <div class="form-group col">
-                  <%= @yfcase.country.try(:name) %>
+                <div class="form-group col" style="background-color:#f0f0f0;">
+                  <span><%= @yfcase.country.try(:name) %></span>
                 </div>
               </div>
               
@@ -41,8 +49,8 @@
                 <div class="form-group col-md-2">
                   戶政事務所
                 </div>
-                <div class="form-group col">
-                  <%= @yfcase.township.try(:land_office) %> 戶政事務所
+                <div class="form-group col" style="background-color:#f0f0f0;">
+                  <%= @yfcase.township.try(:land_office) %>戶政事務所
                 </div>
               </div>
               
@@ -559,19 +567,23 @@
     
     <!-- 基本資料   -->
     <div class="card">
-        <div class="card-header" id="headingOne">
+        <div class="card-header" id="headingOne" style="background-color:Azure;border:1px solid #888888;">
             <h2 class="mb-0">
                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    基本資料  ( <%= f.label :company, "所屬公司" %> ) <%= f.select(:company,Yfcase::COMPANY_LIST, {}, {  :prompt => '請輸入所屬公司', class: 'form-control'}) %>
+                    基本資料
                 </button>
             </h2>
         </div>
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
                 <div class="form-row">
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-6">
                         <%= f.label :case_number, "案號" %>
                         <%= f.text_field :case_number, class: 'form-control'  %>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <%= f.label :company, "所屬公司" %> 
+                        <%= f.select(:company,Yfcase::COMPANY_LIST, {}, {  :prompt => '請輸入所屬公司', class: 'form-control'}) %>
                     </div>
                 </div>
                 <hr>
