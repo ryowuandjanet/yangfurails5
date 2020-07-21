@@ -261,37 +261,38 @@ class YfcasesController < ApplicationController
         # keyword2=判定篩選(final_decision)
         # person=人員篩選(user_id)
         # city=縣市篩選(country_id)
+        # PostgreSQL的查詢方式 Yfcase.where( [ "cast(case_number as text) like ?", "%#{params[:keyword]}%"])
       
         if params[:keyword].present? && params[:keyword2].present? && params[:person].present? && params[:city].present?
-          @yfcases = Yfcase.where( [ "case_number like ?", "%#{params[:keyword]}%"]).where( [ "final_decision like ?", "%#{params[:keyword2]}%"]).where( [ "user_id like ?", params[:person]]).where( [ "country_id like ?", params[:city]])
+          @yfcases = Yfcase.where( [ "cast(case_number as text) like ?", "%#{params[:keyword]}%"]).where( [ "cast(final_decision as text) like ?", "%#{params[:keyword2]}%"]).where( [ "cast(user_id as text) like ?", params[:person]]).where( [ "cast(country_id as text) like ?", params[:city]])
         elsif params[:keyword].present? && params[:keyword2].present? && params[:person].present? && params[:city].blank?
-          @yfcases = Yfcase.where( [ "case_number like ?", "%#{params[:keyword]}%"]).where( [ "final_decision like ?", "%#{params[:keyword2]}%"]).where( [ "user_id like ?", params[:person]])
+          @yfcases = Yfcase.where( [ "cast(case_number as text) like ?", "%#{params[:keyword]}%"]).where( [ "cast(final_decision as text) like ?", "%#{params[:keyword2]}%"]).where( [ "cast(user_id as text) like ?", params[:person]])
         elsif params[:keyword].present? && params[:keyword2].present? && params[:person].blank? && params[:city].present?
-          @yfcases = Yfcase.where( [ "case_number like ?", "%#{params[:keyword]}%"]).where( [ "final_decision like ?", "%#{params[:keyword2]}%"]).where( [ "country_id like ?", params[:city]])
+          @yfcases = Yfcase.where( [ "cast(case_number as text) like ?", "%#{params[:keyword]}%"]).where( [ "cast(final_decision as text) like ?", "%#{params[:keyword2]}%"]).where( [ "cast(country_id as text) like ?", params[:city]])
         elsif params[:keyword].present? && params[:keyword2].present? && params[:person].blank? && params[:city].blank?
-          @yfcases = Yfcase.where( [ "case_number like ?", "%#{params[:keyword]}%"]).where( [ "final_decision like ?", "%#{params[:keyword2]}%"])
+          @yfcases = Yfcase.where( [ "cast(case_number as text) like ?", "%#{params[:keyword]}%"]).where( [ "cast(final_decision as text) like ?", "%#{params[:keyword2]}%"])
         elsif params[:keyword].present? && params[:keyword2].blank? && params[:person].present? && params[:city].present?
-          @yfcases = Yfcase.where( [ "case_number like ?", "%#{params[:keyword]}%"]).where( [ "user_id like ?", params[:person]]).where( [ "country_id like ?", params[:city]])
+          @yfcases = Yfcase.where( [ "cast(case_number as text) like ?", "%#{params[:keyword]}%"]).where( [ "cast(user_id as text) like ?", params[:person]]).where( [ "cast(country_id as text) like ?", params[:city]])
         elsif params[:keyword].present? && params[:keyword2].blank? && params[:person].present? && params[:city].blank?
-          @yfcases = Yfcase.where( [ "case_number like ?", "%#{params[:keyword]}%"]).where( [ "user_id like ?", params[:person]])
+          @yfcases = Yfcase.where( [ "cast(case_number as text) like ?", "%#{params[:keyword]}%"]).where( [ "cast(user_id as text) like ?", params[:person]])
         elsif params[:keyword].present? && params[:keyword2].blank? && params[:person].blank? && params[:city].present?
-          @yfcases = Yfcase.where( [ "case_number like ?", "%#{params[:keyword]}%"]).where( [ "country_id like ?", params[:city]])
+          @yfcases = Yfcase.where( [ "cast(case_number as text) like ?", "%#{params[:keyword]}%"]).where( [ "cast(country_id as text) like ?", params[:city]])
         elsif params[:keyword].present? && params[:keyword2].blank? && params[:person].blank? && params[:city].blank?
-          @yfcases = Yfcase.where( [ "case_number like ?", "%#{params[:keyword]}%"])
+          @yfcases = Yfcase.where( [ "cast(case_number as text) like ?", "%#{params[:keyword]}%"])
         elsif params[:keyword].blank? && params[:keyword2].present? && params[:person].present? && params[:city].present?
-          @yfcases = Yfcase.where( [ "final_decision like ?", "%#{params[:keyword2]}%"]).where( [ "user_id like ?", params[:person]]).where( [ "country_id like ?", params[:city]])
+          @yfcases = Yfcase.where( [ "cast(final_decision as text) like ?", "%#{params[:keyword2]}%"]).where( [ "cast(user_id as text) like ?", params[:person]]).where( [ "cast(country_id as text) like ?", params[:city]])
         elsif params[:keyword].blank? && params[:keyword2].present? && params[:person].present? && params[:city].blank?
-          @yfcases = Yfcase.where( [ "final_decision like ?", "%#{params[:keyword2]}%"]).where( [ "user_id like ?", params[:person]])
+          @yfcases = Yfcase.where( [ "cast(final_decision as text) like ?", "%#{params[:keyword2]}%"]).where( [ "cast(user_id as text) like ?", params[:person]])
         elsif params[:keyword].blank? && params[:keyword2].present? && params[:person].blank? && params[:city].present?
-          @yfcases = Yfcase.where( [ "final_decision like ?", "%#{params[:keyword2]}%"]).where( [ "country_id like ?", params[:city]])
+          @yfcases = Yfcase.where( [ "cast(final_decision as text) like ?", "%#{params[:keyword2]}%"]).where( [ "cast(country_id as text) like ?", params[:city]])
         elsif params[:keyword].blank? && params[:keyword2].present? && params[:person].blank? && params[:city].blank?
-          @yfcases = Yfcase.where( [ "final_decision like ?", "%#{params[:keyword2]}%"])
+          @yfcases = Yfcase.where( [ "cast(final_decision as text) like ?", "%#{params[:keyword2]}%"])
         elsif params[:keyword].blank? && params[:keyword2].blank? && params[:person].present? && params[:city].present?
-          @yfcases = Yfcase.where( [ "user_id like ?", params[:person]]).where( [ "country_id like ?", params[:city]])
+          @yfcases = Yfcase.where( [ "cast(user_id as text) like ?", params[:person]]).where( [ "cast(country_id as text) like ?", params[:city]])
         elsif params[:keyword].blank? && params[:keyword2].blank? && params[:person].present? && params[:city].blank?
-          @yfcases = Yfcase.where( [ "user_id like ?", params[:person]])
+          @yfcases = Yfcase.where( [ "cast(user_id as text) like ?", params[:person]])
         elsif params[:keyword].blank? && params[:keyword2].blank? && params[:person].blank? && params[:city].present?
-          @yfcases = Yfcase.where( [ "country_id like ?", params[:city]])
+          @yfcases = Yfcase.where( [ "cast(country_id as text) like ?", params[:city]])
         else 
           @yfcases = Yfcase.all
         end
@@ -304,6 +305,7 @@ class YfcasesController < ApplicationController
         end
         
     end
+
 
 
     # Only allow a list of trusted parameters through.

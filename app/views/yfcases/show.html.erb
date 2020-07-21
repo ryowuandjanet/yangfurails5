@@ -161,8 +161,26 @@
 </head>
 
 <body>
-  <div class="yfratingscalePDFTitle">
-    <%= @yfcase.case_number %> YF評量表
+  <div class="yfratingscalePDFTitle row">
+    <table class="col">
+      <tr>
+        <td style="width:80%;border:none;"><%= @yfcase.case_number %> YF評量表</td>
+        <td style="border:none;">
+           <% if (@yfcase.editable_by?(current_user) && @yfcase.subsigntrueas.blank?) || (@yfcase.final_decision != "放棄" && @yfcase.editable_by?(current_user) ) %>
+              <div id="showitem">
+            	  <%= link_to '編輯', edit_yfcase_path(@yfcase),class: "btn btn-primary" %> |
+                <%= link_to '返回', yfcases_path,class: "btn btn-info" %> 
+              </div>
+            <% else %>
+              <div id="showitem">
+                <%= link_to '返回', yfcases_path,class: "btn btn-info" %>
+              </div>
+            <% end %>
+        </td>
+      </tr>
+    </table>
+   
+    
   </div>
   
   <!--基本資料-->
@@ -224,7 +242,7 @@
       <tr>
         <td style="text-align:left;">
           <% @yfcase.lands.each do |land| %>
-            <%= land.land_number %><br>
+            <%= @yfcase.big_section %><%= land.land_number %><br>
           <% end %>
         </td>
         <td>
@@ -927,7 +945,6 @@
           </tr>
       </table>
   </div>
-
   <!-- 最終判定 -->
   <div class="row" >
         <table class="yfratingscalePDFFinaldecision col">
@@ -1109,7 +1126,8 @@
             </tr>
         </table>
     </div>
-    <% if @yfcase.editable_by?(current_user) && @yfcase.subsigntrueas.blank? %>
+
+    <% if (@yfcase.editable_by?(current_user) && @yfcase.subsigntrueas.blank?) || (@yfcase.final_decision != "放棄" && @yfcase.editable_by?(current_user) ) %>
       <div id="showitem">
     	  <%= link_to '編輯', edit_yfcase_path(@yfcase),class: "btn btn-primary" %> |
         <%= link_to '返回', yfcases_path,class: "btn btn-info" %> | 

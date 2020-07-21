@@ -118,14 +118,14 @@
         <tr>
             <td style="border:1px solid black;width:9%;height:90px;" rowspan="2">(1)<br>受理<br>機關</td>
             <td style="border-top:1px solid black;width:10%;text-align:right;height:45px;">
-                <%= @yfcase.country.try(:name).at(-1) == '縣' ? @yfcase.country.try(:name) : '縣' %>
+                <sanp style="color:blue;"><%= @yfcase.country.try(:name).at(-1) == '縣' ? @yfcase.country.try(:name).at(-3..-2) : '' %></sanp>縣
             </td>
-            <td style="border-top:1px solid black;width:17%;text-align:right;"><%= @yfcase.township.try(:land_office).blank? ? '' : @yfcase.township.try(:land_office) %>地政事務所</td>
+            <td style="border-top:1px solid black;width:17%;text-align:right;"><sanp style="color:blue;"><%= @yfcase.township.try(:land_office).blank? ? '' : @yfcase.township.try(:land_office) %></sanp>地政事務所</td>
             <td style="border:1px solid black;width:6%;" rowspan="2">資料管<br>轄機關</td>
             <td style="border:1px solid black;width:21%;text-align:right;" rowspan="2">
-                <%= @yfcase.country.try(:name).at(-1) == '縣' ? @yfcase.country.try(:name) : '縣' %><br>
-                <%= @yfcase.country.try(:name).at(-1) == '市' ? @yfcase.country.try(:name) : '市' %><br>
-                <%= @yfcase.township.try(:land_office).blank? ? '' : @yfcase.township.try(:land_office) %>地政事務所
+                <sanp style="color:blue;"><%= @yfcase.country.try(:name).at(-1) == '縣' ? @yfcase.country.try(:name).at(-3..-2) : '' %></sanp>縣<br>
+                <sanp style="color:blue;"><%= @yfcase.country.try(:name).at(-1) == '市' ? @yfcase.country.try(:name).at(-3..-2) : '' %></sanp>市<br>
+                <sanp style="color:blue;"><%= @yfcase.township.try(:land_office).blank? ? '' : @yfcase.township.try(:land_office) %></sanp>地政事務所
             </td>
             <td style="border:1px solid black;width:10%;" rowspan="2">(2)原因發生<br>日    期</td>
             <td style="border:1px solid black;width:26%;" rowspan="2">
@@ -133,13 +133,13 @@
                 <% if @yfcase.cause_data.blank? %>
                     中華民國    年    月    日
                 <% else %>
-                    中華民國 <%= @yfcase.cause_data.year-1911 %> 年 <%= @yfcase.cause_data.month %> 月 <%= @yfcase.cause_data.day %> 日
+                    中華民國 <sanp style="color:blue;"><%= @yfcase.cause_data.year-1911 %></sanp> 年 <sanp style="color:blue;"><%= @yfcase.cause_data.month %></sanp> 月 <sanp style="color:blue;"><%= @yfcase.cause_data.day %></sanp> 日
                 <% end %>
             </td>
         </tr>
         <tr style="height:28px;">
             <td style="border-style:none;text-align:right;height:45px;">
-                <%= @yfcase.country.try(:name).at(-1) == '市' ? @yfcase.country.try(:name) : '市' %>
+                <sanp style="color:blue;"><%= @yfcase.country.try(:name).at(-1) == '市' ? @yfcase.country.try(:name).at(-3..-2) : '' %></sanp>市
             </td>
             <td style="border-style:none;text-align:right;">&#9744 跨所申請</td>
         </tr>
@@ -697,10 +697,10 @@
         <!--第六行-->
         <tr>
             <th colspan="2" style="height:100px;">(3)面 積<br>(平方公尺)</th>
-            <td><%= @yfcase.lands.first.blank? ? "" : number_to_currency((@yfcase.lands.first.land_area.to_f * @yfcase.lands.first.land_holding_point_personal.to_f / @yfcase.lands.first.land_holding_point_all.to_f), unit: "", precision: 2) %></td>
-            <td><%= @yfcase.lands.second.blank? ? "" : number_to_currency((@yfcase.lands.second.land_area.to_f * @yfcase.lands.second.land_holding_point_personal.to_f / @yfcase.lands.second.land_holding_point_all.to_f), unit: "", precision: 2) %></td>
-            <td><%= @yfcase.lands.third.blank? ? "" : number_to_currency((@yfcase.lands.third.land_area.to_f * @yfcase.lands.third.land_holding_point_personal.to_f / @yfcase.lands.third.land_holding_point_all.to_f), unit: "", precision: 2) %></td>
-            <td><%= @yfcase.lands.fourth.blank? ? "" : number_to_currency((@yfcase.lands.fourth.land_area.to_f * @yfcase.lands.fourth.land_holding_point_personal.to_f / @yfcase.lands.fourth.land_holding_point_all.to_f), unit: "", precision: 2) %></td>
+            <td><%= @yfcase.lands.first.blank? ? "" : number_to_currency(@yfcase.lands.first.land_area.to_f, unit: "", precision: 2) %></td>
+            <td><%= @yfcase.lands.second.blank? ? "" : number_to_currency(@yfcase.lands.second.land_area.to_f, unit: "", precision: 2) %></td>
+            <td><%= @yfcase.lands.third.blank? ? "" : number_to_currency(@yfcase.lands.third.land_area.to_f, unit: "", precision: 2) %></td>
+            <td><%= @yfcase.lands.fourth.blank? ? "" : number_to_currency(@yfcase.lands.fourth.land_area.to_f, unit: "", precision: 2) %></td>
             <td></td>
             <td></td>
             <td></td>
@@ -858,10 +858,10 @@
         </tr>
         <tr>
             <th>面 積<br>(平方公尺)</th>
-            <td><%= @yfcase.builds.first.blank? ? "" : number_to_currency((@yfcase.builds.first.build_area.to_f * @yfcase.builds.first.build_holding_point_personal.to_f / @yfcase.builds.first.build_holding_point_all.to_f), unit: "", precision: 2) %></td>
-            <td><%= @yfcase.builds.second.blank? ? "" : number_to_currency((@yfcase.builds.second.build_area.to_f * @yfcase.builds.second.build_holding_point_personal.to_f / @yfcase.builds.second.build_holding_point_all.to_f), unit: "", precision: 2) %></td>
-            <td><%= @yfcase.builds.third.blank? ? "" : number_to_currency((@yfcase.builds.third.build_area.to_f * @yfcase.builds.third.build_holding_point_personal.to_f / @yfcase.builds.third.build_holding_point_all.to_f), unit: "", precision: 2) %></td>
-            <td><%= @yfcase.builds.fourth.blank? ? "" : number_to_currency((@yfcase.builds.fourth.build_area.to_f * @yfcase.builds.fourth.build_holding_point_personal.to_f / @yfcase.builds.fourth.build_holding_point_all.to_f), unit: "", precision: 2) %></td>
+            <td><%= @yfcase.builds.first.blank? ? "" : number_to_currency(@yfcase.builds.first.build_area.to_f, unit: "", precision: 2) %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : number_to_currency(@yfcase.builds.second.build_area.to_f, unit: "", precision: 2) %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : number_to_currency(@yfcase.builds.third.build_area.to_f, unit: "", precision: 2) %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : number_to_currency(@yfcase.builds.fourth.build_area.to_f, unit: "", precision: 2) %></td>
         </tr>
         <tr>
             <th colspan="2">(11)權 利 範 圍</th>
