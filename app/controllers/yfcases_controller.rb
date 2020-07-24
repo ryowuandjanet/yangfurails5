@@ -1,6 +1,6 @@
 class YfcasesController < ApplicationController
   include ApplicationHelper
-  before_action :set_yfcase, only: [:edit, :update, :destroy, :deedtax, :yfratingscale, :realestateregistration, :complaint, :letter]
+  before_action :set_yfcase, only: [:edit, :update, :destroy]
   before_action :show_helper, only: [:edit, :update, :destroy, :deedtax, :yfratingscale, :realestateregistration, :complaint, :letter]
   before_action :authenticate_user!
 
@@ -130,7 +130,7 @@ class YfcasesController < ApplicationController
   end
 
   def yfratingscale
-
+    @yfcase = Yfcase.find(params[:id])
     respond_to do |format|
       format.html
       format.json
@@ -139,6 +139,7 @@ class YfcasesController < ApplicationController
   end
 
   def deedtax
+    @yfcase = Yfcase.find(params[:id])
     respond_to do |format|
       format.html
       format.json
@@ -147,6 +148,7 @@ class YfcasesController < ApplicationController
   end
 
   def realestateregistration
+    @yfcase = Yfcase.find(params[:id])
     respond_to do |format|
       format.html
       format.json
@@ -155,6 +157,7 @@ class YfcasesController < ApplicationController
   end
 
   def complaint
+    @yfcase = Yfcase.find(params[:id])
     respond_to do |format|
       format.html
       format.json
@@ -163,6 +166,7 @@ class YfcasesController < ApplicationController
   end
   
   def letter
+    @yfcase = Yfcase.find(params[:id])
     respond_to do |format|
       format.html
       format.json
