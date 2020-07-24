@@ -10,7 +10,7 @@
     body {
         /*楷體*/
         font-family: 'bkai00mp';
-        font-size: 20pt;
+        font-size: 18pt;
     }
     .table {
       padding-left:20px;
@@ -36,36 +36,55 @@
     .letterPDFAttachment td{
       padding:5px;
     }
+    .complaintTable{
+      border-collapse:collapse;
+      border:none;
+      width:100%;
+    }
+    .complaintTable td{
+      padding-top:10px;
+      border:none;
+    }
     </style>
 </head>
 
 <body>
+  <% @complaintLitigationAgent = @yfcase.complaintLitigationAgent.to_s %>
     <h2 style="text-align:center;">民事起訴狀（裁判分割共有物）</h2>
     <h3>訴訟標的：新臺幣(以下同)<span style="border-bottom: 4px double blue;"><%= @yfcase.floor_price_1 %></span>元</h3>
-    <table class="table" style="padding:0px;margin:20px 0px;">
+    <table class="complaintTable" style="padding:0px;margin:20px 0px;">
       <tr>
         <% if @yfcase.personnals.where(is_creditor: true).count >= 1 %>
           <% @yfcase.personnals.where(is_creditor: true).each do |creditor| %>
-            <td style="width:25%;">
-              原告：<span style="border-bottom: 3px double blue;"><%= creditor.name %></span>
-            </td>
-            <td>
-              住：<span style="border-bottom: 3px double blue;"><%= address(creditor.person_country,creditor.person_township,creditor.person_village,creditor.person_neighbor,creditor.person_street,creditor.person_section,creditor.person_lane,creditor.person_alley,creditor.person_number,creditor.person_floor) %></span>
-              <br>
-              電話：<span style="border-bottom: 4px double blue;"><%= @yfcase.personnals.where(is_creditor: true).count >= 1 ? @yfcase.personnals.where(is_creditor: true).first.mobile_phone : ' ' %></span>
-            </td>
+            <tr>
+              <td colspan="2">
+                原告：<span style="border-bottom: 3px double blue;">揚富開發有限公司(法定代理人：陳美純)</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="width:8.2%;"></td>
+              <td>
+                住址：<span style="border-bottom: 3px double blue;">臺中市大里區新仁路三段49號1樓</span>
+                <br>
+                電話：<span style="border-bottom: 4px double blue;">0921-765-023</span>
+              </td>
+            </tr>
           <% end %>
         <% end %>
       </tr>
       <tr>
         <% if @yfcase.personnals.where(is_debtor: true).count >= 1 %>
           <% @yfcase.personnals.where(is_debtor: true).each do |debtor| %>
-            <td>
+            <td colspan="2">
               被告：<span style="border-bottom: 4px double blue;"><%= debtor.name %></span>
             </td>
-            <td>
-              住：<span style="border-bottom: 4px double blue;"><%= address(debtor.person_country,debtor.person_township,debtor.person_village,debtor.person_neighbor,debtor.person_street,debtor.person_section,debtor.person_lane,debtor.person_alley,debtor.person_number,debtor.person_floor) %></span><br>
-            </td>
+            <tr>
+              <td></td>
+              <td>
+                住址：<span style="border-bottom: 4px double blue;"><%= address(debtor.person_country,debtor.person_township,debtor.person_village,debtor.person_neighbor,debtor.person_street,debtor.person_section,debtor.person_lane,debtor.person_alley,debtor.person_number,debtor.person_floor) %></span><br>
+                電話：<span style="border-bottom: 4px double blue;"><%= @yfcase.personnals.where(is_debtor: true).count >= 1 ? @yfcase.personnals.where(is_debtor: true).first.mobile_phone : ' ' %></span>
+              </td>
+            </tr>
           <% end %>
         <% end %>
       </tr>
@@ -326,7 +345,7 @@
             <tr>
               <td style="width:80%;height:70px;text-align:right;font-size:36px;">具 狀 人</td>
               <td style="width:20%;height:70px;text-align:center;font-size:36px;">
-                <%= @yfcase.personnals.where(is_creditor: true).count >= 1 ? @yfcase.personnals.where(is_creditor: true).first.name : ' ' %>
+                <%= @yfcase.complaintLitigationAgent.blank? ? '' : User.find(@complaintLitigationAgent).full_name %>
               </td>
             </tr>
         </table>

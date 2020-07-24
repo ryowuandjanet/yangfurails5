@@ -53,7 +53,7 @@
 </head>
 
 <body>
-    
+    <% @realestateregistrationRealEstateAgent = @yfcase.realestateregistrationRealEstateAgent.to_s %>
     <!-- 前導資料 -->
     <div class="firstdata">
     	<div style="float: left;width: 33.33%;">
@@ -282,9 +282,7 @@
             <td style="border:1px solid black;width:3%;" rowspan="8">(8)<br>聯<br>絡<br>方<br>式</td>
             <td style="border:1px solid black;width:14%;height:28px;">權利人電話</td>
             <td style="border:1px solid black;width:15%;color:blue;">
-                <% if @yfcase.personnals.where(is_creditor: true).first.mobile_phone.present? %>
-                    <%= @yfcase.personnals.where(is_creditor: true).first.mobile_phone %>
-                <% end %>
+               待提供
             </td>
         </tr>
         <tr>
@@ -427,147 +425,64 @@
                     權利人
                 <% end %>
             </td>
-            <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_creditor: true).first.name.present? %>
-                    <%= @yfcase.personnals.where(is_creditor: true).first.name %>
-                <% end %>                
-            </td>
-            <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_creditor: true).first.birthday.present? %>
-                    <%= @yfcase.personnals.where(is_creditor: true).first.birthday.year %>年
-                    <%= @yfcase.personnals.where(is_creditor: true).first.birthday.month %>月
-                    <%= @yfcase.personnals.where(is_creditor: true).first.birthday.day %>日
-                <% end %>  
-            </td>
-            <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_creditor: true).first.identity_card.present? %>
-                    <%= @yfcase.personnals.where(is_creditor: true).first.identity_card %>
-                <% end %>  
-            </td>
-            <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_creditor: true).first.person_country.present? %>
-                    <%= @yfcase.personnals.where(is_creditor: true).first.person_country %>
-                <% end %> 
-            </td>
-            <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_creditor: true).first.person_township.present? %>
-                    <%= @yfcase.personnals.where(is_creditor: true).first.person_township %>
-                <% end %> 
-            </td>
-            <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_creditor: true).first.person_village.present? %>
-                    <%= @yfcase.personnals.where(is_creditor: true).first.person_village %>
-                <% end %> 
-            </td>
-            <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_creditor: true).first.person_neighbor.present? %>
-                    <%= @yfcase.personnals.where(is_creditor: true).first.person_neighbor %>
-                <% end %> 
-            </td>
-            <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_creditor: true).first.person_street.present? %>
-                    <%= @yfcase.personnals.where(is_creditor: true).first.person_street %>
-                <% end %>
-            </td>
-            <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_creditor: true).first.person_section.present? %>
-                    <%= @yfcase.personnals.where(is_creditor: true).first.person_section %>
-                <% end %>
-            </td>
-            <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_creditor: true).first.person_lane.present? %>
-                    <%= @yfcase.personnals.where(is_creditor: true).first.person_lane %>
-                <% end %>
-            </td>
-            <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_creditor: true).first.person_alley.present? %>
-                    <%= @yfcase.personnals.where(is_creditor: true).first.person_alley %>
-                <% end %>
-            </td>
-            <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_creditor: true).first.person_number.present? %>
-                    <%= @yfcase.personnals.where(is_creditor: true).first.person_number %>
-                <% end %>
-            </td>
-            <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_creditor: true).first.person_floor.present? %>
-                    <%= @yfcase.personnals.where(is_creditor: true).first.person_floor %>
-                <% end %>
-            </td>
+            <td style="border:1px solid black;">揚富開發有限公司(法定代理人：陳美純)</td>
+            <td style="border:1px solid black;">待提供</td>
+            <td style="border:1px solid black;">待提供</td>
+            <td style="border:1px solid black;">臺中市</td>
+            <td style="border:1px solid black;">大里區</td>
+            <td style="border:1px solid black;"></td>
+            <td style="border:1px solid black;"></td>
+            <td style="border:1px solid black;">新仁路</td>
+            <td style="border:1px solid black;">三</td>
+            <td style="border:1px solid black;"></td>
+            <td style="border:1px solid black;"></td>
+            <td style="border:1px solid black;">49</td>
+            <td style="border:1px solid black;">1</td>
             <td style="border:1px solid black;"></td>
         </tr>
+        <%= @yfcase.realestateregistrationRealEstateAgent.present? %>
         <tr style="height:28px;color:blue;">
             <td style="border:1px solid black;height:50px;">
-                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.name.present? %>
-                    契稅代理人
-                <% end %>
+                <%= @yfcase.realestateregistrationRealEstateAgent.present? ? "契稅代理人" : '' %>
             </td>
             <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.name.present? %>
-                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.name %>
-                <% end %>                
+                <%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).full_name : '' %>              
             </td>
             <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.birthday.present? %>
-                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.birthday.year %>年
-                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.birthday.month %>月
-                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.birthday.day %>日
-                <% end %>  
+                <%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userBirthday : '' %> 
             </td>
             <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.identity_card.present? %>
-                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.identity_card %>
-                <% end %>  
+                <%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userIdentityCard : '' %>   
             </td>
             <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_country.present? %>
-                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_country %>
-                <% end %> 
+                <%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userCountry : '' %>  
             </td>
             <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_township.present? %>
-                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_township %>
-                <% end %> 
+                <%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userTownship : '' %>   
             </td>
             <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_village.present? %>
-                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_village %>
-                <% end %> 
+                <%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userVillage : '' %>  
             </td>
             <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_neighbor.present? %>
-                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_neighbor %>
-                <% end %> 
+                <%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userNeighbor : '' %>  
             </td>
             <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_street.present? %>
-                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_street %>
-                <% end %>
+                <%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userStreet : '' %>
             </td>
             <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_section.present? %>
-                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_section %>
-                <% end %>
+                <%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userSection : '' %> 
             </td>
             <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_lane.present? %>
-                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_lane %>
-                <% end %>
+                <%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userLane : '' %> 
             </td>
             <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_alley.present? %>
-                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_alley %>
-                <% end %>
+                <%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userAlley : '' %>  
             </td>
             <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_number.present? %>
-                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_number %>
-                <% end %>
+                <%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userNumber : '' %> 
             </td>
             <td style="border:1px solid black;">
-                <% if @yfcase.personnals.where(is_deed_tax_agent: true).first.person_floor.present? %>
-                    <%= @yfcase.personnals.where(is_deed_tax_agent: true).first.person_floor %>
-                <% end %>
+                <%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userFloor : '' %>
             </td>
             <td style="border:1px solid black;"></td>
         </tr>

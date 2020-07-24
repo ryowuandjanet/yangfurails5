@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_16_031100) do
+ActiveRecord::Schema.define(version: 2020_07_24_025125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -213,6 +213,23 @@ ActiveRecord::Schema.define(version: 2020_07_16_031100) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "full_name"
+    t.string "userIdentityCard"
+    t.date "userBirthday"
+    t.string "userLocalPhone"
+    t.string "userMobilePhone"
+    t.string "userNotes"
+    t.string "userCountry"
+    t.string "userTownship"
+    t.string "userVillage"
+    t.string "userNeighbor"
+    t.string "userStreet"
+    t.string "userSection"
+    t.string "userLane"
+    t.string "userAlley"
+    t.string "userNumber"
+    t.string "userFloor"
+    t.string "userIdentityCode"
+    t.string "userPublicOrPrivate"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -353,6 +370,9 @@ ActiveRecord::Schema.define(version: 2020_07_16_031100) do
     t.string "exhibit3"
     t.string "exhibit4"
     t.date "tabulationDate"
+    t.string "isMobileOrDesktop"
+    t.string "realestateregistrationRealEstateAgent"
+    t.string "complaintLitigationAgent"
     t.index ["country_id"], name: "index_yfcases_on_country_id"
     t.index ["township_id"], name: "index_yfcases_on_township_id"
     t.index ["user_id"], name: "index_yfcases_on_user_id"

@@ -53,11 +53,11 @@
 			<td style="border:1px solid black;width:18px;">F</td>
 		</tr>
 	</table>
-
+	
 	<!-- (1)房屋稅籍編號/(2)建號/(3)移轉房屋坐落 -->
 	<table style="border-collapse: collapse;font-size:12pt;text-align: center;">
 		<tr>
-			<td style="border:1px solid black;width:102px;text-align:left;" rowspan="2">(1)房　　屋<br>&nbsp;&nbsp;&nbsp;稅籍編號</td>
+			<td style="border:1px solid black;width:102px;text-align:leftl" rowspan="2">(1)房　　屋<br>&nbsp;&nbsp;&nbsp;稅籍編號</td>
 			<td style="border:1px solid black;" colspan="2">鄉鎮<br>市區</td>
 			<td style="border:1px solid black;" colspan="2">村里</td>
 			<td style="border:1px solid black;" colspan="4">冊頁(棟)</td>
@@ -68,7 +68,7 @@
                 	<%= @yfcase.big_section %><%= build.build_number %><br>
         		<% end %>
         	</td>
-			<td style="border:1px solid black;width:70px;" rowspan="2">(3)移　　轉<br>&nbsp;&nbsp;&nbsp;房屋坐落</td>
+			<td style="border:1px solid black;width:70px;font-size:10pt;" rowspan="2">(3)移　　轉<br>&nbsp;&nbsp;&nbsp;房屋坐落</td>
 			<td style="border:1px solid black;width:288px;color:blue;" rowspan="2">
 				<%= @yfcase.township.try(:zip_code) %> <%= @yfcase.country.try(:name) %><%= @yfcase.township.try(:name) %><%= @yfcase.other_address %>
 			</td>
@@ -148,10 +148,11 @@
 	</table>
 
 	<!-- (7)茲委託 -->
+	<% @username=@yfcase.deedtaxChargeDaffairesTaxDeclarant.to_i %>
 	<table style="border-collapse: collapse;font-size:12px;text-align: center;">
 		<tr style="height:25px;">
 			<td style="border-width:1px;border-style:none none none solid;width:70px;text-align: left;" rowspan="2">(7)茲委託</td>
-			<td style="width:102px;color:blue;" rowspan="2"><%= @yfcase.deedtaxChargeDaffairesTaxDeclarant %></td>
+			<td style="width:102px;color:blue;" rowspan="2"><%= User.find(@username).full_name %></td>
 			<td style="width:25px;">先生</td>
 			<td style="border-width:1px;border-style:none solid none none;width:675px;" rowspan="2">代辦契稅申報、領取契稅繳款書或免稅證明書、前業主應繳未繳之房屋稅繳款書及領回證件等事項。</td>
 		</tr>
@@ -161,6 +162,8 @@
 	</table>
 	
 	<!-- (8)原所有權人 -->
+	<!--原所有權人：個人持分 / 所有持分-->
+	<% @originalPersonAndAllHoldingPoint =@yfcase.personnals.where(is_original_owner: true).first.right_share_person.to_s + "/" + @yfcase.personnals.where(is_original_owner: true).first.right_share_all.to_s %>	
 	<table style="border-collapse: collapse;font-size:12px;text-align:center;">
 		<tr>
 			<td style="border:1px solid black;width:102px;text-align:left;" rowspan="6">(8)原所有權人</td>
@@ -205,7 +208,7 @@
 			<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.person_number %></td>
 			<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.person_floor %></td>
 			<td style="border:1px solid black;color:blue;" rowspan="2">
-				<%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' :  @yfcase.personnals.where(is_original_owner: true).first.right_share_person.to_s + "/" + @yfcase.personnals.where(is_original_owner: true).first.right_share_all.to_s %>
+				<%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' :  @originalPersonAndAllHoldingPoint %>
 			</td>
 			<td style="border:1px solid black;text-align:left;" rowspan="12">
 				&#9744一般案件<br/>
@@ -254,29 +257,29 @@
 		<tr style="height:20px;">
 			<td style="border:1px solid black;text-align:left;" rowspan="4">(9)新所有權人<br>(如為持分共有<br>房屋，請另填寫<br>第(16)欄)</td>
 
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.name %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><span style="color:blue;">揚富開發有限公司(法定代理人：陳美純)</span></td>
 				<td style="border:1px solid black;color:blue;" rowspan="2"></td>
 				<td style="border:1px solid black;color:blue;" colspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.identity_card %></td>
 				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.identity_code %></td>
 				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.public_or_private %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.person_country %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.person_township %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2">臺中市</td>
+				<td style="border:1px solid black;color:blue;" rowspan="2">大里區</td>
 				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.person_village %></td>
 				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.person_neighbor %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.person_street %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.person_section %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2">新仁路</td>
+				<td style="border:1px solid black;color:blue;" rowspan="2">三</td>
 				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.person_lane %></td>
 				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.person_alley %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.person_number %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.person_floor %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2">49</td>
+				<td style="border:1px solid black;color:blue;" rowspan="2">1</td>
 				<td style="border:1px solid black;color:blue;" rowspan="2">
-					<%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.right_share_person.to_s + "/" + @yfcase.personnals.where(is_new_owner: true).first.right_share_all.to_s %>
+					<%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' :  @originalPersonAndAllHoldingPoint %>
 				</td>
 
 		</tr>
 		<tr style="height:20px;">
 			<td style="border:1px solid black;">電話</td>
-			<td style="border:1px solid black;font-size:7pt;color:blue;"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.mobile_phone %></td>
+			<td style="border:1px solid black;font-size:7pt;color:blue;">0921765023</td>
 		</tr>
 		<tr style="height:20px;">
 			<td style="border:1px solid black;" rowspan="2"></td>
@@ -305,29 +308,29 @@
 		<!-- (10)契稅代理人 -->
 		<tr style="height:20px;">
 			<td style="border:1px solid black;text-align:left;" rowspan="2">(10)契稅代理人</td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.name %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).full_name %></td>
 				<td style="border:1px solid black;color:blue;" rowspan="2"></td>
-				<td style="border:1px solid black;color:blue;" colspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.identity_card %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.identity_code %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.public_or_private %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_country %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_township %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_village %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_neighbor %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_street %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_section %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_lane %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_alley %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_number %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.person_floor %></td>
+				<td style="border:1px solid black;color:blue;" colspan="2"><%= User.find(@username).userIdentityCard %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userIdentityCode %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userPublicOrPrivate %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userCountry %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userTownship %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userVillage %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userNeighbor %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userStreet %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userSection %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userLane %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userAlley %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userNumber %></td>
+				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userFloor %></td>
 				<td style="border:1px solid black;color:blue;" rowspan="2">
-					<%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.right_share_person.to_s + "/" + @yfcase.personnals.where(is_deed_tax_agent: true).first.right_share_all.to_s %>
+					<%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' :  @originalPersonAndAllHoldingPoint %>
 				</td>
 
 		</tr>
 		<tr style="height:25px;">
 			<td style="border:1px solid black;">電話</td>
-			<td style="border:1px solid black;font-size:7pt;color:blue;"><%= @yfcase.personnals.where(is_deed_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_deed_tax_agent: true).first.mobile_phone %></td>
+			<td style="border:1px solid black;color:blue;padding:0px;margin:0px;font-size:10pt;"><%= User.find(@username).userMobilePhone %></td>
 		</tr>
 
 		<!-- (11)在國內房屋稅納稅代理人 -->

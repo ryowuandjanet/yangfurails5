@@ -310,7 +310,7 @@ class YfcasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def yfcase_params
-      params.require(:yfcase).permit(:case_number, :company, :adv_find_condition,\
+      params.require(:yfcase).permit(:case_number, :company, :adv_find_condition, :isMobileOrDesktop, \
         :country_id, :township_id, :big_section, :small_section, \
         :other_address, :co_owner, \
         :auction_day_1,:auction_day_2,:auction_day_3,:auction_day_4, \
@@ -326,6 +326,7 @@ class YfcasesController < ApplicationController
         :auction_record_title,:auction_record_link,:other_notes,:survey_resolution,:final_decision, \
         :occupy,:register,:parking_space,:management_fee,:rent,:leak,:easy_parking,:railway,:vegetable_market,:supermarket,:school,:park,:post_office,:main_road,:water_and_power_failure,:good_vision, :final_decision_date, \
         :active_result,:active_result_date,:priority_purchase_result,:target_number, \
+        :realestateregistrationRealEstateAgent, :complaintLitigationAgent, \
         :deedtaxDateOfDeed, :deedtaxDeclarationDate, :deedtaxTransferPrice, :deedtaxChargeDaffairesTaxDeclarant, :deedtaxDebtTaxPaymentReceiptMethod, :deedtaxClosedNewsletter, :deedtaxUnderreportedDays, :deedtaxRemark, \
         :cause_data,:application_for_registration,:reason_for_registration,:marking_and_application_rights,:attached_Document_Content_1,:number_of_attached_quantity_1,:attached_Document_Content_2,:number_of_attached_quantity_2,:attached_Document_Content_3,:number_of_attached_quantity_3,:registration_notes, \
         :deedtaxBuildingTransferLevel1, :deedtaxBuildingTransferLevel2, :deedtaxBuildingTransferLevel3, :deedtaxBuildingTransferLevel4, :deedtaxBuildingTransferLevel5, :deedtaxBuildingTransferLevel6, :deedtaxBuildingTransferLevel7, \

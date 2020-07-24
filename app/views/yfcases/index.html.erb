@@ -1,6 +1,17 @@
 <p id="notice"><%= notice %></p>
+<style>
+@media(min-width: 368px){
+	h1 {
+	  font-size:40pt;
+	}
+	h3 {
+	  font-size:30pt;
+	}
+}
 
+</style>
 <h1 style="text-align:center;">案號清單</h1>
+
 <div style="margin-bottom:3px;">
   <h3>篩選條件</h3>
   <table>
@@ -14,8 +25,88 @@
       <% end %>
     </tr>
   </table>
-</div>
+</div>  
 
+
+<% @yfcases.each do |yfcase| %>
+<div class="card" style="background:#f0f0f0;" hidden>
+  <div class="card-header bg-info" style="color:white;font-size:20pt;padding:2px 5px;">
+    <table>
+      <tr>
+        <td>
+          <%= link_to yfcase_path(yfcase) do %>
+            <span style="color:red;"><%= yfcase.case_number %></span>
+          <% end %>
+        </td>
+        <td class="float-right">
+          <table>
+            <% if yfcase.priority_purchase_result.present? && yfcase.priority_purchase_result == "無人優購" %>
+            <tr>
+              <td>
+                <%= link_to yfratingscale_yfcase_path(yfcase,format: "pdf") do %>
+                  <div class="y10000">評</div>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to deedtax_yfcase_path(yfcase,format: "pdf") do %>
+                  <div class="y20000">契</div>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to realestateregistration_yfcase_path(yfcase,format: "pdf") do %>
+                  <div class="y30000">動</div>
+                <% end %>
+                </td>
+              <td>
+                <%= link_to complaint_yfcase_path(yfcase,format: "pdf") do %>
+                  <div class="y40000">狀</div>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to letter_yfcase_path(yfcase,format: "pdf") do %>
+                  <div class="y50000">函</div>       
+                <% end %>
+              </td>
+            </tr>
+            <% else %>
+            <tr>
+              <td>
+                <%= link_to yfratingscale_yfcase_path(yfcase,format: "pdf") do %>
+                  <div class="y10000">評</div>
+                <% end %>
+              </td>
+            </tr>
+            <% end %>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="card-body">
+    <table style="border-collapse:collapse; border:1px solid red;font-size:13pt;width:100%">
+       <tr style="border:1px solid grey;">
+          <th style="width:35%">最終判定：<span style="color:blue;"><%= yfcase.final_decision.blank? ? '未判定' : yfcase.final_decision %></span></th>
+           <th colspan="2">地址:<span style="color:blue;"><%= yfcase.township.try(:zip_code) %> <%= yfcase.country.try(:name) %><%= yfcase.township.try(:name) %><%= yfcase.other_address %></span></th>
+       </tr>
+       <tr style="border:1px solid grey;">
+        <th>執行結果：<span style="color:blue;"><%= yfcase.active_result %></span></th>
+          <th style="width:5%"></th>
+           <th>區域負責人:<span style="color:blue;"><%= yfcase.user.first_name + yfcase.user.last_name %></span></th>
+
+       </tr>
+        <tr style="border:1px solid grey;">
+          <th>得標結果：<span style="color:blue;"><%= yfcase.priority_purchase_result %></span></th>
+          <th></th>
+
+       </tr>
+
+    </table>
+  </div>
+</div>
+<% end %>
+
+
+<!--若是要隱藏這個區塊 table class="content-table" hidden-->
 <table class="content-table">
   <thead>
     <tr>

@@ -5,6 +5,14 @@
   .card-header {
     padding:2px;
   }
+  .card{
+    background-color:Gainsboro;
+    border:1px solid black;
+  }
+  .card-body{
+    background-color:white;
+  }
+
 </style>
 <%= form_with(model: yfcase, local: true) do |f| %>
 <% if yfcase.errors.any? %>
@@ -22,7 +30,6 @@
 <% end %>
 
 <div class="accordion" id="accordionExample">
-  
     <% if yfcase.priority_purchase_result.present? && yfcase.priority_purchase_result == "無人優購" %>
       <!--無人優購後顯示：不動產登記-->
       <div class="card">
@@ -144,6 +151,15 @@
                   <%= f.text_field :registration_notes , placeholder: '在此輸入登記備註', class: 'form-control' %>
                 </div>
               </div>
+              
+              <div class="form-row">
+                <div class="form-group col-md-2">
+                  <%= f.label :realestateregistrationRealEstateAgent,"代理人" %>
+                </div>
+                <div class="form-group col">
+                  <%= f.collection_select :realestateregistrationRealEstateAgent, User.order(:full_name), :id, :full_name, {:include_blank => true}, { class: 'form-control'} %>
+                </div>
+              </div>
 
             </div>
           </div>
@@ -193,7 +209,7 @@
                 <%= f.label :deedtaxChargeDaffairesTaxDeclarant,"代辦契稅申報人" %>
               </div>
               <div class="form-group col">
-                <%= f.text_field :deedtaxChargeDaffairesTaxDeclarant , placeholder: '在此輸入代辦契稅申報人', class: 'form-control' %>
+                <%= f.collection_select :deedtaxChargeDaffairesTaxDeclarant, User.order(:full_name), :id, :full_name, {:include_blank => true}, {  class: 'form-control'} %>
               </div>
             </div>
             
@@ -556,9 +572,14 @@
                 <%= f.text_field :tabulationDate,  class: "datepicker form-control" %>
               </div>
             </div>
-            
-            
-     
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <%= f.label :complaintLitigationAgent, "訴訟代理人" %>
+              </div>
+              <div class="form-group col">
+                <%= f.collection_select :complaintLitigationAgent, User.order(:full_name), :id, :full_name, {:include_blank => true}, { class: 'form-control'} %>
+              </div>
+            </div>
           </div>
         </div>
       </div>      
@@ -567,7 +588,7 @@
     
     <!-- 基本資料   -->
     <div class="card">
-        <div class="card-header" id="headingOne" style="background-color:Azure;border:1px solid #888888;">
+        <div class="card-header" id="headingOne">
             <h2 class="mb-0">
                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     基本資料
@@ -752,8 +773,7 @@
         </div>
     </div>
 
-
-     <!-- 建物查檢表 -->
+    <!-- 建物查檢表 -->
     <div class="card">
         <div class="card-header" id="headingFive">
             <h2 class="mb-0">
@@ -841,7 +861,8 @@
 
             </div>
         </div>
-    </div>   
+    </div> 
+    
     <!-- 物件資料 -->
     <div class="card">
         <div class="card-header" id="headingSeven">
@@ -867,6 +888,7 @@
             </div>
         </div>
     </div>
+    
     <!-- 最終判定 -->
     <div class="card">
         <div class="card-header" id="headingEight">
@@ -876,8 +898,8 @@
                 </button>
             </h2>
         </div>
-        <div id="collapseEight" class="collapse show" aria-labelledby="headingEight" data-parent="#accordionExample">
-            <div class="card-body">
+        <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
+            <div class="card-body" style="border:1px solid black;">
                 <table id="finaldecision">
                   <tr>
                     <th>
@@ -923,8 +945,8 @@
     </div>
     <br>
     <div class="form-group">
-        <%= f.submit "更新YF評量表", class: "btn btn-outline-dark" %>
-        <%= link_to "返回", @yfcase, class: "btn btn-outline-secondary" %>
+        <%= f.submit "更新YF評量表", class: "btn btn-success" %>
+        <%= link_to "返回", @yfcase, class: "btn btn-secondary" %>
     </div>
     <%= f.hidden_field :adv_find_condition, :value => "#{@yfcase.case_number}/#{@yfcase.final_decision}/#{@yfcase.user_id}/#{@yfcase.country_id}" %>
 </div>
