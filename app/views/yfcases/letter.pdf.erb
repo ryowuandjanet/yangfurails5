@@ -584,7 +584,7 @@
             </tr>
             <tr style="background-color: #ccc;">
                 <th style="border:1px solid black;" rowspan="2">共有人設籍</th>
-                <th style="border:1px solid black;" colspan="2">系爭房地應有部分比例</th>
+                <th style="border:1px solid black;" colspan="2"><%= @yfcase.country.try(:name) %><%= @yfcase.township.try(:name) %><%= @yfcase.other_address %>房地應有部分比例</th>
             </tr>
             <tr>
                 <th style="border:1px solid black;background-color: LightGoldenRodYellow;">

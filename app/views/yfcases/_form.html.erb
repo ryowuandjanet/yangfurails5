@@ -63,22 +63,22 @@
               
               <div class="form-row">
                 <div class="form-group col-md-2">
+                  <%= f.label :realestateregistrationRealEstateAgent,"代理人" %>
+                </div>
+                <div class="form-group col">
+                  <%= f.collection_select :realestateregistrationRealEstateAgent, User.order(:full_name), :id, :full_name, {:include_blank => true}, { class: 'form-control'} %>
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group col-md-2">
                   <%= f.label :cause_data, "原因發生日期" %>
                 </div>
                 <div class="form-group col">
                   <%= f.text_field :cause_data,  class: "datepicker form-control" %>
                 </div>
               </div>
-              
-              <div class="form-row">
-                <div class="form-group col-md-2">
-                  <%= f.label :application_for_registration, "申請登記事由" %>
-                </div>
-                <div class="form-group col">
-                  <%= f.select(:application_for_registration,Yfcase::APPLICATION_FOR_REGISTRATION_LIST, {}, {  :prompt => '請輸入狀態', class: 'form-control'}) %>
-                </div>
-              </div>
-              
+
               <div class="form-row">
                 <div class="form-group col-md-2">
                   <%= f.label :reason_for_registration,"登記原因" %>
@@ -87,77 +87,13 @@
                   <%= f.select(:reason_for_registration,Yfcase::REASON_FOR_REGISTRATION_LIST, {}, {  :prompt => '請輸入狀態', class: 'form-control'}) %>
                 </div>
               </div>
-              
-              <div class="form-row">
-                <div class="form-group col-md-2">
-                  <%= f.label :marking_and_application_rights,"標示及申請權利內容" %>
-                </div>
-                <div class="form-group col">
-                  <%= f.select(:marking_and_application_rights,Yfcase::MARKING_AND_APPLICATION_RIGHTS_LIST, {}, {  :prompt => '請輸入狀態', class: 'form-control'}) %>
-                </div>
-              </div>
-              
-              <div class="form-row">
-                <div class="form-group col-md-2">
-                  <%= f.label :attached_Document_Content_1,"附繳證件內容1" %>
-                </div>
-                <div class="form-group col-md-6">
-                  <%= f.text_field :attached_Document_Content_1 , placeholder: '在此輸入附繳證件內容1', class: 'form-control' %>
-                </div>
-                <div class="form-group col-md-1">
-                  <%= f.label :number_of_attached_quantity_1,"數量" %>
-                </div>
-                <div class="form-group col">
-                  <%= f.number_field :number_of_attached_quantity_1, in: 0..100, :required => true, class: "form-control" %>
-                </div>
-              </div>
-              
-              <div class="form-row">
-                <div class="form-group col-md-2">
-                  <%= f.label :attached_Document_Content_2,"附繳證件內容2" %>
-                </div>
-                <div class="form-group col-md-6">
-                  <%= f.text_field :attached_Document_Content_2 , placeholder: '在此輸入附繳證件內容2', class: 'form-control' %>
-                </div>
-  
-                <div class="form-group col-md-1">
-                  <%= f.label :number_of_attached_quantity_2,"數量" %>
-                </div>
-                <div class="form-group col">
-                  <%= f.number_field :number_of_attached_quantity_2, in: 0..100, :required => true, class: "form-control" %>
-                </div>
-              </div>
-              
-              <div class="form-row">
-                <div class="form-group col-md-2">
-                  <%= f.label :attached_Document_Content_3,"附繳證件內容3" %>
-                </div>
-                <div class="form-group col-md-6">
-                  <%= f.text_field :attached_Document_Content_3 , placeholder: '在此輸入附繳證件內容3', class: 'form-control' %>
-                </div>
-                <div class="form-group col-md-1">
-                  <%= f.label :number_of_attached_quantity_3,"數量" %>
-                </div>
-                <div class="form-group col">
-                  <%= f.number_field :number_of_attached_quantity_3, in: 0..100, :required => true, class: "form-control" %>
-                </div>
-              </div>
-              
+
               <div class="form-row">
                 <div class="form-group col-md-2">
                   <%= f.label :registration_notes,"登記備註" %>
                 </div>
                 <div class="form-group col">
                   <%= f.text_field :registration_notes , placeholder: '在此輸入登記備註', class: 'form-control' %>
-                </div>
-              </div>
-              
-              <div class="form-row">
-                <div class="form-group col-md-2">
-                  <%= f.label :realestateregistrationRealEstateAgent,"代理人" %>
-                </div>
-                <div class="form-group col">
-                  <%= f.collection_select :realestateregistrationRealEstateAgent, User.order(:full_name), :id, :full_name, {:include_blank => true}, { class: 'form-control'} %>
                 </div>
               </div>
 
@@ -634,6 +570,7 @@
                         <%= f.text_field :other_address , placeholder: '在此輸入其他地址資訊', class: 'form-control' %>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>

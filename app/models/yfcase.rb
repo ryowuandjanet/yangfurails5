@@ -27,7 +27,7 @@ class Yfcase < ApplicationRecord
 	MOBILE_DESKTOP_LIST=["手機","電腦"]
 	PRIORITY_PURCHASE_RESULT_LIST=[" ","等待優購","遭搶標","無人優購"]
 	APPLICATION_FOR_REGISTRATION_LIST=[" ","所有權第一次登記","所有權移轉登記","抵押權登記","抵押權塗銷登記","抵押權內容變更登記","標示變更登記"]
-	REASON_FOR_REGISTRATION_LIST=[" ","買賣","贈與","繼承","分割繼承","拍賣","共有物分割"]
+	REASON_FOR_REGISTRATION_LIST=[" ","買賣","拍賣"]
 	MARKING_AND_APPLICATION_RIGHTS_LIST=[" ","契約書","登記清冊","複丈結果通知書","建物測量成果圖"]
 	
 	DEEDTAX_DEBTTAX_PAYMENT_RECEIPT_METHOD=[" ","親領","郵寄"]
