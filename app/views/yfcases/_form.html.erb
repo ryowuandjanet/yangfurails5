@@ -335,14 +335,6 @@
               </div>
             </div>
             
-            <div class="form-row">
-              <div class="form-group col-md-2">
-                <%= f.label :deedtaxUnderreportedDays,"怠報日數" %>
-              </div>
-              <div class="form-group col">
-                <%= f.number_field :deedtaxUnderreportedDays, in: 0..1000, :required => true, class: "form-control" %>
-              </div>
-            </div>
             
             <div class="form-row">
               <div class="form-group col-md-2">
@@ -479,28 +471,7 @@
                 <%= f.text_field :deedtaxBuildingTransferArea6, class: 'form-control' %>
               </div>
             </div>
-            
-            <div class="form-row">
-              <div class="form-group col-md-1">
-                (7)層次
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferLevel7, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               構造
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferStructure7, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               面積
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferArea7, class: 'form-control' %>
-              </div>
-            </div>
-            
+
             <h2>移轉情形-公設</h2>
             <div class="form-row">
               <div class="form-group col-md-1">

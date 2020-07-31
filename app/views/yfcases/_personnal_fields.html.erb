@@ -1,8 +1,9 @@
 <div class="nested-fields">
   <div class="field" style="border:1px solid #888;">
       <table class="table" style="border-collapse: collapse;margin:0px;">
-        
-        <div class="form-row">
+        <div>
+
+          <div class="form-row">
           <div class="form-group col-md-2">
             姓名
             <%= f.text_field :name, class: "form-control",placeholder: "姓名" %>
@@ -11,9 +12,10 @@
             地址
             <%= f.text_field :ownerFullAddress, class: "form-control",placeholder: "完整地址" %>
           </div>
+         
         </div>
         
-        <div class="form-row">
+          <div class="form-row">
           <div class="form-group col-md-3">
             土地權利持分(個人)
             <%= f.text_field :right_share_person, class: "form-control",placeholder: "土地權利持分(個人)" %>
@@ -30,6 +32,10 @@
             建物權利持分(所有)
             <%= f.text_field :personnalBuildHoldingPointAll, class: "form-control",placeholder: "建物權利持分(所有)" %>
           </div>
+        </div>
+        
+         <%= link_to_remove_association "刪除共有人", f, class: "btn btn-outline-danger btn-sm" %>
+        
         </div>
         
       </table>
