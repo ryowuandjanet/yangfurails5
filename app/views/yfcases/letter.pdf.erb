@@ -103,6 +103,10 @@
     .letterPDFAttachment td{
       padding:5px;
     }
+    .bluefont{
+		  color:blue;
+		  font-weight:bolder;
+		}
     </style>
 </head>
 
@@ -577,14 +581,22 @@
 
     <!-- 附表 -->
     <div class="page-break">
-        <table class="letterPDFAttachment" style="border-collapse: collapse;width:100%;font-size:30px;">
+        <table class="letterPDFAttachment">
             <tr>
                 <td colspan="2" style="font-size:30px;padding-bottom:10px;">附表：</td>
                 <td></td>
             </tr>
+            
             <tr style="background-color: #ccc;">
-                <th style="border:1px solid black;" rowspan="2">共有人設籍</th>
-                <th style="border:1px solid black;" colspan="2"><%= @yfcase.country.try(:name) %><%= @yfcase.township.try(:name) %><%= @yfcase.other_address %>房地應有部分比例</th>
+                <th style="border:1px solid black;" rowspan="3">
+                  共有人設籍<br>
+                  <small style="color:red;"><%= (@yfcase.co_owner == true ) ? '土地/建物共有人一致' : ' ' %></small>
+                </th>
+                <th style="border:1px solid black;" colspan="2"><%= @yfcase.country.try(:name) %><%= @yfcase.township.try(:name) %><%= @yfcase.other_address %><br>房地應有部分比例</th>
+            </tr>
+            <tr style="background-color: #eee;">
+              <th style="border:1px solid black;">地號</th>
+              <th style="border:1px solid black;">建號</th>
             </tr>
             <tr>
                 <th style="border:1px solid black;background-color: LightGoldenRodYellow;">
@@ -598,22 +610,91 @@
                     <% end %>
                 </th>
             </tr>
-            <% @yfcase.personnals.where(["is_land_owner = :is_land_owner or is_build_owner = :is_build_owner", { is_land_owner: true, is_build_owner: true }]).each do |debtor| %>
+            
+            <!--義務人 : 房地應有部分比例-->
+            <tr>
               <tr style="font-size:16pt;">
                 <td style="border:1px solid black;text-align:left;">
-                  <%= debtor.name %><br>
-                  <%= address(debtor.person_country,debtor.person_township,debtor.person_village,debtor.person_neighbor,debtor.person_street,debtor.person_section,debtor.person_lane,debtor.person_alley,debtor.person_number,debtor.person_floor) %>
+                  <span class="bluefont">
+                    <% if @yfcase.debtorName.present? %>
+                      <%= @yfcase.debtorName %> (義務人)<br>
+                      <%= @yfcase.debtorCountry+@yfcase.debtorTownship+@yfcase.debtorVillage+@yfcase.debtorNeighbor+@yfcase.debtorStreet+@yfcase.debtorSection+@yfcase.debtorLane+@yfcase.debtorAlley+@yfcase.debtorNumber+@yfcase.debtorFloor %>
+                    <% end %>
+                  </span>
                 </td>
                 <td style="border:1px solid black;text-align:center;">
-                  <%= debtor.right_share_person %>/<%= debtor.right_share_all %><br>
-                  <%= numberToChinese(debtor.right_share_all) %>分之<%= numberToChinese(debtor.right_share_person) %>
+                  <span class="bluefont">
+                    <% if @yfcase.debtorLandholdingpointperson.present? && @yfcase.debtorLandholdingpointall.present? %>
+                      <%= @yfcase.debtorLandholdingpointperson+"/"+@yfcase.debtorLandholdingpointall %><br>
+                      <%= numberToChinese(@yfcase.debtorLandholdingpointall.to_i)+"分之"+numberToChinese(@yfcase.debtorLandholdingpointperson.to_i) %><br>
+                    <% end %>
+                  </span>
                 </td>
                 <td style="border:1px solid black;text-align:center;">
-                  <%= debtor.personnalBuildHoldingPointPerson %>/<%= debtor.personnalBuildHoldingPointAll %><br>
-                  <%= numberToChinese(debtor.personnalBuildHoldingPointAll) %>分之<%= numberToChinese(debtor.personnalBuildHoldingPointPerson) %>
+                  <span class="bluefont">
+                    <% if @yfcase.debtorBuildholdingpointperson.present? && @yfcase.debtorBuildholdingpointall.present? %>
+                      <%= @yfcase.debtorBuildholdingpointperson+"/"+@yfcase.debtorBuildholdingpointall %><br>
+                      <%= numberToChinese(@yfcase.debtorBuildholdingpointall.to_i)+"分之"+numberToChinese(@yfcase.debtorBuildholdingpointperson.to_i) %><br>
+                    <% end %>
+                  </span>
+                </td>
+              </tr>
+            </tr>
+            <!--權利人 : 房地應有部分比例-->
+            <tr>
+              <tr style="font-size:16pt;">
+                <td style="border:1px solid black;text-align:left;">
+                  <span class="bluefont">
+                    <% if @yfcase.creditorName.present? %>
+                      <%= @yfcase.creditorName %> (權利人)<br>
+                      <%= @yfcase.creditorCountry+@yfcase.creditorTownship+@yfcase.creditorVillage+@yfcase.creditorNeighbor+@yfcase.creditorStreet+@yfcase.creditorSection+@yfcase.creditorLane+@yfcase.creditorAlley+@yfcase.creditorNumber+@yfcase.creditorFloor %>
+                    <% end %>
+                  </span>
+                </td>
+                <td style="border:1px solid black;text-align:center;">
+                  <span class="bluefont">
+                    <% if @yfcase.creditorLandholdingpointperson.present? && @yfcase.creditorLandholdingpointall.present? %>
+                      <%= @yfcase.creditorLandholdingpointperson+"/"+@yfcase.creditorLandholdingpointall %><br>
+                      <%= numberToChinese(@yfcase.creditorLandholdingpointall.to_i)+"分之"+numberToChinese(@yfcase.creditorLandholdingpointperson.to_i) %><br>
+                    <% end %>
+                  </span>
+                </td>
+                <td style="border:1px solid black;text-align:center;">
+                  <span class="bluefont">
+                    <% if @yfcase.creditorBuildholdingpointperson.present? && @yfcase.creditorBuildholdingpointall.present? %>
+                      <%= @yfcase.creditorBuildholdingpointperson+"/"+@yfcase.creditorBuildholdingpointall %><br>
+                      <%= numberToChinese(@yfcase.creditorBuildholdingpointall.to_i)+"分之"+numberToChinese(@yfcase.creditorBuildholdingpointperson.to_i) %><br>
+                    <% end %>
+                  </span>
+                </td>
+              </tr>
+            </tr>
+            
+            <!--共有人 : 房地應有部分比例-->
+            <% @yfcase.personnals.each do |debtor| %>
+              <tr style="font-size:16pt;">
+                <td style="border:1px solid black;text-align:left;">
+                  <span class="bluefont">
+                    <%= debtor.name %><br>
+                    <%= debtor.ownerFullAddress %>
+                  </span>
+                </td>
+                <td style="border:1px solid black;text-align:center;">
+                  <span class="bluefont">
+                    <%= debtor.right_share_person %>/<%= debtor.right_share_all %><br>
+                    <%= numberToChinese(debtor.right_share_all) %>分之<%= numberToChinese(debtor.right_share_person) %>
+                  </span>
+                </td>
+                <td style="border:1px solid black;text-align:center;">
+                  <span class="bluefont">
+                    <%= debtor.personnalBuildHoldingPointPerson %>/<%= debtor.personnalBuildHoldingPointAll %><br>
+                    <%= numberToChinese(debtor.personnalBuildHoldingPointAll) %>分之<%= numberToChinese(debtor.personnalBuildHoldingPointPerson) %>
+                  </span>
                 </td>
               </tr>
             <% end %>
+            
+            
     
             <tr>
                 <th style="border:1px solid black;">合計</th>

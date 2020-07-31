@@ -12,6 +12,16 @@
   .card-body{
     background-color:white;
   }
+  #relatedpersonnels {
+    width:100%;
+  }
+  .nested-fields .field{
+    padding:10px;
+  }
+  .nested-fields .form-row{
+    padding:0px;
+    margin:0px;
+  }
 
 </style>
 <%= form_with(model: yfcase, local: true) do |f| %>
@@ -96,9 +106,167 @@
                   <%= f.text_field :registration_notes , placeholder: '在此輸入登記備註', class: 'form-control' %>
                 </div>
               </div>
-
+              
+              <!--義務人-->
+              <h3>義務人 : <%= @yfcase.debtorName %></h3>
+              <div class="debtorInfo">
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :debtorIdentitycard , placeholder: '身分証或統一編號', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.date_field :debtorBirthday , placeholder: '生日', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :debtorLocallphone , placeholder: '市話', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :debtorMobilelphone , placeholder: '手機號碼', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <%= f.text_field :debtorNotes , placeholder: '備註', class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :debtorCountry , placeholder: '縣市', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :debtorTownship , placeholder: '鄉鎮', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :debtorVillage , placeholder: '村里', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-1">
+                    <%= f.text_field :debtorNeighbor , placeholder: '鄰', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :debtorStreet , placeholder: '街路', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-1">
+                    <%= f.text_field :debtorSection , placeholder: '段', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-1">
+                    <%= f.text_field :debtorLane , placeholder: '巷', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-1">
+                    <%= f.text_field :debtorAlley , placeholder: '弄', class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :debtorNumber , placeholder: '號', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :debtorFloor , placeholder: '樓', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :debtorLandholdingpointperson , placeholder: '土地個人持分', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :debtorLandholdingpointall , placeholder: '土地所有持分', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :debtorBuildholdingpointperson , placeholder: '建物個人持分', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :debtorBuildholdingpointall , placeholder: '建物所有持分', class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+                
+              <hr>
+                
+              <!--權利人-->
+              <h3>權利人 : <%= @yfcase.creditorName %></h3>
+              <div class="creditorInfo">
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :creditorIdentitycard , placeholder: '身分証或統一編號', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.date_field :creditorBirthday , placeholder: '生日', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :creditorLocallphone , placeholder: '市話', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :creditorMobilelphone , placeholder: '手機號碼', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <%= f.text_field :creditorNotes , placeholder: '備註', class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :creditorCountry , placeholder: '縣市', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :creditorTownship , placeholder: '鄉鎮', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :creditorVillage , placeholder: '村里', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-1">
+                    <%= f.text_field :creditorNeighbor , placeholder: '鄰', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :creditorStreet , placeholder: '街路', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-1">
+                    <%= f.text_field :creditorSection , placeholder: '段', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-1">
+                    <%= f.text_field :creditorLane , placeholder: '巷', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-1">
+                    <%= f.text_field :creditorAlley , placeholder: '弄', class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :creditorNumber , placeholder: '號', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :creditorFloor , placeholder: '樓', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :creditorLandholdingpointperson , placeholder: '土地個人持分', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :creditorLandholdingpointall , placeholder: '土地所有持分', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :creditorBuildholdingpointperson , placeholder: '建物個人持分', class: 'form-control' %>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <%= f.text_field :creditorBuildholdingpointall , placeholder: '建物所有持分', class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+              
+              <hr>  
+                
+              <!--共有人-->
+              <h3>共有人 : </h3>
+              <div>
+                <%= f.check_box :co_owner %>
+                <%= f.label :co_owner,"土地 / 建物共有人是否一致", style: "color:red;" %>
+              </div>
+              <div class="form-row">
+                <div id="relatedpersonnels" >
+                  <%= f.fields_for :personnals do |personnal| %>
+                    <%= render 'personnal_fields', f: personnal %>
+                  <% end %>
+                  <div class="links">
+                    <%= link_to_add_association '新增相關人員', f, :personnals, class: "btn btn-success btn-sm" %>
+                  </div>
+                </div>
+              </div>
+              
             </div>
           </div>
+        </div>
       </div>
 
       <!--無人優購後顯示：契稅申請書-->
@@ -546,6 +714,19 @@
                 <hr>
                 
                 <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <%= f.label :debtorName,"債務人" %>
+                        <%= f.text_field :debtorName , placeholder: '在此輸入債務人', class: 'form-control' %>
+              
+                    </div>
+                    <div class="form-group col-md-6">
+                        <%= f.label :creditorName,"債權人" %>
+                        <%= f.text_field :creditorName , placeholder: '在此輸入債權人', class: 'form-control' %>
+                    </div>
+                </div>
+                
+                <hr>
+                <div class="form-row">
                     <div class="form-group col-md-3">
                         <%= f.label :country_id,"縣市" %>
                         <%= f.collection_select :country_id, Country.order(:name), :id, :name, {:include_blank => true}, {  :prompt => '請輸入縣市', class: 'form-control'} %>
@@ -570,34 +751,7 @@
                         <%= f.text_field :other_address , placeholder: '在此輸入其他地址資訊', class: 'form-control' %>
                     </div>
                 </div>
-                
-            </div>
-        </div>
-    </div>
 
-    <!-- 相關人員 -->
-    <div class="card">
-        <div class="card-header" id="headingTwo">
-            <h2 class="mb-0">
-                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    相關人員
-                </button>
-            </h2>
-        </div>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-            <div class="card-body">
-                <div>
-                    <%= f.check_box :co_owner %>
-                    <%= f.label :co_owner,"土地 / 建物共有人是否一致", style: "color:red;" %>
-                </div>
-                <div id="relatedpersonnels">
-                    <%= f.fields_for :personnals do |personnal| %>
-                    <%= render 'personnal_fields', f: personnal %>
-                    <% end %>
-                    <div class="links">
-                        <%= link_to_add_association '新增相關人員', f, :personnals, class: "btn btn-success btn-sm" %>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

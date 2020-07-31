@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_24_025125) do
+ActiveRecord::Schema.define(version: 2020_07_29_045759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 2020_07_24_025125) do
     t.datetime "updated_at", null: false
     t.string "personnalBuildHoldingPointPerson"
     t.string "personnalBuildHoldingPointAll"
+    t.string "ownerFullAddress"
     t.index ["yfcase_id"], name: "index_personnals_on_yfcase_id"
   end
 
@@ -373,6 +374,46 @@ ActiveRecord::Schema.define(version: 2020_07_24_025125) do
     t.string "isMobileOrDesktop"
     t.string "realestateregistrationRealEstateAgent"
     t.string "complaintLitigationAgent"
+    t.string "debtorName"
+    t.string "debtorIdentitycard"
+    t.date "debtorBirthday"
+    t.string "debtorLocallphone"
+    t.string "debtorMobilelphone"
+    t.string "debtorNotes"
+    t.string "debtorCountry"
+    t.string "debtorTownship"
+    t.string "debtorVillage"
+    t.string "debtorNeighbor"
+    t.string "debtorStreet"
+    t.string "debtorSection"
+    t.string "debtorLane"
+    t.string "debtorAlley"
+    t.string "debtorNumber"
+    t.string "debtorFloor"
+    t.string "debtorBuildholdingpointperson"
+    t.string "debtorBuildholdingpointall"
+    t.string "debtorLandholdingpointperson"
+    t.string "debtorLandholdingpointall"
+    t.string "creditorName"
+    t.string "creditorIdentitycard"
+    t.date "creditorBirthday"
+    t.string "creditorLocallphone"
+    t.string "creditorMobilelphone"
+    t.string "creditorNotes"
+    t.string "creditorCountry"
+    t.string "creditorTownship"
+    t.string "creditorVillage"
+    t.string "creditorNeighbor"
+    t.string "creditorStreet"
+    t.string "creditorSection"
+    t.string "creditorLane"
+    t.string "creditorAlley"
+    t.string "creditorNumber"
+    t.string "creditorFloor"
+    t.string "creditorBuildholdingpointperson"
+    t.string "creditorBuildholdingpointall"
+    t.string "creditorLandholdingpointperson"
+    t.string "creditorLandholdingpointall"
     t.index ["country_id"], name: "index_yfcases_on_country_id"
     t.index ["township_id"], name: "index_yfcases_on_township_id"
     t.index ["user_id"], name: "index_yfcases_on_user_id"

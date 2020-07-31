@@ -9,82 +9,123 @@
 	    body {
         /*楷體*/
         font-family: 'bkai00mp',sans-serif;
-        font-size: 26px;
+        font-size: 13px;
+	    }
+	    .deedtaxHeader{
+	    	border-collapse:collapse;
+    		border:1px solid black;
+    		width:100%;
+	    }
+	    .deedtax123,.deedtax45,.deedtax6,.deedtax7,.deedtax8910,.deedtax11,.deedtax12,.deedtax13To19,.deedtaxFooter,.deedtaxNotWrite{
+	    	border-collapse:collapse;
+    		border:1px solid black;
+    		width:100%;
+    		border-top:hidden;
+	    }
+	    .deedtax6 td,.deedtax7 td,.deedtax8910 td,.deedtax11 td,.deedtax12 td,.deedtax13To19 td,.deedtaxFooter td,.deedtaxNotWrite td{
+	    	border-collapse:collapse;
+    		border:1px solid black;
+    		padding:0px;
+    		margin:0px;
+    		font-size:10.5pt;
+    		height:20px;
+    		text-align:center;
+	    }
+	    
+	    .deedtaxHeader th,.deedtax123 th,.deedtax45 th,.deedtax6 th,.deedtax7 th,.deedtax8910 th,.deedtax11 th,.deedtax12 th,.deedtax13To19 th,.deedtaxFooter th,.deedtaxNotWrite th{
+	    	border-collapse:collapse;
+    		border:1px solid black;
+    		margin:0px;
+    		padding-left:5px;
+	    	text-align:left;
+    		font-size: 12pt;
+	    }
+	    .deedtaxHeader tr {
+	    	height:40px;
+	    }
+	    .deedtaxHeader td {
+	    	border-collapse:collapse;
+    		border:1px solid black;
+    		padding:0px;
+    		margin:0px;
+    		text-align:center;
+	    }
+
+	    .deedtax123 td {
+	    	border-collapse:collapse;
+    		border:1px solid black;
+    		padding:0px;
+    		margin:0px;
+    		font-size:11pt;
+    		text-align:center;
+	    }
+	    .deedtax45 td {
+	    	border-collapse:collapse;
+    		border:1px solid black;
+    		padding:0px;
+    		margin:0px;
+    		font-size:11pt;
+    		text-align:center;
+	    }
+	    .deedtaxNotWrite td{
+	    	font-size:12pt;
+	    	padding:2px 5px;
+	    }
+	    .bluefont{
+	      color:blue;
+	      font-weight:bolder;
 	    }
     </style>
 </head>
 <body>
+	
 
 	<!-- 前導資料 -->
-	<table style="border-collapse: collapse;font-size:10pt;text-align: center;">
-		<tr style="height:25px;">
-			<td style="border:1px solid black;letter-spacing:40px;" colspan="15">※檔案編號</td>
-			<td style="width:270px;font-size:20pt;" rowspan="4">契稅申報書</td>
-			<td style="border:1px solid black;width:20px;" rowspan="4">※總收文</td>
-			<td style="border:1px solid black;width:20px;" rowspan="2">日期</td>
-			<td style="border:1px solid black;width:240px;" rowspan="2">年　　月　　日</td>
+	<table class="deedtaxHeader">
+		<tr>
+			<td rowspan="2" style="width:62.5%;border-top:hidden;border-left:hidden;font-size:30pt;padding-left:300px;">契稅申報書</td>
+			<td rowspan="2" style="width:2.5%;border-top:1px solid black;">申報人免填</td>
+			<td rowspan="2" style="width:4%;border-top:1px solid black;">(總收收件文號)</td>
+			<td style="width:3%;border-top:1px solid black;">日期</td>
+			<td style="font-size:14pt;border-top:1px solid black;">年　　月　　日</td>
 		</tr>
-		<tr style="height:25px;">
-			<td style="border:1px solid black;" colspan="5" rowspan="2">年　 月</td>
-			<td style="border:1px solid black;letter-spacing:20px;" colspan="10">資料編號</td>
-		</tr>
-		<tr style="height:25px;">
-			<td style="border:1px solid black;font-size:7.5pt;" colspan="2">服務區</td>
-			<td style="border:1px solid black;font-size:7.5pt;" colspan="2">總分局</td>
-			<td style="border:1px solid black;letter-spacing:10px;" colspan="6">流水號</td>
-			<td style="border:1px solid black;" rowspan="2">字號</td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-		</tr>
-		<tr style="height:25px;">
-			<td style="border:1px solid black;width:18px;">1</td>
-			<td style="border:1px solid black;width:18px;">2</td>
-			<td style="border:1px solid black;width:18px;">3</td>
-			<td style="border:1px solid black;width:18px;">4</td>
-			<td style="border:1px solid black;width:18px;">5</td>
-			<td style="border:1px solid black;width:18px;">6</td>
-			<td style="border:1px solid black;width:18px;">7</td>
-			<td style="border:1px solid black;width:18px;">8</td>
-			<td style="border:1px solid black;width:18px;">9</td>
-			<td style="border:1px solid black;width:18px;">A</td>
-			<td style="border:1px solid black;width:18px;">B</td>
-			<td style="border:1px solid black;width:18px;">C</td>
-			<td style="border:1px solid black;width:18px;">D</td>
-			<td style="border:1px solid black;width:18px;">E</td>
-			<td style="border:1px solid black;width:18px;">F</td>
+		<tr>
+			<td>字號</td>
+			<td></td>
 		</tr>
 	</table>
 	
 	<!-- (1)房屋稅籍編號/(2)建號/(3)移轉房屋坐落 -->
-	<table style="border-collapse: collapse;font-size:12pt;text-align: center;">
+	<table class="deedtax123">
 		<tr>
-			<td style="border:1px solid black;width:102px;text-align:leftl" rowspan="2">(1)房　　屋<br>&nbsp;&nbsp;&nbsp;稅籍編號</td>
-			<td style="border:1px solid black;" colspan="2">鄉鎮<br>市區</td>
-			<td style="border:1px solid black;" colspan="2">村里</td>
-			<td style="border:1px solid black;" colspan="4">冊頁(棟)</td>
-			<td style="border:1px solid black;" colspan="3">分戶號</td>
-			<td style="border:1px solid black;width:54px;" rowspan="2">(2)建號</td>
-			<td style="border:1px solid black;width:140px;color:blue;" rowspan="2">        
+			<th rowspan="2" style="width:13%">(1)房　　屋<br>&nbsp;&nbsp;&nbsp;稅籍編號</th>
+			<td colspan="2">鄉鎮<br>市區</td>
+			<td colspan="2">村里</td>
+			<td colspan="4">冊頁(棟)</td>
+			<td colspan="3">分戶號</td>
+			<th rowspan="2" style="width:8%">(2)建號</th>
+			<td rowspan="2" style="width:17.8%">        
 				<% @yfcase.builds.each do |build| %>
                 	<%= @yfcase.big_section %><%= build.build_number %><br>
         		<% end %>
         	</td>
-			<td style="border:1px solid black;width:70px;font-size:10pt;" rowspan="2">(3)移　　轉<br>&nbsp;&nbsp;&nbsp;房屋坐落</td>
-			<td style="border:1px solid black;width:288px;color:blue;" rowspan="2">
-				<%= @yfcase.township.try(:zip_code) %> <%= @yfcase.country.try(:name) %><%= @yfcase.township.try(:name) %><%= @yfcase.other_address %>
+			<th rowspan="2" style="width:11%">(3)移　　轉<br>&nbsp;&nbsp;&nbsp;房屋坐落</th>
+			<td rowspan="2">
+				<%= @yfcase.country.try(:name) %><%= @yfcase.township.try(:name) %><%= @yfcase.other_address %>
 			</td>
 		</tr>
-		<tr style="height:25px;">
-			<td style="border:1px solid black;width:18px;">1</td>
-			<td style="border:1px solid black;width:18px;">2</td>
-			<td style="border:1px solid black;width:18px;">3</td>
-			<td style="border:1px solid black;width:18px;">4</td>
-			<td style="border:1px solid black;width:15px;">5</td>
-			<td style="border:1px solid black;width:15px;">6</td>
-			<td style="border:1px solid black;width:15px;">7</td>
-			<td style="border:1px solid black;width:15px;">8</td>
-			<td style="border:1px solid black;width:15px;">9</td>
-			<td style="border:1px solid black;width:15px;">A</td>
-			<td style="border:1px solid black;width:15px;">B</td>
+		<tr>
+			<td style="width:2.2%">1</td>
+			<td style="width:2.2%">2</td>
+			<td style="width:2.2%">3</td>
+			<td style="width:2.2%">4</td>
+			<td style="width:2.2%">5</td>
+			<td style="width:2.2%">6</td>
+			<td style="width:2.2%">7</td>
+			<td style="width:2.2%">8</td>
+			<td style="width:2.2%">9</td>
+			<td style="width:2.2%">A</td>
+			<td style="width:2.2%">B</td>
 		</tr>
 	</table>
 
@@ -97,415 +138,301 @@
 	<% @deedtaxDeclarationDateMonth = @yfcase.deedtaxDeclarationDate.month.to_s %>
 	<% @deedtaxDeclarationDateDay = @yfcase.deedtaxDeclarationDate.day.to_s %>
 	
-	<table style="border-collapse: collapse;font-size:12px;text-align: center;">
-		<tr style="height:25px;">
-			<td style="border:1px solid black;width:258px;text-align: left;" rowspan="2">(4)立契日期或使用執照核發日期（限房<br>&nbsp;&nbsp;&nbsp;屋建造完成前取得所有權案件）</td>
-			<td style="border:1px solid black;" colspan="3">年</td>
-			<td style="border:1px solid black;" colspan="2">月</td>
-			<td style="border:1px solid black;" colspan="2">日</td>
-			<td style="border:1px solid black;width:310px;text-align: left;" rowspan="2">&#9745 1.一般申報案件<br> &#9744 2.房屋建造完成前取得所有權案件</td>
-			<td style="border:1px solid black;width:80px;" rowspan="2">(5)申報日期</td>
-			<td style="border:1px solid black;" colspan="3">年</td>
-			<td style="border:1px solid black;" colspan="2">月</td>
-			<td style="border:1px solid black;" colspan="2">日</td>
-		</tr>
-		<tr style="height:25px;">
-			<td style="border:1px solid black;width:12px;color:blue;"><%= @deedtaxDateOfDeedYear[0] %></td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDateOfDeedYear[1] %></td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDateOfDeedYear[2] %></td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDateOfDeedMonth[-2].blank? ? "0" : @deedtaxDateOfDeedMonth[-2] %></td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDateOfDeedMonth[-1] %></td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDateOfDeedDay[-2].blank? ? "0" : @deedtaxDateOfDeedDay[-2] %></td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDateOfDeedDay[-1] %></td>
-			<td style="border:1px solid black;width:12px;color:blue;"><%= @deedtaxDeclarationDateYear[0] %></td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDeclarationDateYear[1] %></td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDeclarationDateYear[2] %></td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDeclarationDateMonth[-2].blank? ? "0" : @deedtaxDeclarationDateMonth[-2] %></td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDeclarationDateMonth[-1] %></td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDeclarationDateDay[-2].blank? ? "0" : @deedtaxDeclarationDateDay[-2] %></td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxDeclarationDateDay[-1] %></td>
+	<table class="deedtax45">
+		<tr>
+			<th style="width:33.5%;">(4)立契日期或使用執照核發日期（限房<br>&nbsp;&nbsp;&nbsp;屋建造完成前取得所有權案件）</th>
+			<td style="width:11.4%;"><%= @deedtaxDateOfDeedYear %>年<%= @deedtaxDateOfDeedMonth %>月<%= @deedtaxDateOfDeedDay %>日</td>
+			<td style="width:30%;text-align:left;">&#9745 1.一般申報案件<br> &#9744 2.房屋建造完成前取得所有權案件</td>
+			<th style="width:12%;">(5)申報日期</th>
+			<td><%= @deedtaxDeclarationDateYear %>年<%= @deedtaxDeclarationDateMonth %>月<%= @deedtaxDeclarationDateDay %>日</td>
 		</tr>
 	</table>
 
 	<!-- (6)移轉價格(新臺幣) -->
 	<% @deedtaxTransferPrice = @yfcase.deedtaxTransferPrice.to_s %>
-	<table style="border-collapse: collapse;font-size:12px;text-align: center;">
-		<tr style="height:70px;">
-			<td style="border:1px solid black;width:102px;text-align: left;">(6)移轉價格<br>(新臺幣)</td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxTransferPrice[-10].blank? ? "*" : @deedtaxTransferPrice[-10] %></td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxTransferPrice[-9].blank? ? "*" : @deedtaxTransferPrice[-9] %></td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxTransferPrice[-8].blank? ? "*" : @deedtaxTransferPrice[-8] %></td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxTransferPrice[-7].blank? ? "*" : @deedtaxTransferPrice[-7] %></td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxTransferPrice[-6].blank? ? "*" : @deedtaxTransferPrice[-6] %></td>
-			<td style="border:1px solid black;width:13px;color:blue;"><%= @deedtaxTransferPrice[-5].blank? ? "*" : @deedtaxTransferPrice[-5] %></td>
-			<td style="border:1px solid black;width:12px;color:blue;"><%= @deedtaxTransferPrice[-4].blank? ? "*" : @deedtaxTransferPrice[-4] %></td>
-			<td style="border:1px solid black;width:12px;color:blue;"><%= @deedtaxTransferPrice[-3].blank? ? "*" : @deedtaxTransferPrice[-3] %></td>
-			<td style="border:1px solid black;width:12px;color:blue;"><%= @deedtaxTransferPrice[-2].blank? ? "*" : @deedtaxTransferPrice[-2] %></td>
-			<td style="border:1px solid black;width:12px;color:blue;"><%= @deedtaxTransferPrice[-1].blank? ? "*" : @deedtaxTransferPrice[-1] %></td>
-			<td style="border:1px solid black;width:12px;color:blue;">元</td>
-			<td style="border:1px solid black;width:600px;text-align: left;">1.&#9744請按照評定標準價格核課契稅。<br>2.&#9745本件係領買標購公產或法院拍賣案件請按照評定標準價格或申報移轉價格從低核課契稅。</td>
+	<table class="deedtax6">
+		<tr>
+			<th style="width:13%">(6)移轉價格<br>(新臺幣)</th>
+			<td style="width:20.5%;text-align:right;"><%= @deedtaxTransferPrice.blank? ? '' : @deedtaxTransferPrice %>元</td>
+			<td>1.&#9744請按照評定標準價格核課契稅。<br>2.&#9745本件係領買標購公產或法院拍賣案件請按照評定標準價格或申報移轉價格從低核課契稅。</td>
 		</tr>
 	</table>
 
 	<!-- (7)茲委託 -->
 	<% @username=@yfcase.deedtaxChargeDaffairesTaxDeclarant.to_i %>
-	<table style="border-collapse: collapse;font-size:12px;text-align: center;">
-		<tr style="height:25px;">
-			<td style="border-width:1px;border-style:none none none solid;width:70px;text-align: left;" rowspan="2">(7)茲委託</td>
-			<td style="width:102px;color:blue;" rowspan="2"><%= User.find(@username).full_name %></td>
-			<td style="width:25px;">先生</td>
-			<td style="border-width:1px;border-style:none solid none none;width:675px;" rowspan="2">代辦契稅申報、領取契稅繳款書或免稅證明書、前業主應繳未繳之房屋稅繳款書及領回證件等事項。</td>
+	<table class="deedtax7">
+		<tr>
+			<th rowspan="2">(7)茲委託</th>
+			<td rowspan="2" style="width:10%;text-align:right;border-left:hidden;border-right:hidden;"><%= User.find(@username).full_name %></td>
+			<td style="border-bottom:hidden;">先生</td>
+			<td rowspan="2" style="border-left:hidden;">代辦契稅申報、領取契稅繳款書或免稅證明書、前業主應繳未繳之房屋稅繳款書及領回證件等事項。</td>
 		</tr>
-		<tr style="height:25px;">
-			<td style="width:13px;">女士</td>
+		<tr>
+			<td>女士</td>
 		</tr>
 	</table>
 	
-	<!-- (8)原所有權人 -->
+	
+	
 	<!--原所有權人：個人持分 / 所有持分-->
 	<% @originalPersonAndAllHoldingPoint =@yfcase.personnals.where(is_original_owner: true).first.right_share_person.to_s + "/" + @yfcase.personnals.where(is_original_owner: true).first.right_share_all.to_s %>	
-	<table style="border-collapse: collapse;font-size:12px;text-align:center;">
+	<table class="deedtax8910">
+		<!-- (8)原所有權人 -->
 		<tr>
-			<td style="border:1px solid black;width:102px;text-align:left;" rowspan="6">(8)原所有權人</td>
-			<td style="border:1px solid black;width:70px;" rowspan="2">姓名或名稱</td>
-			<td style="border:1px solid black;width:35px;" rowspan="2">蓋章</td>
-			<td style="border:1px solid black;width:120px;" rowspan="2" colspan="2">國民身分證或事業<br>機關團體統一編號</td>
-			<td style="border:1px solid black;width:30px;" rowspan="2">身分<br>代號</th>
-			<td style="border:1px solid black;width:30px;" rowspan="2">公私<br>有別</th>
-			<td style="border:1px solid black;" colspan="10">通訊地址/<small>新所有權人請填移轉後房屋稅繳款書送單地址</small></td>
-			<td style="border:1px solid black;width:59px;" rowspan="2">權利範圍<br>持分比例</td>
-			<td style="border:1px solid black;width:104px;" rowspan="2">※房屋稅查欠情形</td>
+			<th rowspan="6" style="width:13%">(8)原所有權人</th>
+			<td rowspan="2" style="width:10%">姓名或名稱</td>
+			<td style="width:17.7%">國民身分證或統一編號</td>
+			<td colspan="2">出生年</td>
+			<td rowspan="2" style="width:8%">權利移<br>轉範圍</td>
+			<td rowspan="2">通訊地址/<small>新所有權人請填移轉後房屋稅繳款書送單地址</td>
+			<td rowspan="2" style="width:8%">蓋章或<br>簽名</td>
+
 		</tr>
-			
 		<tr>
-			<td style="border:1px solid black;width:30px;">縣市</td>
-			<td style="border:1px solid black;width:45px;">鄉鎮區</td>
-			<td style="border:1px solid black;width:30px;">村里</td>
-			<td style="border:1px solid black;width:20px;">鄰</td>
-			<td style="border:1px solid black;width:35px;">街路</td>
-			<td style="border:1px solid black;width:25px;">段</td>
-			<td style="border:1px solid black;width:25px;">巷</td>
-			<td style="border:1px solid black;width:20px;">弄</td>
-			<td style="border:1px solid black;width:25px;">號</td>
-			<td style="border:1px solid black;width:20px;">樓</td>
+			<td>電話</td>
+			<td>月</td>
+			<td>日</td>
 		</tr>
-
-		<tr style="height:20px;">
-
-			<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.name %></td>
-			<td style="border:1px solid black;color:blue;" rowspan="2"></td>
-			<td style="border:1px solid black;color:blue;" colspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.identity_card %></td>
-			<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.identity_code %></td>
-			<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.public_or_private %></td>
-			<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.person_country %></td>
-			<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.person_township %></td>
-			<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.person_village %></td>
-			<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.person_neighbor %></td>
-			<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.person_street %></td>
-			<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.person_section %></td>
-			<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.person_lane %></td>
-			<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.person_alley %></td>
-			<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.person_number %></td>
-			<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_original_owner: true).first.person_floor %></td>
-			<td style="border:1px solid black;color:blue;" rowspan="2">
-				<%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' :  @originalPersonAndAllHoldingPoint %>
-			</td>
-			<td style="border:1px solid black;text-align:left;" rowspan="12">
-				&#9744一般案件<br/>
-				&emsp;&#9744截至&emsp;年&emsp;月<br/>
-				&emsp;&emsp;無欠繳房屋稅<br/>
-				<br/>
-				&emsp;&#9744尚有欠繳房屋稅<br/>
-				<br/>
-				&emsp;&#9744即予開徵&emsp;&emsp;元<br/>
-				<br/>
-				&emsp;&#9744未即予開徵<br/>
-				<br/>
-				<br/>
-				&#9745法院拍賣案件<br/>
-			</td>
-
+		<tr>
+			<td rowspan="2"><%= @yfcase.debtorName.blank? ? '' : @yfcase.debtorName %></td>
+			<td><%= @yfcase.debtorIdentitycard.blank? ? '' : @yfcase.debtorIdentitycard %></td>
+			<td colspan="2"><%= @yfcase.debtorBirthday.blank? ? '' : @yfcase.debtorBirthday.year.to_i-1911 %></td>
+			<td rowspan="2"><%= (@yfcase.debtorLandholdingpointperson.present? && @yfcase.debtorLandholdingpointall.present?) ? @yfcase.debtorLandholdingpointperson+"/"+@yfcase.debtorLandholdingpointall : '' %></td>
+			<td rowspan="2"><%= @yfcase.debtorCountry.blank? ? '' :@yfcase.debtorCountry+@yfcase.debtorTownship+@yfcase.debtorVillage+@yfcase.debtorNeighbor+@yfcase.debtorStreet+@yfcase.debtorSection+@yfcase.debtorLane+@yfcase.debtorAlley+@yfcase.debtorNumber+@yfcase.debtorFloor %></td>
+			<td rowspan="2"></td>
 		</tr>
-		<tr style="height:20px;">
-			<td style="border:1px solid black;">電話</td>
-			<td style="border:1px solid black;font-size:7pt;color:blue;"><%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' :  @yfcase.personnals.where(is_original_owner: true).first.mobile_phone %></td>
+		<tr>
+			<td><%= @yfcase.debtorMobilelphone.blank? ? '' : @yfcase.debtorMobilelphone %></td>
+			<td><%= @yfcase.debtorBirthday.blank? ? '' : @yfcase.debtorBirthday.month %></td>
+			<td><%= @yfcase.debtorBirthday.blank? ? '' : @yfcase.debtorBirthday.day %></td>
 		</tr>
-		<tr style="height:20px;">
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" colspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
+		<tr>
+			<td rowspan="2"></td>
+			<td></td>
+			<td colspan="2"></td>
+			<td rowspan="2"></td>
+			<td rowspan="2"></td>
+			<td rowspan="2"></td>
 		</tr>
-		<tr style="height:20px;">
-			<td style="border:1px solid black;">電話</td>
-			<td style="border:1px solid black;font-size:7pt;"></td>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
-
+		
 		<!-- (9)新所有權人 -->
-		<tr style="height:20px;">
-			<td style="border:1px solid black;text-align:left;" rowspan="4">(9)新所有權人<br>(如為持分共有<br>房屋，請另填寫<br>第(16)欄)</td>
-
-				<td style="border:1px solid black;color:blue;" rowspan="2"><span style="color:blue;">揚富開發有限公司(法定代理人：陳美純)</span></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"></td>
-				<td style="border:1px solid black;color:blue;" colspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.identity_card %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.identity_code %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.public_or_private %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2">臺中市</td>
-				<td style="border:1px solid black;color:blue;" rowspan="2">大里區</td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.person_village %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.person_neighbor %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2">新仁路</td>
-				<td style="border:1px solid black;color:blue;" rowspan="2">三</td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.person_lane %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_new_owner: true).blank? ? ' ' : @yfcase.personnals.where(is_new_owner: true).first.person_alley %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2">49</td>
-				<td style="border:1px solid black;color:blue;" rowspan="2">1</td>
-				<td style="border:1px solid black;color:blue;" rowspan="2">
-					<%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' :  @originalPersonAndAllHoldingPoint %>
-				</td>
-
-		</tr>
-		<tr style="height:20px;">
-			<td style="border:1px solid black;">電話</td>
-			<td style="border:1px solid black;font-size:7pt;color:blue;">0921765023</td>
-		</tr>
-		<tr style="height:20px;">
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" colspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-			<td style="border:1px solid black;" rowspan="2"></td>
-
-		</tr>
-		<tr style="height:20px;">
-			<td style="border:1px solid black;">電話</td>
-			<td style="border:1px solid black;font-size:7pt;"></td>
-		</tr>
-
-		<!-- (10)契稅代理人 -->
-		<tr style="height:20px;">
-			<td style="border:1px solid black;text-align:left;" rowspan="2">(10)契稅代理人</td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).full_name %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"></td>
-				<td style="border:1px solid black;color:blue;" colspan="2"><%= User.find(@username).userIdentityCard %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userIdentityCode %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userPublicOrPrivate %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userCountry %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userTownship %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userVillage %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userNeighbor %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userStreet %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userSection %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userLane %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userAlley %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userNumber %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= User.find(@username).userFloor %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2">
-					<%= @yfcase.personnals.where(is_original_owner: true).blank? ? ' ' :  @originalPersonAndAllHoldingPoint %>
-				</td>
-
-		</tr>
-		<tr style="height:25px;">
-			<td style="border:1px solid black;">電話</td>
-			<td style="border:1px solid black;color:blue;padding:0px;margin:0px;font-size:10pt;"><%= User.find(@username).userMobilePhone %></td>
-		</tr>
-
-		<!-- (11)在國內房屋稅納稅代理人 -->
-		<tr style="height:20px;">
-			<td style="border:1px solid black;text-align:left;" rowspan="2">(11)在國內房屋<br>&nbsp;&nbsp;&nbsp;稅納稅代理人</td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.name %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"></td>
-				<td style="border:1px solid black;color:blue;" colspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.identity_card %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.identity_code %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.public_or_private %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_country %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_township %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_village %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_neighbor %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_street %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_section %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_lane %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_alley %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_number %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.person_floor %></td>
-				<td style="border:1px solid black;color:blue;" rowspan="2">
-					<%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.right_share_person.to_s + "/" + @yfcase.personnals.where(is_tax_agent: true).first.right_share_all.to_s %>
-				</td>
-		</tr>
-		<tr style="height:20px;">
-			<td style="border:1px solid black;">電話</td>
-			<td style="border:1px solid black;font-size:7pt;color:blue;"><%= @yfcase.personnals.where(is_tax_agent: true).blank? ? ' ' : @yfcase.personnals.where(is_tax_agent: true).first.mobile_phone %></td>
-		</tr>
-	</table>
-
-	<!-- (12)案件類型 -->
-	<table style="border-collapse: collapse;font-size:12px;">
 		<tr>
-			<td style="border-width:1px;border-style:none solid;width:102px;">(12)案件類型</td>
-			<td style="border-style:none;width:150px;" colspan="17">&#9744 1.買賣 &#9744 2.典權 &#9744 3.交換</td>
-			<td style="border-style:none;width:90px;" colspan="17">&#9744 4.0贈與<br>&#9744 4.1夫妻贈與</td>
-			<td style="border-style:none;width:200px;" colspan="17">&#9744 5.分割 &#9744 6.占有 &#9744 7.二親等間買賣</td>
-			<td style="border-style:none;width:70px;" colspan="17">&#9744 8.1標購<br>&#9745 8.2拍賣<br>&#9744 8.3領買</td>
-			<td style="border-style:none;width:150px;" colspan="17">&#9744 9.1判決<br>&#9744 9.2調解<br>&#9744 9.3和解</td>
-			<td style="border-width:1px;border-style:none solid;width:104px;text-align:center;">※查欠人員<br>&nbsp;&nbsp;蓋　　章</td>
+			<th rowspan="4">(9)新所有權人</th>
+			<td rowspan="2"><%= @yfcase.creditorName.blank? ? '' : @yfcase.creditorName %></td>
+			<td><%= @yfcase.creditorIdentitycard.blank? ? '' : @yfcase.creditorIdentitycard %></td>
+			<td colspan="2"><%= @yfcase.creditorBirthday.blank? ? '' : @yfcase.creditorBirthday.year.to_i-1911 %></td>
+			<td rowspan="2"><%= (@yfcase.creditorLandholdingpointperson.present? && @yfcase.creditorLandholdingpointall.present?) ? @yfcase.creditorLandholdingpointperson+"/"+@yfcase.creditorLandholdingpointall : '' %></td>
+			<td rowspan="2"><%= @yfcase.creditorCountry.blank? ? '' :@yfcase.creditorCountry+@yfcase.creditorTownship+@yfcase.creditorVillage+@yfcase.creditorNeighbor+@yfcase.creditorStreet+@yfcase.creditorSection+@yfcase.creditorLane+@yfcase.creditorAlley+@yfcase.creditorNumber+@yfcase.creditorFloor %></td>
+			<td rowspan="2"></td>
+		</tr>
+		<tr>
+			<td><%= @yfcase.creditorMobilelphone.blank? ? '' : @yfcase.creditorMobilelphone %></td>
+			<td><%= @yfcase.creditorBirthday.blank? ? '' : @yfcase.creditorBirthday.month %></td>
+			<td><%= @yfcase.creditorBirthday.blank? ? '' : @yfcase.creditorBirthday.day %></td>
+		</tr>
+		<tr>
+			<td rowspan="2"></td>
+			<td></td>
+			<td colspan="2"></td>
+			<td rowspan="2"></td>
+			<td rowspan="2"></td>
+			<td rowspan="2"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		
+		<!-- (10)代理人 -->
+		<% @userCountry=User.find(@username).userCountry.blank? ? "" : User.find(@username).userCountry %>
+		<% @userTownship=User.find(@username).userTownship.blank? ? "" : User.find(@username).userTownship %>
+		<% @userVillage=User.find(@username).userVillage.blank? ? "" : User.find(@username).userVillage %>
+		<% @userNeighbor=User.find(@username).userNeighbor.blank? ? "" : User.find(@username).userNeighbor %>
+		<% @userStreet=User.find(@username).userStreet.blank? ? "" : User.find(@username).userStreet %>
+		<% @userSection=User.find(@username).userSection.blank? ? "" : User.find(@username).userSection %>
+		<% @userLane=User.find(@username).userLane.blank? ? "" : User.find(@username).userLane %>
+		<% @userAlley=User.find(@username).userAlley.blank? ? "" : User.find(@username).userAlley %>
+		<% @userNumber=User.find(@username).userNumber.blank? ? "" : User.find(@username).userNumber %>
+		<% @userFloor =User.find(@username).userFloor.blank? ? "" : User.find(@username).userFloor  %>
+		<% @deedtaxChargeDaffairesTaxDeclarantFullAddress = @userCountry + @userTownship + @userVillage + @userNeighbor + @userStreet + @userSection + @userLane + @userAlley + @userNumber + @userFloor %>
+		<tr>
+			<th rowspan="4">(10)代理人</th>
+			<td rowspan="2"><%= User.find(@username).full_name.blank? ? '' : User.find(@username).full_name %></td>
+			<td><%= User.find(@username).userIdentityCard.blank? ? '' :User.find(@username).userIdentityCard %></td>
+			<td colspan="2"><%= User.find(@username).userBirthday.blank? ? '' : User.find(@username).userBirthday.year.to_i-1911 %></td>
+			<td rowspan="2"><%= (@yfcase.creditorLandholdingpointperson.present? && @yfcase.creditorLandholdingpointall.present?) ? @yfcase.creditorLandholdingpointperson+"/"+@yfcase.creditorLandholdingpointall : '' %></td>
+			<td rowspan="2"><%= @yfcase.deedtaxChargeDaffairesTaxDeclarant.blank? ? '' : @deedtaxChargeDaffairesTaxDeclarantFullAddress %></td>
+			<td rowspan="2"></td>
+		</tr>
+		<tr>
+			<td><%= User.find(@username).userMobilePhone.blank? ? '' :User.find(@username).userMobilePhone %></td>
+			<td><%= User.find(@username).userBirthday.blank? ? '' :User.find(@username).userBirthday.month %></td>
+			<td><%= User.find(@username).userBirthday.blank? ? '' :User.find(@username).userBirthday.day %></td>
+		</tr>
+
+	</table>
+	
+	<!-- (11)案件類型 -->
+	<table class="deedtax11">
+		<tr>
+			<th style="width:13%;height:50px;">(11)案件類型</th>
+			<td>&#9744 1.買賣 &#9744 2.典權 &#9744 3.交換</td>
+			<td style="text-align:left;border-left:hidden;border-right:hidden;">&#9744 4.0贈與<br>&#9744 4.1夫妻贈與</td>
+			<td>&#9744 5.分割 &#9744 6.占有 &#9744 7.二親等間買賣</td>
+			<td style="text-align:left;border-left:hidden;border-right:hidden;">&#9744 8.1標購<br>&#9745 8.2拍賣<br>&#9744 8.3領買</td>
+			<td>&#9744 9.1判決<br>&#9744 9.2調解<br>&#9744 9.3和解</td>
 		</tr>
 	</table>
 	
-	<!-- (13)移轉情形 -->
-	<table style="border-collapse: collapse;font-size:12px;">
-		<tr style="height:25px;">
-			<td style="border:1px solid black;width:102px;" rowspan="3">(13)移轉情形</td>
-			<td style="border:1px solid black;width:70px;">層次</td>
-			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferLevel1 %></td>
-			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferLevel2 %></td>
-			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferLevel3 %></td>
-			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferLevel4 %></td>
-			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferLevel5 %></td>
-			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferLevel6 %></td>
-			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferLevel7 %></td>
-			<td style="border:1px solid black;width:68px;">公設建號</td>
-			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicBuildingNumber1 %></td>
-			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicBuildingNumber2 %></td>
-			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicBuildingNumber3 %></td>
-			<td style="border:1px solid black;width:38px;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicBuildingNumber4 %></td>
-			<td style="border:1px solid black;width:69px;" rowspan="3">&#9745未辦保<br>存登記部<br>分一併移<br>轉</td>
-			<td style="border:1px solid black;width:104px;" rowspan="3"></td>
+
+	
+	<!-- (12)移轉情形 -->
+	<table class="deedtax12">
+		<tr>
+			<th rowspan="3" style="width:13%;">(12)移轉情形</th>
+			<td style="width:10%;height:25px;">層次</td>
+			<td style="width:6%;"><%= @yfcase.deedtaxBuildingTransferLevel1 %></td>
+			<td style="width:6%;"><%= @yfcase.deedtaxBuildingTransferLevel2 %></td>
+			<td style="width:6%;"><%= @yfcase.deedtaxBuildingTransferLevel3 %></td>
+			<td style="width:6%;"><%= @yfcase.deedtaxBuildingTransferLevel4 %></td>
+			<td style="width:6%;"><%= @yfcase.deedtaxBuildingTransferLevel5 %></td>
+			<td style="width:6%;"><%= @yfcase.deedtaxBuildingTransferLevel6 %></td>
+			<td style="width:8%;">公設建號</td>
+			<td style="width:6%;"><%= @yfcase.deedtaxBuildingTransferPublicBuildingNumber1 %></td>
+			<td style="width:6%;"><%= @yfcase.deedtaxBuildingTransferPublicBuildingNumber2 %></td>
+			<td style="width:6%;"><%= @yfcase.deedtaxBuildingTransferPublicBuildingNumber3 %></td>
+			<td style="width:6%;"><%= @yfcase.deedtaxBuildingTransferPublicBuildingNumber4 %></td>
+			<td rowspan="3" style="text-align:left;">&#9745未辦保存登<br>&emsp;記部分一併<br>&emsp;移轉</td>
 		</tr>
-		<tr style="height:25px;">
-			<td style="border:1px solid black;">構造</td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferStructure1 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferStructure2 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferStructure3 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferStructure4 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferStructure5 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferStructure6 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferStructure7 %></td>
-			<td style="border:1px solid black;">面積（m2）</td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicArea1 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicArea2 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicArea3 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicArea4 %></td>
+		<tr>
+			<td style="height:25px;">構造</td>
+			<td><%= @yfcase.deedtaxBuildingTransferStructure1 %></td>
+			<td><%= @yfcase.deedtaxBuildingTransferStructure2 %></td>
+			<td><%= @yfcase.deedtaxBuildingTransferStructure3 %></td>
+			<td><%= @yfcase.deedtaxBuildingTransferStructure4 %></td>
+			<td><%= @yfcase.deedtaxBuildingTransferStructure5 %></td>
+			<td><%= @yfcase.deedtaxBuildingTransferStructure6 %></td>
+			<td rowspan="2">持分比例</td>
+			<td rowspan="2"><%= @yfcase.deedtaxBuildingTransferPublicHoldings1 %></td>
+			<td rowspan="2"><%= @yfcase.deedtaxBuildingTransferPublicHoldings2 %></td>
+			<td rowspan="2"><%= @yfcase.deedtaxBuildingTransferPublicHoldings3 %></td>
+			<td rowspan="2"><%= @yfcase.deedtaxBuildingTransferPublicHoldings4 %></td>
 		</tr>
-		<tr style="height:25px;">
-			<td style="border:1px solid black;font-size:9px;">面積(平方公尺)</td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferArea1 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferArea2 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferArea3 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferArea4 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferArea5 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferArea6 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferArea7 %></td>
-			<td style="border:1px solid black;">持分比例</td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicHoldings1 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicHoldings2 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicHoldings3 %></td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxBuildingTransferPublicHoldings4 %></td>
+		<tr>
+			<td style="height:25px;">面&emsp;&emsp;積<br>(平方公尺)</td>
+			<td><%= @yfcase.deedtaxBuildingTransferArea1 %></td>
+			<td><%= @yfcase.deedtaxBuildingTransferArea2 %></td>
+			<td><%= @yfcase.deedtaxBuildingTransferArea3 %></td>
+			<td><%= @yfcase.deedtaxBuildingTransferArea4 %></td>
+			<td><%= @yfcase.deedtaxBuildingTransferArea5 %></td>
+			<td><%= @yfcase.deedtaxBuildingTransferArea6 %></td>
+			
 		</tr>
 	</table>
 	
-	<!-- (14)申請減免項目 -->
-	<table style="border-collapse: collapse;font-size:12px;">
-		<tr style="height:50px;">
-			<td style="border:1px solid black;width:102px;">(14)申請減免<br>項目</td>
-			<td style="border:1px solid black;width:70px;">&#9744 1.全免<br>&#9744 2.減徵</td>
-			<td style="border:1px solid black;width:570px;" colspan="12">合於契稅條例第(　　   )條規定。<br>合於(　　              )條例第(　　  )條(　　  )款規定。</td>
-			<td style="border:1px solid black;width:69px;">*&#9744 准<br>*&#9744 不准</td>
-			<td style="border:1px solid black;width:104px;text-align:center;">※房屋稅承辦<br>人員蓋章</td>
+	<!--( 13-19 )-->
+	<table class="deedtax13To19">
+		<!-- (13)申請減免項目 -->
+		<tr>
+			<th style="width:13%;height:45px;">(13)申請減免<br>&emsp;&emsp;項&emsp;&emsp;目</th>
+			<td style="width:10%">&#9744 1.全免<br>&#9744 2.減徵</td>
+			<td colspan="3" style="text-align:left;">合於契稅條例第(　　   )條規定。<br>合於(　　              )條例第(　　  )條(　　  )款規定。</td>
 		</tr>
-	</table>
-	
-	<!-- (15)檢　　附 -->
-	<table style="margin:0px;border-collapse: collapse;font-size:12px;">
-		<tr style="height:80px;">
-			<td style="border:1px solid black;width:102px;">(15)檢　　附</td>
-			<td style="border:1px solid black;width:708px;" colspan="5">
+		
+		<!-- (14)檢　　附 -->
+		<tr>
+			<th>(14)檢　　附</th>
+			<td colspan="4" style="text-align:left;">
 				&#9744契約書正本(查驗後退還)、影本（貼印花部分）1份，　□所有權狀影本共(　　)份。<br>
 				&#9745不動產權利移轉證明書影本1份，□法院判決書及判決確定證明書影本( 　 )份。<br>
 				&#9745身分證明文件影本(   　)份，□該移轉房屋已納房屋稅繳款書影本1份　□其他文件(　　　) 份。<br>
-				<b>
-					&#9744納稅者如有依納稅者權利保護法第7條第8項但書規定，為重要事項陳述者，請另填報「聲明事項表」並檢附相關證明文件。
-				</b>
+				&#9744納稅者如有依納稅者權利保護法第7條第8項但書規定，為重要事項陳述者，請另填報「聲明事項表」並檢附相關證明文件。
 			</td>
-			<td style="border:1px solid black;width:104px;" rowspan="4"></td>
-		</tr>
-
-		<!-- (16)持分共有房屋繳款書填發方式		 -->
-		<tr style="height:70px;">
-			<td style="border:1px solid black;">(16)持分共有房屋繳款書填發方式</td>
-			<td style="border:1px solid black;" colspan="5">
-				&#9744本房屋為持分共有，已推定共有人           為管理人繳納房屋稅。<br>
-				&#9745本房屋為持分共有，請依稅捐稽徵法第12條規定，按持分比例分別發單課徵房屋稅。
-			</td style="border:1px solid black;">
-		</tr>
-
-		<!-- (17)契稅繳款書領回方式 -->
-		<tr style="height:25px;">
-			<td style="border:1px solid black;color:blue;" colspan="6">(17)契稅繳款書領回方式&emsp;  
-			<%= @yfcase.deedtaxDebtTaxPaymentReceiptMethod == "親領" ? "\u2611" : "\u2610" %>親領&emsp;
-			<%= @yfcase.deedtaxDebtTaxPaymentReceiptMethod == "郵寄" ? "\u2611" : "\u2610" %>郵寄　   請寄：</td>
 		</tr>
 		
-		<!-- (18)結案簡訊通知 -->
-		<tr style="height:40px;">
-			<td style="border:1px solid black;">(18)結案簡訊<br>&nbsp;&nbsp;&nbsp;&nbsp;通&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;知</td>
-			<td style="border:1px solid black;width:120px;color:blue;">
-				<%= @yfcase.deedtaxClosedNewsletter == "需要" ? "\u2611" : "\u2610" %>需要&emsp; 
-				<%= @yfcase.deedtaxClosedNewsletter == "不需要" ? "\u2611" : "\u2610" %>不需要</td>
-			<td style="border:1px solid black;width:100px;">(19)※怠報日數</td>
-			<td style="border:1px solid black;width:70px;text-align:center;color:blue;"><%= @yfcase.deedtaxUnderreportedDays %></td>
-			<td style="border:1px solid black;width:70px;">(20)備註：</td>
-			<td style="border:1px solid black;color:blue;"><%= @yfcase.deedtaxRemark %></td>
+		<!-- (15)持分共有房屋繳款書填發方式		 -->
+		<tr>
+			<th>(15)持分共有<br>房屋繳款書填<br>發方式</th>
+			<td colspan="4" style="text-align:left;height:60px;">
+				&#9744本房屋為持分共有，已推定共有人           為管理人繳納房屋稅。<br>
+				&#9745本房屋為持分共有，請依稅捐稽徵法第12條規定，按持分比例分別發單課徵房屋稅。
+			</td>
+		</tr>
+		
+		<!-- (16)契稅繳款書領回方式 -->
+		<tr>
+			<th colspan="5" style="height:30px;">(16)契稅繳款書領回方式&emsp;
+			<%= @yfcase.deedtaxDebtTaxPaymentReceiptMethod == "親領" ? "\u2611" : "\u2610" %>親領&emsp;
+			<%= @yfcase.deedtaxDebtTaxPaymentReceiptMethod == "郵寄" ? "\u2611" : "\u2610" %>郵寄　   請寄：<%= @yfcase.deedtaxChargeDaffairesTaxDeclarant.blank? ? '' : @deedtaxChargeDaffairesTaxDeclarantFullAddress %></th>
+		</tr>
+		
+		<!-- (17)結案簡訊通知+(18)備註 -->
+		<tr>
+			<th style="height:50px;">(17)結案簡訊<br>&emsp;&emsp;通&emsp;&emsp;知</th>
+			<td colspan="2" style="width:40%;text-align:left;">
+				<%= @yfcase.deedtaxClosedNewsletter == "需要" ? "\u2611" : "\u2610" %>需要，手機號碼：<%= @yfcase.deedtaxClosedNewsletter == "需要" ? User.find(@username).userMobilePhone : '' %> <br>
+				<%= @yfcase.deedtaxClosedNewsletter == "不需要" ? "\u2611" : "\u2610" %>不需要
+			</td>
+			<th style="width:12%;">(18)備&emsp;&emsp;註</th>
+			<td><%= @yfcase.deedtaxRemark %></td>
+		</tr>
+		
+		<!-- (19)申報人取得房屋... -->
+		<tr>
+			<th colspan="5" style="height:70px;">
+				(19)申報人取得房屋，請依附聯填報不動產移轉後使用情形，供自住使用者，可申請按自住房屋稅率課徵房屋稅及自用住宅<br>&emsp;&emsp;用地稅率課徵地價稅。未填報附聯者，請於房屋移轉後，儘速向所屬稽徵機關申報移轉後的房屋使用情形，以維護您的<br>&emsp;&emsp;權益。
+				<br>&emsp;&emsp;&#9745 申請(續填報附聯)&emsp;&emsp;&#9744不申請&emsp;&emsp;(請務必擇一勾選)
+			</th>
 		</tr>
 
 	</table>
 
-	<table style="margin:0px;border-collapse: collapse;font-size:12px;">
-	    <tr style="height:120px;">
-	        <td style="border:1px solid black;width:900px;">茲依照契稅條例第14條、第15條、第16條規定填具契稅申報書，請依法核定應納契稅，並依照房屋稅條例第7條之規定申請變更房屋稅<br>
-	            納稅義務人名義。　　　　 此　　致<br>
-	            （稽徵機關全銜）<br>
-	            　　　　鄉（鎮、市）公所<br>
-	            　　　　 申報人 揚富開發有限公司 法定代理人陳美純
-	        </td>
-	    </tr>
+
+	<table class="deedtaxFooter">
+    <tr>
+      <td style="height:90px;text-align:left;font-size:12pt;padding:0px 10px;">
+      	茲依照契稅條例第14條、第15條、第16條規定填具契稅申報書，請依法核定應納契稅，並依照房屋稅條例第7條之規定申請變更房屋稅納稅義務人名義。<br><br><br><br>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;申報人 揚富開發有限公司 法定代理人陳美純&emsp;&emsp;&emsp;&emsp;（蓋章或簽名）
+      </td>
+    </tr>
 	</table>
-
-	<div style="margin:0px;border-collapse: collapse;font-size:12px;">
-
-		說明：<br>
-			一、本表有※之欄位請免填。<br>
-			二、申報人取得房屋，請依附聯填報不動產移轉後使用情形，供自住使用者，可申請按自住房屋稅率課徵房屋稅及自用住宅用地稅率課徵地價稅，以維護您的權益。<br>
-			<b>
-				三、依據納稅者權利保護法第7條規定，納稅者基於獲得租稅利益，違背稅法之立法目的，濫用法律形式，以非常規交易規避租稅構成要件之該當，以達<br>
-				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;成與交易常規相當之經濟效果，為租稅規避。稅捐稽徵機關仍根據與實質上經濟利益相當之法律形式，成立租稅上請求權，並加徵滯納金及利息，不<br>
-				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;得另課予逃漏稅捐之處罰。但納稅者於申報或調查時，對重要事項隱匿或為虛偽不實陳述或提供不正確資料，致使稅捐稽徵機關短漏核定稅捐者，不<br>
-				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;在此限
-			</b>
-	</div>								
-
+	
+	<!--申報人免填-->
+	<table class="deedtaxNotWrite">
+    <tr>
+      <td rowspan="2" style="width:2.5%;height:100px;">
+      	申報人免填
+      </td>
+      <td rowspan="2" style="width:10%;">房&ensp;屋&ensp;稅<br>查欠情形</td>
+      <td rowspan="2" style="width:64%;text-align:left;">
+      	&#9744一般案件&emsp;&emsp;&#9744截至&emsp;&emsp;年&emsp;&emsp;月無欠繳房屋稅&emsp;&emsp;&#9744即予開徵&emsp;&emsp;&emsp;&emsp;元<br>
+      	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#9744尚有欠繳房屋稅&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#9744未即予開徵<br>
+      	&#9744法院拍賣案件<br>
+      	<br>
+      	查欠人員蓋章
+      </td>
+      <td>房屋稅承辦人員蓋章</td>
+    </tr>
+    <tr>
+    	<td></td>
+    </tr>
+	</table>
+	
+	<!--說明-->
+	<table style="width:100%;">
+		<tr>
+			<td style="vertical-align:text-top;width:6%;font-size:12pt;">說明：</td>
+			<td style="font-size:12pt;">
+				依據納稅者權利保護法第7 條規定，納稅者基於獲得租稅利益，違背稅法之立法目的，濫用法律形式，以非常規交易規避租稅構成要件之該當，以達成與交易常規相當之經濟效果，為租稅規避。稅捐稽徵機關仍根據與實質上經濟 利益相當之法律形式，成立租稅上請求權，並加徵滯納金及利息，不得另課予逃漏稅捐之處罰，但納稅者於申報或 調查時，對重要事項隱匿或為虛偽不實陳述或提供不正確資料，致使稅捐稽徵機關短漏核定稅捐者，不在此限。
+			</td>
+		</tr>
+	</table>								
 
 </body>
 </html>

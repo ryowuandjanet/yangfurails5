@@ -161,6 +161,7 @@
 </head>
 
 <body>
+  
 <div style="padding:0px 50px;">
   <div class="yfratingscalePDFTitle row">
     <table class="col">
@@ -194,28 +195,10 @@
         </td>
         <th style="width:10%;">債務人</th>
         <td style="width:25%;">
-          <% if @yfcase.personnals.where(is_debtor: true).count > 1 %>
-            <%= @yfcase.personnals.where(is_debtor: true).first.name %> ...共
-            <%= @yfcase.personnals.where(is_debtor: true).count %>名<br>
-            <small style="color:red;"><%= (@yfcase.co_owner == true ) ? '土地/建物共有人一致' : ' ' %></small>
-          <% elsif @yfcase.personnals.where(is_debtor: true).count == 1 %>
-            <%= @yfcase.personnals.where(is_debtor: true).first.name %><br>
-            <small style="color:red;"><%= (@yfcase.co_owner == true ) ? '土地/建物共有人一致' : ' ' %></small>
-          <% else %>
-            <%= ' ' %>
-          <% end %>
+          <%= @yfcase.debtorName %>
         </td>
         <th style="width:10%;">債務人</th>
-        <td>
-          <% if @yfcase.personnals.where(is_creditor: true).count > 1 %>
-          <%= @yfcase.personnals.where(is_creditor: true).first.name %> ...共
-          <%= @yfcase.personnals.where(is_creditor: true).count %>名
-          <% elsif @yfcase.personnals.where(is_creditor: true).count == 1 %>
-          <%= @yfcase.personnals.where(is_creditor: true).first.name %>
-          <% else %>
-          <%= ' ' %>
-          <% end %>
-        </td>
+        <td><%= @yfcase.creditorName %></td>
       </tr>
       <tr>
         <th>住址</th>

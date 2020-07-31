@@ -55,10 +55,13 @@ module ApplicationHelper
 	def suggestedincrease(floorprice,click,monitor)
 		result=((click.to_f/100).ceil+monitor.to_f)*0.03
 		
+		overFifteen="<small>(100% + #{0.15*100}%)</small><br>#{currency_helper(floorprice*(1+0.15),0)}"
+		notOverFifteen="<small>(100% + #{result*100}%)</small><br>#{currency_helper(floorprice*(1+result),0)}"
+		
 		if result > 0.15
-			return  "(100% + "+"#{0.15*100}%)"+"\n"+"#{currency_helper(floorprice*(1+0.15),0)}"
+			return overFifteen.html_safe
 		else
-			return "(100% + "+"#{result*100}%)"+"\n"+"#{currency_helper(floorprice*(1+result),0)}"
+			return notOverFifteen.html_safe
 		end
 	end		
 	
@@ -177,5 +180,15 @@ module ApplicationHelper
 		 value = numberString[-1].tr(arabic,chinese)
 		end
 		return value
+	end
+	
+	# 最大公因數
+	def gcd(a, b)
+	  b.zero? ? a : gcd(b, a%b)
+	end
+	# 最小公倍數
+	def lcm(a, b)
+	  result=a*b/gcd(a,b)
+	  return result
 	end
 end
