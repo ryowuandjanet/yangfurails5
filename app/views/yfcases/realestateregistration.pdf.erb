@@ -396,7 +396,9 @@
               <sanp class="bluefont"><%= @yfcase.debtorName.present? ? @yfcase.debtorName : '' %></sanp>                
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"><%= @yfcase.debtorBirthday.present? ? @yfcase.debtorBirthday : '' %></sanp> 
+              <sanp class="bluefont">
+                民國<%= @yfcase.debtorBirthday.present? ? @yfcase.debtorBirthday.year.to_i-1911 : '' %>年<%= @yfcase.debtorBirthday.present? ? @yfcase.debtorBirthday.month.to_i : '' %>月<%= @yfcase.debtorBirthday.present? ? @yfcase.debtorBirthday.day.to_i : '' %>日
+              </sanp> 
             </td>
             <td style="border:1px solid black;">
               <sanp class="bluefont"><%= @yfcase.debtorIdentitycard.present? ? @yfcase.debtorIdentitycard : '' %></sanp> 
@@ -439,43 +441,43 @@
               <sanp class="bluefont"><%= @yfcase.creditorName.present? ? '權利人' : '' %></sanp>
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"><%= @yfcase.creditorName.present? ? @yfcase.creditorName : '' %></sanp>                
+              <sanp class="bluefont"><%= @yfcase.company.present? ? @yfcase.company : '' %>(法定代理人：陳美純)</sanp>                
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"><%= @yfcase.creditorBirthday.present? ? @yfcase.creditorBirthday : '' %></sanp> 
+              <sanp class="bluefont">民國107年01月23日</sanp> 
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"><%= @yfcase.creditorIdentitycard.present? ? @yfcase.creditorIdentitycard : '' %></sanp> 
+              <sanp class="bluefont">64187207</sanp> 
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"><%= @yfcase.creditorCountry.present? ? @yfcase.creditorCountry : '' %></sanp> 
+              <sanp class="bluefont">台中市</sanp> 
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"><%= @yfcase.creditorTownship.present? ? @yfcase.creditorTownship : '' %></sanp> 
+              <sanp class="bluefont">大里區</sanp> 
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"><%= @yfcase.creditorVillage.present? ? @yfcase.creditorVillage : '' %></sanp> 
+              <sanp class="bluefont"></sanp> 
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"><%= @yfcase.creditorNeighbor.present? ? @yfcase.creditorNeighbor : '' %></sanp> 
+              <sanp class="bluefont"></sanp> 
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"><%= @yfcase.creditorStreet.present? ? @yfcase.creditorStreet : '' %></sanp> 
+              <sanp class="bluefont">新仁路</sanp> 
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"><%= @yfcase.creditorSection.present? ? @yfcase.creditorSection : '' %></sanp>
+              <sanp class="bluefont">三段</sanp>
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"><%= @yfcase.creditorLane.present? ? @yfcase.creditorLane : '' %></sanp>
+              <sanp class="bluefont"></sanp>
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"><%= @yfcase.creditorAlley.present? ? @yfcase.creditorAlley : '' %></sanp>
+              <sanp class="bluefont"></sanp>
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"><%= @yfcase.creditorNumber.present? ? @yfcase.creditorNumber : '' %></sanp>
+              <sanp class="bluefont">49號</sanp>
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"><%= @yfcase.creditorFloor.present? ? @yfcase.creditorFloor : '' %></sanp>
+              <sanp class="bluefont">1樓</sanp>
             </td>
             <td style="border:1px solid black;"></td>
         </tr>
@@ -488,7 +490,9 @@
                 <sanp class="bluefont"><%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).full_name : '' %></sanp>            
             </td>
             <td style="border:1px solid black;">
-                <sanp class="bluefont"><%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userBirthday : '' %></sanp> 
+                <sanp class="bluefont">
+                  民國<%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userBirthday.year.to_i-1911 : '' %>年<%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userBirthday.month.to_i : '' %>月<%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userBirthday.day.to_i : '' %>日
+                </sanp> 
             </td>
             <td style="border:1px solid black;">
                 <sanp class="bluefont"><%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userIdentityCard : '' %></sanp>   
@@ -639,10 +643,10 @@
         <!--第五行-->
         <tr>
             <th colspan="2" style="height:100px;">(2)地 號</th>
-            <td><%= @yfcase.lands.first.blank? ? "" : @yfcase.big_section+@yfcase.lands.first.land_number %></td>
-            <td><%= @yfcase.lands.second.blank? ? "" : @yfcase.big_section+@yfcase.lands.second.land_number %></td>
-            <td><%= @yfcase.lands.third.blank? ? "" : @yfcase.big_section+@yfcase.lands.third.land_number %></td>
-            <td><%= @yfcase.lands.fourth.blank? ? "" : @yfcase.big_section+@yfcase.lands.fourth.land_number %></td>
+            <td><%= @yfcase.lands.first.blank? ? "" : @yfcase.lands.first.land_number %></td>
+            <td><%= @yfcase.lands.second.blank? ? "" :@yfcase.lands.second.land_number %></td>
+            <td><%= @yfcase.lands.third.blank? ? "" : @yfcase.lands.third.land_number %></td>
+            <td><%= @yfcase.lands.fourth.blank? ? "" : @yfcase.lands.fourth.land_number %></td>
             <td></td>
             <td></td>
             <td></td>
