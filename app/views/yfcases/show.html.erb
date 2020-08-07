@@ -185,6 +185,8 @@
     
   </div>
   
+  
+  
   <!--基本資料-->
   <div class="row">
     <table class="yfratingscalePDFBaseData">
@@ -197,8 +199,8 @@
         <td style="width:25%;">
           <%= @yfcase.debtorName %>
         </td>
-        <th style="width:10%;">債務人</th>
-        <td><%= @yfcase.creditorName %></td>
+        <th style="width:10%;">債權人</th>
+        <td><%= @yfcase.creditorName.blank? ? @yfcase.company : @yfcase.creditorName %></td>
       </tr>
       <tr>
         <th>住址</th>

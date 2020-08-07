@@ -78,7 +78,7 @@
 </head>
 
 <body>
-    <% @realestateregistrationRealEstateAgent = @yfcase.realestateregistrationRealEstateAgent.to_s %>
+    <% @realestateregistrationRealEstateAgent = @yfcase.realestateregistrationRealEstateAgent.blank? ? @yfcase.user_id : @yfcase.realestateregistrationRealEstateAgent.to_s %>
     <!-- 前導資料 -->
     <div class="firstdata">
     	<div style="float: left;width: 33.33%;">
@@ -131,26 +131,28 @@
     	</div>
 
     </div>
-	<br>
+	  <br>
+	  
     <!-- 土地登記申請書標題 -->
     <table style="border-collapse: collapse;border:1px solid black;font-size:28px;text-align:center;width:100%;">
     	<tr>
     		<td>土        地        登        記        申        請        書</td>
     	</tr>
     </table>
+    
     <!-- (1)受理機關 / (2)原因發生日期 -->
     <table style="border-collapse: collapse;font-size:20px;text-align:center;width:100%;border-top:hidden;">
         <tr>
             <td style="border:1px solid black;width:9%;height:90px;" rowspan="2">(1)<br>受理<br>機關</td>
             <td style="border-top:1px solid black;width:10%;text-align:right;height:45px;">
-                <sanp style="color:blue;"><%= @yfcase.country.try(:name).at(-1) == '縣' ? @yfcase.country.try(:name).at(-3..-2) : '' %></sanp>縣
+                <sanp class="bluefont"><%= @yfcase.country.try(:name).at(-1) == '縣' ? @yfcase.country.try(:name).at(-3..-2) : '' %></sanp>縣
             </td>
-            <td style="border-top:1px solid black;width:17%;text-align:right;"><sanp style="color:blue;"><%= @yfcase.township.try(:land_office).blank? ? '' : @yfcase.township.try(:land_office) %></sanp>地政事務所</td>
+            <td style="border-top:1px solid black;width:17%;text-align:right;"><sanp  class="bluefont"><%= @yfcase.township.try(:land_office).blank? ? '' : @yfcase.township.try(:land_office) %></sanp>地政事務所</td>
             <td style="border:1px solid black;width:6%;" rowspan="2">資料管<br>轄機關</td>
             <td style="border:1px solid black;width:21%;text-align:right;" rowspan="2">
-                <sanp style="color:blue;"><%= @yfcase.country.try(:name).at(-1) == '縣' ? @yfcase.country.try(:name).at(-3..-2) : '' %></sanp>縣<br>
-                <sanp style="color:blue;"><%= @yfcase.country.try(:name).at(-1) == '市' ? @yfcase.country.try(:name).at(-3..-2) : '' %></sanp>市<br>
-                <sanp style="color:blue;"><%= @yfcase.township.try(:land_office).blank? ? '' : @yfcase.township.try(:land_office) %></sanp>地政事務所
+                <sanp class="bluefont"><%= @yfcase.country.try(:name).at(-1) == '縣' ? @yfcase.country.try(:name).at(-3..-2) : '' %></sanp>縣<br>
+                <sanp class="bluefont"><%= @yfcase.country.try(:name).at(-1) == '市' ? @yfcase.country.try(:name).at(-3..-2) : '' %></sanp>市<br>
+                <sanp class="bluefont"><%= @yfcase.township.try(:land_office).blank? ? '' : @yfcase.township.try(:land_office) %></sanp>地政事務所
             </td>
             <td style="border:1px solid black;width:10%;" rowspan="2">(2)原因發生<br>日    期</td>
             <td style="border:1px solid black;width:26%;" rowspan="2">
@@ -158,17 +160,18 @@
                 <% if @yfcase.cause_data.blank? %>
                     中華民國    年    月    日
                 <% else %>
-                    中華民國 <sanp style="color:blue;"><%= @yfcase.cause_data.year-1911 %></sanp> 年 <sanp style="color:blue;"><%= @yfcase.cause_data.month %></sanp> 月 <sanp style="color:blue;"><%= @yfcase.cause_data.day %></sanp> 日
+                    中華民國 <sanp class="bluefont"><%= @yfcase.cause_data.year-1911 %></sanp> 年 <sanp class="bluefont"><%= @yfcase.cause_data.month %></sanp> 月 <sanp class="bluefont"><%= @yfcase.cause_data.day %></sanp> 日
                 <% end %>
             </td>
         </tr>
         <tr style="height:28px;">
             <td style="border-bottom:1px solid black;text-align:right;height:45px;">
-                <sanp style="color:blue;"><%= @yfcase.country.try(:name).at(-1) == '市' ? @yfcase.country.try(:name).at(-3..-2) : '' %></sanp>市
+                <sanp class="bluefont"><%= @yfcase.country.try(:name).at(-1) == '市' ? @yfcase.country.try(:name).at(-3..-2) : '' %></sanp>市
             </td>
             <td style="border-bottom:1px solid black;text-align:right;">&#9744 跨所申請</td>
         </tr>
     </table>
+    
     <!-- (3)申請登記事由 /(4)登記原因 -->
     <table style="border-collapse: collapse;font-size:20px;text-align:left;width:100%;border-top:hidden;">
         <tr style="height:28px;">
@@ -232,6 +235,7 @@
         </tr>
         
     </table>
+    
     <!-- (5)標示及申請權利內容 -->
     <table style="border-collapse: collapse;font-size:20px;text-align:left;width:100%;border-top:hidden;">
         <tr style="height:28px;">
@@ -241,6 +245,7 @@
             </td>
         </tr>
     </table>
+    
     <!-- (6)附繳證件 -->
     <table class="realestateregistrationSix">
         <tr>
@@ -316,12 +321,13 @@
             <td class="realestateregistrationSixValue" style="border-left:hidden;"> 份</td>
         </tr>
     </table>
+    
     <!-- (7)委任關係 /(8)聯絡方式 /(9)備註-->
     <table style="border-collapse: collapse;font-size:20px;text-align:center;width:100%;border-top:hidden;">
         <tr>
           <td style="border:1px solid black;width:8%;" rowspan="3">(7)<br>委任<br>關係</td>
           <td style="border:1px solid black;width:60%;text-align:left;" rowspan="3">
-          	本土地登記案之申請委託&emsp;<sanp class="bluefont"><%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).full_name : '' %></sanp>&emsp;代理。&emsp;&emsp;&emsp;
+          	本土地登記案之申請委託&emsp;<sanp class="bluefont"><%= (@yfcase.realestateregistrationRealEstateAgent.present? || @yfcase.user_id.present?) ? User.find(@realestateregistrationRealEstateAgent).full_name : '' %></sanp>&emsp;代理。&emsp;&emsp;&emsp;
           	複代理。<br>委託人確為登記標的物之權利人或權利關係人，並經核對身分無誤，如有虛偽不實，本代理人(複代理人)願負法律責任。 
 		      </td>
           <td style="border:1px solid black;width:3%;" rowspan="8">(8)<br>聯<br>絡<br>方<br>式</td>
@@ -364,6 +370,7 @@
         </tr>
     </table>
     <br>
+    
     <!-- (10)-(16) -->
     <table style="border-collapse: collapse;font-size:20px;width:100%;text-align:center;">
         <tr>
@@ -397,7 +404,9 @@
             </td>
             <td style="border:1px solid black;">
               <sanp class="bluefont">
-                民國<%= @yfcase.debtorBirthday.present? ? @yfcase.debtorBirthday.year.to_i-1911 : '' %>年<%= @yfcase.debtorBirthday.present? ? @yfcase.debtorBirthday.month.to_i : '' %>月<%= @yfcase.debtorBirthday.present? ? @yfcase.debtorBirthday.day.to_i : '' %>日
+                <% if @yfcase.debtorBirthday.present? %>
+                  民國<%= @yfcase.debtorBirthday.year.to_i-1911 %>年<%= @yfcase.debtorBirthday.month.to_i %>月<%= @yfcase.debtorBirthday.day.to_i %>日
+                <% end %>
               </sanp> 
             </td>
             <td style="border:1px solid black;">
@@ -436,62 +445,165 @@
             <td style="border:1px solid black;"></td>
             <td style="border:1px solid black;" rowspan="6"></td>
         </tr>
+        
+
         <tr style="height:28px;color:blue;">
             <td style="border:1px solid black;height:50px;">
-              <sanp class="bluefont"><%= @yfcase.creditorName.present? ? '權利人' : '' %></sanp>
+              <sanp class="bluefont">權利人</sanp>
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"><%= @yfcase.company.present? ? @yfcase.company : '' %>(法定代理人：陳美純)</sanp>                
+              <sanp class="bluefont"><%= @yfcase.creditorName.blank? ? @yfcase.company+"(法定代理人：陳美純)" : @yfcase.creditorName %></sanp>                
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont">民國107年01月23日</sanp> 
+              <sanp class="bluefont">
+                <% if @yfcase.creditorName.blank? %>
+                  <% User.where(full_name: @yfcase.company).each do |creditorInfo| %>
+                    民國<%= creditorInfo.userBirthday.present? ? creditorInfo.userBirthday.year.to_i-1911 : '' %>年<%= creditorInfo.userBirthday.present? ? creditorInfo.userBirthday.month.to_i : '' %>月<%= creditorInfo.userBirthday.present? ? creditorInfo.userBirthday.day.to_i : '' %>日
+                  <% end %>
+                <% else %>
+                  民國<%= @yfcase.creditorBirthday.present? ? @yfcase.creditorBirthday.year.to_i-1911 : '' %>年<%= @yfcase.creditorBirthday.present? ? @yfcase.creditorBirthday.month.to_i : '' %>月<%= @yfcase.creditorBirthday.present? ? @yfcase.creditorBirthday.day.to_i : '' %>日
+                <% end %>
+              </sanp> 
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont">64187207</sanp> 
+              <sanp class="bluefont">
+                <% if @yfcase.creditorName.blank? %>
+                  <% User.where(full_name: @yfcase.company).each do |creditorInfo| %>
+                    <%= creditorInfo.userIdentityCard %>
+                  <% end %>
+                <% else %>
+                  <%= @yfcase.creditorIdentitycard %>
+                <% end %>
+              </sanp> 
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont">台中市</sanp> 
+              <sanp class="bluefont">
+                <% if @yfcase.creditorName.blank? %>
+                  <% User.where(full_name: @yfcase.company).each do |creditorInfo| %>
+                    <%= creditorInfo.userCountry %>
+                  <% end %>
+                <% else %>
+                  <%= @yfcase.creditorCountry %>
+                <% end %>
+              </sanp> 
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont">大里區</sanp> 
+              <sanp class="bluefont">
+                <% if @yfcase.creditorName.blank? %>
+                  <% User.where(full_name: @yfcase.company).each do |creditorInfo| %>
+                    <%= creditorInfo.userTownship %>
+                  <% end %>
+                <% else %>
+                  <%= @yfcase.creditorTownship %>
+                <% end %>
+              </sanp> 
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"></sanp> 
+              <sanp class="bluefont">
+                <% if @yfcase.creditorName.blank? %>
+                  <% User.where(full_name: @yfcase.company).each do |creditorInfo| %>
+                    <%= creditorInfo.userVillage %>
+                  <% end %>
+                <% else %>
+                  <%= @yfcase.creditorVillage %>
+                <% end %>
+              </sanp> 
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"></sanp> 
+              <sanp class="bluefont">
+                <% if @yfcase.creditorName.blank? %>
+                  <% User.where(full_name: @yfcase.company).each do |creditorInfo| %>
+                    <%= creditorInfo.userNeighbor %>
+                  <% end %>
+                <% else %>
+                  <%= @yfcase.creditorNeighbor %>
+                <% end %>
+              </sanp> 
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont">新仁路</sanp> 
+              <sanp class="bluefont">
+                <% if @yfcase.creditorName.blank? %>
+                  <% User.where(full_name: @yfcase.company).each do |creditorInfo| %>
+                    <%= creditorInfo.userStreet %>
+                  <% end %>
+                <% else %>
+                  <%= @yfcase.creditorStreet %>
+                <% end %>
+              </sanp> 
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont">三段</sanp>
+              <sanp class="bluefont">
+                <% if @yfcase.creditorName.blank? %>
+                  <% User.where(full_name: @yfcase.company).each do |creditorInfo| %>
+                    <%= creditorInfo.userSection %>
+                  <% end %>
+                <% else %>
+                  <%= @yfcase.creditorSection %>
+                <% end %>
+              </sanp>
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"></sanp>
+              <sanp class="bluefont">
+                <% if @yfcase.creditorName.blank? %>
+                  <% User.where(full_name: @yfcase.company).each do |creditorInfo| %>
+                    <%= creditorInfo.userLane %>
+                  <% end %>
+                <% else %>
+                  <%= @yfcase.creditorLane %>
+                <% end %>
+              </sanp>
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"></sanp>
+              <sanp class="bluefont">
+                <% if @yfcase.creditorName.blank? %>
+                  <% User.where(full_name: @yfcase.company).each do |creditorInfo| %>
+                    <%= creditorInfo.userAlley %>
+                  <% end %>
+                <% else %>
+                  <%= @yfcase.creditorAlley %>
+                <% end %>
+              </sanp>
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont">49號</sanp>
+              <sanp class="bluefont">
+                <% if @yfcase.creditorName.blank? %>
+                  <% User.where(full_name: @yfcase.company).each do |creditorInfo| %>
+                    <%= creditorInfo.userNumber %>
+                  <% end %>
+                <% else %>
+                  <%= @yfcase.creditorNumber %>
+                <% end %>
+              </sanp>
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont">1樓</sanp>
+              <sanp class="bluefont">
+                <% if @yfcase.creditorName.blank? %>
+                  <% User.where(full_name: @yfcase.company).each do |creditorInfo| %>
+                    <%= creditorInfo.userFloor %>
+                  <% end %>
+                <% else %>
+                  <%= @yfcase.creditorFloor %>
+                <% end %>
+              </sanp>
             </td>
             <td style="border:1px solid black;"></td>
         </tr>
  
         <tr style="height:28px;color:blue;">
             <td style="border:1px solid black;height:50px;">
-                <sanp class="bluefont"><%= @yfcase.realestateregistrationRealEstateAgent.present? ? "契稅代理人" : '' %></sanp>
+                <sanp class="bluefont"><%= @yfcase.realestateregistrationRealEstateAgent.present? ? "代理人" : '' %></sanp>
             </td>
             <td style="border:1px solid black;">
                 <sanp class="bluefont"><%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).full_name : '' %></sanp>            
             </td>
             <td style="border:1px solid black;">
                 <sanp class="bluefont">
-                  民國<%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userBirthday.year.to_i-1911 : '' %>年<%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userBirthday.month.to_i : '' %>月<%= @yfcase.realestateregistrationRealEstateAgent.present? ? User.find(@realestateregistrationRealEstateAgent).userBirthday.day.to_i : '' %>日
+                  <% @realestateregistrationRealEstateAgentYear = (User.find(@realestateregistrationRealEstateAgent.to_i).userBirthday.nil? ? '' : User.find(@realestateregistrationRealEstateAgent.to_i).userBirthday.year-1911) %>
+                  <% @realestateregistrationRealEstateAgentMonth = (User.find(@realestateregistrationRealEstateAgent.to_i).userBirthday.nil? ? '' : User.find(@realestateregistrationRealEstateAgent.to_i).userBirthday.month) %>
+                  <% @realestateregistrationRealEstateAgentDay = (User.find(@realestateregistrationRealEstateAgent.to_i).userBirthday.nil? ? '' : User.find(@realestateregistrationRealEstateAgent.to_i).userBirthday.day) %>
+                  <% if @yfcase.realestateregistrationRealEstateAgent.present? && User.find(@realestateregistrationRealEstateAgent.to_i).userBirthday.present? %>
+                    <%= "民國"+@realestateregistrationRealEstateAgentYear.to_s+"年"+@realestateregistrationRealEstateAgentMonth.to_s+"月"+@realestateregistrationRealEstateAgentDay.to_s+"日" %>
+                  <% end %>
                 </sanp> 
             </td>
             <td style="border:1px solid black;">
@@ -549,6 +661,7 @@
         </tr>
 
     </table>
+    
     <!-- 本案處理經過情形 -->
     <table style="border-collapse: collapse;font-size:24px;width:100%;text-align:center;border-top:hidden;">
         <tr style="height:28px;">
@@ -607,10 +720,10 @@
             <th rowspan="7" style="width:3%;">土地標示</th>
             <th rowspan="3" style="width:3%">(1)坐落</th>
             <th style="width:12%;height:100px;">鄉 鎮<br>市 區</th>
-            <td><%= @yfcase.lands.first.blank? ? "" : @yfcase.country.try(:name) %><br><%= @yfcase.lands.first.blank? ? "" : @yfcase.township.try(:name) %></td>
-            <td><%= @yfcase.lands.second.blank? ? "" : @yfcase.country.try(:name) %><br><%= @yfcase.lands.second.blank? ? "" : @yfcase.township.try(:name) %></td>
-            <td><%= @yfcase.lands.third.blank? ? "" : @yfcase.country.try(:name) %><br><%= @yfcase.lands.third.blank? ? "" : @yfcase.township.try(:name) %></td>
-            <td><%= @yfcase.lands.fourth.blank? ? "" : @yfcase.country.try(:name) %><br><%= @yfcase.lands.fourth.blank? ? "" : @yfcase.township.try(:name) %></td>
+            <td><%= @yfcase.lands.first.blank? ? "" : @yfcase.township.try(:name) %></td>
+            <td><%= @yfcase.lands.second.blank? ? "" : @yfcase.township.try(:name) %></td>
+            <td><%= @yfcase.lands.third.blank? ? "" : @yfcase.township.try(:name) %></td>
+            <td><%= @yfcase.lands.fourth.blank? ? "" : @yfcase.township.try(:name) %></td>
             <td></td>
             <td></td>
             <td></td>
@@ -646,7 +759,7 @@
             <td><%= @yfcase.lands.first.blank? ? "" : @yfcase.lands.first.land_number %></td>
             <td><%= @yfcase.lands.second.blank? ? "" :@yfcase.lands.second.land_number %></td>
             <td><%= @yfcase.lands.third.blank? ? "" : @yfcase.lands.third.land_number %></td>
-            <td><%= @yfcase.lands.fourth.blank? ? "" : @yfcase.lands.fourth.land_number %></td>
+            <td><%= @yfcase.lands.fourth.blank? ? "" : @yfcase.big_section+@yfcase.lands.fourth.land_number %></td>
             <td></td>
             <td></td>
             <td></td>
@@ -721,17 +834,101 @@
         </tr>
         <tr>
             <th>段 巷 弄</th>
-            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildLane+"巷" %><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildDo+"弄" %></td>
-            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildLane+"巷" %><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildDo+"弄" %></td>
-            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildLane+"巷" %><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildDo+"弄" %></td>
-            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildLane+"巷" %><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildDo+"弄" %></td>
+            <td>
+               <% if @yfcase.builds.first.present? %>
+                <% if @yfcase.builds.first.buildSegment.present? %>
+                  <%= @yfcase.builds.first.buildSegment+"段" %>
+                <% end %>
+                <% if @yfcase.builds.first.buildLane.present? %>
+                  <%= @yfcase.builds.first.buildLane+"巷" %>
+                <% end %>
+                <% if @yfcase.builds.first.buildDo.present? %>
+                  <%= @yfcase.builds.first.buildDo+"弄" %>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% if @yfcase.builds.second.present? %>
+                <% if @yfcase.builds.second.buildSegment.present? %>
+                  <%= @yfcase.builds.second.buildSegment+"段" %>
+                <% end %>
+                <% if @yfcase.builds.second.buildLane.present? %>
+                  <%= @yfcase.builds.second.buildLane+"巷" %>
+                <% end %>
+                <% if @yfcase.builds.second.buildDo.present? %>
+                  <%= @yfcase.builds.second.buildDo+"弄" %>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% if @yfcase.builds.third.present? %>
+                <% if @yfcase.builds.third.buildSegment.present? %>
+                  <%= @yfcase.builds.third.buildSegment+"段" %>
+                <% end %>
+                <% if @yfcase.builds.third.buildLane.present? %>
+                  <%= @yfcase.builds.third.buildLane+"巷" %>
+                <% end %>
+                <% if @yfcase.builds.third.buildDo.present? %>
+                  <%= @yfcase.builds.third.buildDo+"弄" %>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% if @yfcase.builds.fourth.present? %>
+                <% if @yfcase.builds.fourth.buildSegment.present? %>
+                  <%= @yfcase.builds.fourth.buildSegment+"段" %>
+                <% end %>
+                <% if @yfcase.builds.fourth.buildLane.present? %>
+                  <%= @yfcase.builds.fourth.buildLane+"巷" %>
+                <% end %>
+                <% if @yfcase.builds.fourth.buildDo.present? %>
+                  <%= @yfcase.builds.fourth.buildDo+"弄" %>
+                <% end %>
+              <% end %>
+            </td>
         </tr>
         <tr>
             <th>號 樓</th>
-            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildNumber+"號" %><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildFloor+"樓" %></td>
-            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildNumber+"號" %><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildFloor+"樓" %></td>
-            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildNumber+"號" %><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildFloor+"樓" %></td>
-            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildNumber+"號" %><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildFloor+"樓" %></td>
+            <td>
+              <% if @yfcase.builds.first.present? %>
+                <% if @yfcase.builds.first.buildNumber.present? %>
+                  <%= @yfcase.builds.first.buildNumber+"號" %>
+                <% end %>
+                <% if @yfcase.builds.first.buildFloor.present? %>
+                  <%= @yfcase.builds.first.buildFloor+"樓" %>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% if @yfcase.builds.second.present? %>
+                <% if @yfcase.builds.second.buildNumber.present? %>
+                  <%= @yfcase.builds.second.buildNumber+"號" %>
+                <% end %>
+                <% if @yfcase.builds.second.buildFloor.present? %>
+                  <%= @yfcase.builds.second.buildFloor+"樓" %>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% if @yfcase.builds.third.present? %>
+                <% if @yfcase.builds.third.buildNumber.present? %>
+                  <%= @yfcase.builds.third.buildNumber+"號" %>
+                <% end %>
+                <% if @yfcase.builds.third.buildFloor.present? %>
+                  <%= @yfcase.builds.third.buildFloor+"樓" %>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% if @yfcase.builds.fourth.present? %>
+                <% if @yfcase.builds.fourth.buildNumber.present? %>
+                  <%= @yfcase.builds.fourth.buildNumber+"號" %>
+                <% end %>
+                <% if @yfcase.builds.fourth.buildFloor.present? %>
+                  <%= @yfcase.builds.fourth.buildFloor+"樓" %>
+                <% end %>
+              <% end %>
+            </td>
         </tr>
         <tr>
             <th rowspan="3">(8)<br>建 物<br>坐 落</th>
@@ -749,11 +946,11 @@
             <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.small_section %></td>
         </tr>
         <tr>
-            <th>地段</th>
-            <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.builds.first.buildLot %></td>
-            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.builds.second.buildLot %></td>
-            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.builds.third.buildLot %></td>
-            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildLot %></td>
+            <th>地號</th>
+            <td><%= @yfcase.builds.first.nil? ? "" : (@yfcase.builds.first.buildLandNumber.blank? ? '' : Land.find(@yfcase.builds.first.buildLandNumber.to_i).land_number) %></td>
+            <td><%= @yfcase.builds.second.nil? ? "" : (@yfcase.builds.second.buildLandNumber.blank? ? '' : Land.find(@yfcase.builds.second.buildLandNumber.to_i).land_number) %></td>
+            <td><%= @yfcase.builds.third.nil? ? "" : (@yfcase.builds.third.buildLandNumber.blank? ? '' : Land.find(@yfcase.builds.third.buildLandNumber.to_i).land_number) %></td>
+            <td><%= @yfcase.builds.fourth.nil? ? "" : (@yfcase.builds.fourth.buildLandNumber.blank? ? '' : Land.find(@yfcase.builds.fourth.buildLandNumber.to_i).land_number) %></td>
         </tr>
         <tr>
             <th rowspan="6">(9)<br>面 積<br>︵<br>平方<br>公尺<br>︶</th>
@@ -794,16 +991,16 @@
         <tr>
             <th>共 計</th>
             <td>
-              <%= @yfcase.builds.first.blank? ? "" :@yfcase.builds.first.buildLevel1.to_i + @yfcase.builds.first.buildLevel2.to_i+ @yfcase.builds.first.buildLevel3.to_i + @yfcase.builds.first.buildLevel4.to_i + @yfcase.builds.first.buildOther1.to_i %>
+              <%= @yfcase.builds.first.blank? ? "" :@yfcase.builds.first.buildLevel1.to_f + @yfcase.builds.first.buildLevel2.to_f+ @yfcase.builds.first.buildLevel3.to_f + @yfcase.builds.first.buildLevel4.to_f + @yfcase.builds.first.buildOther1.to_f %>
             </td>
             <td>
-              <%= @yfcase.builds.second.blank? ? "" :@yfcase.builds.second.buildLevel1.to_i + @yfcase.builds.second.buildLevel2.to_i+ @yfcase.builds.second.buildLevel3.to_i + @yfcase.builds.second.buildLevel4.to_i + @yfcase.builds.second.buildOther1.to_i %>
+              <%= @yfcase.builds.second.blank? ? "" :@yfcase.builds.second.buildLevel1.to_f + @yfcase.builds.second.buildLevel2.to_f+ @yfcase.builds.second.buildLevel3.to_f + @yfcase.builds.second.buildLevel4.to_f + @yfcase.builds.second.buildOther1.to_f %>
             </td>
             <td>
-              <%= @yfcase.builds.third.blank? ? "" :@yfcase.builds.third.buildLevel1.to_i + @yfcase.builds.third.buildLevel2.to_i+ @yfcase.builds.third.buildLevel3.to_i + @yfcase.builds.third.buildLevel4.to_i + @yfcase.builds.third.buildOther1.to_i %>
+              <%= @yfcase.builds.third.blank? ? "" :@yfcase.builds.third.buildLevel1.to_f + @yfcase.builds.third.buildLevel2.to_f+ @yfcase.builds.third.buildLevel3.to_f + @yfcase.builds.third.buildLevel4.to_f + @yfcase.builds.third.buildOther1.to_f %>
             </td>
             <td>
-              <%= @yfcase.builds.fourth.blank? ? "" :@yfcase.builds.fourth.buildLevel1.to_i + @yfcase.builds.fourth.buildLevel2.to_i+ @yfcase.builds.fourth.buildLevel3.to_i + @yfcase.builds.fourth.buildLevel4.to_i + @yfcase.builds.fourth.buildOther1.to_i %>
+              <%= @yfcase.builds.fourth.blank? ? "" :@yfcase.builds.fourth.buildLevel1.to_f + @yfcase.builds.fourth.buildLevel2.to_f+ @yfcase.builds.fourth.buildLevel3.to_f + @yfcase.builds.fourth.buildLevel4.to_f + @yfcase.builds.fourth.buildOther1.to_f %>
             </td>
         </tr>
         <tr>
@@ -816,10 +1013,10 @@
         </tr>
         <tr>
             <th>面 積<br>(平方公尺)</th>
-            <td><%= @yfcase.builds.first.blank? ? "" : number_to_currency(@yfcase.builds.first.build_area.to_f, unit: "", precision: 2) %></td>
-            <td><%= @yfcase.builds.second.blank? ? "" : number_to_currency(@yfcase.builds.second.build_area.to_f, unit: "", precision: 2) %></td>
-            <td><%= @yfcase.builds.third.blank? ? "" : number_to_currency(@yfcase.builds.third.build_area.to_f, unit: "", precision: 2) %></td>
-            <td><%= @yfcase.builds.fourth.blank? ? "" : number_to_currency(@yfcase.builds.fourth.build_area.to_f, unit: "", precision: 2) %></td>
+            <td><%= @yfcase.builds.first.blank? ? "" : number_to_currency(@yfcase.builds.first.buildScopeOfArea.to_f, unit: "", precision: 2) %></td>
+            <td><%= @yfcase.builds.second.blank? ? "" : number_to_currency(@yfcase.builds.second.buildScopeOfArea.to_f, unit: "", precision: 2) %></td>
+            <td><%= @yfcase.builds.third.blank? ? "" : number_to_currency(@yfcase.builds.third.buildScopeOfArea.to_f, unit: "", precision: 2) %></td>
+            <td><%= @yfcase.builds.fourth.blank? ? "" : number_to_currency(@yfcase.builds.fourth.buildScopeOfArea.to_f, unit: "", precision: 2) %></td>
         </tr>
         <tr>
             <th colspan="2">(11)權 利 範 圍</th>

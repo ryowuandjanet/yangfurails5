@@ -178,7 +178,7 @@
               <hr>
                 
               <!--權利人-->
-              <h3>權利人 : <%= @yfcase.company %></h3>
+              <h3>權利人 : <%= @yfcase.creditorName.blank? ? @yfcase.company : @yfcase.creditorName %></h3>
               <div class="creditorInfo">
                 <div class="form-row">
                   <div class="form-group col-md-2">
@@ -280,6 +280,79 @@
         </div>
         <div id="collapseDeedtax" class="collapse" aria-labelledby="headingDeedtax" data-parent="#accordionExample">
           <div class="card-body">
+            
+             <div class="form-row">
+            <div class="form-group col-md-1">
+              房屋稅籍
+            </div>
+            
+            <div class="form-group col-md-2" style="background-color:Aquamarine;">
+              鄉鎮區
+              <div class="container">
+                <div class="row">
+                  <div class="col" style="padding-right:1px;padding-left:1px;">
+                   <%= f.text_field :houseTaxNumberCountry1, class: 'form-control' %>
+                  </div>
+                  <div class="col-sm" style="padding-right:1px;padding-left:1px;">
+                    <%= f.text_field :houseTaxNumberCountry2, class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group col-md-2" style="background-color:DeepSkyBlue;">
+              村里
+              <div class="container">
+                <div class="row">
+                  <div class="col" style="padding-right:1px;padding-left:1px;">
+                   <%= f.text_field :houseTaxNumberTownship1, class: 'form-control' %>
+                  </div>
+                  <div class="col-sm" style="padding-right:1px;padding-left:1px;">
+                    <%= f.text_field :houseTaxNumberTownship2, class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group col-md-4" style="background-color:Gainsboro;">
+              冊頁(棟)
+              <div class="container">
+                <div class="row">
+                  <div class="col" style="padding-right:1px;padding-left:1px;">
+                   <%= f.text_field :houseTaxNumberBuilding1, class: 'form-control' %>
+                  </div>
+                  <div class="col-sm" style="padding-right:1px;padding-left:1px;">
+                    <%= f.text_field :houseTaxNumberBuilding2, class: 'form-control' %>
+                  </div>
+                  <div class="col" style="padding-right:1px;padding-left:1px;">
+                   <%= f.text_field :houseTaxNumberBuilding3, class: 'form-control' %>
+                  </div>
+                  <div class="col-sm" style="padding-right:1px;padding-left:1px;">
+                    <%= f.text_field :houseTaxNumberBuilding4, class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group col-md-3" style="background-color:Khaki;">
+              分戶號
+              <div class="container">
+                <div class="row">
+                  <div class="col" style="padding-right:1px;padding-left:1px;">
+                   <%= f.text_field :houseTaxNumberHouseHold1, class: 'form-control' %>
+                  </div>
+                  <div class="col-sm" style="padding-right:1px;padding-left:1px;">
+                    <%= f.text_field :houseTaxNumberHouseHold2, class: 'form-control' %>
+                  </div>
+                  <div class="col" style="padding-right:1px;padding-left:1px;">
+                   <%= f.text_field :houseTaxNumberHouseHold3, class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+          </div>
             
             <div class="form-row">
               <div class="form-group col-md-2">
@@ -692,7 +765,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <%= f.label :creditorName,"債權人" %>
-                        <%= f.text_field :creditorName , placeholder: '在此輸入債權人', class: 'form-control' %>
+                        <%= f.text_field :creditorName , placeholder: '預設為所屬公司(若無其他債權人)', class: 'form-control' %>
                     </div>
                 </div>
                 

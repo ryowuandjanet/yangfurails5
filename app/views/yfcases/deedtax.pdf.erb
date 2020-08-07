@@ -115,17 +115,17 @@
 			</td>
 		</tr>
 		<tr>
-			<td style="width:2.2%">1</td>
-			<td style="width:2.2%">2</td>
-			<td style="width:2.2%">3</td>
-			<td style="width:2.2%">4</td>
-			<td style="width:2.2%">5</td>
-			<td style="width:2.2%">6</td>
-			<td style="width:2.2%">7</td>
-			<td style="width:2.2%">8</td>
-			<td style="width:2.2%">9</td>
-			<td style="width:2.2%">A</td>
-			<td style="width:2.2%">B</td>
+			<td style="width:2.2%"><%= @yfcase.houseTaxNumberCountry1 %></td>
+			<td style="width:2.2%"><%= @yfcase.houseTaxNumberCountry2 %></td>
+			<td style="width:2.2%"><%= @yfcase.houseTaxNumberTownship1 %></td>
+			<td style="width:2.2%"><%= @yfcase.houseTaxNumberTownship2 %></td>
+			<td style="width:2.2%"><%= @yfcase.houseTaxNumberBuilding1 %></td>
+			<td style="width:2.2%"><%= @yfcase.houseTaxNumberBuilding2 %></td>
+			<td style="width:2.2%"><%= @yfcase.houseTaxNumberBuilding3 %></td>
+			<td style="width:2.2%"><%= @yfcase.houseTaxNumberBuilding4 %></td>
+			<td style="width:2.2%"><%= @yfcase.houseTaxNumberHouseHold1 %></td>
+			<td style="width:2.2%"><%= @yfcase.houseTaxNumberHouseHold2 %></td>
+			<td style="width:2.2%"><%= @yfcase.houseTaxNumberHouseHold3 %></td>
 		</tr>
 	</table>
 
@@ -154,12 +154,12 @@
 		<tr>
 			<th style="width:13%">(6)移轉價格<br>(新臺幣)</th>
 			<td style="width:20.5%;text-align:right;"><%= @deedtaxTransferPrice.blank? ? '' : @deedtaxTransferPrice %>元</td>
-			<td>1.&#9744請按照評定標準價格核課契稅。<br>2.&#9745本件係領買標購公產或法院拍賣案件請按照評定標準價格或申報移轉價格從低核課契稅。</td>
+			<td style="text-align:left;">1.&#9744請按照評定標準價格核課契稅。<br>2.&#9745本件係領買標購公產或法院拍賣案件請按照評定標準價格或申報移轉價格從低核課契稅。</td>
 		</tr>
 	</table>
 
 	<!-- (7)茲委託 -->
-	<% @username=@yfcase.deedtaxChargeDaffairesTaxDeclarant.to_i %>
+	<% @username=@yfcase.deedtaxChargeDaffairesTaxDeclarant.blank? ? @yfcase.user_id : @yfcase.deedtaxChargeDaffairesTaxDeclarant.to_i %>
 	<table class="deedtax7">
 		<tr>
 			<th rowspan="2">(7)茲委託</th>
@@ -175,7 +175,9 @@
 	
 	
 	<!--原所有權人：個人持分 / 所有持分-->
-	<% @originalPersonAndAllHoldingPoint =@yfcase.personnals.where(is_original_owner: true).first.right_share_person.to_s + "/" + @yfcase.personnals.where(is_original_owner: true).first.right_share_all.to_s %>	
+	<% if @yfcase.personnals.where(is_original_owner: true).first.present? %>
+		<% @originalPersonAndAllHoldingPoint =@yfcase.personnals.where(is_original_owner: true).first.right_share_person.to_s + "/" + @yfcase.personnals.where(is_original_owner: true).first.right_share_all.to_s %>	
+	<% end %>
 	<table class="deedtax8910">
 		<!-- (8)原所有權人 -->
 		<tr>
@@ -223,17 +225,63 @@
 		<!-- (9)新所有權人 -->
 		<tr>
 			<th rowspan="4">(9)新所有權人</th>
-			<td rowspan="2"><%= @yfcase.creditorName.blank? ? '' : @yfcase.creditorName %></td>
-			<td><%= @yfcase.creditorIdentitycard.blank? ? '' : @yfcase.creditorIdentitycard %></td>
-			<td colspan="2"><%= @yfcase.creditorBirthday.blank? ? '' : @yfcase.creditorBirthday.year.to_i-1911 %></td>
-			<td rowspan="2"><%= (@yfcase.creditorLandholdingpointperson.present? && @yfcase.creditorLandholdingpointall.present?) ? @yfcase.creditorLandholdingpointperson+"/"+@yfcase.creditorLandholdingpointall : '' %></td>
-			<td rowspan="2"><%= @yfcase.creditorCountry.blank? ? '' :@yfcase.creditorCountry+@yfcase.creditorTownship+@yfcase.creditorVillage+@yfcase.creditorNeighbor+@yfcase.creditorStreet+@yfcase.creditorSection+@yfcase.creditorLane+@yfcase.creditorAlley+@yfcase.creditorNumber+@yfcase.creditorFloor %></td>
+			<td rowspan="2" style="text-align:left;">
+				<% if @yfcase.creditorName.blank? %>
+          <%= @yfcase.company+"(法定代理人：陳美純)" %><br>
+        <% else %>
+          <%= @yfcase.creditorName %><br>
+        <% end %>
+			</td>
+			<td>
+				<% if @yfcase.creditorName.blank? %>
+          <% User.where(full_name: @yfcase.company).each do |creditorInfo| %>
+            <%= creditorInfo.userIdentityCard %>
+          <% end %>
+        <% else %>
+          <%= @yfcase.creditorIdentitycard %>
+        <% end %>
+			</td>
+			<td colspan="2">
+				<% if @yfcase.creditorName.blank? %>
+          <% User.where(full_name: @yfcase.company).each do |creditorInfo| %>
+            <%= (creditorInfo.userBirthday.year-1911).to_s %>
+          <% end %>
+        <% else %>
+          <%= (@yfcase.creditorBirthday.year-1911).to_s %>
+        <% end %>
+      </td>
+			<td rowspan="2"><%= (@yfcase.debtorLandholdingpointperson.present? && @yfcase.debtorLandholdingpointall.present?) ? @yfcase.debtorLandholdingpointperson+"/"+@yfcase.debtorLandholdingpointall : '' %></td>
+			<td rowspan="2">
+				<% if @yfcase.creditorName.blank? %>
+          <% User.where(full_name: @yfcase.company).each do |creditorInfo| %>
+            <%= creditorInfo.userCountry %><%= creditorInfo.userTownship %><%= creditorInfo.userVillage %><%= creditorInfo.userStreet %><%= creditorInfo.userSection %><%= creditorInfo.userNeighbor %><%= creditorInfo.userLane %><%= creditorInfo.userAlley %><%= creditorInfo.userNumber %><%= creditorInfo.userFloor %>
+          <% end %>
+        <% else %>
+          <%= @yfcase.creditorCountry %><%= @yfcase.creditorTownship %><%= @yfcase.creditorVillage %><%= @yfcase.creditorStreet %><%= @yfcase.creditorSection %><%= @yfcase.creditorNeighbor %><%= @yfcase.creditorLane %><%= @yfcase.creditorAlley %><%= @yfcase.creditorNumber %><%= @yfcase.creditorFloor %>
+        <% end %>
+			</td>
 			<td rowspan="2"></td>
 		</tr>
 		<tr>
-			<td><%= @yfcase.creditorMobilelphone.blank? ? '' : @yfcase.creditorMobilelphone %></td>
-			<td><%= @yfcase.creditorBirthday.blank? ? '' : @yfcase.creditorBirthday.month %></td>
-			<td><%= @yfcase.creditorBirthday.blank? ? '' : @yfcase.creditorBirthday.day %></td>
+			<td></td>
+			<td>
+				<% if @yfcase.creditorName.blank? %>
+          <% User.where(full_name: @yfcase.company).each do |creditorInfo| %>
+            <%= creditorInfo.userBirthday.month.to_s %>
+          <% end %>
+        <% else %>
+          <%= @yfcase.creditorBirthday.year.month.to_s %>
+        <% end %>
+      </td>
+			<td>
+				<% if @yfcase.creditorName.blank? %>
+          <% User.where(full_name: @yfcase.company).each do |creditorInfo| %>
+            <%= creditorInfo.userBirthday.day.to_s %>
+          <% end %>
+        <% else %>
+          <%= @yfcase.creditorBirthday.year.day.to_s %>
+        <% end %>
+			</td>
 		</tr>
 		<tr>
 			<td rowspan="2"></td>
@@ -266,8 +314,8 @@
 			<td rowspan="2"><%= User.find(@username).full_name.blank? ? '' : User.find(@username).full_name %></td>
 			<td><%= User.find(@username).userIdentityCard.blank? ? '' :User.find(@username).userIdentityCard %></td>
 			<td colspan="2"><%= User.find(@username).userBirthday.blank? ? '' : User.find(@username).userBirthday.year.to_i-1911 %></td>
-			<td rowspan="2"><%= (@yfcase.creditorLandholdingpointperson.present? && @yfcase.creditorLandholdingpointall.present?) ? @yfcase.creditorLandholdingpointperson+"/"+@yfcase.creditorLandholdingpointall : '' %></td>
-			<td rowspan="2"><%= @yfcase.deedtaxChargeDaffairesTaxDeclarant.blank? ? '' : @deedtaxChargeDaffairesTaxDeclarantFullAddress %></td>
+			<td rowspan="2">----</td>
+			<td rowspan="2"><%= (@yfcase.user_id.blank? && @yfcase.deedtaxChargeDaffairesTaxDeclarant.blank?) ? '' : @deedtaxChargeDaffairesTaxDeclarantFullAddress %></td>
 			<td rowspan="2"></td>
 		</tr>
 		<tr>

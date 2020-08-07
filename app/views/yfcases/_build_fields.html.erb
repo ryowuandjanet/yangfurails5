@@ -45,36 +45,43 @@
             </div>
             <%= f.url_field :build_url,class: "form-control" %>
           </div>
+          <div class="col-sm-6" style="padding:1px;margin:auto;text-align:left;">
+          <%= link_to_remove_association "刪除建號", f, class: "btn btn-danger btn-sm" %>
+        </div>
         </div>
         
         <div class="col-md-8">
           <div class="form-row">
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
               縣市<br>
               <%= @yfcase.country.try(:name) %>
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
               <%= f.label :township_id,"鄉鎮區" %><br>
               <%= @yfcase.township.try(:name) %>
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
               <%= f.label :big_section,"段名" %><br>
               <%= @yfcase.big_section %>
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
               <%= f.label :small_section,"小段" %><br>
               <%= @yfcase.small_section %>
+            </div>
+            <div class="form-group col-md-4">
+              <%= f.label :buildLandNumber,"地號" %><br>
+              <%= f.collection_select :buildLandNumber, @yfcase.lands, :id, :land_number, {:include_blank => true}, { class: 'form-control'} %>
             </div>
           </div>
 
           <div class="form-row">
-            <div class="form-group col-md-2">
-              <%= f.label :buildLot,"地段" %>
-              <%= f.text_field :buildLot , placeholder: '地段', class: 'form-control' %>
-            </div>
             <div class="form-group col-md-3">
               <%= f.label :buildRoad, "街/路" %>
               <%= f.text_field :buildRoad , placeholder: '街/路', class: 'form-control' %>
+            </div>
+            <div class="form-group col-md-2">
+              <%= f.label :buildSegment,"段" %>
+              <%= f.text_field :buildSegment , placeholder: '段', class: 'form-control' %>
             </div>
             <div class="form-group col-md-2">
               <%= f.label :buildLane, "巷" %>

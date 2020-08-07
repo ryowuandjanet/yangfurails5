@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_29_045759) do
+ActiveRecord::Schema.define(version: 2020_08_07_101013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2020_07_29_045759) do
     t.string "buildScopeOfRights"
     t.string "buildRemarks"
     t.string "buildTotalArea"
+    t.string "buildLandNumber"
     t.index ["yfcase_id"], name: "index_builds_on_yfcase_id"
   end
 
@@ -414,6 +415,17 @@ ActiveRecord::Schema.define(version: 2020_07_29_045759) do
     t.string "creditorBuildholdingpointall"
     t.string "creditorLandholdingpointperson"
     t.string "creditorLandholdingpointall"
+    t.string "houseTaxNumberCountry1"
+    t.string "houseTaxNumberCountry2"
+    t.string "houseTaxNumberTownship1"
+    t.string "houseTaxNumberTownship2"
+    t.string "houseTaxNumberBuilding1"
+    t.string "houseTaxNumberBuilding2"
+    t.string "houseTaxNumberBuilding3"
+    t.string "houseTaxNumberBuilding4"
+    t.string "houseTaxNumberHouseHold1"
+    t.string "houseTaxNumberHouseHold2"
+    t.string "houseTaxNumberHouseHold3"
     t.index ["country_id"], name: "index_yfcases_on_country_id"
     t.index ["township_id"], name: "index_yfcases_on_township_id"
     t.index ["user_id"], name: "index_yfcases_on_user_id"
