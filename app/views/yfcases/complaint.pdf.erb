@@ -134,7 +134,7 @@
     
       
     <div style="text-align:left;">民事起訴狀（裁判分割共有物）</div>
-    <div>訴訟標的：新臺幣(以下同)<span class="bluefont"><%= number_to_currency(@fees, unit: "", precision: 1) %></span>元</div>
+    <div>訴訟標的：新臺幣(以下同)<span class="bluefont"><%= number_to_currency(@fees, unit: "", precision: 0) %></span>元</div>
     <table class="complaintTable" style="padding:0px;margin:20px 0px;">
       <tr>
         <% if @yfcase.personnals.where(is_creditor: true).count >= 1 %>
@@ -225,11 +225,11 @@
             <% @presentValueOfTaxableHousingFees = @yfcase.housingTax.to_f * (land.land_holding_point_personal.to_f / land.land_holding_point_all.to_f) %>
           <% end %>
           <% @fees = @controversialLandAnnouncementFees.to_f + @presentValueOfTaxableHousingFees.to_f %>
-          按訴訟標的之價額，由法院核定。核定訴訟標的之價額，以起訴時之交易價額為準。分割共有物涉訟，以原告因分割所受利益之價額為準。民事訴訟法 第77條之1第1項、第2項前段 及 第77條之11 分別定有明文。本件原告起訴請求分割兩造共有坐落
+          按訴訟標的之價額，由法院核定。核定訴訟標的之價額，以起訴時之交易價額為準。分割共有物涉訟，以原告因分割所受利益之價額為準。民事訴訟法 第77條之1第1項、第2項前段 及 第77條之11 分別訂有明文。本件原告起訴請求分割兩造共有
           <% @yfcase.lands.each do |land| %>
             <span class="bluefont"><%= @yfcase.country.try(:name) %><%= @yfcase.township.try(:name) %><%= @yfcase.big_section %><%= land.land_number %>地號</span>
           <% end %>
-          之土地（下稱「系爭土地」）及其上同段
+          之土地（下稱「系爭土地」）及坐落其上同段
           <% @yfcase.builds.where('build_type_use != ? and build_type_use != ?','0公設','12增建(持分後坪數打對折)').each do |build| %>
             <span class="bluefont"><%= @yfcase.country.try(:name) %><%= @yfcase.township.try(:name) %><%= @yfcase.big_section %><%= build.build_number %>建號</span>
           <% end %>
@@ -322,7 +322,7 @@
     <br>
     <div>謹 狀</div>
     <br>
-    <div>臺灣臺南地方法院民事庭 公鑒</div>
+    <div>臺灣<span class="bluefont"><%= @yfcase.township.district_court %></span>地方法院民事庭 公鑒</div>
 
     
     
@@ -470,10 +470,10 @@
               中&emsp;華&emsp;民&emsp;國&emsp;<span class="bluefont"><%= @yfcase.tabulationDate.year-1911 %></span>&emsp;年&emsp;<span class="bluefont"><%= @yfcase.tabulationDate.month %></span>&emsp;月&emsp;<span class="bluefont"><%= @yfcase.tabulationDate.day %></span>&emsp;日</td>
             </tr>
             <tr>
-              <td style="width:80%;height:70px;text-align:right;font-size:16.5pt;">具 狀 人</td>
-              <td style="width:20%;height:70px;text-align:center;font-size:16.5pt;">
+              <td style="width:70%;height:70px;text-align:right;font-size:16.5pt;">具 狀 人</td>
+              <td style="width:30%;height:70px;text-align:left;font-size:16.5pt;">
                 <span class="bluefont">
-                  <%= @yfcase.complaintLitigationAgent.blank? ? '' : User.find(@complaintLitigationAgent).full_name %>
+                  <%= @yfcase.company %><br>法定代理人：陳美純
                 </span>
               </td>
             </tr>

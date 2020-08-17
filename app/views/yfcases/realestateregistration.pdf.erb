@@ -14,6 +14,9 @@
         font-size: 26px;
         font-weight : border;
 	    }
+      .page-break {
+        page-break-before: always;
+      }
     	.firstdata:after {
   		  content: "";
   		  display: table;
@@ -192,11 +195,11 @@
             </td>
             <td style="border:1px solid black;height:28px;">
                 <% if @yfcase.reason_for_registration == "買賣" %>
-                    <sanp class="bluefont">&#9745</sanp> 買賣  &#9744 贈與  &#9744 繼承  &#9744 分割繼承  &#9744 拍賣  &#9744 共有物分割  &#9744 
+                    <sanp class="bluefont">&#9745</sanp> 買賣  &#9744 贈與  &#9744 繼承  &#9744 分割繼承  &#9744 拍賣  &#9744 共有物分割  &#9744 調解 
                 <% elsif @yfcase.reason_for_registration == "拍賣" %>
-                    &#9744 買賣  &#9744 贈與  &#9744 繼承  &#9744 分割繼承  <sanp class="bluefont">&#9745</sanp> 拍賣  &#9744 共有物分割  &#9744
+                    &#9744 買賣  &#9744 贈與  &#9744 繼承  &#9744 分割繼承  <sanp class="bluefont">&#9745</sanp> 拍賣  &#9744 共有物分割  &#9744 調解
                 <% else %>
-                    &#9744 買賣  &#9744 贈與  &#9744 繼承  &#9744 分割繼承  &#9744 拍賣  &#9744 共有物分割  &#9744
+                    &#9744 買賣  &#9744 贈與  &#9744 繼承  &#9744 分割繼承  &#9744 拍賣  &#9744 共有物分割  &#9744 調解
                 <% end %>
             </td>
         </tr>
@@ -263,10 +266,16 @@
               <sanp class="bluefont"><%= (@yfcase.reason_for_registration == "買賣" || @yfcase.reason_for_registration == "拍賣") ? "1" : "" %></sanp> 份
             </td>
             <td class="realestateregistrationSixItem">
-              4. <sanp class="bluefont"><%= @yfcase.reason_for_registration == "買賣" ? "契稅繳（免）稅證明" : "" %></sanp>
+              <% if @yfcase.reason_for_registration == "買賣" %>
+                4. <sanp class="bluefont">契稅繳（免）稅證明</sanp> 
+              <% elsif @yfcase.reason_for_registration == "拍賣" %>
+                4. <sanp class="bluefont">公司變更登記事項卡</sanp> 
+              <% else %>
+                4.
+              <% end %>
             </td>
             <td class="realestateregistrationSixValue" style="border-left:hidden;">
-              <sanp class="bluefont"><%= @yfcase.reason_for_registration == "買賣" ? "1" : "" %></sanp> 份
+              <sanp class="bluefont"><%= (@yfcase.reason_for_registration == "買賣" || @yfcase.reason_for_registration == "拍賣") ? "1" : "" %></sanp> 份
             </td>
             <td class="realestateregistrationSixItem">
               7. <sanp class="bluefont"><%= @yfcase.reason_for_registration == "買賣" ? "印鑑證明" : "" %></sanp>
@@ -290,10 +299,16 @@
               <sanp class="bluefont"><%= (@yfcase.reason_for_registration == "買賣" || @yfcase.reason_for_registration == "拍賣") ? "1" : "" %></sanp> 份
             </td>
             <td class="realestateregistrationSixItem">
-              5. <sanp class="bluefont"><%= @yfcase.reason_for_registration == "買賣" ? "土地增值稅繳（免）稅證明" : "" %></sanp>
+              <% if @yfcase.reason_for_registration == "買賣" %>
+                5. <sanp class="bluefont">土地增值稅繳（免）稅證明</sanp> 
+              <% elsif @yfcase.reason_for_registration == "拍賣" %>
+                5. <sanp class="bluefont">法人身分證明文件</sanp> 
+              <% else %>
+                5.
+              <% end %>
             </td>
             <td class="realestateregistrationSixValue" style="border-left:hidden;">
-              <sanp class="bluefont"><%= @yfcase.reason_for_registration == "買賣" ? "1" : "" %></sanp> 份
+              <sanp class="bluefont"><%= (@yfcase.reason_for_registration == "買賣" || @yfcase.reason_for_registration == "拍賣") ? "1" : "" %></sanp> 份
             </td>
             <td class="realestateregistrationSixItem">8. </td>
             <td class="realestateregistrationSixValue" style="border-left:hidden;"> 份</td>
@@ -312,10 +327,23 @@
               <sanp class="bluefont"><%= (@yfcase.reason_for_registration == "買賣" || @yfcase.reason_for_registration == "拍賣") ? "1" : "" %></sanp> 份
             </td>
             <td class="realestateregistrationSixItem">
-              6. <sanp class="bluefont"><%= @yfcase.reason_for_registration == "買賣" ? "身分證影本" : "" %></sanp>
+              <% if @yfcase.reason_for_registration == "買賣" %>
+                6. <sanp class="bluefont">身分證影本</sanp> 
+              <% elsif @yfcase.reason_for_registration == "拍賣" %>
+                6. <sanp class="bluefont">授權書</sanp> 
+              <% else %>
+                6.
+              <% end %>
             </td>
             <td class="realestateregistrationSixValue" style="border-left:hidden;">
-              <sanp class="bluefont"><%= @yfcase.reason_for_registration == "買賣" ? "2" : "" %></sanp> 份
+              <% if @yfcase.reason_for_registration == "買賣" %>
+                <sanp class="bluefont">2</sanp> 
+              <% elsif @yfcase.reason_for_registration == "拍賣" %>
+                <sanp class="bluefont">1</sanp> 
+              <% else %>
+                <%= "" %>
+              <% end %>
+              份
             </td>
             <td class="realestateregistrationSixItem">9. </td>
             <td class="realestateregistrationSixValue" style="border-left:hidden;"> 份</td>
@@ -371,8 +399,10 @@
     </table>
     <br>
     
-    <!-- (10)-(16) -->
-    <table style="border-collapse: collapse;font-size:20px;width:100%;text-align:center;">
+    
+    <div class="page-break">
+      <!-- (10)-(16) -->
+      <table style="border-collapse: collapse;font-size:20px;width:100%;text-align:center;">
         <tr>
             <td style="border:1px solid black;width:4%" rowspan="7">(10)<br>申<br><br>請<br><br>人</td>
             <td style="border:1px solid black;width:9%;" rowspan="2">(11)<br>權利人<br>或<br>義務人</td>
@@ -662,51 +692,49 @@
 
     </table>
     
-    <!-- 本案處理經過情形 -->
-    <table style="border-collapse: collapse;font-size:24px;width:100%;text-align:center;border-top:hidden;">
-        <tr style="height:28px;">
-            <td style="border:1px solid black;width:4%;font-size:20px;" rowspan="4">本案處理經過情形︵<br>以下各欄<br>申請人請勿填寫<br>︶</td>
-            <td style="border:1px solid black;width:16%;height:110px;">初           審</td>
-            <td style="border:1px solid black;width:16%;">複            審</td>
-            <td style="border:1px solid black;width:17%;">核           定</td>
-            <td style="border:1px solid black;width:9%;">登  簿</td>
-            <td style="border:1px solid black;width:10%;">校  簿</td>
-            <td style="border:1px solid black;width:9%;">書  狀<br>列  印</td>
-            <td style="border:1px solid black;width:9%;">校  狀</td>
-            <td style="border:1px solid black;width:9%;">書  狀<br>用  印</td>
-        </tr>
-        <tr style="height:28px;">
-            <td style="border:1px solid black;" rowspan="3"></td>
-            <td style="border:1px solid black;" rowspan="3"></td>
-            <td style="border:1px solid black;" rowspan="3"></td>
-            <td style="border:1px solid black;height:110px;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-        </tr>
-        <tr style="height:28px;">
-            <td style="border:1px solid black;height:110px;">地  價<br>異  動</td>
-            <td style="border:1px solid black;">通  知<br>領  狀</td>
-            <td style="border:1px solid black;">異  動<br>通  知</td>
-            <td style="border:1px solid black;">交  付<br>發  狀</td>
-            <td style="border:1px solid black;">歸  檔</td>
-        </tr>
-        <tr style="height:28px;">
-            <td style="border:1px solid black;height:110px;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-        </tr>
-    </table>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+      <!-- 本案處理經過情形 -->
+      <table style="border-collapse: collapse;font-size:24px;width:100%;text-align:center;border-top:hidden;">
+          <tr style="height:28px;">
+              <td style="border:1px solid black;width:4%;font-size:20px;" rowspan="4">本案處理經過情形︵<br>以下各欄<br>申請人請勿填寫<br>︶</td>
+              <td style="border:1px solid black;width:16%;height:110px;">初           審</td>
+              <td style="border:1px solid black;width:16%;">複            審</td>
+              <td style="border:1px solid black;width:17%;">核           定</td>
+              <td style="border:1px solid black;width:9%;">登  簿</td>
+              <td style="border:1px solid black;width:10%;">校  簿</td>
+              <td style="border:1px solid black;width:9%;">書  狀<br>列  印</td>
+              <td style="border:1px solid black;width:9%;">校  狀</td>
+              <td style="border:1px solid black;width:9%;">書  狀<br>用  印</td>
+          </tr>
+          <tr style="height:28px;">
+              <td style="border:1px solid black;" rowspan="3"></td>
+              <td style="border:1px solid black;" rowspan="3"></td>
+              <td style="border:1px solid black;" rowspan="3"></td>
+              <td style="border:1px solid black;height:110px;"></td>
+              <td style="border:1px solid black;"></td>
+              <td style="border:1px solid black;"></td>
+              <td style="border:1px solid black;"></td>
+              <td style="border:1px solid black;"></td>
+          </tr>
+          <tr style="height:28px;">
+              <td style="border:1px solid black;height:110px;">地  價<br>異  動</td>
+              <td style="border:1px solid black;">通  知<br>領  狀</td>
+              <td style="border:1px solid black;">異  動<br>通  知</td>
+              <td style="border:1px solid black;">交  付<br>發  狀</td>
+              <td style="border:1px solid black;">歸  檔</td>
+          </tr>
+          <tr style="height:28px;">
+              <td style="border:1px solid black;height:110px;"></td>
+              <td style="border:1px solid black;"></td>
+              <td style="border:1px solid black;"></td>
+              <td style="border:1px solid black;"></td>
+              <td style="border:1px solid black;"></td>
+          </tr>
+      </table>
+    </div>
+    
     <!--登記清冊-土地清冊-->
-    <table class="realestateregistrationLand">
+    <div class="page-break">
+      <table class="realestateregistrationLand">
         <!--第一行-->
         <tr>
             <th colspan="10">
@@ -801,14 +829,11 @@
         </tr>
         
     </table>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    </div>
+    
     <!--登記清冊-建物清冊-->
-    <table class="realestateregistrationBuild">
+    <div class="page-break">
+      <table class="realestateregistrationBuild">
         <tr>
             <th rowspan="18" style="width:3%">建 物 標 示</th>
             <th colspan="2">(6)建 號</th>
@@ -1033,6 +1058,7 @@
             <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.builds.fourth.buildRemarks %></td>
         </tr>
     </table>
+    </div>
     
 </body>
 
