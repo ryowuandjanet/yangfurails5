@@ -698,11 +698,21 @@
         </tr>
           <tr>
             <th>物件照片<small>(證物四)</small></th>
-            <td colspan="3" class="yfratingscalePDFAttachmentContent">
+            <td class="yfratingscalePDFAttachmentContent">
               <% if @yfcase.object_photo_link.blank? %>
                 <%= " " %>
               <% else %>
                 <%= link_to "Google街景", add_https(@yfcase.object_photo_link) , target: "_blank" %>
+              <% end %>
+            </td>
+            <th style="width:18%">標的物現場勘查</th>
+            <td class="yfratingscalePDFAttachmentContent">
+              <% if @yfcase.net_price_registration_market_price_link.blank? %>
+                <%= " " %>
+              <% else %>
+                <%= link_to  add_https(@yfcase.net_price_registration_market_price_link), target: "_blank" do %>
+                  <%= fa_icon "camera 2x" %>
+                <% end %>
               <% end %>
             </td>
           </tr>
@@ -726,7 +736,7 @@
                       <table class="yfratingscalePDFObjectBuild">
                            <tr>
                               <th>狀態</th>
-                              <th>地址(屋齡)(樓高)</th>
+                              <th>地址(成立日期)(屋齡)(樓高)</th>
                               <th>總價(元)</th>
                               <th>建坪(坪)</th>
                               <th>單價(元)</th>
@@ -750,8 +760,9 @@
                               <td rowspan="3">
                                   <%= objectbuild.address %>
                                   <% if objectbuild.house_age.present? %>
-                                      <br>(<%= objectbuild.house_age %>年)
-                                      <br>(樓高：<%= objectbuild.floor_height %>)
+                                      <span><%= (objectbuild.objectBuildDealYear.blank? && objectbuild.objectBuildDealMonth.blank?) ? '' : "(成交日期："+objectbuild.objectBuildDealYear+"年"+objectbuild.objectBuildDealMonth+"月)" %></span>
+                                      <br><%= objectbuild.house_age.blank? ? '' : "("+objectbuild.house_age.to_s+"年)" %>
+                                      <br><%= objectbuild.floor_height.blank? ? '' : "(樓高："+objectbuild.floor_height.to_s+")" %>
                                   <% else %>
                                       <%= ' ' %>
                                   <% end %>
@@ -801,7 +812,7 @@
                               </td>
                           </tr>
                           <tr>
-                              <th>附件</th>
+                              <th>現勘</th>
                               <th>勘查員B</th>
                               <th>加成B</th>
                               <th>加成原因B</th>
@@ -843,11 +854,7 @@
                       </table>
                       <p style="margin:2px;padding:2px;">
                       <% end %>
-                          <% if @yfcase.net_price_registration_market_price_link.blank? %>
-                      <%= " " %>
-                  <% else %>
-                      <%= link_to "實價登錄連結", add_https(@yfcase.net_price_registration_market_price_link), target: "_blank" %>
-                  <% end %>
+                          
                      
               </td>
           </tr>

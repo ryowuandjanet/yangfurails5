@@ -302,7 +302,7 @@
               <% if @yfcase.reason_for_registration == "買賣" %>
                 5. <sanp class="bluefont">土地增值稅繳（免）稅證明</sanp> 
               <% elsif @yfcase.reason_for_registration == "拍賣" %>
-                5. <sanp class="bluefont">法人身分證明文件</sanp> 
+                5. <sanp class="bluefont">公司負責人身分證明文件</sanp> 
               <% else %>
                 5.
               <% end %>
@@ -425,6 +425,7 @@
             <td style="border:1px solid black;width:3%;">樓</td>
             <td style="border:1px solid black;width:2%;"></td>
         </tr>
+        <!--義務人-->
         <tr style="height:28px;color:blue;">
             <td style="border:1px solid black;height:50px;">
               <sanp class="bluefont"><%= @yfcase.debtorName.present? ? '義務人' : '' %></sanp>
@@ -476,13 +477,13 @@
             <td style="border:1px solid black;" rowspan="6"></td>
         </tr>
         
-
+        <!--權利人-->
         <tr style="height:28px;color:blue;">
             <td style="border:1px solid black;height:50px;">
               <sanp class="bluefont">權利人</sanp>
             </td>
             <td style="border:1px solid black;">
-              <sanp class="bluefont"><%= @yfcase.creditorName.blank? ? @yfcase.company+"(法定代理人：陳美純)" : @yfcase.creditorName %></sanp>                
+              <sanp class="bluefont"><%= @yfcase.creditorName.blank? ? @yfcase.company : @yfcase.creditorName %></sanp>                
             </td>
             <td style="border:1px solid black;">
               <sanp class="bluefont">
@@ -618,7 +619,27 @@
             </td>
             <td style="border:1px solid black;"></td>
         </tr>
- 
+        
+        <!--法定代理人-->
+        <tr style="height:28px;color:blue;">
+            <td style="border:1px solid black;height:50px;"><sanp class="bluefont">法定代理人</sanp></td>
+            <td style="border:1px solid black;"><sanp class="bluefont">陳美純</sanp></td>
+            <td style="border:1px solid black;"><sanp class="bluefont">民國30年10月31日</sanp></td>
+            <td style="border:1px solid black;"><sanp class="bluefont">L203130632</sanp></td>
+            <td style="border:1px solid black;"><sanp class="bluefont">臺中市</sanp></td>
+            <td style="border:1px solid black;"><sanp class="bluefont">大里區</sanp></td>
+            <td style="border:1px solid black;"><sanp class="bluefont">西榮里</sanp></td>
+            <td style="border:1px solid black;"><sanp class="bluefont">7鄰</sanp></td>
+            <td style="border:1px solid black;"><sanp class="bluefont">新仁路</sanp></td>
+            <td style="border:1px solid black;"><sanp class="bluefont">三段</sanp></td>
+            <td style="border:1px solid black;"><sanp class="bluefont">72巷</sanp></td>
+            <td style="border:1px solid black;"><sanp class="bluefont"></sanp></td>
+            <td style="border:1px solid black;"><sanp class="bluefont">3號</sanp></td>
+            <td style="border:1px solid black;"><sanp class="bluefont"></sanp></td>
+            <td style="border:1px solid black;"><sanp class="bluefont"></sanp></td>
+        </tr>
+        
+        <!--代理人-->
         <tr style="height:28px;color:blue;">
             <td style="border:1px solid black;height:50px;">
                 <sanp class="bluefont"><%= @yfcase.realestateregistrationRealEstateAgent.present? ? "代理人" : '' %></sanp>
@@ -672,23 +693,7 @@
             <td style="border:1px solid black;"></td>
         </tr>
 
-        <tr style="height:28px;">
-            <td style="border:1px solid black;height:50px;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;"></td>
-        </tr>
+        
 
     </table>
     
@@ -749,9 +754,27 @@
             <th rowspan="3" style="width:3%">(1)坐落</th>
             <th style="width:12%;height:100px;">鄉 鎮<br>市 區</th>
             <td><%= @yfcase.lands.first.blank? ? "" : @yfcase.township.try(:name) %></td>
-            <td><%= @yfcase.lands.second.blank? ? "" : @yfcase.township.try(:name) %></td>
-            <td><%= @yfcase.lands.third.blank? ? "" : @yfcase.township.try(:name) %></td>
-            <td><%= @yfcase.lands.fourth.blank? ? "" : @yfcase.township.try(:name) %></td>
+            <td>
+              <% if @yfcase.lands.first.present? && @yfcase.lands.second.blank? %>
+                <div style="color:red;border:3px solid red;">以下空白</div>
+              <% else %>
+                <%= @yfcase.lands.second.blank? ? "" : @yfcase.township.try(:name) %>
+              <% end %>
+            </td>
+            <td>
+              <% if @yfcase.lands.second.present? && @yfcase.lands.third.blank? %>
+                <div style="color:red;border:3px solid red;">以下空白</div>
+              <% else %>
+                <%= @yfcase.lands.third.blank? ? "" : @yfcase.township.try(:name) %>
+              <% end %>
+            </td>
+            <td>
+              <% if @yfcase.lands.third.present? && @yfcase.lands.fourth.blank? %>
+                <div style="color:red;border:3px solid red;">以下空白</div>
+              <% else %>
+                <%= @yfcase.lands.fourth.blank? ? "" : @yfcase.township.try(:name) %>
+              <% end %>
+            </td>
             <td></td>
             <td></td>
             <td></td>
@@ -838,9 +861,27 @@
             <th rowspan="18" style="width:3%">建 物 標 示</th>
             <th colspan="2">(6)建 號</th>
             <td><%= @yfcase.builds.first.blank? ? "" : @yfcase.big_section+@yfcase.builds.first.build_number %></td>
-            <td><%= @yfcase.builds.second.blank? ? "" : @yfcase.big_section+@yfcase.builds.second.build_number %></td>
-            <td><%= @yfcase.builds.third.blank? ? "" : @yfcase.big_section+@yfcase.builds.third.build_number %></td>
-            <td><%= @yfcase.builds.fourth.blank? ? "" : @yfcase.big_section+@yfcase.builds.fourth.build_number %></td>
+            <td>
+              <% if @yfcase.builds.first.present? && @yfcase.builds.second.blank? %>
+                <div style="color:red;border:3px solid red;">以下空白</div>
+              <% else %>
+                <%= @yfcase.builds.second.blank? ? "" : @yfcase.big_section+@yfcase.builds.second.build_number %>
+              <% end %>
+            </td>
+            <td>
+              <% if @yfcase.builds.second.present? && @yfcase.builds.third.blank? %>
+                <div style="color:red;border:3px solid red;">以下空白</div>
+              <% else %>
+                <%= @yfcase.builds.third.blank? ? "" : @yfcase.big_section+@yfcase.builds.third.build_number %>
+              <% end %>
+            </td>
+            <td>
+              <% if @yfcase.builds.third.present? && @yfcase.builds.fourth.blank? %>
+                <div style="color:red;border:3px solid red;">以下空白</div>
+              <% else %>
+                <%= @yfcase.builds.fourth.blank? ? "" : @yfcase.big_section+@yfcase.builds.fourth.build_number %>
+              <% end %>
+            </td>
         </tr>
         <tr>
             <th rowspan="4" style="width:10%">(7)<br>門 牌</th>

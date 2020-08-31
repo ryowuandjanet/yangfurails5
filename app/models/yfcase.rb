@@ -22,7 +22,7 @@ class Yfcase < ApplicationRecord
 	COMPANY_LIST=["揚富開發有限公司","鉅鈦開發有限公司"]
 	
 	AREA_LIST=["第一種住宅區","第二種住宅區","第三種住宅區","第四種住宅區","第一種商業區","第二種商業區","第三種商業區","第四種商業區","第二種工業區","第三種工業區","行政區","文教區","倉庫區","風景區","農業區","保護區","行水區","保存區","特定專用區"]
-	JUDGMENT_LIST=[" ","2拍進場","3拍進場","4拍進場","放棄"]
+	JUDGMENT_LIST=[" ","未判定","2拍進場","3拍進場","4拍進場","放棄"]
 	ACTIVE_RESULT_LIST=[" ","撤回","遭優購","得標"]
 	MOBILE_DESKTOP_LIST=["手機","電腦"]
 	PRIORITY_PURCHASE_RESULT_LIST=[" ","等待優購","遭優購","無人優購"]
@@ -33,6 +33,7 @@ class Yfcase < ApplicationRecord
 	DEEDTAX_DEBTTAX_PAYMENT_RECEIPT_METHOD=[" ","親領","郵寄"]
 	DEEDTAX_CLOSE_NEWSLETTER=[" ","需要","不需要"]
 	BUILD_USE_LIST=["","陽台","露台","花台","騎樓","雨遮"]
+	AGE_CLASS = [" ","2拍進場","3拍進場","4拍進場","放棄"].freeze
 	
 
 

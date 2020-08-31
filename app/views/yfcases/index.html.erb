@@ -18,7 +18,7 @@
     <tr>
       <%= form_tag yfcases_path, :method => :get do %>
       <td style="padding:0px 5px;width:17%">案號：<%= text_field_tag "keyword", nil , placeholder: "輸入關鍵字",class: "form-control" %></td>
-      <td style="padding:0px 5px;width:17%">最終判定：<%= select_tag "keyword2", raw("<option>3拍進場</option><option>4拍進場</option><option>放棄</option>"), {:include_blank => true, class: 'form-control'} %></td>
+      <td style="padding:0px 5px;width:17%">最終判定：<%= select_tag "keyword2", raw("<option>未判定</option><option>3拍進場</option><option>4拍進場</option><option>放棄</option>"), {:include_blank => true, class: 'form-control'} %></td>
       <td style="padding:0px 5px;width:17%">縣市：<%= select_tag "city", options_from_collection_for_select(Country.order(:name), "id", "name"), {:include_blank => true, class: 'form-control'}  %></td>
       <td style="padding:0px 5px;width:17%">人員：<%= select_tag "person", options_from_collection_for_select(User.order(:full_name), "id", "full_name") , {:include_blank => true, class: 'form-control'} %></td>
       <td style="padding:0px 5px;;width:15%"><%= submit_tag "搜尋", class: "btn btn-primary col align-self-end" %></td>
@@ -32,14 +32,8 @@
   <thead>
     <tr>
       <th>操作</th>
-      <th>案號
-        <%= link_to yfcases_path( :sqrtcasename => "up") do %>
-          <%=  fa_stacked_icon "arrow-down inverse", base: "circle",class: "pull-right" %>
-        <% end %>
-        <%= link_to yfcases_path( :sqrtcasename => "down") do %>
-          <%=  fa_stacked_icon "arrow-up inverse", base: "circle",class: "pull-right" %>
-        <% end %>
-      </th>
+      <th>案號</th>
+      <th>更新時間</th>
       <th>判定兩週內<br>提醒</th>
       <th>負責人</th>
       <th colspan="2">最終判定</th>
@@ -49,7 +43,7 @@
     </tr>
   </thead>
     <tbody>
-        <% @yfcases.order(updated_at: :desc).each do |yfcase| %>
+        <% @yfcases.each do |yfcase| %>
         <tr>
           <td>
             <table>
@@ -80,16 +74,21 @@
             <br>
             &emsp;&#10149;<%= yfcase.township.try(:zip_code) %> <%= yfcase.country.try(:name) %><%= yfcase.township.try(:name) %><%= yfcase.other_address %>
           </td>
-          
+          <td>
+            <%= yfcase.updated_at %>
+          </td>
           <!--兩週內提醒-->
           <% @todayInteger = Date.today.in_time_zone("Taipei").to_time.to_i/ (60 * 60 * 24) + 1 %>
           <td>
             <% if yfcase.final_decision =="2拍進場" && yfcase.auction_day_2.present? %>
-              <%= (@todayInteger - yfcase.auction_day_2.to_time.to_i / (60 * 60 * 24)) <= 14 ? "兩週內" : "" %>
+              <% @yfcaseAuction_day_2= yfcase.auction_day_2.to_time.to_i / (60 * 60 * 24) - @todayInteger %>
+              <%= (@yfcaseAuction_day_2 <= 14 && @yfcaseAuction_day_2 >=0) ? "兩週內" : "" %>
             <% elsif yfcase.final_decision =="3拍進場" && yfcase.auction_day_3.present? %>
-              <%= (@todayInteger - yfcase.auction_day_3.to_time.to_i / (60 * 60 * 24)) <= 14 ? "兩週內" : "" %>
+              <% @yfcaseAuction_day_3= yfcase.auction_day_3.to_time.to_i / (60 * 60 * 24) - @todayInteger %>
+              <%= (@yfcaseAuction_day_3 <= 14 && @yfcaseAuction_day_3 >=0) ? "兩週內" : "" %>
             <% elsif yfcase.final_decision =="4拍進場" && yfcase.auction_day_4.present? %>
-              <%= (@todayInteger - yfcase.auction_day_4.to_time.to_i / (60 * 60 * 24)) <= 14 ? "兩週內" : "" %>
+              <% @yfcaseAuction_day_4= yfcase.auction_day_4.to_time.to_i / (60 * 60 * 24) - @todayInteger %>
+              <%= (@yfcaseAuction_day_4 <= 14 && @yfcaseAuction_day_4 >=0) ? "兩週內" : "" %>
             <% else %>
               <%= "" %>
             <% end %>

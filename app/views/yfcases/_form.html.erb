@@ -800,6 +800,43 @@
         </div>
     </div>
 
+    <!-- 土地 / 建物 -->
+    <div class="card">
+        <div class="card-header" id="headingFour">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                    土地 / 建物
+                </button>
+            </h2>
+        </div>
+        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+            <div class="card-body">
+                <div class="field">
+                    <h3>地號</h3>
+                    <div id="lands">
+                        <%= f.fields_for :lands do |land| %>
+                        <%= render 'land_fields', f: land %>
+                        <% end %>
+                        <div class="links">
+                            <%= link_to_add_association '新增地號', f, :lands, class: "btn btn-success btn-sm" %>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <h3>建號</h3><small style="color:red;">第一筆需為目標建號 >> 儲存 >> 後續才可設定"公設"及"增建"資料</small>
+                    <div id="builds">
+                        <%= f.fields_for :builds do |build| %>
+                        <%= render 'build_fields', f: build %>
+                        <% end %>
+                        <div class="links">
+                            <%= link_to_add_association '新增建號', f, :builds, class: "btn btn-success btn-sm" %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 拍賣資訊 -->
     <div class="card">
         <div class="card-header" id="headingThree">
@@ -868,43 +905,6 @@
             </table>
             
           </div>
-        </div>
-    </div>
-
-    <!-- 土地 / 建物 -->
-    <div class="card">
-        <div class="card-header" id="headingFour">
-            <h2 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                    土地 / 建物
-                </button>
-            </h2>
-        </div>
-        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-            <div class="card-body">
-                <div class="field">
-                    <h3>地號</h3>
-                    <div id="lands">
-                        <%= f.fields_for :lands do |land| %>
-                        <%= render 'land_fields', f: land %>
-                        <% end %>
-                        <div class="links">
-                            <%= link_to_add_association '新增地號', f, :lands, class: "btn btn-success btn-sm" %>
-                        </div>
-                    </div>
-                </div>
-                <div class="field">
-                    <h3>建號</h3><small style="color:red;">第一筆需為目標建號 >> 儲存 >> 後續才可設定"公設"及"增建"資料</small>
-                    <div id="builds">
-                        <%= f.fields_for :builds do |build| %>
-                        <%= render 'build_fields', f: build %>
-                        <% end %>
-                        <div class="links">
-                            <%= link_to_add_association '新增建號', f, :builds, class: "btn btn-success btn-sm" %>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -977,11 +977,11 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-2">
-                        實價登錄市價
+                        標的物現場勘查
                     </div>
 
                     <div class="form-group col-md-10">
-                        <%= f.text_field :net_price_registration_market_price_link, class: "form-control",placeholder: "請輸入參考物件補充文件" %>
+                        <%= f.text_field :net_price_registration_market_price_link, class: "form-control",placeholder: "請輸入標的物現場勘查連結" %>
                     </div>
                 </div>
 
@@ -1042,10 +1042,10 @@
                       <%= f.label :final_decision,"評量表結論" %>
                     </th>
                     <td>
-                      <%= f.select(:final_decision,Yfcase::JUDGMENT_LIST, {:include_blank => true}, {  :prompt => '請輸入評量表結論', class: 'form-control'}) %>
+                      <%= f.select(:final_decision,options_for_select(["","未判定","2拍進場","3拍進場","4拍進場"], :selected => f.object.final_decision), {}, {class: 'form-control' }) %>
                     </td>
                   </tr>
-                  <% if yfcase.final_decision.present? && yfcase.final_decision != "放棄" %>
+                  <% if yfcase.final_decision != "未判定" && yfcase.final_decision != "放棄" %>
                     <tr>
                       <th>
                         <%= f.hidden_field :active_result_date, :value => "#{Time.now.strftime('%Y-%m-%d')}" %>

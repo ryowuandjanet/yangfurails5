@@ -1,13 +1,12 @@
 class YfcasesController < ApplicationController
   include ApplicationHelper
-  before_action :set_yfcase, only: [:edit, :update, :destroy]
+  before_action :set_yfcase, only: [:edit, :update]
   before_action :show_helper, only: [:edit, :update, :destroy, :deedtax, :yfratingscale, :realestateregistration, :complaint, :letter]
   before_action :authenticate_user!
 
   # GET /yfcases
   # GET /yfcases.json
   def index
-    # @yfcases = Yfcase.all
     prepare_variable_for_index_template
     respond_to do |format|
       format.html
@@ -83,6 +82,7 @@ class YfcasesController < ApplicationController
     @yfcase = current_user.yfcases.build( \
     floor_price_1:0,floor_price_2:0,floor_price_3:0,floor_price_4:0,number_of_attached_quantity_1:0,\
     number_of_attached_quantity_2:0,number_of_attached_quantity_3:0,deedtaxTransferPrice:0,deedtaxUnderreportedDays:0)
+    @yfcase.final_decision ||= "未判定"
   end
 
   # GET /yfcases/1/edit
@@ -122,6 +122,7 @@ class YfcasesController < ApplicationController
   # DELETE /yfcases/1
   # DELETE /yfcases/1.json
   def destroy
+    @yfcase = Yfcase.find(params[:id])
     @yfcase.destroy
     respond_to do |format|
       format.html { redirect_to yfcases_url, notice: 'Yfcase was successfully destroyed.' }
@@ -259,7 +260,6 @@ class YfcasesController < ApplicationController
     end
 
     def prepare_variable_for_index_template
-        @yfcases = Yfcase.all
         kk=true
         # keyword=案號篩選(case_number)
         # keyword2=判定篩選(final_decision)
@@ -301,13 +301,7 @@ class YfcasesController < ApplicationController
           @yfcases = Yfcase.all
         end
         
-     
-        if params[:sqrtcasename] == 'up'
-          @yfcases = @yfcases.order(:case_number => "ASC")
-        else  params[:sqrtcasename] == 'down'
-          @yfcases = @yfcases.order(:case_number => "DESC")
-        end
-        
+        @yfcases = @yfcases.order("updated_at DESC")
     end
 
 
@@ -345,8 +339,10 @@ class YfcasesController < ApplicationController
         personnals_attributes: [:id, :is_debtor, :is_creditor, :is_land_owner, :is_build_owner,:is_original_owner, :is_new_owner, :is_deed_tax_agent, :is_tax_agent, :name, :identity_card, :birthday,:person_country , \
         :person_township ,:person_village ,:person_neighbor ,:person_street ,:person_section ,:person_lane ,:person_alley ,:person_number ,:person_floor , :local_phone, :mobile_phone, :personnal_notes,:identity_code, :public_or_private, :right_share_person, :right_share_all,:personnalBuildHoldingPointPerson,:personnalBuildHoldingPointAll,:ownerFullAddress , :_destroy], \
         lands_attributes: [:id, :land_number, :land_url, :land_area, :land_holding_point_personal, :land_holding_point_all ,:landRemarks , :landPresentValue, :landTotalArea, :landAreaWidth, :landAreaDepth, :_destroy], \
-        objectbuilds_attributes: [:id, :address, :total_price, :build_area, :house_age, :floor_height, :surveyora, :surveyorb, :plusa, :plusb,:plusa_reason,:plusb_reason,:objectbuild_status, :objectbuild_url, :_destroy], \
+        objectbuilds_attributes: [:id, :address, :total_price, :build_area, :house_age, :floor_height, :surveyora, :surveyorb, :plusa, :plusb,:plusa_reason,:plusb_reason,:objectbuild_status, :objectbuild_url, :objectBuildDealYear, :objectBuildDealMonth, :_destroy], \
         builds_attributes: [:id, :build_number,:build_url,:build_area, :build_holding_point_personal, :build_holding_point_all, :build_type_use,:use_partition, :_destroy, \
-        :buildCity, :buildTownship, :buildArea, :buildStreet, :buildRoad, :buildSegment, :buildLane, :buildDo, :buildNumber, :buildFloor, :buildBigSegment, :buildSmallSegment, :buildLot, :buildLevel1, :buildLevel2, :buildLevel3, :buildLevel4, :buildOther1, :buildOther2, :buildUse, :buildScopeOfArea, :buildScopeOfRights, :buildTotalArea, :buildRemarks, :buildLandNumber] )
+        :buildCity, :buildTownship, :buildArea, :buildStreet, :buildRoad, :buildSegment, :buildLane, :buildDo, :buildNumber, :buildFloor, :buildBigSegment, :buildSmallSegment, :buildLot, :buildLevel1, :buildLevel2, :buildLevel3, :buildLevel4, :buildOther1, :buildOther2, :buildUse, :buildScopeOfArea, :buildScopeOfRights, :buildTotalArea, :buildRemarks, :buildLandNumber, \
+        :mainBuildLevel1,:mainBuildLevel2, :mainBuildLevel3, :mainBuildLevel4, :mainBuildLevel5, :mainBuildConstruction1, :mainBuildConstruction2, :mainBuildConstruction3, :mainBuildConstruction4, :mainBuildConstruction5, :mainBuildArea1, :mainBuildArea2, :mainBuildArea3, :mainBuildArea4, :mainBuildArea5, :publicBuildNumber1, :publicBuildNumber2, :publicBuildNumber3, :publicBuildNumber4, \
+        :publicBuildArea1, :publicBuildArea2, :publicBuildArea3, :publicBuildArea4, :publicBuildHP1, :publicBuildHP2, :publicBuildHP3, :publicBuildHP4, :subBuildUse1, :subBuildUse2, :subBuildUse3, :subBuildArea1, :subBuildArea2, :subBuildArea3,] )
     end
 end

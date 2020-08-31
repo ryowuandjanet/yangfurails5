@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_07_101013) do
+ActiveRecord::Schema.define(version: 2020_08_17_065500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,39 @@ ActiveRecord::Schema.define(version: 2020_08_07_101013) do
     t.string "buildRemarks"
     t.string "buildTotalArea"
     t.string "buildLandNumber"
+    t.string "mainBuildLevel1"
+    t.string "mainBuildLevel2"
+    t.string "mainBuildLevel3"
+    t.string "mainBuildLevel4"
+    t.string "mainBuildLevel5"
+    t.string "mainBuildConstruction1"
+    t.string "mainBuildConstruction2"
+    t.string "mainBuildConstruction3"
+    t.string "mainBuildConstruction4"
+    t.string "mainBuildConstruction5"
+    t.string "mainBuildArea1"
+    t.string "mainBuildArea2"
+    t.string "mainBuildArea3"
+    t.string "mainBuildArea4"
+    t.string "mainBuildArea5"
+    t.string "publicBuildNumber1"
+    t.string "publicBuildNumber2"
+    t.string "publicBuildNumber3"
+    t.string "publicBuildNumber4"
+    t.string "publicBuildArea1"
+    t.string "publicBuildArea2"
+    t.string "publicBuildArea3"
+    t.string "publicBuildArea4"
+    t.string "publicBuildHP1"
+    t.string "publicBuildHP2"
+    t.string "publicBuildHP3"
+    t.string "publicBuildHP4"
+    t.string "subBuildUse1"
+    t.string "subBuildUse2"
+    t.string "subBuildUse3"
+    t.string "subBuildArea1"
+    t.string "subBuildArea2"
+    t.string "subBuildArea3"
     t.index ["yfcase_id"], name: "index_builds_on_yfcase_id"
   end
 
@@ -94,6 +127,8 @@ ActiveRecord::Schema.define(version: 2020_08_07_101013) do
     t.string "objectbuild_status"
     t.string "plusa_reason"
     t.string "plusb_reason"
+    t.string "objectBuildDealYear"
+    t.string "objectBuildDealMonth"
     t.index ["yfcase_id"], name: "index_objectbuilds_on_yfcase_id"
   end
 
