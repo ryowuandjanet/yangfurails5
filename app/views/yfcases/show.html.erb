@@ -1003,7 +1003,11 @@
             </tr>
             <tr>
               <td>
-                    <% if @yfcase.final_decision == "2拍進場" %>
+                    <% if @yfcase.final_decision == "1拍進場" %>
+                    <div class="yfratingscalePDFFinaldecisionJudgment" style="color:Brown;border:5px solid Brown;">
+                        <%= @yfcase.final_decision %>
+                    </div>
+                    <% elsif @yfcase.final_decision == "2拍進場" %>
                     <div class="yfratingscalePDFFinaldecisionJudgment" style="color:purple;border:5px solid purple;">
                         <%= @yfcase.final_decision %>
                     </div>
