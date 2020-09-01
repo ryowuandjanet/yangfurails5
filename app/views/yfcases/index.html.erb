@@ -82,16 +82,24 @@
           <td>
             <% if yfcase.final_decision =="1拍進場" && yfcase.auction_day_1.present? %>
               <% @yfcaseAuction_day_1= yfcase.auction_day_1.to_time.to_i / (60 * 60 * 24) - @todayInteger %>
-              <%= (@yfcaseAuction_day_1 <= 14 && @yfcaseAuction_day_1 >=0) ? "兩週內" : "" %>
+              <% if @yfcaseAuction_day_1 <= 14 && @yfcaseAuction_day_1 >=0 %>
+                兩週內<span style="color:red;">(<%= @yfcaseAuction_day_1 %>)</span>
+              <% end %> 
             <% elsif yfcase.final_decision =="2拍進場" && yfcase.auction_day_2.present? %>
               <% @yfcaseAuction_day_2= yfcase.auction_day_2.to_time.to_i / (60 * 60 * 24) - @todayInteger %>
-              <%= (@yfcaseAuction_day_2 <= 14 && @yfcaseAuction_day_2 >=0) ? "兩週內" : "" %>
+              <% if @yfcaseAuction_day_2 <= 14 && @yfcaseAuction_day_2 >=0 %>
+                兩週內<span style="color:red;">(<%= @yfcaseAuction_day_2 %>)</span>
+              <% end %> 
             <% elsif yfcase.final_decision =="3拍進場" && yfcase.auction_day_3.present? %>
               <% @yfcaseAuction_day_3= yfcase.auction_day_3.to_time.to_i / (60 * 60 * 24) - @todayInteger %>
-              <%= (@yfcaseAuction_day_3 <= 14 && @yfcaseAuction_day_3 >=0) ? "兩週內" : "" %>
+              <% if @yfcaseAuction_day_3 <= 14 && @yfcaseAuction_day_3 >=0 %>
+                兩週內<span style="color:red;">(<%= @yfcaseAuction_day_3 %>)</span>
+              <% end %> 
             <% elsif yfcase.final_decision =="4拍進場" && yfcase.auction_day_4.present? %>
               <% @yfcaseAuction_day_4= yfcase.auction_day_4.to_time.to_i / (60 * 60 * 24) - @todayInteger %>
-              <%= (@yfcaseAuction_day_4 <= 14 && @yfcaseAuction_day_4 >=0) ? "兩週內" : "" %>
+              <% if @yfcaseAuction_day_4 <= 14 && @yfcaseAuction_day_4 >=0 %>
+                兩週內<span style="color:red;">(<%= @yfcaseAuction_day_4 %>)</span>
+              <% end %>
             <% else %>
               <%= "" %>
             <% end %>
