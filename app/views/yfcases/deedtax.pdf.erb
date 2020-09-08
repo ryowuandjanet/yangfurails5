@@ -115,7 +115,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td style="width:2.2%"><%= @yfcase.houseTaxNumberCountry1 %></td>
+			<td style="width:2.2%;height:30px;"><%= @yfcase.houseTaxNumberCountry1 %></td>
 			<td style="width:2.2%"><%= @yfcase.houseTaxNumberCountry2 %></td>
 			<td style="width:2.2%"><%= @yfcase.houseTaxNumberTownship1 %></td>
 			<td style="width:2.2%"><%= @yfcase.houseTaxNumberTownship2 %></td>
@@ -131,12 +131,12 @@
 
 
 	<!-- (4)立契日期或使用執照核發日期（限房屋建造完成前取得所有權案件）/(5)申報日期 -->
-	<% @deedtaxDateOfDeedYear = (@yfcase.deedtaxDateOfDeed.year-1911).to_s %>
-	<% @deedtaxDateOfDeedMonth = @yfcase.deedtaxDateOfDeed.month.to_s %>
-	<% @deedtaxDateOfDeedDay = @yfcase.deedtaxDateOfDeed.day.to_s %>
-	<% @deedtaxDeclarationDateYear = (@yfcase.deedtaxDeclarationDate.year-1911).to_s %>
-	<% @deedtaxDeclarationDateMonth = @yfcase.deedtaxDeclarationDate.month.to_s %>
-	<% @deedtaxDeclarationDateDay = @yfcase.deedtaxDeclarationDate.day.to_s %>
+	<% @yfcase.deedtaxDateOfDeed.blank? ? ' ' : @deedtaxDateOfDeedYear = (@yfcase.deedtaxDateOfDeed.year-1911).to_s %>
+	<% @yfcase.deedtaxDateOfDeed.blank? ? ' ' : @deedtaxDateOfDeedMonth = @yfcase.deedtaxDateOfDeed.month.to_s %>
+	<% @yfcase.deedtaxDateOfDeed.blank? ? ' ' : @deedtaxDateOfDeedDay = @yfcase.deedtaxDateOfDeed.day.to_s %>
+	<% @yfcase.deedtaxDeclarationDate.blank? ? ' ' : @deedtaxDeclarationDateYear = (@yfcase.deedtaxDeclarationDate.year-1911).to_s %>
+	<% @yfcase.deedtaxDeclarationDate.blank? ? ' ' : @deedtaxDeclarationDateMonth = @yfcase.deedtaxDeclarationDate.month.to_s %>
+	<% @yfcase.deedtaxDeclarationDate.blank? ? ' ' : @deedtaxDateOfDeedDay = @yfcase.deedtaxDeclarationDate.day.to_s %>
 	
 	<table class="deedtax45">
 		<tr>
@@ -227,7 +227,7 @@
 			<th rowspan="4">(9)新所有權人</th>
 			<td rowspan="2" style="text-align:left;">
 				<% if @yfcase.creditorName.blank? %>
-          <%= @yfcase.company+"法定代理人：陳美純" %><br>
+          <%= @yfcase.company %><br>
         <% else %>
           <%= @yfcase.creditorName %><br>
         <% end %>
@@ -284,7 +284,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td rowspan="2"></td>
+			<td rowspan="2">法定代理人<br>陳美純</td>
 			<td></td>
 			<td colspan="2"></td>
 			<td rowspan="2"></td>

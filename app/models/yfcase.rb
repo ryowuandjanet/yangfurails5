@@ -32,7 +32,7 @@ class Yfcase < ApplicationRecord
 	
 	DEEDTAX_DEBTTAX_PAYMENT_RECEIPT_METHOD=[" ","親領","郵寄"]
 	DEEDTAX_CLOSE_NEWSLETTER=[" ","需要","不需要"]
-	BUILD_USE_LIST=["","陽台","露台","花台","騎樓","雨遮"]
+	BUILD_USE_LIST=["","陽台","露台","花台","騎樓","雨遮","屋頂突出物"]
 	AGE_CLASS = [" ","2拍進場","3拍進場","4拍進場","放棄"].freeze
 	
 

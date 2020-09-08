@@ -477,6 +477,14 @@
                 </span>
               </td>
             </tr>
+            <tr>
+              <td style="width:70%;height:70px;text-align:right;font-size:16.5pt;">訴訟代理人</td>
+              <td style="width:30%;height:70px;text-align:left;font-size:16.5pt;">
+                <span class="bluefont">
+                  <span class="bluefont"><%= @yfcase.complaintLitigationAgent.blank? ? '' : User.find(@complaintLitigationAgent).full_name %>
+                </span>
+              </td>
+            </tr>
         </table>
       </div>
     <% end %>
