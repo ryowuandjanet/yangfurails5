@@ -291,21 +291,25 @@
         <td>三、</td>
         <td>
           查系爭房地並無使用目的不能分割之情形，二造就附表所示房地並無不分割協議及共管契約。經原告於
-          <span class="bluefont"><%= @yfcase.agreementSplitUnsuccessfulDate.to_date.year-1911 %>年<%= @yfcase.agreementSplitUnsuccessfulDate.to_date.month %>月<%= @yfcase.agreementSplitUnsuccessfulDate.to_date.day %>日</span>
-          通知被告協議分割未果
-          <% if @yfcase.exhibit4.present? %>
-          【證物4】
-          <% end %>，故有訴訟請求判決分割共有物之必要，爰依民法第823、824條規定請求。
+          <% if @yfcase.agreementSplitUnsuccessfulDate.present? %>
+            <span class="bluefont"><%= @yfcase.agreementSplitUnsuccessfulDate.to_date.year-1911 %>年<%= @yfcase.agreementSplitUnsuccessfulDate.to_date.month %>月<%= @yfcase.agreementSplitUnsuccessfulDate.to_date.day %>日</span>
+            通知被告協議分割未果
+            <% if @yfcase.exhibit4.present? %>
+            【證物4】
+            <% end %>，故有訴訟請求判決分割共有物之必要，爰依民法第823、824條規定請求。
+          <% end %>
         </td>
       </tr>
       <tr>
         <td>四、</td>
         <td>
-          鈞院裁判分割變賣系爭房地，所得價金由兩造按附表所示比例分配，理由臚陳如下：系爭房地倘採原物分割，二造最大持分<span class="bluefont"><%= numberToChinese(@ownerMaxArrayAll.to_i)+"分之"+numberToChinese(@ownerMaxArrayPerson.to_i) %></span>，最小持分<span class="bluefont"><%= numberToChinese(@ownerMinArrayAll.to_i)+"分之"+numberToChinese(@ownerMinArrayPerson.to_i) %></span>，共有人所得土地面積僅<span class="bluefont"><%= (@landTotalArea * @ownerMaxArrayValue).round(2) %></span>及<span class="bluefont"><%= (@landTotalArea * @ownerMinArrayValue).round(2) %></span>平方公尺。臨路面寬僅最小不足1米，顯然過於狹小不利使用，又系爭建物對外僅有單一出入口，並無個別出入口。
-          <% if @yfcase.exhibit3.present? %>
-          【證物3】
+          <% if @ownerMaxArrayAll.present? && @ownerMaxArrayPerson.present? %>
+            鈞院裁判分割變賣系爭房地，所得價金由兩造按附表所示比例分配，理由臚陳如下：系爭房地倘採原物分割，二造最大持分<span class="bluefont"><%= numberToChinese(@ownerMaxArrayAll.to_i)+"分之"+numberToChinese(@ownerMaxArrayPerson.to_i) %></span>，最小持分<span class="bluefont"><%= numberToChinese(@ownerMinArrayAll.to_i)+"分之"+numberToChinese(@ownerMinArrayPerson.to_i) %></span>，共有人所得土地面積僅<span class="bluefont"><%= (@landTotalArea * @ownerMaxArrayValue).round(2) %></span>及<span class="bluefont"><%= (@landTotalArea * @ownerMinArrayValue).round(2) %></span>平方公尺。臨路面寬僅最小不足1米，顯然過於狹小不利使用，又系爭建物對外僅有單一出入口，並無個別出入口。
+            <% if @yfcase.exhibit3.present? %>
+            【證物3】
+            <% end %>
+            如就系爭房地採取原物分割，將導致分割後房地之使用欠缺效益，性質上難以分割，且兩造間並無任何親屬關係及信任基礎可言，若共同生活實有害各自間日常生活隱私。
           <% end %>
-          如就系爭房地採取原物分割，將導致分割後房地之使用欠缺效益，性質上難以分割，且兩造間並無任何親屬關係及信任基礎可言，若共同生活實有害各自間日常生活隱私。
         </td>
       </tr>
       <tr>

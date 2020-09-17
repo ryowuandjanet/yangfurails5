@@ -31,6 +31,7 @@ class Yfcase < ApplicationRecord
 	MARKING_AND_APPLICATION_RIGHTS_LIST=[" ","契約書","登記清冊","複丈結果通知書","建物測量成果圖"]
 	
 	DEEDTAX_DEBTTAX_PAYMENT_RECEIPT_METHOD=[" ","親領","郵寄"]
+	NEWSPAPER_ATTACHED_CHOICE = ["","申請","不申請"]
 	DEEDTAX_CLOSE_NEWSLETTER=[" ","需要","不需要"]
 	BUILD_USE_LIST=["","陽台","露台","花台","騎樓","雨遮","屋頂突出物"]
 	AGE_CLASS = [" ","2拍進場","3拍進場","4拍進場","放棄"].freeze

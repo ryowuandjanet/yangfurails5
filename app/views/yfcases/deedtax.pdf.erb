@@ -285,16 +285,16 @@
 		</tr>
 		<tr>
 			<td rowspan="2">法定代理人<br>陳美純</td>
-			<td></td>
-			<td colspan="2"></td>
+			<td>L203130632</td>
+			<td colspan="2">30</td>
 			<td rowspan="2"></td>
-			<td rowspan="2"></td>
+			<td rowspan="2">臺中市大里區西榮里7鄰新仁路三段72巷3號</td>
 			<td rowspan="2"></td>
 		</tr>
 		<tr>
 			<td></td>
-			<td></td>
-			<td></td>
+			<td>10</td>
+			<td>31</td>
 		</tr>
 		
 		<!-- (10)代理人 -->
@@ -435,7 +435,13 @@
 		<tr>
 			<th colspan="5" style="height:70px;">
 				(19)申報人取得房屋，請依附聯填報不動產移轉後使用情形，供自住使用者，可申請按自住房屋稅率課徵房屋稅及自用住宅<br>&emsp;&emsp;用地稅率課徵地價稅。未填報附聯者，請於房屋移轉後，儘速向所屬稽徵機關申報移轉後的房屋使用情形，以維護您的<br>&emsp;&emsp;權益。
-				<br>&emsp;&emsp;&#9745 申請(續填報附聯)&emsp;&emsp;&#9744不申請&emsp;&emsp;(請務必擇一勾選)
+				<% if @yfcase.newspaperAttached == "申請" %>
+					<br>&emsp;&emsp;&#9745 申請(續填報附聯)&emsp;&emsp;&#9744 不申請&emsp;&emsp;(請務必擇一勾選)
+				<% elsif @yfcase.newspaperAttached == "不申請" %>
+					<br>&emsp;&emsp;&#9744 申請(續填報附聯)&emsp;&emsp;&#9745 不申請&emsp;&emsp;(請務必擇一勾選)
+				<% else %>
+					<br>&emsp;&emsp;&#9744 申請(續填報附聯)&emsp;&emsp;&#9744 不申請&emsp;&emsp;(請務必擇一勾選)
+				<% end %>
 			</th>
 		</tr>
 

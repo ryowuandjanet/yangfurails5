@@ -408,6 +408,14 @@
               </div>
             </div>
             
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <%= f.label :newspaperAttached, "填寫(申請)報附聯" %>
+              </div>
+              <div class="form-group col">
+                <%= f.select(:newspaperAttached,Yfcase::NEWSPAPER_ATTACHED_CHOICE, {}, {  :prompt => '請選擇申請/不申請', class: 'form-control'}) %>
+              </div>
+            </div>
             
             <div class="form-row">
               <div class="form-group col-md-2">
@@ -1084,6 +1092,8 @@
         <%= link_to "返回", @yfcase, class: "btn btn-secondary" %>
     </div>
     <%= f.hidden_field :adv_find_condition, :value => "#{@yfcase.case_number}/#{@yfcase.final_decision}/#{@yfcase.user_id}/#{@yfcase.country_id}" %>
+   
+
 </div>
 <script>
     $.datepicker.regional['zh-TW']={
