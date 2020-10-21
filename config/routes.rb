@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 		get :realestateregistration #不動產登記
 		get :complaint #訴訟狀
 		get :letter #存証信函
+		get :commonpropertydivision #共有物分割
 		# get :sendmail #寄發信件給會計
 		delete :delete_subsigntruea #刪除副署人員1
 		delete :delete_subsigntrueb #刪除副署人員2

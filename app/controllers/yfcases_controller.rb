@@ -174,6 +174,15 @@ class YfcasesController < ApplicationController
       format.pdf {render template:'yfcases/letter', pdf: 'Letter'}
     end    
   end
+  
+  def commonpropertydivision
+    @yfcase = Yfcase.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf {render template:'yfcases/commonpropertydivision', pdf: 'Commonpropertydivision'}
+    end    
+  end
 
   def delete_subsigntruea
     @yfcase = Yfcase.find(params[:id])
