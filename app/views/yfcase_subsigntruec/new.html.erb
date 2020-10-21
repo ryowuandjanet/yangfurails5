@@ -6,6 +6,7 @@
     <%= f.hidden_field :signtruec_first_name, :value => "#{current_user.first_name}" %>
     <%= f.hidden_field :signtruec_last_name, :value => "#{current_user.last_name}" %>
     <%= f.hidden_field :signtruec_date, :value => "#{Time.now.strftime('%Y-%m-%d')}" %>
+    <%= f.hidden_field :signtruec_work_area, :value => "#{current_user.userWorkArea}" %>
 </div>
 
 <div class="form-group">

@@ -106,6 +106,21 @@ module ApplicationHelper
 			x * ((a+b)/2)
 		end
 	end
+	
+	# 代出輸入底價的最大值
+	def maxvalue(a,b,c,d)
+		if a > b && a > c && a > d
+			return a
+		elsif b > a && b > c && b > d
+			return b
+		elsif c > a && c > b && c > d
+			return c
+		elsif d > a && d > b && d > c
+			return d
+		else
+			return 0
+		end
+	end
 
 
 

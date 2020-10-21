@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_17_010637) do
+ActiveRecord::Schema.define(version: 2020_10_21_052745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -177,6 +177,8 @@ ActiveRecord::Schema.define(version: 2020_09_17_010637) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "plusa_reason"
+    t.decimal "plusa2", precision: 4, scale: 2
+    t.string "plusa_reason2"
     t.index ["objectbuild_id"], name: "index_plusrateas_on_objectbuild_id"
   end
 
@@ -198,6 +200,7 @@ ActiveRecord::Schema.define(version: 2020_09_17_010637) do
     t.integer "yfcase_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "signtruea_work_area"
     t.index ["yfcase_id"], name: "index_subsigntrueas_on_yfcase_id"
   end
 
@@ -209,6 +212,7 @@ ActiveRecord::Schema.define(version: 2020_09_17_010637) do
     t.integer "yfcase_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "signtrueb_work_area"
     t.index ["yfcase_id"], name: "index_subsigntruebs_on_yfcase_id"
   end
 
@@ -220,6 +224,7 @@ ActiveRecord::Schema.define(version: 2020_09_17_010637) do
     t.integer "yfcase_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "signtruec_work_area"
     t.index ["yfcase_id"], name: "index_subsigntruecs_on_yfcase_id"
   end
 
@@ -254,7 +259,6 @@ ActiveRecord::Schema.define(version: 2020_09_17_010637) do
     t.date "userBirthday"
     t.string "userLocalPhone"
     t.string "userMobilePhone"
-    t.string "userNotes"
     t.string "userCountry"
     t.string "userTownship"
     t.string "userVillage"
@@ -265,8 +269,9 @@ ActiveRecord::Schema.define(version: 2020_09_17_010637) do
     t.string "userAlley"
     t.string "userNumber"
     t.string "userFloor"
-    t.string "userIdentityCode"
     t.string "userPublicOrPrivate"
+    t.string "userFullName"
+    t.string "userWorkArea"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

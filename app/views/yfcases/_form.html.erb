@@ -25,21 +25,22 @@
 
 </style>
 <%= form_with(model: yfcase, local: true) do |f| %>
-<% if yfcase.errors.any? %>
-<div id="error_explanation">
-    <h2>
-        <%= pluralize(yfcase.errors.count, "error") %> prohibited this yfcase from being saved:</h2>
-    <ul>
-        <% yfcase.errors.full_messages.each do |message| %>
-        <li>
-            <%= message %>
-        </li>
-        <% end %>
-    </ul>
-</div>
-<% end %>
 
-<div class="accordion" id="accordionExample">
+  <% if yfcase.errors.any? %>
+  <div id="error_explanation">
+      <h2>
+          <%= pluralize(yfcase.errors.count, "error") %> prohibited this yfcase from being saved:</h2>
+      <ul>
+          <% yfcase.errors.full_messages.each do |message| %>
+          <li>
+              <%= message %>
+          </li>
+          <% end %>
+      </ul>
+  </div>
+  <% end %>
+
+  <div class="accordion" id="accordionExample">
     <% if yfcase.priority_purchase_result.present? && yfcase.priority_purchase_result == "無人優購" %>
       <!--無人優購後顯示：不動產登記-->
       <div class="card">
@@ -269,384 +270,384 @@
         </div>
       </div>
 
-      <!--無人優購後顯示：契稅申請書-->
-      <div class="card">
-        <div class="card-header" id="headingDeedtax">
-          <h2 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseDeedtax" aria-expanded="true" aria-controls="collapseDeedtax">
-              無人優購後顯示：契稅申請書
-            </button>
-          </h2>
+    <!--無人優購後顯示：契稅申請書-->
+    <div class="card">
+      <div class="card-header" id="headingDeedtax">
+        <h2 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseDeedtax" aria-expanded="true" aria-controls="collapseDeedtax">
+            無人優購後顯示：契稅申請書
+          </button>
+        </h2>
+      </div>
+      <div id="collapseDeedtax" class="collapse" aria-labelledby="headingDeedtax" data-parent="#accordionExample">
+        <div class="card-body">
+          
+           <div class="form-row">
+          <div class="form-group col-md-1">
+            房屋稅籍
+          </div>
+          
+          <div class="form-group col-md-2" style="background-color:Aquamarine;">
+            鄉鎮區
+            <div class="container">
+              <div class="row">
+                <div class="col" style="padding-right:1px;padding-left:1px;">
+                 <%= f.text_field :houseTaxNumberCountry1, class: 'form-control' %>
+                </div>
+                <div class="col-sm" style="padding-right:1px;padding-left:1px;">
+                  <%= f.text_field :houseTaxNumberCountry2, class: 'form-control' %>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group col-md-2" style="background-color:DeepSkyBlue;">
+            村里
+            <div class="container">
+              <div class="row">
+                <div class="col" style="padding-right:1px;padding-left:1px;">
+                 <%= f.text_field :houseTaxNumberTownship1, class: 'form-control' %>
+                </div>
+                <div class="col-sm" style="padding-right:1px;padding-left:1px;">
+                  <%= f.text_field :houseTaxNumberTownship2, class: 'form-control' %>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group col-md-4" style="background-color:Gainsboro;">
+            冊頁(棟)
+            <div class="container">
+              <div class="row">
+                <div class="col" style="padding-right:1px;padding-left:1px;">
+                 <%= f.text_field :houseTaxNumberBuilding1, class: 'form-control' %>
+                </div>
+                <div class="col-sm" style="padding-right:1px;padding-left:1px;">
+                  <%= f.text_field :houseTaxNumberBuilding2, class: 'form-control' %>
+                </div>
+                <div class="col" style="padding-right:1px;padding-left:1px;">
+                 <%= f.text_field :houseTaxNumberBuilding3, class: 'form-control' %>
+                </div>
+                <div class="col-sm" style="padding-right:1px;padding-left:1px;">
+                  <%= f.text_field :houseTaxNumberBuilding4, class: 'form-control' %>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group col-md-3" style="background-color:Khaki;">
+            分戶號
+            <div class="container">
+              <div class="row">
+                <div class="col" style="padding-right:1px;padding-left:1px;">
+                 <%= f.text_field :houseTaxNumberHouseHold1, class: 'form-control' %>
+                </div>
+                <div class="col-sm" style="padding-right:1px;padding-left:1px;">
+                  <%= f.text_field :houseTaxNumberHouseHold2, class: 'form-control' %>
+                </div>
+                <div class="col" style="padding-right:1px;padding-left:1px;">
+                 <%= f.text_field :houseTaxNumberHouseHold3, class: 'form-control' %>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
         </div>
-        <div id="collapseDeedtax" class="collapse" aria-labelledby="headingDeedtax" data-parent="#accordionExample">
-          <div class="card-body">
-            
-             <div class="form-row">
+          
+          <div class="form-row">
+            <div class="form-group col-md-2">
+              <%= f.label :deedtaxDateOfDeed, "立契日期" %>
+            </div>
+            <div class="form-group col">
+              <%= f.text_field :deedtaxDateOfDeed,  class: "datepicker form-control" %>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group col-md-2">
+              <%= f.label :deedtaxDeclarationDate, "申報日期" %>
+            </div>
+            <div class="form-group col">
+              <%= f.text_field :deedtaxDeclarationDate,  class: "datepicker form-control" %>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group col-md-2">
+              <%= f.label :deedtaxTransferPrice,"移轉價格" %>
+            </div>
+            <div class="form-group col">
+              <%= f.number_field :deedtaxTransferPrice, in: 0..1000000000, :required => true, class: "form-control" %>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group col-md-2">
+              <%= f.label :deedtaxChargeDaffairesTaxDeclarant,"代辦契稅申報人" %>
+            </div>
+            <div class="form-group col">
+              <%= f.collection_select :deedtaxChargeDaffairesTaxDeclarant, User.order(:full_name), :id, :full_name, {:include_blank => true}, {  class: 'form-control'} %>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group col-md-2">
+              <%= f.label :deedtaxDebtTaxPaymentReceiptMethod, "契稅繳款書領回方式" %>
+            </div>
+            <div class="form-group col">
+              <%= f.select(:deedtaxDebtTaxPaymentReceiptMethod,Yfcase::DEEDTAX_DEBTTAX_PAYMENT_RECEIPT_METHOD, {}, {  :prompt => '請選擇領回方式', class: 'form-control'}) %>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group col-md-2">
+              <%= f.label :deedtaxClosedNewsletter, "結案簡訊通知" %>
+            </div>
+            <div class="form-group col">
+              <%= f.select(:deedtaxClosedNewsletter,Yfcase::DEEDTAX_CLOSE_NEWSLETTER, {}, {  :prompt => '請選擇通知方式', class: 'form-control'}) %>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group col-md-2">
+              <%= f.label :newspaperAttached, "填寫(申請)報附聯" %>
+            </div>
+            <div class="form-group col">
+              <%= f.select(:newspaperAttached,Yfcase::NEWSPAPER_ATTACHED_CHOICE, {}, {  :prompt => '請選擇申請/不申請', class: 'form-control'}) %>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group col-md-2">
+              <%= f.label :deedtaxRemark,"備註" %>
+            </div>
+            <div class="form-group col">
+              <%= f.text_field :deedtaxRemark , placeholder: '在此輸入備註', class: 'form-control' %>
+            </div>
+          </div>
+          
+          <h2>移轉情形-層次</h2>
+          <div class="form-row">
             <div class="form-group col-md-1">
-              房屋稅籍
+              (1)層次
             </div>
-            
-            <div class="form-group col-md-2" style="background-color:Aquamarine;">
-              鄉鎮區
-              <div class="container">
-                <div class="row">
-                  <div class="col" style="padding-right:1px;padding-left:1px;">
-                   <%= f.text_field :houseTaxNumberCountry1, class: 'form-control' %>
-                  </div>
-                  <div class="col-sm" style="padding-right:1px;padding-left:1px;">
-                    <%= f.text_field :houseTaxNumberCountry2, class: 'form-control' %>
-                  </div>
-                </div>
-              </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferLevel1, class: 'form-control' %>
             </div>
-            
-            <div class="form-group col-md-2" style="background-color:DeepSkyBlue;">
-              村里
-              <div class="container">
-                <div class="row">
-                  <div class="col" style="padding-right:1px;padding-left:1px;">
-                   <%= f.text_field :houseTaxNumberTownship1, class: 'form-control' %>
-                  </div>
-                  <div class="col-sm" style="padding-right:1px;padding-left:1px;">
-                    <%= f.text_field :houseTaxNumberTownship2, class: 'form-control' %>
-                  </div>
-                </div>
-              </div>
+            <div class="form-group col-md-1">
+             構造
             </div>
-            
-            <div class="form-group col-md-4" style="background-color:Gainsboro;">
-              冊頁(棟)
-              <div class="container">
-                <div class="row">
-                  <div class="col" style="padding-right:1px;padding-left:1px;">
-                   <%= f.text_field :houseTaxNumberBuilding1, class: 'form-control' %>
-                  </div>
-                  <div class="col-sm" style="padding-right:1px;padding-left:1px;">
-                    <%= f.text_field :houseTaxNumberBuilding2, class: 'form-control' %>
-                  </div>
-                  <div class="col" style="padding-right:1px;padding-left:1px;">
-                   <%= f.text_field :houseTaxNumberBuilding3, class: 'form-control' %>
-                  </div>
-                  <div class="col-sm" style="padding-right:1px;padding-left:1px;">
-                    <%= f.text_field :houseTaxNumberBuilding4, class: 'form-control' %>
-                  </div>
-                </div>
-              </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferStructure1, class: 'form-control' %>
             </div>
-            
-            <div class="form-group col-md-3" style="background-color:Khaki;">
-              分戶號
-              <div class="container">
-                <div class="row">
-                  <div class="col" style="padding-right:1px;padding-left:1px;">
-                   <%= f.text_field :houseTaxNumberHouseHold1, class: 'form-control' %>
-                  </div>
-                  <div class="col-sm" style="padding-right:1px;padding-left:1px;">
-                    <%= f.text_field :houseTaxNumberHouseHold2, class: 'form-control' %>
-                  </div>
-                  <div class="col" style="padding-right:1px;padding-left:1px;">
-                   <%= f.text_field :houseTaxNumberHouseHold3, class: 'form-control' %>
-                  </div>
-                </div>
-              </div>
+            <div class="form-group col-md-1">
+             面積
             </div>
-            
-            
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferArea1, class: 'form-control' %>
+            </div>
           </div>
-            
-            <div class="form-row">
-              <div class="form-group col-md-2">
-                <%= f.label :deedtaxDateOfDeed, "立契日期" %>
-              </div>
-              <div class="form-group col">
-                <%= f.text_field :deedtaxDateOfDeed,  class: "datepicker form-control" %>
-              </div>
+          
+          <div class="form-row">
+            <div class="form-group col-md-1">
+              (2)層次
             </div>
-            
-            <div class="form-row">
-              <div class="form-group col-md-2">
-                <%= f.label :deedtaxDeclarationDate, "申報日期" %>
-              </div>
-              <div class="form-group col">
-                <%= f.text_field :deedtaxDeclarationDate,  class: "datepicker form-control" %>
-              </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferLevel2, class: 'form-control' %>
             </div>
-            
-            <div class="form-row">
-              <div class="form-group col-md-2">
-                <%= f.label :deedtaxTransferPrice,"移轉價格" %>
-              </div>
-              <div class="form-group col">
-                <%= f.number_field :deedtaxTransferPrice, in: 0..1000000000, :required => true, class: "form-control" %>
-              </div>
+            <div class="form-group col-md-1">
+             構造
             </div>
-            
-            <div class="form-row">
-              <div class="form-group col-md-2">
-                <%= f.label :deedtaxChargeDaffairesTaxDeclarant,"代辦契稅申報人" %>
-              </div>
-              <div class="form-group col">
-                <%= f.collection_select :deedtaxChargeDaffairesTaxDeclarant, User.order(:full_name), :id, :full_name, {:include_blank => true}, {  class: 'form-control'} %>
-              </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferStructure2, class: 'form-control' %>
             </div>
-            
-            <div class="form-row">
-              <div class="form-group col-md-2">
-                <%= f.label :deedtaxDebtTaxPaymentReceiptMethod, "契稅繳款書領回方式" %>
-              </div>
-              <div class="form-group col">
-                <%= f.select(:deedtaxDebtTaxPaymentReceiptMethod,Yfcase::DEEDTAX_DEBTTAX_PAYMENT_RECEIPT_METHOD, {}, {  :prompt => '請選擇領回方式', class: 'form-control'}) %>
-              </div>
+            <div class="form-group col-md-1">
+             面積
             </div>
-            
-            <div class="form-row">
-              <div class="form-group col-md-2">
-                <%= f.label :deedtaxClosedNewsletter, "結案簡訊通知" %>
-              </div>
-              <div class="form-group col">
-                <%= f.select(:deedtaxClosedNewsletter,Yfcase::DEEDTAX_CLOSE_NEWSLETTER, {}, {  :prompt => '請選擇通知方式', class: 'form-control'}) %>
-              </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferArea2, class: 'form-control' %>
             </div>
-            
-            <div class="form-row">
-              <div class="form-group col-md-2">
-                <%= f.label :newspaperAttached, "填寫(申請)報附聯" %>
-              </div>
-              <div class="form-group col">
-                <%= f.select(:newspaperAttached,Yfcase::NEWSPAPER_ATTACHED_CHOICE, {}, {  :prompt => '請選擇申請/不申請', class: 'form-control'}) %>
-              </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group col-md-1">
+              (3)層次
             </div>
-            
-            <div class="form-row">
-              <div class="form-group col-md-2">
-                <%= f.label :deedtaxRemark,"備註" %>
-              </div>
-              <div class="form-group col">
-                <%= f.text_field :deedtaxRemark , placeholder: '在此輸入備註', class: 'form-control' %>
-              </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferLevel3, class: 'form-control' %>
             </div>
-            
-            <h2>移轉情形-層次</h2>
-            <div class="form-row">
-              <div class="form-group col-md-1">
-                (1)層次
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferLevel1, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               構造
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferStructure1, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               面積
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferArea1, class: 'form-control' %>
-              </div>
+            <div class="form-group col-md-1">
+             構造
             </div>
-            
-            <div class="form-row">
-              <div class="form-group col-md-1">
-                (2)層次
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferLevel2, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               構造
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferStructure2, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               面積
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferArea2, class: 'form-control' %>
-              </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferStructure3, class: 'form-control' %>
             </div>
-            
-            <div class="form-row">
-              <div class="form-group col-md-1">
-                (3)層次
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferLevel3, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               構造
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferStructure3, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               面積
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferArea3, class: 'form-control' %>
-              </div>
+            <div class="form-group col-md-1">
+             面積
             </div>
-            
-            <div class="form-row">
-              <div class="form-group col-md-1">
-                (4)層次
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferLevel4, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               構造
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferStructure4, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               面積
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferArea4, class: 'form-control' %>
-              </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferArea3, class: 'form-control' %>
             </div>
-            
-            <div class="form-row">
-              <div class="form-group col-md-1">
-                (5)層次
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferLevel5, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               構造
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferStructure5, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               面積
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferArea5, class: 'form-control' %>
-              </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group col-md-1">
+              (4)層次
             </div>
-            
-            <div class="form-row">
-              <div class="form-group col-md-1">
-                (6)層次
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferLevel6, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               構造
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferStructure6, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               面積
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferArea6, class: 'form-control' %>
-              </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferLevel4, class: 'form-control' %>
             </div>
+            <div class="form-group col-md-1">
+             構造
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferStructure4, class: 'form-control' %>
+            </div>
+            <div class="form-group col-md-1">
+             面積
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferArea4, class: 'form-control' %>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group col-md-1">
+              (5)層次
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferLevel5, class: 'form-control' %>
+            </div>
+            <div class="form-group col-md-1">
+             構造
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferStructure5, class: 'form-control' %>
+            </div>
+            <div class="form-group col-md-1">
+             面積
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferArea5, class: 'form-control' %>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group col-md-1">
+              (6)層次
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferLevel6, class: 'form-control' %>
+            </div>
+            <div class="form-group col-md-1">
+             構造
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferStructure6, class: 'form-control' %>
+            </div>
+            <div class="form-group col-md-1">
+             面積
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferArea6, class: 'form-control' %>
+            </div>
+          </div>
 
-            <h2>移轉情形-公設</h2>
-            <div class="form-row">
-              <div class="form-group col-md-1">
-                (1)建號
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferPublicBuildingNumber1, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               面積
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferPublicArea1, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               持分比例
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferPublicHoldings1, class: 'form-control' %>
-              </div>
+          <h2>移轉情形-公設</h2>
+          <div class="form-row">
+            <div class="form-group col-md-1">
+              (1)建號
             </div>
-            <div class="form-row">
-              <div class="form-group col-md-1">
-                (2)建號
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferPublicBuildingNumber2, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               面積
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferPublicArea2, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               持分比例
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferPublicHoldings2, class: 'form-control' %>
-              </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferPublicBuildingNumber1, class: 'form-control' %>
             </div>
-            <div class="form-row">
-              <div class="form-group col-md-1">
-                (3)建號
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferPublicBuildingNumber3, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               面積
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferPublicArea3, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               持分比例
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferPublicHoldings3, class: 'form-control' %>
-              </div>
+            <div class="form-group col-md-1">
+             面積
             </div>
-            <div class="form-row">
-              <div class="form-group col-md-1">
-                (4)建號
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferPublicBuildingNumber4, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               面積
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferPublicArea4, class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-1">
-               持分比例
-              </div>
-              <div class="form-group col-md-3">
-                <%= f.text_field :deedtaxBuildingTransferPublicHoldings4, class: 'form-control' %>
-              </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferPublicArea1, class: 'form-control' %>
             </div>
-           
-            
-            
-            
-            
-            
-            
+            <div class="form-group col-md-1">
+             持分比例
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferPublicHoldings1, class: 'form-control' %>
+            </div>
           </div>
+          <div class="form-row">
+            <div class="form-group col-md-1">
+              (2)建號
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferPublicBuildingNumber2, class: 'form-control' %>
+            </div>
+            <div class="form-group col-md-1">
+             面積
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferPublicArea2, class: 'form-control' %>
+            </div>
+            <div class="form-group col-md-1">
+             持分比例
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferPublicHoldings2, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-1">
+              (3)建號
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferPublicBuildingNumber3, class: 'form-control' %>
+            </div>
+            <div class="form-group col-md-1">
+             面積
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferPublicArea3, class: 'form-control' %>
+            </div>
+            <div class="form-group col-md-1">
+             持分比例
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferPublicHoldings3, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-1">
+              (4)建號
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferPublicBuildingNumber4, class: 'form-control' %>
+            </div>
+            <div class="form-group col-md-1">
+             面積
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferPublicArea4, class: 'form-control' %>
+            </div>
+            <div class="form-group col-md-1">
+             持分比例
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.text_field :deedtaxBuildingTransferPublicHoldings4, class: 'form-control' %>
+            </div>
+          </div>
+         
+          
+          
+          
+          
+          
+          
         </div>
       </div>
-      
-      <!--無人優購後顯示：民事起訴狀-->
-      <div class="card">
+    </div>
+    
+    <!--無人優購後顯示：民事起訴狀-->
+    <div class="card">
         <div class="card-header" id="headingComplaint">
           <h2 class="mb-0">
             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseComplaint" aria-expanded="true" aria-controls="collapseComplaint">
@@ -831,7 +832,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <h3>建號</h3><small style="color:red;">第一筆需為目標建號 >> 儲存 >> 後續才可設定"公設"及"增建"資料</small>
+                    <h3>建號</h3><small style="color:red;">第一筆需為目標建號 >> 儲��� >> 後續才可設定"公設"及"增建"資料</small>
                     <div id="builds">
                         <%= f.fields_for :builds do |build| %>
                         <%= render 'build_fields', f: build %>
@@ -1006,7 +1007,7 @@
         </div>
     </div> 
     
-    <!-- 物件資料 -->
+    <!-- 物件資料-->
     <div class="card">
         <div class="card-header" id="headingSeven">
             <h2 class="mb-0">
@@ -1031,7 +1032,7 @@
             </div>
         </div>
     </div>
-    
+    <% @maxvalueYesNo = maxvalue(yfcase.floor_price_1,yfcase.floor_price_2,yfcase.floor_price_3,yfcase.floor_price_4) %>
     <!-- 最終判定 -->
     <div class="card">
         <div class="card-header" id="headingEight">
@@ -1054,32 +1055,34 @@
                     </td>
                   </tr>
                   <% if yfcase.final_decision != "未判定" && yfcase.final_decision != "放棄" %>
-                    <tr>
-                      <th>
-                        <%= f.hidden_field :active_result_date, :value => "#{Time.now.strftime('%Y-%m-%d')}" %>
-                        <%= f.label :active_result,"執行結果" %>
-                      </th>
-                      <td>
-                        <%= f.select(:active_result,Yfcase::ACTIVE_RESULT_LIST, {:include_blank => true}, {  :prompt => '請輸入執行結果', class: 'form-control'}) %>
-                      </td>
-                      <% if yfcase.active_result.present? && yfcase.active_result == "得標" %>
-                        <th>
-                          <%= f.label :priority_purchase_result,"優購結果" %>
-                        </th>
-                        <td>
-                          <%= f.select(:priority_purchase_result,Yfcase::PRIORITY_PURCHASE_RESULT_LIST, {:include_blank => true}, {  :prompt => '請輸入優購結果', class: 'form-control'}) %>
-                        </td>
-                      <% end %>
-                    </tr>
-                    <% if yfcase.priority_purchase_result.present? && yfcase.priority_purchase_result == "無人優購" %>
+                    <% if (@maxvalueYesNo > 1000000 && yfcase.subsigntruebs.first.present?) || (@maxvalueYesNo < 1000000 && @maxvalueYesNo > 0 && yfcase.subsigntrueas.first.present?) %>
                       <tr>
                         <th>
-                          <%= f.label :target_number,"標的編號" %>
+                          <%= f.hidden_field :active_result_date, :value => "#{Time.now.strftime('%Y-%m-%d')}" %>
+                          <%= f.label :active_result,"執行結果" %>
                         </th>
                         <td>
-                          <%= f.text_field :target_number, class: "form-control",placeholder: "請輸入得標後的標的號碼" %>
+                          <%= f.select(:active_result,Yfcase::ACTIVE_RESULT_LIST, {:include_blank => true}, {  :prompt => '請輸入執行結果', class: 'form-control'}) %>
                         </td>
+                        <% if yfcase.active_result.present? && yfcase.active_result == "得標" %>
+                          <th>
+                            <%= f.label :priority_purchase_result,"優購結果" %>
+                          </th>
+                          <td>
+                            <%= f.select(:priority_purchase_result,Yfcase::PRIORITY_PURCHASE_RESULT_LIST, {:include_blank => true}, {  :prompt => '請輸入優購結果', class: 'form-control'}) %>
+                          </td>
+                        <% end %>
                       </tr>
+                      <% if yfcase.priority_purchase_result.present? && yfcase.priority_purchase_result == "無人優購" %>
+                        <tr>
+                          <th>
+                            <%= f.label :target_number,"標的編號" %>
+                          </th>
+                          <td>
+                            <%= f.text_field :target_number, class: "form-control",placeholder: "請輸入得標後的標的號碼" %>
+                          </td>
+                        </tr>
+                      <% end %>
                     <% end %>
                   <% end %>
                 </table>

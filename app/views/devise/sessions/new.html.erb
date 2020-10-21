@@ -61,7 +61,7 @@
 <div class="text-center">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin"}) do |f| %>
   
-    <img class="mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <img class="mb-4" src="../img/BJ.png" alt="" width="200" height="165" style="border-radius:10%">
     <h1 class="h3 mb-3 font-weight-normal">登入畫面</h1>
     <%= f.label :email,"註冊信箱", class: "sr-only" %>
     <%= f.email_field :email, id: "inputEmail", class: "form-control" , autofocus: true, required: true, autocomplete: "email", placeholder: "請輸入註冊信箱" %>

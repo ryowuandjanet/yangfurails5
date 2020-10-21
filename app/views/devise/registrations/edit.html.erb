@@ -6,23 +6,34 @@
 
   <div class="field">
     <%= f.label :email,"信箱" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", \
-                                              class: "form-control" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
   </div>
 
 
   <div class="field">
     <%= f.label :first_name,"姓氏" %><br />
-    <%= f.text_field :first_name, autocomplete: "first_name", \
-                                                  class: "form-control" %>
+    <%= f.text_field :first_name, autocomplete: "first_name", class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= f.label :last_name,"名稱" %><br />
-    <%= f.text_field :last_name, autocomplete: "last_name", \
-                                                  class: "form-control" %>
+    <%= f.label :last_name,"名字" %><br />
+    <%= f.text_field :last_name, autocomplete: "last_name", class: "form-control" %>
   </div>
 
+  <div class="field">
+    <%= f.label :userFullName,"全名" %><br />
+    <%= f.text_field :userFullName, class: "form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :userWorkArea,"負責區域" %><br />
+    <%= f.text_field :userWorkArea, class: "form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :role,"權限" %><br />
+    <%= f.number_field :role, :value => 0 ,class: "form-control" %>
+  </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
@@ -30,8 +41,7 @@
 
   <div class="field">
     <%= f.label :password,"請輸入新密碼" %> <i>(如果您不想更改，請留空)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password", \
-                                              class: "form-control" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
     <% if @minimum_password_length %>
       <br />
       <em><%= @minimum_password_length %> characters minimum</em>
@@ -40,17 +50,95 @@
 
   <div class="field">
     <%= f.label :password_confirmation,"請輸入再次新密碼做為二次確認" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", \
-                                              class: "form-control" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= f.label :current_password,"請輸入原始密碼以便驗証" %> \
-    <i>(我們需要您當前的密碼來確認您的更改)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password", \
-                                                class: "form-control" %>
+    <%= f.label :current_password,"請輸入原始密碼以便驗証" %> <i>(我們需要您當前的密碼來確認您的更改)</i><br />
+    <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+  </div>
+  
+  <hr>
+
+  <div class="field">
+    <%= f.label :userIdentityCard,"身分証字號" %><br />
+    <%= f.text_field :userIdentityCard, class: "form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :userBirthday,"出生年月日" %><br />
+    <%= f.text_field :userBirthday, class: "form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :userLocalPhone,"手機" %><br />
+    <%= f.text_field :userLocalPhone, class: "form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :userIdentityCard,"市話" %><br />
+    <%= f.text_field :userIdentityCard, class: "form-control" %>
+  </div>
+  
+  <hr>
+  
+  <div class="field">
+    <%= f.label :userCountry,"縣市鄉鎮" %><br />
+    <%= f.text_field :userCountry, class: "form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :userTownship,"鄉鎮" %><br />
+    <%= f.text_field :userTownship, class: "form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :userVillage,"村里" %><br />
+    <%= f.text_field :userVillage, class: "form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :userNeighbor,"鄰" %><br />
+    <%= f.text_field :userNeighbor, class: "form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :userStreet,"街路" %><br />
+    <%= f.text_field :userStreet, class: "form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :userSection,"段" %><br />
+    <%= f.text_field :userSection, class: "form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :userLane,"巷" %><br />
+    <%= f.text_field :userLane, class: "form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :userAlley,"弄" %><br />
+    <%= f.text_field :userAlley, class: "form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :userNumber,"號" %><br />
+    <%= f.text_field :userNumber, class: "form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :userFloor,"樓" %><br />
+    <%= f.text_field :userFloor, class: "form-control" %>
   </div>
 
+  <div class="field">
+    <%= f.label :userPublicOrPrivate,"身分別" %><br />
+    <%= f.text_field :userPublicOrPrivate, class: "form-control" %>
+  </div>
+  
+  <hr>
+  
   <div class="actions">
     <%= f.submit "更新", class: "form-control" %>
   </div>

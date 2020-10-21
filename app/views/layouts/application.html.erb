@@ -40,10 +40,8 @@
       </form>
     </div>
   </nav>
-  <div class="container col" style="padding:20px;">
-    <% flash.each do |name, msg| %>
-      <% content_tag(:div, msg, class: "alert alert-#{name}") %>
-    <% end %>
+
+  <div class="container col-md-11" style="padding:20px;">
     <%= yield %>
   </div>
     

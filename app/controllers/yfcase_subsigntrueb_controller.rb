@@ -23,6 +23,6 @@ class YfcaseSubsigntruebController < ApplicationController
 	end
 
 	def signtrueb_params
-		params.require(:subsigntrueb).permit(:signtrueb,:signtrueb_first_name,:signtrueb_last_name,:signtrueb_date)
+		params.require(:subsigntrueb).permit(:signtrueb,:signtrueb_first_name,:signtrueb_last_name,:signtrueb_date,:signtrueb_work_area)
 	end
 end
