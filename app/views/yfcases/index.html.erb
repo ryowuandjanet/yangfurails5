@@ -85,6 +85,11 @@
         <%= select_tag "keyword2", raw("<option>1拍進場</option><option>2拍進場</option><option>3拍進場</option><option>4拍進場</option><option>未判定</option><option>放棄</option>"), :include_blank => true, class: 'form-control', aria: {label: "Username",describedby: "basic-addon4"}, style: "border:1px solid black;" %>
       </div>
     </div>
+    
+    <div class="form-check form-check-inline">
+      <%= check_box_tag 'noworbefore', false %>
+      <label class="form-check-label" for="inlineCheckbox1">所有記錄</label>
+    </div>
 
     <div class="col-sm-2" style="padding-left:0px;">
       <%= submit_tag "篩選", class: "btn btn-primary", style: "background-color: brown; border:1px solid chocolate;" %>

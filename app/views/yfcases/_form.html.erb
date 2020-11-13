@@ -27,18 +27,24 @@
 <%= form_with(model: yfcase, local: true) do |f| %>
 
   <% if yfcase.errors.any? %>
-  <div id="error_explanation">
-      <h2>
-          <%= pluralize(yfcase.errors.count, "error") %> prohibited this yfcase from being saved:</h2>
-      <ul>
-          <% yfcase.errors.full_messages.each do |message| %>
-          <li>
-              <%= message %>
-          </li>
-          <% end %>
-      </ul>
-  </div>
+    <div id="error_explanation">
+        <h2>
+            <%= pluralize(yfcase.errors.count, "error") %> prohibited this yfcase from being saved:</h2>
+        <ul>
+            <% yfcase.errors.full_messages.each do |message| %>
+            <li>
+                <%= message %>
+            </li>
+            <% end %>
+        </ul>
+    </div>
   <% end %>
+  
+  <!--是否要歸類到過往記錄-->
+  <div class="col-md-2">
+    <td><%= f.check_box :now_or_before %></td>
+    <td><%= f.label :now_or_before,"歸類到過往記錄" %></td>
+  </div>
 
   <div class="accordion" id="accordionExample">
     <% if yfcase.priority_purchase_result.present? && yfcase.priority_purchase_result == "無人優購" %>
@@ -1042,12 +1048,14 @@
                 </button>
             </h2>
         </div>
+        <%=  %>
         <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
             <div class="card-body" style="border:1px solid black;">
                 <table id="finaldecision">
                   <tr>
                     <th>
-                      <%= f.hidden_field :final_decision_date, :value => "#{Time.now.strftime('%Y-%m-%d')}" %>
+                
+                      <%= f.hidden_field :final_decision_date, :value => yfcase.created_at.strftime("%Y-%m-%d") %>
                       <%= f.label :final_decision,"評量表結論" %>
                     </th>
                     <td>
