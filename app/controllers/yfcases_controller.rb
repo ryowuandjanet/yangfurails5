@@ -310,7 +310,7 @@ class YfcasesController < ApplicationController
           @yfcases = Yfcase.all
         end
         
-        @yfcases = @yfcases.order("updated_at DESC")
+        @yfcases = @yfcases.order("updated_at DESC").page(params[:page])
     end
 
 

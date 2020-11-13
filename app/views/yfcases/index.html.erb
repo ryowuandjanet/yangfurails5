@@ -108,6 +108,7 @@
   </thead>
 
   <tbody>
+
     <% @yfcases.each do |yfcase| %>
       <tr>
         <td scope="row" style="padding: 0px;text-align: center;vertical-align: middle;">
@@ -236,12 +237,24 @@
               </tr>
             <% end %>
           </table>
+          
         </td>
         <td>
           <%= yfcase.target_number %>
         </td>
       </tr>
-     <% end %>
+    <% end %>
+
   </tbody>
+  
 </table>
+
+<!--分頁-->
+<div style="position: relative; width: 100%;">
+  <div style="position: absolute; color: blue; right: 0;">
+    <%= paginate @yfcases %>
+  </div>
+</div>
+
+
 

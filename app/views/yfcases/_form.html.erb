@@ -232,16 +232,16 @@
                     <%= f.text_field :creditorFloor , placeholder: '樓', class: 'form-control' %>
                   </div>
                   <div class="form-group col-md-2">
-                    <%= f.text_field :creditorLandholdingpointperson , placeholder: '土地個人持分', class: 'form-control' %>
+                    <%= f.text_field :creditorLandholdingpointperson, :value => "#{yfcase.debtorLandholdingpointperson}" , placeholder: '土地個人持分', class: 'form-control' %>
                   </div>
                   <div class="form-group col-md-2">
-                    <%= f.text_field :creditorLandholdingpointall , placeholder: '土地所有持分', class: 'form-control' %>
+                    <%= f.text_field :creditorLandholdingpointall, :value => "#{yfcase.debtorLandholdingpointall}" , placeholder: '土地所有持分', class: 'form-control' %>
                   </div>
                   <div class="form-group col-md-2">
-                    <%= f.text_field :creditorBuildholdingpointperson , placeholder: '建物個人持分', class: 'form-control' %>
+                    <%= f.text_field :creditorBuildholdingpointperson, :value => "#{yfcase.debtorBuildholdingpointperson}" , placeholder: '建物個人持分', class: 'form-control' %>
                   </div>
                   <div class="form-group col-md-2">
-                    <%= f.text_field :creditorBuildholdingpointall , placeholder: '建物所有持分', class: 'form-control' %>
+                    <%= f.text_field :creditorBuildholdingpointall, :value => "#{yfcase.debtorBuildholdingpointall}" , placeholder: '建物所有持分', class: 'form-control' %>
                   </div>
                 </div>
               </div>

@@ -75,10 +75,12 @@
     
     <!--共有人的土地持分(陣列):-->
     <% @ownerLandholdingpoint = @yfcase.personnals.map { |n| [n.right_share_person.to_f / n.right_share_all.to_f] }.flatten %>
+    <!--添加元素 Array.push([element])-->
     <% @ownerLandholdingpointAdd = @ownerLandholdingpoint.push(@creditorLandholdingpoint) %>
     <% @ownerLandholdingpointMin = @ownerLandholdingpointAdd.min %>
     <% @ownerLandholdingpointMax = @ownerLandholdingpointAdd.max %>
     <% @ownerLandholdingpointSum = @ownerLandholdingpointAdd.sum %>
+      
     
     <!--共有人的建物持分(陣列):-->
     <% @ownerBuildholdingpoint = @yfcase.personnals.map { |n| [n.personnalBuildHoldingPointPerson.to_f / n.personnalBuildHoldingPointAll.to_f] }.flatten %>
@@ -137,41 +139,35 @@
     <div>執行標的金額：新台幣<span class="bluefont"><%= number_to_currency(@fees, unit: "", precision: 0) %></span>元整</div>
     <table class="complaintTable" style="padding:0px;margin:20px 0px;">
       <tr>
-        <% if @yfcase.personnals.where(is_creditor: true).count >= 1 %>
-          <% @yfcase.personnals.where(is_creditor: true).each do |creditor| %>
-          
-            <!--原告-->
-            <tr>
-              <td >
-                聲請人：<span class="bluefont">揚富開發有限公司</span>
-              </td>
-              <td>
-                設：<span class="bluefont">臺中市大里區新仁路三段49號1樓</span>
-              </td>
-            </tr>
-            
-            <!--法定代理人-->
-            <tr>
-              <td>
-              法定代理人：<span class="bluefont">陳美純</span>
-              </td>
-               <td>
-                住址：<span class="bluefont">同上 (證物1)</span>
-              </td>
-            </tr>
-            
-            <!--訴訟代理人-->
-            <tr>
-              <td>訴訟代理人：<span class="bluefont"><%= @yfcase.complaintLitigationAgent.blank? ? '' : User.find(@complaintLitigationAgent).full_name %></span></td>
-              <td>
-                住址：<span class="bluefont">臺中市大里區新仁路三段49號1樓</span>
-                <br>
-                電話：<span class="bluefont">0921-765-023</span>
-              </td>
-            </tr>
-            
-          <% end %>
-        <% end %>
+        <!--原告-->
+        <tr>
+          <td >
+            聲請人：<span class="bluefont">揚富開發有限公司</span>
+          </td>
+          <td>
+            設：<span class="bluefont">臺中市大里區新仁路三段49號1樓</span>
+          </td>
+        </tr>
+        
+        <!--法定代理人-->
+        <tr>
+          <td>
+          法定代理人：<span class="bluefont">陳美純</span>
+          </td>
+           <td>
+            住址：<span class="bluefont">同上 (證物1)</span>
+          </td>
+        </tr>
+        
+        <!--訴訟代理人-->
+        <tr>
+          <td>訴訟代理人：<span class="bluefont"><%= @yfcase.complaintLitigationAgent.blank? ? '' : User.find(@complaintLitigationAgent).full_name %></span></td>
+          <td>
+            住址：<span class="bluefont">臺中市大里區新仁路三段49號1樓</span>
+            <br>
+            電話：<span class="bluefont">0921-765-023</span>
+          </td>
+        </tr>
       </tr>
     
       
