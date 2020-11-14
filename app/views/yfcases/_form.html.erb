@@ -1059,7 +1059,7 @@
                       <%= f.label :final_decision,"評量表結論" %>
                     </th>
                     <td>
-                      <%= f.select(:final_decision,options_for_select(["","未判定","1拍進場","2拍進場","3拍進場","4拍進場"], :selected => f.object.final_decision), {}, {class: 'form-control' }) %>
+                      <%= f.select(:final_decision,options_for_select(["","未判定","1拍進場","2拍進場","3拍進場","4拍進場","放棄"], :selected => f.object.final_decision), {}, {class: 'form-control' }) %>
                     </td>
                   </tr>
                   <% if yfcase.final_decision != "未判定" && yfcase.final_decision != "放棄" %>
