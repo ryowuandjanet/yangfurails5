@@ -1,0 +1,60 @@
+<tr>
+  <th style="width:6%;">結果</th>
+  <th style="width:21%;">查檢內容</th>
+  <th style="width:6%;">結果</th>
+  <th>查檢內容</th>
+  <th style="width:6%;">結果</th>
+  <th style="width:15%;">查檢內容</th>
+  <th style="width:6%;">結果</th>
+  <th style="width:19%;">查檢內容</th>
+</tr>
+<!-- 第一行 -->
+<tr>
+  <td><%= @yfcase.occupy ? "V" : "" %></td>
+  <th class="yfratingscalePDFBuildCheckListItem">01.占用鄰地？</th>
+  <td><%= @yfcase.rent ? "V" : "" %></td>
+  <th class="yfratingscalePDFBuildCheckListItem">05.出租/出借/佔用？</th>
+  <td><%= @yfcase.vegetable_market ? "V" : "" %></td>
+  <th class="yfratingscalePDFBuildCheckListItem">09.鄰近菜市場？</th>
+  <td><%= @yfcase.post_office ? "V" : "" %></td>
+  <th class="yfratingscalePDFBuildCheckListItem">13.鄰近郵局/機關？</th>
+</tr>
+
+<!-- 第二行 -->
+<tr>
+  <td><%= @yfcase.register ? "V" : "" %></td>
+  <th class="yfratingscalePDFBuildCheckListItem">02.無未保存登記建物？</th>
+  <td><%= @yfcase.leak ? "V" : "" %></td>
+  <th class="yfratingscalePDFBuildCheckListItem">06.無嚴重漏水現象？</th>
+  <td><%= @yfcase.supermarket ? "V" : "" %></td>
+  <th class="yfratingscalePDFBuildCheckListItem">10.鄰近大賣場？</th>
+  <td><%= @yfcase.main_road ? "V" : "" %></td>
+  <th class="yfratingscalePDFBuildCheckListItem">14.鄰近幹道？</th>
+</tr>
+<!-- 第三行 -->
+<tr>
+  <td><%= @yfcase.parking_space ? "V" : "" %></td>
+  <th class="yfratingscalePDFBuildCheckListItem">03.停車位(機車/汽車)？</th>
+  <td><%= @yfcase.easy_parking ? "V" : "" %></td>
+  <th class="yfratingscalePDFBuildCheckListItem">07.停車方便？</th>
+  <td><%= @yfcase.school ? "V" : "" %></td>
+  <th class="yfratingscalePDFBuildCheckListItem">11.鄰近學校？</th>
+  <td><%= @yfcase.water_and_power_failure ? "V" : "" %></td>
+  <th class="yfratingscalePDFBuildCheckListItem">15.斷水斷電？</th>
+</tr>
+<!-- 第四行 -->
+<tr>
+  <td><%= @yfcase.management_fee ? "V" : "" %></td>
+  <th class="yfratingscalePDFBuildCheckListItem">04.積欠管理費？</th>
+  <td><%= @yfcase.railway ? "V" : "" %></td>
+  <th class="yfratingscalePDFBuildCheckListItem">08.鄰近捷運站/台鐵站？</th>
+  <td><%= @yfcase.park ? "V" : "" %></td>
+  <th class="yfratingscalePDFBuildCheckListItem">12.鄰近公園？</th>
+  <td><%= @yfcase.good_vision ? "V" : "" %></td>
+  <th class="yfratingscalePDFBuildCheckListItem">16.採光視野良好？</th>
+</tr>
+<!-- 備註 -->
+<tr>
+  <th>備註</th>
+  <td colspan="7"></td>
+</tr>

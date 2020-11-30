@@ -1,7 +1,6 @@
 class Yfcase < ApplicationRecord
 	# index首頁設定
 	paginates_per 10 # 每頁10筆資料
-
 	
 	belongs_to :user, :optional => true
 	belongs_to :country, :optional => true

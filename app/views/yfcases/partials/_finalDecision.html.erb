@@ -1,0 +1,198 @@
+<tr>
+    <!-- 區域負責人 -->
+    <% yfcasefullname = @yfcase.user.first_name + @yfcase.user.last_name %>
+    <!-- 區域負責人:管轄區域 -->
+    <% yfcaseworkarea = @yfcase.user.userWorkArea %>
+    <!-- 登入人員 -->
+    <% currentfullname = current_user.first_name + current_user.last_name %>
+    <!-- 登入人員:管轄區域 -->
+    <% currentworkarea = current_user.userWorkArea %>
+    <!-- 副署人員1 -->
+    <% @yfcase.subsigntrueas.first.blank? ? ' ' : subsigntrueafullname = @yfcase.subsigntrueas.first.signtruea %>
+    <!-- 副署人員2 -->
+    <% @yfcase.subsigntruebs.first.blank? ? ' ' : subsigntruebfullname = @yfcase.subsigntruebs.first.signtrueb %>
+    <!-- 副署人員3 -->
+    <% @yfcase.subsigntruecs.first.blank? ? ' ' : subsigntruecfullname = @yfcase.subsigntruecs.first.signtruec %>
+    <!-- 副署人員1:管轄區域 -->
+    <% @yfcase.subsigntrueas.first.blank? ? ' ' : subsigntrueaworkarea = @yfcase.subsigntrueas.first.signtruea_work_area %>
+    <!-- 副署人員2:管轄區域 -->
+    <% @yfcase.subsigntruebs.first.blank? ? ' ' : subsigntruebworkarea = @yfcase.subsigntruebs.first.signtrueb_work_area %>
+    <!-- 副署人員3:管轄區域 -->
+    <% @yfcase.subsigntruecs.first.blank? ? ' ' : subsigntruecworkarea = @yfcase.subsigntruecs.first.signtruec_work_area %>
+    <th style="width:28%;">結論</th>
+    <th style="width:18%;">區域負責人</th>
+    <th style="width:18%;">
+      
+      <!--登入人員=管理者 或是 (副署人員1有資料+區域負責人=登入人員) >> 顯示"副署人員+刪除鈕"-->
+        <% if current_user.role == 1 || (@yfcase.subsigntrueas.first.present? && yfcasefullname == currentfullname) %>
+          副署人員1
+          <%= link_to "刪除", delete_subsigntruea_yfcase_path(@yfcase),method: :delete,class: "btn btn-info btn-sm" %>
+        <% elsif @yfcase.final_decision.blank? || (@yfcase.final_decision.present? && yfcaseworkarea == currentworkarea) %>
+          <span style="color:red;"><%= '該區已副署' %></span>
+        <% else %>
+          <% if @yfcase.subsigntrueas.first.blank? %>
+            <%= link_to "副署人員1", new_yfcase_subsigntruea_path(@yfcase),class: "btn btn-primary btn-sm" %>
+          <% else %>
+            <%= "副署人員1" %>
+          <% end %>
+        <% end %>
+    </th>
+    <th style="width:18%;">
+        <% if current_user.role == 1 || (@yfcase.subsigntruebs.first.present? && yfcasefullname == currentfullname) %>
+          副署人員2
+          <%= link_to "刪除", delete_subsigntrueb_yfcase_path(@yfcase),method: :delete,class: "btn btn-info btn-sm" %>
+        <% elsif @yfcase.final_decision.blank? || (@yfcase.final_decision.present? && yfcaseworkarea == currentworkarea) %>
+          <span style="color:red;"><%= '該區已副署' %></span>
+        <% elsif @yfcase.final_decision.present? && yfcaseworkarea != currentworkarea && subsigntrueaworkarea == currentworkarea %>
+          <span style="color:red;"><%= '該區已副署' %></span>
+        <% else %>
+          <% if @yfcase.subsigntruebs.first.blank? && @yfcase.subsigntrueas.first.present? %>
+            <%= link_to "副署人員2", new_yfcase_subsigntrueb_path(@yfcase),class: "btn btn-primary btn-sm" %>
+          <% else %>
+            <%= "副署人員2" %>
+          <% end %>
+        <% end %>
+    </th>
+    
+    <th>
+        <% if current_user.role == 1 || (@yfcase.subsigntruecs.first.present? && yfcasefullname == currentfullname) %>
+          副署人員3
+          <%= link_to "刪除", delete_subsigntruec_yfcase_path(@yfcase),method: :delete,class: "btn btn-info btn-sm" %>
+        <% elsif  @yfcase.final_decision.blank? || (@yfcase.final_decision.present? && yfcaseworkarea == currentworkarea) %>
+          <span style="color:red;"><%= '該區已副署' %></span>
+        <% elsif @yfcase.final_decision.present? && yfcaseworkarea != currentworkarea && ((subsigntrueaworkarea == currentworkarea && subsigntruebworkarea != currentworkarea) || (subsigntrueaworkarea != currentworkarea && subsigntruebworkarea == currentworkarea)) %>
+          <span style="color:red;"><%= '該區已副署' %></span>
+        <% else %>
+          <% if @yfcase.subsigntruecs.first.blank? && @yfcase.subsigntruebs.first.present? %>
+            <%= link_to "副署人員3", new_yfcase_subsigntruec_path(@yfcase),class: "btn btn-primary btn-sm" %>
+          <% else %>
+            <%= "副署人員3" %>
+          <% end %>
+        <% end %>
+    </th>
+</tr>
+
+
+<tr>
+  <td>
+    <% if @yfcase.final_decision == "1拍進場" %>
+    <div class="yfratingscalePDFFinaldecisionJudgment" style="color:Brown;border:5px solid Brown;">
+        <%= @yfcase.final_decision %>
+    </div>
+    <% elsif @yfcase.final_decision == "2拍進場" %>
+    <div class="yfratingscalePDFFinaldecisionJudgment" style="color:purple;border:5px solid purple;">
+        <%= @yfcase.final_decision %>
+    </div>
+    <% elsif @yfcase.final_decision == "3拍進場" %>
+    <div class="yfratingscalePDFFinaldecisionJudgment" style="color:blue;border:5px solid blue;">
+        <%= @yfcase.final_decision %>
+    </div>
+    <% elsif @yfcase.final_decision == "4拍進場" %>
+    <div class="yfratingscalePDFFinaldecisionJudgment" style="color:green;border:5px solid green;">
+        <%= @yfcase.final_decision %>
+    </div>
+    <% elsif @yfcase.final_decision == "放棄" %>
+    <div class="yfratingscalePDFFinaldecisionJudgment" style="color:red;border:5px solid red;">
+        <%= @yfcase.final_decision %>
+    </div>
+    <% else %>
+    <%= "" %>
+    <% end %>
+  </td>
+  <td class="yfratingscalePDFPerson">
+    <div class="yfratingscalePDFPersonCircle">
+      <table class="yfratingscalePDFPersonTable">
+        <tr>
+          <td class="yfratingscalePDFPersonName" style="border-bottom:5px solid red;">
+            <%= @yfcase.user.first_name %><%= @yfcase.user.last_name %>
+          </td>
+        </tr>
+        <tr>
+          <td class="yfratingscalePDFPersonDate">
+            <%= @yfcase.final_decision_date.blank? ? '待結論判定' : @yfcase.final_decision_date %>
+          </td>
+        </tr>
+        <tr>
+          <td class="yfratingscalePDFPersonName"style="border-top:5px solid red;">
+            <%= @yfcase.user.userWorkArea %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </td>
+    
+    
+  <td class="yfratingscalePDFPerson">
+    <% if @yfcase.subsigntrueas.first.present? %>
+      <div class="yfratingscalePDFPersonCircle">
+        <table class="yfratingscalePDFPersonTable">
+          <tr>
+            <td class="yfratingscalePDFPersonName" style="border-bottom:5px solid red;">
+              <%= @yfcase.subsigntrueas.first.signtruea_first_name %><%= @yfcase.subsigntrueas.first.signtruea_last_name %>
+            </td>
+          </tr>
+          <tr>
+            <td class="yfratingscalePDFPersonDate">
+              <%= @yfcase.subsigntrueas.first.signtruea_date %>
+            </td>
+          </tr>
+          <tr>
+            <td class="yfratingscalePDFPersonName"style="border-top:5px solid red;">
+              <%= @yfcase.subsigntrueas.first.signtruea_work_area %>
+            </td>
+          </tr>
+        </table>
+      </div>
+     <% end %> 
+    </td>
+    
+    
+    <td class="yfratingscalePDFPerson">
+    <% if @yfcase.subsigntruebs.first.present? %>
+      <div class="yfratingscalePDFPersonCircle">
+        <table class="yfratingscalePDFPersonTable">
+          <tr>
+            <td class="yfratingscalePDFPersonName" style="border-bottom:5px solid red;">
+              <%= @yfcase.subsigntruebs.first.signtrueb_first_name %><%= @yfcase.subsigntruebs.first.signtrueb_last_name %>
+            </td>
+          </tr>
+          <tr>
+            <td class="yfratingscalePDFPersonDate">
+              <%= @yfcase.subsigntruebs.first.signtrueb_date %>
+            </td>
+          </tr>
+          <tr>
+            <td class="yfratingscalePDFPersonName"style="border-top:5px solid red;">
+              <%= @yfcase.subsigntruebs.first.signtrueb_work_area %>
+            </td>
+          </tr>
+        </table>
+      </div>
+     <% end %> 
+    </td>
+    
+    <td class="yfratingscalePDFPerson">
+    <% if @yfcase.subsigntruecs.first.present? %>
+      <div class="yfratingscalePDFPersonCircle">
+        <table class="yfratingscalePDFPersonTabe">
+          <tr>
+            <td class="yfratingscalePDFPersonName" style="border-bottom:5px solid red;">
+              <%= @yfcase.subsigntruecs.first.signtruec_first_name %><%= @yfcase.subsigntruecs.first.signtruec_last_name %>
+            </td>
+          </tr>
+          <tr>
+            <td class="yfratingscalePDFPersonDate">
+              <%= @yfcase.subsigntruecs.first.signtruec_date %>
+            </td>
+          </tr>
+          <tr>
+            <td class="yfratingscalePDFPersonName"style="border-top:5px solid red;">
+              <%= @yfcase.subsigntruecs.first.signtruec_work_area %>
+            </td>
+          </tr>
+        </table>
+      </div>
+     <% end %> 
+    </td>
+    
+</tr>

@@ -1,0 +1,291 @@
+<tr>
+  <th style="width:11%;">拍賣日</th>
+  <th colspan="4">拍別-進場判定<br>
+    <div style="padding:0px;font-size:10pt;color:red;">(可進場CP值)</div>
+  </th>
+  <th>底價<small>(NT)</small><br>
+    <div style="padding:0px;font-size:10pt;color:red;">各拍建議底價</div>
+  </th>
+  <th>坪價<small>(NT)</small></th>
+  <th>時價<small>(NT)</small></th>
+  <th style="width:6%;">CP</th>
+  <th style="width:5%;">點閱</th>
+  <th style="width:5%;">監控</th>
+  <th style="width:15%;">建議加價</th>
+  <th style="width:9%;">保証金</th>
+</tr>
+<!-- 第一拍 -->
+<tr>
+  <!-- 拍別：第一拍 -->
+  <td>
+    <%= @yfcase.floor_price_1 == 0 ? ' ' : @yfcase.auction_day_1 %>
+  </td>
+  <td style="width:7%;">第一拍<br>
+    <div style="padding:0px;font-size:10pt;color:red;">(CP>0.92)</div>
+  </td>
+  <td colspan="3" style="width:12%;">
+    <% @floorPricePlus1=suggestedincreaseJudgment(@yfcase.floor_price_1,@yfcase.click_1,@yfcase.monitor_1) %>
+    <% @cp1=@marketprice / @pingprice1 %>
+    <% @cpPlusJudgment1=@cp1 / @floorPricePlus1 %>
+    <% if @yfcase.floor_price_1 == 0 %>
+      <div>底價未輸入</div>
+    <% elsif @cpPlusJudgment1 > 0.92 %>
+      <div style="padding:0px;font-size:10pt;color:green;">
+        加價CP(<%= (@cpPlusJudgment1).round(2) %>)<br>建議進場
+      </div>
+    <% else %>
+      <div style="padding:0px;font-size:10pt;color:red;">
+        加價CP(<%= (@cpPlusJudgment1).round(2) %>)<br>不可進場
+      </div>
+    <% end %>
+    </td>
+    <!-- 第一拍：底價 -->
+  <td>
+    <%= @yfcase.floor_price_1 == 0 ? ' ' : currency_helper(@yfcase.floor_price_1,0) %>
+  </td>
+  <!-- 第一拍：坪價 -->
+  <td>
+    <%= (@yfcase.floor_price_1 == 0 || @yfcase.builds.count == 0) ? ' ' : currency_helper(@pingprice1,0) %>
+  </td>
+  <!-- 第一拍：時價 -->
+  <td>
+    <%= (@yfcase.floor_price_1 == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : currency_helper(@marketprice,0) %>
+  </td>
+  <!-- 第一拍：CP值 -->
+  <td>
+    <%= (@yfcase.floor_price_1 == 0 || @yfcase.builds.count == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : (@marketprice / @pingprice1).round(2) %>
+  </td>
+  <!-- 第一拍：點閱 -->
+  <td>
+    <%= @yfcase.floor_price_1 == 0 ? ' ' : @yfcase.click_1 %>
+  </td>
+  <!-- 第一拍：監控 -->
+  <td>
+    <%= @yfcase.floor_price_1 == 0 ? ' ' : @yfcase.monitor_1 %>
+  </td>
+  <!-- 第一拍：建議加價 -->
+  <td>
+    <%= @yfcase.floor_price_1 == 0 ? ' ' : suggestedincrease(@yfcase.floor_price_1,@yfcase.click_1,@yfcase.monitor_1) %>
+  </td>
+  <!-- 第一拍：保証金 -->
+  <td>
+    <%= @yfcase.floor_price_1 == 0 ? ' ' : currency_helper(@yfcase.margin_1,0) %>
+  </td>
+</tr>
+<!-- 第二拍 -->
+<tr>
+  <!-- 拍別：第二拍 -->
+  <td>
+    <%= @yfcase.floor_price_2 == 0 ? ' ' : @yfcase.auction_day_2 %>
+  </td>
+  <td>第二拍<br>
+    <div style="padding:0px;font-size:10pt;color:red;">(CP>1.15)</div>
+  </td>
+  <td colspan="3">
+    <% @floorPricePlus2=suggestedincreaseJudgment(@yfcase.floor_price_2,@yfcase.click_2,@yfcase.monitor_2) %>
+    <% @cp2=@marketprice / @pingprice2 %>
+    <% @cpPlusJudgment2=@cp2 / @floorPricePlus2 %>
+    <% if @yfcase.floor_price_2 == 0 %>
+      <div>底價未輸入</div>
+    <% elsif @cpPlusJudgment2 > 1.15 %>
+      <div style="padding:0px;font-size:10pt;color:green;">
+        加價CP(<%= (@cpPlusJudgment2).round(2) %>)<br>建議進場
+      </div>
+    <% else %>
+      <div style="padding:0px;font-size:10pt;color:red;">
+        加價CP(<%= (@cpPlusJudgment2).round(2) %>)<br>不可進場
+      </div>
+    <% end %>
+    </td>
+    <!-- 第二拍：底價 -->
+  <td>
+    <%= @yfcase.floor_price_2 == 0 ? ' ' : currency_helper(@yfcase.floor_price_2,0) %>
+    <!-- 第二拍建議底價 -->
+    <% if @yfcase.floor_price_1 != 0 %>
+      <br>
+      <div style="padding:0px;font-size:10pt;color:red;">
+        <%= currency_helper(@yfcase.floor_price_1 * 0.8 ,0) %>
+      </div>
+    <% else %>
+      <%= " " %>
+    <% end %>
+  </td>
+  <!-- 第二拍：坪價 -->
+  <td>
+    <%= (@yfcase.floor_price_2 == 0 || @yfcase.builds.count == 0) ? ' ' : currency_helper(@pingprice2,0) %>
+  </td>
+  <!-- 第二拍：時價 -->
+  <td>
+    <%= (@yfcase.floor_price_2 == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : currency_helper(@marketprice,0) %>
+  </td>
+  <!-- 第二拍：CP值 -->
+  <td>
+    <%= (@yfcase.floor_price_2 == 0 || @yfcase.builds.count == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : (@marketprice / @pingprice2).round(2) %>
+  </td>
+  <!-- 第二拍：點閱 -->
+  <td>
+    <%= @yfcase.floor_price_2 == 0 ? ' ' : @yfcase.click_2 %>
+  </td>
+  <!-- 第二拍：監控 -->
+  <td>
+    <%= @yfcase.floor_price_2 == 0 ? ' ' : @yfcase.monitor_2 %>
+  </td>
+  <!-- 第二拍：建議加價 -->
+  <td>
+    <%= @yfcase.floor_price_2 == 0 ? ' ' : suggestedincrease(@yfcase.floor_price_2,@yfcase.click_2,@yfcase.monitor_2) %>
+  </td>
+  <!-- 第二拍：保証金 -->
+  <td>
+    <%= @yfcase.floor_price_2 == 0 ? ' ' : currency_helper(@yfcase.margin_2,0) %>
+  </td>
+</tr>
+<!-- 第三拍 -->
+<tr>
+  <!-- 拍別：第三拍 -->
+  <td>
+    <%= @yfcase.floor_price_3 == 0 ? ' ' : @yfcase.auction_day_3 %>
+  </td>
+  <td>第三拍<br>
+      <div style="padding:0px;font-size:10pt;color:red;">(CP>1.44)</div>
+  </td>
+  <td colspan="3">
+    <% @floorPricePlus3=suggestedincreaseJudgment(@yfcase.floor_price_3,@yfcase.click_3,@yfcase.monitor_3) %>
+    <% @cp3=@marketprice / @pingprice3 %>
+    <% @cpPlusJudgment3=@cp3 / @floorPricePlus3 %>
+    <% if @yfcase.floor_price_3 == 0 %>
+      <div>底價未輸入</div>
+    <% elsif @cpPlusJudgment3 > 1.44 %>
+      <div style="padding:0px;font-size:10pt;color:green;">
+        加價CP(<%= (@cpPlusJudgment3).round(2) %>)<br>建議進場
+      </div>
+    <% else %>
+      <div style="padding:0px;font-size:10pt;color:red;">
+        加價CP(<%= (@cpPlusJudgment3).round(2) %>)<br>不可進場
+      </div>
+    <% end %>
+  </td>
+    <!-- 第三拍：底價 -->
+  <td>
+    <%= @yfcase.floor_price_3 == 0 ? ' ' : currency_helper(@yfcase.floor_price_3,0) %>
+    <!-- 第三拍建議底價 -->
+    <% if @yfcase.floor_price_1 != 0 %>
+      <br>
+      <div style="padding:0px;font-size:10pt;color:red;">
+        <%= currency_helper(@yfcase.floor_price_1 * 0.8 * 0.8 ,0) %>
+      </div>
+    <% elsif @yfcase.floor_price_2 != 0 %>
+      <br>
+      <div style="padding:0px;font-size:10pt;color:red;">
+        <%= currency_helper(@yfcase.floor_price_2 * 0.8 ,0) %>
+      </div>
+    <% else %>
+      <%= " " %>
+    <% end %>
+  </td>
+  <!-- 第三拍：坪價 -->
+  <td>
+    <%= (@yfcase.floor_price_3 == 0 || @yfcase.builds.count == 0) ? ' ' : currency_helper(@pingprice3,0) %>
+  </td>
+  <!-- 第三拍：時價 -->
+  <td>
+    <%= (@yfcase.floor_price_3 == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : currency_helper(@marketprice,0) %>
+  </td>
+  <!-- 第三拍：CP值 -->
+  <td>
+    <%= (@yfcase.floor_price_3 == 0 || @yfcase.builds.count == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : (@marketprice / @pingprice3).round(2) %>
+  </td>
+  <!-- 第三拍：點閱 -->
+  <td>
+    <%= @yfcase.floor_price_3 == 0 ? ' ' : @yfcase.click_3 %>
+  </td>
+  <!-- 第三拍：監控 -->
+  <td>
+    <%= @yfcase.floor_price_3 == 0 ? ' ' : @yfcase.monitor_3 %>
+  </td>
+  <!-- 第三拍：建議加價 -->
+  <td>
+    <%= @yfcase.floor_price_3 == 0 ? ' ' : suggestedincrease(@yfcase.floor_price_3,@yfcase.click_3,@yfcase.monitor_3) %>
+  </td>
+  <!-- 第三拍：保証金 -->
+  <td>
+    <%= @yfcase.floor_price_3 == 0 ? ' ' : currency_helper(@yfcase.margin_3,0) %>
+  </td>
+</tr>
+<!-- 第四拍 -->
+<tr>
+  <!-- 拍別：第四拍 -->
+  <td>
+      <%= @yfcase.floor_price_4 == 0 ? ' ' : @yfcase.auction_day_4 %>
+  </td>
+  <td>第四拍<br>
+      <div style="padding:0px;font-size:10pt;color:red;">(CP>1.80)</div>
+  </td>
+  <td colspan="3">
+    <% @floorPricePlus4=suggestedincreaseJudgment(@yfcase.floor_price_4,@yfcase.click_4,@yfcase.monitor_4) %>
+    <% @cp4=@marketprice / @pingprice4 %>
+    <% @cpPlusJudgment4=@cp4 / @floorPricePlus4 %>
+    <% if @yfcase.floor_price_4 == 0 %>
+    <div>底價未輸入</div>
+    <% elsif @cpPlusJudgment4 > 1.80 %>
+    <div style="padding:0px;font-size:10pt;color:green;">
+      加價CP(<%= (@cpPlusJudgment4).round(2) %>)<br>建議進場
+    </div>
+    <% else %>
+    <div style="padding:0px;font-size:10pt;color:red;">
+      加價CP(<%= (@cpPlusJudgment4).round(2) %>)<br>不可進場
+    </div>
+    <% end %>
+    </td>
+    <!-- 第四拍：底價 -->
+  <td>
+    <%= @yfcase.floor_price_4 == 0 ? ' ' : currency_helper(@yfcase.floor_price_4,0) %>
+    <!-- 第四拍建議底價 -->
+    <% if @yfcase.floor_price_1 != 0 %>
+      <br>
+      <div style="padding:0px;font-size:10pt;color:red;">
+        <%= currency_helper(@yfcase.floor_price_1 * 0.8 * 0.8 * 0.8 ,0) %>
+      </div>
+    <% elsif @yfcase.floor_price_2 != 0 %>
+      <br>
+      <div style="padding:0px;font-size:10pt;color:red;">
+        <%= currency_helper(@yfcase.floor_price_2 * 0.8 * 0.8 ,0) %>
+      </div>
+    <% elsif @yfcase.floor_price_3 != 0 %>
+      <br>
+      <div style="padding:0px;font-size:10pt;color:red;">
+        <%= currency_helper(@yfcase.floor_price_3 * 0.8 ,0) %>
+      </div>
+    <% else %>
+      <%= " " %>
+    <% end %>
+  </td>
+  
+  <!-- 第四拍：坪價 -->
+  <td>
+    <%= (@yfcase.floor_price_4 == 0 || @yfcase.builds.count == 0) ? ' ' : currency_helper(@pingprice4,0) %>
+  </td>
+  <!-- 第四拍：時價 -->
+  <td>
+    <%= (@yfcase.floor_price_4 == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : currency_helper(@marketprice,0) %>
+  </td>
+  <!-- 第四拍：CP值 -->
+  <td>
+    <%= (@yfcase.floor_price_4 == 0 || @yfcase.builds.count == 0 || @yfcase.objectbuilds.count == 0) ? ' ' : (@marketprice / @pingprice4).round(2) %>
+  </td>
+  <!-- 第四拍：點閱 -->
+  <td>
+    <%= @yfcase.floor_price_4 == 0 ? ' ' : @yfcase.click_4 %>
+  </td>
+  <!-- 第四拍：監控 -->
+  <td>
+    <%= @yfcase.floor_price_4 == 0 ? ' ' : @yfcase.monitor_4 %>
+  </td>
+  <!-- 第四拍：建議加價 -->
+  <td>
+    <%= @yfcase.floor_price_4 == 0 ? ' ' : suggestedincrease(@yfcase.floor_price_4,@yfcase.click_4,@yfcase.monitor_4) %>
+  </td>
+  <!-- 第四拍：保証金 -->
+  <td>
+    <%= @yfcase.floor_price_4 == 0 ? ' ' : currency_helper(@yfcase.margin_4,0) %>
+  </td>
+</tr>

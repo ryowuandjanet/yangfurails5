@@ -1,3 +1,4 @@
+/* global $ */
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -21,3 +22,12 @@
 //= require cocoon
 //= require bootstrap-select
 //= require_tree .
+
+// $(function(){
+//   // 評量表-基本資料-新增Modal
+//   $('#yfcase-basedata-new-modal').on('show.bs.modal', function (event) {
+//       var button = $(event.relatedTarget) 
+//       var modal = $(this)
+//     })  
+// })
+

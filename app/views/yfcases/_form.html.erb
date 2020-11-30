@@ -25,18 +25,18 @@
 
 </style>
 <%= form_with(model: yfcase, local: true) do |f| %>
-
+  
+  <!--全域：錯誤訊息-->
   <% if yfcase.errors.any? %>
     <div id="error_explanation">
-        <h2>
-            <%= pluralize(yfcase.errors.count, "error") %> prohibited this yfcase from being saved:</h2>
-        <ul>
-            <% yfcase.errors.full_messages.each do |message| %>
-            <li>
-                <%= message %>
-            </li>
-            <% end %>
-        </ul>
+      <h2><%= pluralize(yfcase.errors.count, "error") %> prohibited this yfcase from being saved:</h2>
+      <ul>
+        <% yfcase.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+        <% end %>
+      </ul>
     </div>
   <% end %>
   
@@ -747,7 +747,7 @@
         </div>
       </div>      
       
-    <% end %>
+<% end %>
     
     <!-- 基本資料   -->
     <div class="card">
@@ -1055,7 +1055,7 @@
                   <tr>
                     <th>
                 
-                      <%= f.hidden_field :final_decision_date, :value => yfcase.created_at.strftime("%Y-%m-%d") %>
+                      <%= f.hidden_field :final_decision_date, :value => DateTime.now.strftime("%Y-%m-%d") %>
                       <%= f.label :final_decision,"評量表結論" %>
                     </th>
                     <td>

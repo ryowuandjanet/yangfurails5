@@ -1,0 +1,18 @@
+<tr>
+  <th style="width:10%;">案號</th>
+  <td style="width:30%;">
+    <%= @yfcase.case_number %>
+  </td>
+  <th style="width:10%;">債務人</th>
+  <td style="width:25%;">
+    <%= @yfcase.debtorName %>
+  </td>
+  <th style="width:10%;">債權人</th>
+  <td><%= @yfcase.creditorName.blank? ? @yfcase.company : @yfcase.creditorName %></td>
+  </tr>
+  <tr>
+  <th>住址</th>
+  <td colspan="5">
+    <%= @yfcase.township.try(:zip_code) %> <%= @yfcase.country.try(:name) %><%= @yfcase.township.try(:name) %><%= @yfcase.other_address %>
+  </td>
+</tr>

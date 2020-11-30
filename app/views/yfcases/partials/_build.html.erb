@@ -1,0 +1,99 @@
+<tr>
+  <th rowspan="2" style="width:20%">建號</th>
+  <th rowspan="2" style="width:7%">建號<br>謄本</th>
+  <th rowspan="2" style="width:15%">建坪(面積)<br>平方公尺(坪)</th>
+  <th rowspan="2" style="width:9%">持分</th>  
+  <th colspan="2">建坪持分 - 平方公尺(坪)</th>
+  <th rowspan="2" style="width:23%">
+    <div style="font-size:10.5pt;color;red;background-color:Cornsilk;text-align:center;">
+     使用分區：
+      <% if @yfcase.builds.first.present? %>
+        <%= @yfcase.builds.first.use_partition %>
+      <% end %>
+    </div>
+    建物型/使用
+  </th>
+</tr>
+<tr>
+  <th>(原)</th>
+  <th>(計算後)</th>
+</tr>
+<tr>
+  <td style="text-align:left;">
+    <% @yfcase.builds.each do |build| %>
+      <% if @yfcase.big_section.blank? %>
+        <%= build.build_number %><br>
+      <% else %>
+        <%= @yfcase.big_section %><%= build.build_number %><br>
+      <% end %>
+    <% end %>
+  </td>
+  <td>
+    <% @yfcase.builds.each do |build| %>
+      <% if build.build_url.blank? %>
+        <%= link_to " " %> <br>
+      <% else%>
+        <%= link_to "連結", build.build_url, target: "_blank" %><br>
+      <% end %>
+    <% end %>
+  </td>
+  <td>
+    <% @yfcase.builds.each do |build| %>
+      <%= area(build.build_area,1,1,1).round(2) %>(<%= area(build.build_area,1,1,0.3025).round(2) %>)<br>
+    <% end %>
+  </td>
+  <td>
+    <% @yfcase.builds.each do |build| %>
+      <% if build.build_type_use == "0公設" %> 
+        <!--找到第一筆非公設(notPU)的個人持分(holding_point_personal)-->
+        <% @notPU_holding_point_personal=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_personal %>
+        <!--找到第一筆非公設(notPU)的個人持分(build_holding_point_all)-->
+        <% @notPU_build_holding_point_all=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_all %>
+        <%= @notPU_holding_point_personal*build.build_holding_point_personal %>/<%= @notPU_build_holding_point_all*build.build_holding_point_all %><br>
+      <% else %>
+        <%= build.build_holding_point_personal %>/<%= build.build_holding_point_all %><br>
+      <% end %>
+    <% end %>
+  </td>
+  <td>
+    <% @yfcase.builds.each do |build| %>
+      <% if build.build_type_use == "0公設" %> 
+        <!--找到第一筆非公設(notPU)的個人持分(holding_point_personal)-->
+        <% @notPU_holding_point_personal=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_personal %>
+        <!--找到第一筆非公設(notPU)的個人持分(build_holding_point_all)-->
+        <% @notPU_build_holding_point_all=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_all %>
+        <%= area(build.build_area,@notPU_holding_point_personal*build.build_holding_point_personal,@notPU_build_holding_point_all*build.build_holding_point_all,1).round(2) %> (
+        <%= '%.2f' % area(build.build_area,@notPU_holding_point_personal*build.build_holding_point_personal,@notPU_build_holding_point_all*build.build_holding_point_all,0.3025).round(2) %> )<br>
+      <% elsif build.build_type_use == "12增建(持分後坪數打對折)" %>
+        <%= area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,1).round(2) %> (
+        <%= '%.2f' % area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,0.3025).round(2) %> )<br>
+      <% else %>
+        <%= area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,1).round(2) %> (
+        <%= '%.2f' % area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,0.3025).round(2) %> )<br>
+      <% end %>
+    <% end %>   
+  </td>
+  <td>
+    <% @yfcase.builds.each do |build| %>
+      <% if build.build_type_use == "0公設" %> 
+        <!--找到第一筆非公設(notPU)的個人持分(holding_point_personal)-->
+        <% @notPU_holding_point_personal=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_personal %>
+        <!--找到第一筆非公設(notPU)的個人持分(build_holding_point_all)-->
+        <% @notPU_build_holding_point_all=@yfcase.builds.where.not(build_type_use: "0公設").first.build_holding_point_all %>
+        <%= area(build.build_area,@notPU_holding_point_personal*build.build_holding_point_personal,@notPU_build_holding_point_all*build.build_holding_point_all,1).round(2) %> (
+        <%= '%.2f' % area(build.build_area,@notPU_holding_point_personal*build.build_holding_point_personal,@notPU_build_holding_point_all*build.build_holding_point_all,0.3025).round(2) %> )<br>
+      <% elsif build.build_type_use == "12增建(持分後坪數打對折)" %>
+        <%= area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,0.5).round(2) %> (
+        <%= '%.2f' % area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,0.15125).round(2) %> )<br>
+      <% else %>
+        <%= area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,1).round(2) %> (
+        <%= '%.2f' % area(build.build_area,build.build_holding_point_personal,build.build_holding_point_all,0.3025).round(2) %> )<br>
+      <% end %>
+    <% end %>                
+  </td>
+  <td>
+    <% @yfcase.builds.each do |build| %>
+      <%= build.build_type_use %><br>
+    <% end %>
+  </td>
+</tr>
