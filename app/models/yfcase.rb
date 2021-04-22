@@ -48,4 +48,6 @@ class Yfcase < ApplicationRecord
 	accepts_nested_attributes_for :personnals, reject_if: proc { |attributes| attributes['name'].blank? },allow_destroy: true
 	accepts_nested_attributes_for :objectbuilds, reject_if: proc { |attributes| attributes['address'].blank? },allow_destroy: true
 	validates :case_number, presence: true
+	
+
 end

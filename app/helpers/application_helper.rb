@@ -1,9 +1,13 @@
 module ApplicationHelper
 	# # 平方公尺換算成坪數
-	# def squaremetertoping(meter)
-	# 	result=meter * 0.3025
-	# 	return result
-	# end
+	def squaremetertoping(meter)
+		if meter.is_a? Numeric
+			z = meter * 0.3025
+			return z
+		else
+			return meter
+		end
+	end
 
 	# 計算持分
 	def holdingpoint(arg1,arg2)

@@ -254,12 +254,28 @@
   
 </table>
 
+
 <!--分頁-->
 <div style="position: relative; width: 100%;">
   <div style="position: absolute; color: blue; right: 0;">
     <%= paginate @yfcases %>
   </div>
 </div>
+
+
+
+<%= link_to "建立YF評量表", new_yfcase_path, remote: true, class: "btn btn-primary btn-sm"  %>
+
+<!-- Modal -->
+<div class="modal fade" id="yfcaseBasedataNew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+    </div>
+  </div>
+</div>
+
+
 
 
 

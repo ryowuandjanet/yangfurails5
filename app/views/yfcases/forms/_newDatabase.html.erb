@@ -1,0 +1,62 @@
+<%= form_with(model: yfcase, local: true) do |f| %>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">新增案號</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+      
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <%= f.label :case_number, "案號" %>
+          <%= f.text_field :case_number, class: 'form-control' %>
+        </div>
+        <div class="form-group col-md-6">
+          <%= f.label :yfcaseCompany, "所屬公司" %> 
+          <%= f.select(:yfcaseCompany,Yfcase::COMPANY_LIST, {}, { :prompt => '請輸入所屬公司', class: 'form-control'}) %>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <%= f.label :yfcaseDebtor,"債務人" %>
+          <%= f.text_field :yfcaseDebtor , placeholder: '在此輸入債務人', class: 'form-control' %>
+        </div>
+        <div class="form-group col-md-6">
+          <%= f.label :yfcaseCreditor,"債權人" %>
+          <%= f.text_field :yfcaseCreditor ,placeholder: '預設為所屬公司(若無其他債權人)',class: 'form-control' %>
+        </div>
+      </div>
+        
+      <hr>
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <%= f.label :yfcaseCity,"縣市" %>
+          <%= f.text_field :yfcaseCity , placeholder: '請輸入縣市', class: 'form-control' %>
+        </div>
+        <div class="form-group col-md-3">
+          <%= f.label :yfcaseTownship,"鄉鎮區" %>
+          <%= f.text_field :yfcaseTownship , placeholder: '請輸入鄉鎮區', class: 'form-control' %>
+        </div>
+        <div class="form-group col-md-3">
+          <%= f.label :yfcaseBigSection,"段名" %>
+          <%= f.text_field :yfcaseBigSection , placeholder: '在此輸入段名', class: 'form-control' %>
+        </div>
+        <div class="form-group col-md-3">
+          <%= f.label :yfcaseSmallSection,"小段" %>
+          <%= f.text_field :yfcaseSmallSection , placeholder: '在此輸入小段', class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <%= f.label :yfcaseOtherAddress, "其他後續地址欄位" %>
+          <%= f.text_field :yfcaseOtherAddress , placeholder: '在此輸入其他地址資訊', class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+    <button type="submit" class="btn btn-primary">新增</button>
+  </div>
+<% end %>
